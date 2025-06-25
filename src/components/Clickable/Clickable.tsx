@@ -2,6 +2,7 @@ import { cloneElement, ComponentPropsWithoutRef, ElementType, isValidElement } f
 
 type ClickableProps = {
   types: "social" | "default";
+  children: React.ReactNode;
 }
 
 abstract class ClickableStrategy {
@@ -25,11 +26,11 @@ class ClickableFactory {
   }
 }
 
-export function Clickable({ types = "default" }: ClickableProps) {
+export function Clickable({ types = "default", ...props }: ClickableProps) {
   const strategy = ClickableFactory.create(types);
 
   return (
-    <Slot className={strategy.styleRender()} />
+    <Slot {...props} className={strategy.styleRender()}  />
   )
 }
 
