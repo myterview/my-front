@@ -1,5 +1,9 @@
 import { cloneElement, ComponentPropsWithoutRef, ElementType, isValidElement } from "react";
 
+type ClickableProps = {
+  types: "social" | "default";
+}
+
 abstract class ClickableStrategy {
   abstract styleRender(): string;
 }
@@ -11,7 +15,7 @@ class SocialClickableStrategy implements ClickableStrategy {
 }
 
 class ClickableFactory {
-  static create(type: "social"): ClickableStrategy {
+  static create(type: ClickableProps["types"]): ClickableStrategy {
     switch (type) {
       case "social":
         return new SocialClickableStrategy();
@@ -21,8 +25,8 @@ class ClickableFactory {
   }
 }
 
-export function Clickable({ type }: { type: "social" }) {
-  const strategy = ClickableFactory.create(type);
+export function Clickable({ types = "default" }: ClickableProps) {
+  const strategy = ClickableFactory.create(types);
 
   return (
     <Slot className={strategy.styleRender()} />
