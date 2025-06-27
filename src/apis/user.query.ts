@@ -5,10 +5,13 @@ import { Fetcher } from "./Fetcher";
 
 type User = {
   id: string;
-  name: string;
   email: string;
-  // 필요한 다른 필드들...
-};
+  nickname: string,
+  role: string,
+  provider: string,
+  profileImage?: string,
+  bio?: string
+}
 
 @thisBind
 export class UserQuery extends Fetcher {

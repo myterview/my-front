@@ -11,7 +11,7 @@ abstract class ClickableStrategy {
 
 class SocialClickableStrategy implements ClickableStrategy {
   styleRender(): string {
-    return "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded";
+    return "flex items-center justify-start w-full gap-15 rounded-10 p-15 shadow-custom rounded-[10] text-black/54 font-semibold";
   }
 }
 
