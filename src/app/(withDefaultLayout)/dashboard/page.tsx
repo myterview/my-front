@@ -9,5 +9,5 @@ export default async function Home() {
     redirect("/sign");
   }
 
-  return <></>;
+  return <>ㅁ</>;
 }

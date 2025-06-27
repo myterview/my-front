@@ -6,7 +6,7 @@ import { useSidebar } from "@/hooks/useSidebar";
 import { useRef } from "react";
 import { neato } from "neato";
 
-export function Sidebar() {
+export function Sidebar({ children }: { children: React.ReactNode }) {
   const asideRef = useRef<HTMLElement>(null);
   const [isOpen, setIsOpen] = useSidebar();
 
@@ -19,28 +19,33 @@ export function Sidebar() {
         }
       }}
       className={neato(
-        "bg-gray-100/10 transition-all duration-300 ease-in-out",
-        "desktop:w-300 max-desktop:absolute top-0 h-dvh",
+        "desktop:w-300 max-desktop:absolute top-0 flex h-dvh flex-col bg-black/5 transition-all duration-200 ease-in-out",
         isOpen ? "left-0 w-full" : "-left-300"
       )}
     >
-      <menu className="relative h-dvh w-300 bg-gray-100">
-        <Logo size="small" />
+      <div className="relative flex h-dvh w-300 flex-col gap-80 bg-gray-100 bg-[url('/images/PATTERN.svg')] bg-size-[800] px-24 pt-60">
+        <div className="flex items-center justify-between">
+          <Logo size="small" />
 
-        <button
-          className={neato(
-            "desktop:hidden absolute transition-all duration-300 ease-in-out",
-            isOpen ? "-right-0" : "-right-50"
-          )}
-          onClick={() => setIsOpen((prev) => !prev)}
-        >
-          Toggle
-        </button>
+          <button
+            className={neato(
+              "desktop:hidden absolute transition-all duration-200 ease-in-out",
+              isOpen ? "-right-0" : "-right-50"
+            )}
+            onClick={() => setIsOpen((prev) => !prev)}
+          >
+            Toggle
+          </button>
+        </div>
 
-        <Link href="">모의 인터뷰</Link>
+        <menu className="text-primary-600 flex flex-col gap-40 font-bold">
+          <Link href="/dashboard/interview">모의 인터뷰</Link>
 
-        <Link href="">기술 면접 질문</Link>
-      </menu>
+          <Link href="/dashboard/tech-question">기술 면접 질문</Link>
+        </menu>
+      </div>
+
+      {children}
     </aside>
   );
 }
