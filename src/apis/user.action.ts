@@ -12,21 +12,24 @@ type User = {
 
 export async function patchUserRoleAction() {
   const userFetcher = new Fetcher().createCustomFetcher({
-    prefixUrl: '/auth',
+    prefixUrl: "/auth",
   });
 
   const cookieStore = await cookies();
   const allCookies = cookieStore.getAll();
-  const Cookie = allCookies.reduce((acc, { name, value }) => `${acc}${name}=${value}; `, "");
+  const Cookie = allCookies.reduce(
+    (acc, { name, value }) => `${acc}${name}=${value}; `,
+    ""
+  );
 
   try {
     return await userFetcher.patch<User>(`user/role`, {
-        json: { secret: "your_role_change_code" },
-        headers: {
-          Cookie
-        }
-      });
+      json: { secret: "your_role_change_code" },
+      headers: {
+        Cookie,
+      },
+    });
   } catch (error) {
-    console.error("Error occurred while patching user role:", error); 
+    console.error("Error occurred while patching user role:", error);
   }
 }

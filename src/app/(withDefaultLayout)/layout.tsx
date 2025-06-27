@@ -1,3 +1,4 @@
+import { Sidebar } from "@/components/Sidebar/Sidebar";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,6 +13,7 @@ export default function RootLayout({
   return (
     <>
       {children}
+      <Sidebar />
     </>
   );
 }

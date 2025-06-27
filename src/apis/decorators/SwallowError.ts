@@ -1,5 +1,6 @@
-
-export function SwallowError<T>(swallowedReturnValue: T = undefined as unknown as T) {
+export function SwallowError<T>(
+  swallowedReturnValue: T = undefined as unknown as T
+) {
   return function (
     target: unknown,
     propertyKey: string,
@@ -13,7 +14,7 @@ export function SwallowError<T>(swallowedReturnValue: T = undefined as unknown a
       try {
         return await originalMethod.apply(this, args);
       } catch (error) {
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV === "development") {
           console.error(`Error in method ${propertyKey} (swallowed):`, error);
         }
         return swallowedReturnValue;

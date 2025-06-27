@@ -2,22 +2,25 @@
 
 @theme inline {
   --font-sans: var(--font-pretendard), ui-sans-serif, system-ui, sans-serif;
-  
+
   --spacing: calc(1rem / 16);
 
-  --primary-100: #D5E8FF;
-  --primary-200: #AAD2FF;
-  --primary-300: #80BBFF;
-  --primary-400: #55A5FF;
-  --primary-500: #2B8EFF;
-  --primary-600: #2272CC;
-  --primary-700: #1A5599;
+  --breakpoint-desktop: 770px;
+
+  --primary-100: #d5e8ff;
+  --primary-200: #aad2ff;
+  --primary-300: #80bbff;
+  --primary-400: #55a5ff;
+  --primary-500: #2b8eff;
+  --primary-600: #2272cc;
+  --primary-700: #1a5599;
   --primary-800: #113966;
-  --primary-900: #091C33;
+  --primary-900: #091c33;
 
-  --secondary: #FFEFBB;
+  --secondary: #ffefbb;
 
-  --gray: #DBDBDB;
+  --gray-100: #f8f8f7;
+  --gray-200: #dbdbdb;
 
   --shadow-custom: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
 }

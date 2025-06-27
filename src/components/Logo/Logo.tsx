@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export function Logo({ size }: {size: "small" | "large" }) {
+export function Logo({ size }: { size: "small" | "large" }) {
   return (
     <Link href="/" className="block w-fit">
       <Image
