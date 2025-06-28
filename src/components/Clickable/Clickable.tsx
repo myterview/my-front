@@ -6,11 +6,12 @@ import {
   isValidElement,
 } from "react";
 
-type ClickableProps = {
-  types: "social" | "default";
+type ClickableProps = ClickableTypes & {
   className?: string;
   children: React.ReactNode;
 };
+
+type ClickableTypes = { types: "social" } | { types: "default" };
 
 abstract class ClickableStrategy {
   abstract styleRender(): string;
@@ -22,9 +23,20 @@ class SocialClickableStrategy implements ClickableStrategy {
   }
 }
 
+class DefaultClickableStrategy implements ClickableStrategy {
+  styleRender(): string {
+    return neato(
+      "box-border flex items-center justify-center text-[16px] font-bold desktop:text-[20px] text-primary-500 bg-white border-primary-400 border-1 rounded-xl px-12 py-8 desktop:px-16 desktop:py-12",
+      "active:bg-blue-500 active:border-blue-500 active:text-white hover:bg-blue-100"
+    );
+  }
+}
+
 class ClickableFactory {
   static create(type: ClickableProps["types"]): ClickableStrategy {
     switch (type) {
+      case "default":
+        return new DefaultClickableStrategy();
       case "social":
         return new SocialClickableStrategy();
       default:

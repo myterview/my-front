@@ -1,15 +1,22 @@
 "use client";
 
 import { startInterview } from "@/apis/interview.action";
-import { Dropdown } from "@/components/Dropdown/Dropdown";
+import { Dropdown } from "@/components/Form/Dropdown";
 import { DefaultInputWrapper } from "@/components/Form/DefaultInputWrapper";
 import Form from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
 import useServerAction from "@/hooks/useServerAction";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
 import { useRouter } from "next/navigation";
-import { handleServerAction, getValues, register } from "../page";
+
 import { Clickable } from "@/components/Clickable/Clickable";
+import {
+  handleServerAction,
+  register,
+  getValues,
+  InterviewPositionKr,
+  InterviewExperienceKr,
+} from "@/hooks/sicilian/interviewForm";
 
 export function InterviewForm() {
   const [dispatch, isPending] = useServerAction(startInterview);
@@ -32,20 +39,23 @@ export function InterviewForm() {
         <div className="flex w-full gap-16">
           <SicilianProvider value={{ register, name: "position", getValues }}>
             <Dropdown
-              options={["frontend", "backend", "fullstack"]}
+              options={Object.values(InterviewPositionKr)}
               title="직군"
             />
           </SicilianProvider>
 
           <SicilianProvider value={{ register, name: "experience", getValues }}>
-            <Dropdown options={["junior", "mid", "senior"]} title="경력" />
+            <Dropdown
+              options={Object.values(InterviewExperienceKr)}
+              title="경력"
+            />
           </SicilianProvider>
         </div>
       </div>
 
-      <Clickable types="social">
+      <Clickable types="default">
         <button type="submit" disabled={isPending}>
-          aa
+          인터뷰 시작
         </button>
       </Clickable>
     </Form>

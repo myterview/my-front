@@ -1,13 +1,4 @@
-import { CreateForm } from "@ilokesto/sicilian";
 import { InterviewForm } from "./(component)/InterviewForm";
-
-export const { register, getValues, handleServerAction } = new CreateForm({
-  initValue: {
-    title: "",
-    position: "",
-    experience: "",
-  },
-});
 
 export default function Home() {
   return (
@@ -18,6 +9,8 @@ export default function Home() {
         원하는 직군과 경력을 선택해 맞춤형 인터뷰를 시작해보세요.
       </p>
       <InterviewForm />
+
+      <h3 className="heading-02">나의 인터뷰 기록</h3>
     </>
   );
 }

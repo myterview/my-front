@@ -2,6 +2,8 @@
 
 import { ApiResponse } from "@/types/apiUtils";
 import { Fetcher } from "./Fetcher";
+
+import { getCookieValue } from "@/utils/cookieUtils";
 import { cookies } from "next/headers";
 
 const userFetcher = new Fetcher().createCustomFetcher({
@@ -9,20 +11,13 @@ const userFetcher = new Fetcher().createCustomFetcher({
 });
 
 export async function patchUserRoleAction() {
-  const cookieStore = await cookies();
-  const allCookies = cookieStore.getAll();
-  const Cookie = allCookies.reduce(
-    (acc, { name, value }) => `${acc}${name}=${value}; `,
-    ""
-  );
-
   try {
     return await userFetcher.patch<ApiResponse<"/auth/user/role", "patch">>(
       `user/role`,
       {
         json: { secret: "your_role_change_code" },
         headers: {
-          Cookie,
+          Cookie: await getCookieValue(),
         },
       }
     );
@@ -32,18 +27,11 @@ export async function patchUserRoleAction() {
 }
 
 export async function logoutAction() {
-  const cookieStore = await cookies();
-  const allCookies = cookieStore.getAll();
-  const Cookie = allCookies.reduce(
-    (acc, { name, value }) => `${acc}${name}=${value}; `,
-    ""
-  );
-
   try {
     // 백엔드 로그아웃 API 호출
     await userFetcher.post(`signout`, {
       headers: {
-        Cookie,
+        Cookie: await getCookieValue(),
       },
     });
   } catch (error) {

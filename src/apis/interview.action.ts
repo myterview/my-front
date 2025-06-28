@@ -1,28 +1,38 @@
 "use server";
 
 import { ApiResponse } from "@/types/apiUtils";
-import { cookies } from "next/headers";
 import { Fetcher } from "./Fetcher";
+import { getEnumKeyByValue } from "@/utils/enumUtils";
+import {
+  InterviewPositionKr,
+  InterviewExperienceKr,
+} from "@/hooks/sicilian/interviewForm";
+import { getCookieValue } from "@/utils/cookieUtils";
 
 const interviewFetcher = new Fetcher().createCustomFetcher({
   prefixUrl: "/interview",
 });
 
-export async function startInterview<T>(data: T) {
-  const cookieStore = await cookies();
-  const allCookies = cookieStore.getAll();
-  const Cookie = allCookies.reduce(
-    (acc, { name, value }) => `${acc}${name}=${value}; `,
-    ""
-  );
-
+export async function startInterview({
+  title,
+  position,
+  experience,
+}: {
+  title: string;
+  position: InterviewPositionKr | "";
+  experience: InterviewExperienceKr | "";
+}) {
   try {
     return await interviewFetcher.post<ApiResponse<"/interview/start", "post">>(
       `start`,
       {
-        json: data,
+        json: {
+          title,
+          position: getEnumKeyByValue(InterviewPositionKr, position),
+          experience: getEnumKeyByValue(InterviewExperienceKr, experience),
+        },
         headers: {
-          Cookie,
+          Cookie: await getCookieValue(),
         },
       }
     );
