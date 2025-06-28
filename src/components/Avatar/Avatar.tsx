@@ -7,6 +7,7 @@ export function Avatar({ src }: { src?: string }) {
         className="object-cover"
         src={src ?? "/images/AVATAR.svg"}
         alt="Avatar"
+        draggable={false}
         fill
       />
     </div>

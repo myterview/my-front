@@ -11,15 +11,30 @@ type ClickableProps = ClickableTypes & {
   children: React.ReactNode;
 };
 
-type ClickableTypes = { types: "social" } | { types: "default" };
+type ClickableTypes = ShadowClickableTypes | DefaultClickableTypes;
+
+type ShadowClickableTypes = {
+  types: "shadow";
+  size: "small" | "medium" | "large";
+};
+
+type DefaultClickableTypes = {
+  types: "default";
+};
 
 abstract class ClickableStrategy {
   abstract styleRender(): string;
 }
 
-class SocialClickableStrategy implements ClickableStrategy {
+class ShadowClickableStrategy implements ClickableStrategy {
+  constructor(private props: ShadowClickableTypes) {}
+
   styleRender(): string {
-    return "flex items-center justify-start gap-15 rounded-10 p-15 shadow-custom rounded-[10] text-black/54 font-semibold";
+    return neato(
+      "flex items-center justify-start shadow-custom bg-white font-semibold",
+      this.props.size === "small" && "p-4 rounded-[12]",
+      this.props.size === "large" && "gap-15 rounded-[10] p-15 text-black/54"
+    );
   }
 }
 
@@ -34,14 +49,12 @@ class DefaultClickableStrategy implements ClickableStrategy {
 }
 
 class ClickableFactory {
-  static create(type: ClickableProps["types"]): ClickableStrategy {
-    switch (type) {
-      case "default":
-        return new DefaultClickableStrategy();
-      case "social":
-        return new SocialClickableStrategy();
+  static create(props: ClickableTypes): ClickableStrategy {
+    switch (props.types) {
+      case "shadow":
+        return new ShadowClickableStrategy(props);
       default:
-        throw new Error("Unknown clickable type");
+        return new DefaultClickableStrategy();
     }
   }
 }
@@ -49,12 +62,18 @@ class ClickableFactory {
 export function Clickable({
   types = "default",
   className,
+  children,
   ...props
 }: ClickableProps) {
-  const strategy = ClickableFactory.create(types);
+  const strategy = ClickableFactory.create({
+    types,
+    ...props,
+  } as ClickableTypes);
 
   return (
-    <Slot {...props} className={neato(strategy.styleRender(), className)} />
+    <Slot {...props} className={neato(strategy.styleRender(), className)}>
+      {children}
+    </Slot>
   );
 }
 

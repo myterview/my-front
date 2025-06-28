@@ -1,7 +1,7 @@
 import { CreateForm } from "@ilokesto/sicilian";
 
 export enum InterviewPositionKr {
-  frontend = "프론트엔드",
+  frontend = "프론트",
   backend = "백엔드",
   fullstack = "풀스택",
   infra = "인프라",

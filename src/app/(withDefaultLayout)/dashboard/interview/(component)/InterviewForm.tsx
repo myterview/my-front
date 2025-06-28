@@ -3,12 +3,9 @@
 import { startInterview } from "@/apis/interview.action";
 import { Dropdown } from "@/components/Dropdown/Dropdown";
 import { DefaultInputWrapper } from "@/components/Form/DefaultInputWrapper";
-import Form from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
-import useServerAction from "@/hooks/useServerAction";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
 import { useRouter } from "next/navigation";
-
 import { Clickable } from "@/components/Clickable/Clickable";
 import {
   handleServerAction,
@@ -17,10 +14,33 @@ import {
   InterviewPositionKr,
   InterviewExperienceKr,
 } from "@/hooks/sicilian/interviewForm";
+import Form from "@/components/Form/Form";
+import useServerAction from "@/hooks/useServerAction";
+import { InterviewDropdownButton } from "@/components/Dropdown/InterviewDropdownButton";
+import { For } from "utilinent";
 
 export function InterviewForm() {
   const [dispatch, isPending] = useServerAction(startInterview);
   const router = useRouter();
+
+  const DROPDOWN_ARRAY = [
+    {
+      title: "직군" as const,
+      sicilian: {
+        name: "position",
+        state: getStateByName("position"),
+      },
+      options: Object.values(InterviewPositionKr),
+    },
+    {
+      title: "경력" as const,
+      sicilian: {
+        name: "experience",
+        state: getStateByName("experience"),
+      },
+      options: Object.values(InterviewExperienceKr),
+    },
+  ];
 
   return (
     <Form
@@ -32,25 +52,30 @@ export function InterviewForm() {
     >
       <div className="flex max-w-480 flex-col gap-28">
         <SicilianProvider value={{ register, name: "title" }}>
-          <DefaultInputWrapper title="기본 입력">
+          <DefaultInputWrapper title="인터뷰 제목">
             <Input />
           </DefaultInputWrapper>
         </SicilianProvider>
 
         <div className="flex w-full gap-16">
-          <SicilianProvider value={{ register, name: "position", getValues }}>
-            <Dropdown
-              options={Object.values(InterviewPositionKr)}
-              title="직군"
-            />
-          </SicilianProvider>
-
-          <SicilianProvider value={{ register, name: "experience", getValues }}>
-            <Dropdown
-              options={Object.values(InterviewExperienceKr)}
-              title="경력"
-            />
-          </SicilianProvider>
+          <For each={DROPDOWN_ARRAY}>
+            {(item) => (
+              <Dropdown
+                key={item.sicilian.name}
+                options={item.options}
+                {...item.sicilian.state}
+              >
+                {(anchor, helpers) => (
+                  <InterviewDropdownButton
+                    anchor={anchor}
+                    helpers={helpers}
+                    title={item.title}
+                    selectedOption={getValues(item.sicilian.name) as string}
+                  />
+                )}
+              </Dropdown>
+            )}
+          </For>
         </div>
       </div>
 
@@ -61,4 +86,21 @@ export function InterviewForm() {
       </Clickable>
     </Form>
   );
+}
+
+function getStateByName(name: string) {
+  const selectedOption = getValues(name) as string;
+
+  const { onChange } = register({ name });
+
+  const setSelectedOption = (option: string) => {
+    onChange({
+      target: {
+        value: option,
+        name,
+      },
+    });
+  };
+
+  return { selectedOption, setSelectedOption };
 }

@@ -7,6 +7,7 @@ export function Logo({ size }: { size: "small" | "large" }) {
       <Image
         src={`/images/LOGO_${size.toUpperCase()}.svg`}
         width={size === "small" ? 57 : 303}
+        draggable={false}
         height={size === "small" ? 48 : 81}
         alt="logo"
       />

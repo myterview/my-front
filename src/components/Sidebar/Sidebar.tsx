@@ -2,9 +2,13 @@
 
 import Link from "next/link";
 import { Logo } from "../Logo/Logo";
-import { useSidebar } from "@/hooks/useSidebar";
 import { useRef } from "react";
 import { neato } from "neato";
+import { create } from "caro-kann";
+import { Clickable } from "../Clickable/Clickable";
+import Image from "next/image";
+
+export const useSidebar = create(false);
 
 export function Sidebar({ children }: { children: React.ReactNode }) {
   const asideRef = useRef<HTMLElement>(null);
@@ -27,15 +31,29 @@ export function Sidebar({ children }: { children: React.ReactNode }) {
         <div className="flex items-center justify-between">
           <Logo size="small" />
 
-          <button
+          <Clickable
+            types="shadow"
+            size="small"
             className={neato(
               "desktop:hidden absolute transition-all duration-200 ease-in-out",
-              isOpen ? "-right-0" : "-right-50"
+              isOpen
+                ? "-right-0 ml-0 rounded-r-none"
+                : "-right-50 mr-0 rounded-l-none"
             )}
-            onClick={() => setIsOpen((prev) => !prev)}
           >
-            Toggle
-          </button>
+            <button onClick={() => setIsOpen((prev) => !prev)}>
+              <Image
+                src="/icons/paw.svg"
+                alt="sidebar toggle image"
+                style={{
+                  transform: isOpen ? "scaleX(-1)" : "scaleX(1)",
+                }}
+                draggable={false}
+                width={28}
+                height={24}
+              />
+            </button>
+          </Clickable>
         </div>
 
         <menu className="menu text-primary-600 flex flex-col gap-40">

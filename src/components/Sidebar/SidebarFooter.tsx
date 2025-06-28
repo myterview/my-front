@@ -26,6 +26,7 @@ export function SidebarFooter({
           <Image
             src="/icons/setting.svg"
             alt="설정"
+            draggable={false}
             width={24}
             height={24}
             className="brightness-[104%] contrast-[104%] hue-rotate-[183deg] invert-[81%] saturate-[237%] sepia-[28%]"
@@ -37,6 +38,7 @@ export function SidebarFooter({
           <Image
             src="/icons/term.svg"
             alt="이용약관"
+            draggable={false}
             width={24}
             height={24}
             className="brightness-[104%] contrast-[104%] hue-rotate-[183deg] invert-[81%] saturate-[237%] sepia-[28%]"

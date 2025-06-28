@@ -8,14 +8,14 @@ export default function Home() {
       <div className="mt-24 mb-60 space-y-12">
         <h3 className="heading-02">인터뷰 생성하기</h3>
         <p className="heading-03">
-          원하는 직군과 경력을 선택해 맞춤형 인터뷰를 시작해보세요.
+          직군과 경력을 선택해 맞춤형 인터뷰를 시작해보세요.
         </p>
       </div>
 
       <InterviewForm />
 
       <div className="mt-60 mb-24 space-y-12">
-        <h3 className="heading-02">나의 인터뷰 기록</h3>
+        <h3 className="heading-02">나의 인터뷰</h3>
         <p className="heading-03"></p>
       </div>
     </>
