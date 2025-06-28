@@ -2,6 +2,7 @@ import { UserQuery } from "@/apis/user.query";
 import { Sidebar } from "@/components/Sidebar/Sidebar";
 import { SidebarFooter } from "@/components/Sidebar/SidebarFooter";
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Myterview",
@@ -14,6 +15,10 @@ export default async function RootLayout({
 }>) {
   const { getUser } = new UserQuery();
   const user = await getUser();
+
+  if (!user) {
+    redirect("/sign");
+  }
 
   return (
     <div className="flex flex-row-reverse">
