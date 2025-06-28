@@ -21,8 +21,8 @@ export default async function RootLayout({
   }
 
   return (
-    <div className="flex flex-row-reverse">
-      <main className="px-60 py-80">{children}</main>
+    <div className="flex w-full flex-row-reverse">
+      <main className="mx-auto max-w-1160 flex-1 px-60 py-80">{children}</main>
       <Sidebar>
         <SidebarFooter user={user} />
       </Sidebar>

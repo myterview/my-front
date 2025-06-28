@@ -12,7 +12,7 @@ export default function Page() {
       </header>
 
       <main className="mt-10 flex w-full flex-col items-center justify-center gap-22">
-        <Clickable types="social">
+        <Clickable types="social" className="w-full">
           <Link href="http://localhost:3000/api/auth/google">
             <Image
               src="/images/google.svg"
@@ -24,7 +24,7 @@ export default function Page() {
           </Link>
         </Clickable>
 
-        <Clickable types="social">
+        <Clickable types="social" className="w-full">
           <Link href="http://localhost:3000/api/auth/github">
             <Image
               src="/images/github.svg"

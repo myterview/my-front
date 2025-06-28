@@ -17,11 +17,23 @@ type PathWithoutApi<T extends keyof ApiPaths> = T extends `/api${infer Rest}`
 export type ApiResponse<
   T extends PathWithoutApi<keyof ApiPaths>,
   M extends keyof ApiPaths[AddApiPrefix<T>],
-> = ApiPaths[AddApiPrefix<T>][M] extends {
-  responses: { 200: { content: { "application/json": infer R } } };
-}
-  ? R
-  : never;
+> =
+  // 200 응답
+  ApiPaths[AddApiPrefix<T>][M] extends {
+    responses: { 200: { content: { "application/json": infer R200 } } };
+  }
+    ? R200
+    : // 201 응답
+      ApiPaths[AddApiPrefix<T>][M] extends {
+          responses: { 201: { content: { "application/json": infer R201 } } };
+        }
+      ? R201
+      : // 204 응답 (204는 보통 content가 없음)
+        ApiPaths[AddApiPrefix<T>][M] extends {
+            responses: { 204: { content: { "application/json": infer R204 } } };
+          }
+        ? R204
+        : never;
 
 // 개선된 ApiRequest - /api prefix 자동 추가
 export type ApiRequest<

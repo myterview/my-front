@@ -11,6 +11,9 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@floating-ui/react": "^0.27.12",
+    "@floating-ui/react-dom-interactions": "^0.13.3",
+    "@ilokesto/sicilian": "^1.0.1",
     "@svgr/webpack": "^8.1.0",
     "caro-kann": "^4.0.0",
     "common-resolver": "^1.0.0",
@@ -19,7 +22,6 @@
     "next": "15.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sicilian": "^3.1.5",
     "utilinent": "^0.0.10",
     "zod": "^3.25.51"
   },

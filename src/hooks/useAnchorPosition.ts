@@ -1,0 +1,95 @@
+import {
+  flip,
+  offset,
+  shift,
+  useClick,
+  useDismiss,
+  useFloating,
+  useInteractions,
+  autoUpdate,
+  useListNavigation,
+  useRole,
+  FloatingFocusManager,
+} from "@floating-ui/react";
+import { useState, useRef, useEffect } from "react";
+
+export function useAnchorPosition({
+  mainAxis = 8,
+  crossAxis = 0,
+}: {
+  mainAxis?: number;
+  crossAxis?: number;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpened, setIsOpened] = useState(false); // 이 부분은 필요하지 않을 수 있습니다.
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const listRef = useRef<Array<HTMLElement | null>>([]);
+
+  const { refs, floatingStyles, context } = useFloating({
+    open: isOpen,
+    onOpenChange: (open) => {
+      setIsOpen(open);
+      if (!open) setActiveIndex(null);
+    },
+    middleware: [offset({ mainAxis, crossAxis }), flip(), shift()],
+    placement: "bottom-start",
+    whileElementsMounted: autoUpdate,
+  });
+
+  const click = useClick(context, {
+    event: "mousedown", // input의 경우 mousedown 이벤트 사용
+  });
+  const dismiss = useDismiss(context, {
+    outsidePressEvent: "mousedown",
+    referencePress: false, // input 클릭 시 닫히지 않도록
+  });
+
+  const role = useRole(context, { role: "listbox" });
+
+  const listNavigation = useListNavigation(context, {
+    listRef,
+    activeIndex,
+    onNavigate: setActiveIndex,
+  });
+
+  const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
+    [click, dismiss, role, listNavigation]
+  );
+
+  const selectItem = (callback: () => void) => {
+    callback();
+    setIsOpen(false);
+    setActiveIndex(null);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => setIsOpened(true), 20);
+    } else {
+      setTimeout(() => setIsOpened(false), 20);
+    }
+  }, [isOpen]);
+
+  return {
+    anchor: {
+      ref: refs.setReference,
+      ...getReferenceProps(),
+    },
+    floater: {
+      ref: refs.setFloating,
+      style: floatingStyles,
+      ...getFloatingProps(),
+    },
+    helper: {
+      isOpen,
+      setIsOpen,
+      isOpened,
+      getItemProps,
+      activeIndex,
+      selectItem,
+      listRef,
+      FloatingFocusManager,
+      context,
+    },
+  };
+}

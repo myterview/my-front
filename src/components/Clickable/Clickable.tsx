@@ -1,3 +1,4 @@
+import { neato } from "neato";
 import {
   cloneElement,
   ComponentPropsWithoutRef,
@@ -7,6 +8,7 @@ import {
 
 type ClickableProps = {
   types: "social" | "default";
+  className?: string;
   children: React.ReactNode;
 };
 
@@ -16,7 +18,7 @@ abstract class ClickableStrategy {
 
 class SocialClickableStrategy implements ClickableStrategy {
   styleRender(): string {
-    return "flex items-center justify-start w-full gap-15 rounded-10 p-15 shadow-custom rounded-[10] text-black/54 font-semibold";
+    return "flex items-center justify-start gap-15 rounded-10 p-15 shadow-custom rounded-[10] text-black/54 font-semibold";
   }
 }
 
@@ -31,10 +33,16 @@ class ClickableFactory {
   }
 }
 
-export function Clickable({ types = "default", ...props }: ClickableProps) {
+export function Clickable({
+  types = "default",
+  className,
+  ...props
+}: ClickableProps) {
   const strategy = ClickableFactory.create(types);
 
-  return <Slot {...props} className={strategy.styleRender()} />;
+  return (
+    <Slot {...props} className={neato(strategy.styleRender(), className)} />
+  );
 }
 
 function Slot<T extends ElementType>({

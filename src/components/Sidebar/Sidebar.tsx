@@ -38,7 +38,7 @@ export function Sidebar({ children }: { children: React.ReactNode }) {
           </button>
         </div>
 
-        <menu className="text-primary-600 flex flex-col gap-40 font-bold">
+        <menu className="menu text-primary-600 flex flex-col gap-40">
           <Link href="/dashboard/interview">모의 인터뷰</Link>
 
           <Link href="/dashboard/tech-question">기술 면접 질문</Link>

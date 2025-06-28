@@ -5,33 +5,37 @@
 
   --spacing: calc(1rem / 16);
 
-  --primary-100: #d5e8ff;
-  --primary-200: #aad2ff;
-  --primary-300: #80bbff;
-  --primary-400: #55a5ff;
-  --primary-500: #2b8eff;
-  --primary-600: #2272cc;
-  --primary-700: #1a5599;
-  --primary-800: #113966;
-  --primary-900: #091c33;
+  --breakpoint-desktop: 770px;
+
+  --color-primary-100: #d5e8ff;
+  --color-primary-200: #aad2ff;
+  --color-primary-300: #80bbff;
+  --color-primary-400: #55a5ff;
+  --color-primary-500: #2b8eff;
+  --color-primary-600: #2272cc;
+  --color-primary-700: #1a5599;
+  --color-primary-800: #113966;
+  --color-primary-900: #091c33;
 
   --secondary: #ffefbb;
 
-  --gray: #dbdbdb;
+  --color-gray-100: #f8f8f7;
+  --color-gray-200: #dbdbdb;
+  --color-gray-600: #767676;
 
   --shadow-custom: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 /* Typography Styles */
-.header-01 {
+.heading-01 {
   @apply font-sans text-[32px] leading-normal font-extrabold;
 }
 
-.header-02 {
+.heading-02 {
   @apply font-sans text-[24px] leading-normal font-bold;
 }
 
-.header-03 {
+.heading-03 {
   @apply font-sans text-[20px] leading-[150%] font-semibold;
 }
 
@@ -49,4 +53,14 @@
 
 .menu {
   @apply font-sans text-[20px] leading-[20px] font-bold;
+}
+
+.dropdown-transition {
+  transition:
+    max-height 500ms ease-in-out,
+    opacity 300ms ease-in-out;
+}
+
+*:focus {
+  outline: none;
 }
