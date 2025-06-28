@@ -1,7 +1,7 @@
 "use client";
 
 import { startInterview } from "@/apis/interview.action";
-import { Dropdown } from "@/components/Form/Dropdown";
+import { Dropdown } from "@/components/Dropdown/Dropdown";
 import { DefaultInputWrapper } from "@/components/Form/DefaultInputWrapper";
 import Form from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
@@ -28,6 +28,7 @@ export function InterviewForm() {
         const result = await dispatch(data);
         router.push("/dashboard/interview/" + result?.sessionId);
       })}
+      className="flex w-full flex-col gap-24"
     >
       <div className="flex max-w-480 flex-col gap-28">
         <SicilianProvider value={{ register, name: "title" }}>
@@ -53,7 +54,7 @@ export function InterviewForm() {
         </div>
       </div>
 
-      <Clickable types="default">
+      <Clickable types="default" className="self-end">
         <button type="submit" disabled={isPending}>
           인터뷰 시작
         </button>

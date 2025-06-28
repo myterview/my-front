@@ -12,7 +12,7 @@ export function SidebarFooter({
   user: components["schemas"]["UserResDTO"];
 }) {
   return (
-    <div className="bg-primary-600 flex w-300 flex-col gap-20 px-20 pt-18 pb-28">
+    <div className="bg-primary-600 flex w-280 flex-col gap-20 px-20 pt-18 pb-28">
       <div className="flex items-center justify-between">
         <Avatar src={user.profileImage} />
         <div className="flex flex-col items-end gap-12 text-[16px]/12 font-semibold text-gray-100">

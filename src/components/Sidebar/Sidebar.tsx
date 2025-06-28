@@ -19,11 +19,11 @@ export function Sidebar({ children }: { children: React.ReactNode }) {
         }
       }}
       className={neato(
-        "desktop:w-300 max-desktop:absolute top-0 flex h-dvh flex-col bg-black/5 transition-all duration-200 ease-in-out",
+        "desktop:w-280 max-desktop:absolute top-0 flex h-dvh flex-col bg-black/5 transition-all duration-200 ease-in-out",
         isOpen ? "left-0 w-full" : "-left-300"
       )}
     >
-      <div className="relative flex h-dvh w-300 flex-col gap-80 bg-gray-100 bg-[url('/images/pattern.svg')] bg-size-[120] px-24 pt-60">
+      <div className="relative flex h-dvh w-280 flex-col gap-80 bg-gray-100 bg-[url('/images/pattern.svg')] bg-size-[120] px-24 pt-60">
         <div className="flex items-center justify-between">
           <Logo size="small" />
 

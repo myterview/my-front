@@ -10,15 +10,18 @@ import {
   useListNavigation,
   useRole,
   FloatingFocusManager,
+  Placement,
 } from "@floating-ui/react";
 import { useState, useRef, useEffect } from "react";
 
 export function useAnchorPosition({
   mainAxis = 8,
   crossAxis = 0,
+  placement = "bottom-start",
 }: {
   mainAxis?: number;
   crossAxis?: number;
+  placement?: Placement;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpened, setIsOpened] = useState(false); // 이 부분은 필요하지 않을 수 있습니다.
@@ -32,7 +35,7 @@ export function useAnchorPosition({
       if (!open) setActiveIndex(null);
     },
     middleware: [offset({ mainAxis, crossAxis }), flip(), shift()],
-    placement: "bottom-start",
+    placement,
     whileElementsMounted: autoUpdate,
   });
 

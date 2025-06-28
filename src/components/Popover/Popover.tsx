@@ -1,9 +1,10 @@
 "use client";
 
 import { useAnchorPosition } from "@/hooks/useAnchorPosition";
+import { Placement } from "@floating-ui/react";
 
 export function Popover({
-  position = { mainAxis: 8, crossAxis: 0 },
+  position = { mainAxis: 8, crossAxis: 0, placement: "bottom-start" },
   anchorElement,
   floaterElement,
 }: {
@@ -15,7 +16,7 @@ export function Popover({
     floater: ReturnType<typeof useAnchorPosition>["floater"],
     helpers: ReturnType<typeof useAnchorPosition>["helper"]
   ) => React.ReactElement;
-  position?: { mainAxis?: number; crossAxis?: number };
+  position?: { mainAxis?: number; crossAxis?: number; placement?: Placement };
 }) {
   const { anchor, floater, helper } = useAnchorPosition(position);
 
