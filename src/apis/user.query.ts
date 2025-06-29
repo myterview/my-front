@@ -8,9 +8,7 @@ export class UserQuery extends Fetcher {
   @SwallowError()
   @WithCookies()
   public async getUser() {
-    return await this.serverFetcher.get("auth/user", {
-      searchParams: { include: "id,name,email" },
-    });
+    return await this.serverFetcher.get("auth/user");
   }
 
   @SwallowError()

@@ -26,7 +26,7 @@ Card.subTitle = function SubTitle({ children }: { children: React.ReactNode }) {
 export enum ProgressStatus {
   IN_PROGRESS = "진행 중",
   ANALYZING = "분석 중",
-  COMPLETED = "종료",
+  COMPLETED = "분석 완료",
 }
 
 Card.ProgressChip = function Progress({

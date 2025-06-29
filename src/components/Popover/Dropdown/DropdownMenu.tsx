@@ -1,14 +1,17 @@
 import { neato } from "neato";
 import { For } from "@ilokesto/utilinent";
-import { IPopoverFloater } from "../Popover/Popover";
+import { IPopoverFloater } from "../Popover";
 
-export function DropdownFloater({
+export function DropdownMenu({
   floater,
   helpers,
   options,
   selectedOption,
+  className,
   setSelectedOption,
-}: IPopoverFloater) {
+}: IPopoverFloater & {
+  className?: string;
+}) {
   return (
     <div
       {...floater}
@@ -26,9 +29,10 @@ export function DropdownFloater({
                 helpers.listRef.current[index] = node;
               }}
               className={neato(
-                "min-w-132 cursor-pointer px-4 py-2 font-semibold text-gray-600",
+                "cursor-pointer px-4 py-2 font-semibold text-gray-600",
                 helpers.activeIndex === index && "bg-blue-100",
-                selectedOption === option && "text-blue-600"
+                selectedOption === option && "text-blue-600",
+                className
               )}
               {...helpers.getItemProps({
                 onClick: () =>

@@ -12,10 +12,7 @@ export class InterviewQuery extends Fetcher {
   @WithCookies()
   public async getInterviewById(interviewId: string) {
     return await this.serverFetcher.get(
-      `interview/${interviewId}` as "interview/{sessionId}",
-      {
-        searchParams: { include: "questions" },
-      }
+      `interview/${interviewId}` as "interview/{sessionId}"
     );
   }
 }

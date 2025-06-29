@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { QueryProvider } from "./QueryProvider";
 
 export const metadata: Metadata = {
   title: "Myterview",
@@ -14,7 +15,6 @@ const pretendard = localFont({
   variable: "--font-pretendard",
   display: "swap",
 });
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`font-sans ${pretendard.variable} flex antialiased`}>
-        {children}
+        <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
   );

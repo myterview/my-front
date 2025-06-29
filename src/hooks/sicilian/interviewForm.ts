@@ -24,4 +24,5 @@ export const { register, getValues, handleServerAction } = new CreateForm<{
     position: "",
     experience: "",
   },
+  clearFormOn: ["routeChange"],
 });

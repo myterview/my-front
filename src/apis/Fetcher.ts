@@ -23,36 +23,42 @@ export class Fetcher {
       retry: 2,
     });
 
-  public serverFetcher = {
-    get: <P extends PathWithoutApi<keyof paths>>(
-      path: P,
-      options?: Options
-    ): Promise<ApiResponse<P, "get">> => {
-      return this.instance().get(path, options).json();
-    },
-    post: <P extends PathWithoutApi<keyof paths>>(
-      path: P,
-      options?: Options
-    ): Promise<ApiResponse<P, "post">> => {
-      return this.instance().post(path, options).json();
-    },
-    put: <P extends PathWithoutApi<keyof paths>>(
-      path: P,
-      options?: Options
-    ): Promise<ApiResponse<P, "put">> => {
-      return this.instance().put(path, options).json();
-    },
-    patch: <P extends PathWithoutApi<keyof paths>>(
-      path: P,
-      options?: Options
-    ): Promise<ApiResponse<P, "patch">> => {
-      return this.instance().patch(path, options).json();
-    },
-    delete: <P extends PathWithoutApi<keyof paths>>(
-      path: P,
-      options?: Options
-    ): Promise<ApiResponse<P, "delete">> => {
-      return this.instance().delete(path, options).json();
-    },
-  };
+  public serverFetcher = this.createFetcher("server");
+
+  public clientFetcher = this.createFetcher("client");
+
+  private createFetcher(type: "server" | "client") {
+    return {
+      get: <P extends PathWithoutApi<keyof paths>>(
+        path: P,
+        options?: Options
+      ): Promise<ApiResponse<P, "get">> => {
+        return this.instance(type).get(path, options).json();
+      },
+      post: <P extends PathWithoutApi<keyof paths>>(
+        path: P,
+        options?: Options
+      ): Promise<ApiResponse<P, "post">> => {
+        return this.instance(type).post(path, options).json();
+      },
+      put: <P extends PathWithoutApi<keyof paths>>(
+        path: P,
+        options?: Options
+      ): Promise<ApiResponse<P, "put">> => {
+        return this.instance(type).put(path, options).json();
+      },
+      patch: <P extends PathWithoutApi<keyof paths>>(
+        path: P,
+        options?: Options
+      ): Promise<ApiResponse<P, "patch">> => {
+        return this.instance(type).patch(path, options).json();
+      },
+      delete: <P extends PathWithoutApi<keyof paths>>(
+        path: P,
+        options?: Options
+      ): Promise<ApiResponse<P, "delete">> => {
+        return this.instance(type).delete(path, options).json();
+      },
+    };
+  }
 }

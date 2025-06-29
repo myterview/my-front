@@ -30,7 +30,12 @@ export default function Page() {
       <main className="mt-10 flex w-full flex-col items-center justify-center gap-22">
         <For each={SIGN_ARRAY}>
           {({ href, imageSrc, altText, text }) => (
-            <Clickable types="shadow" size="large" className="w-full">
+            <Clickable
+              key={text}
+              types="shadow"
+              size="large"
+              className="w-full"
+            >
               <Link href={href}>
                 <Image
                   draggable={false}

@@ -695,6 +695,15 @@ export interface components {
              */
             createdAt: string;
         };
+        GetInterviewDTO: {
+            /**
+             * @description Indicates if there are more pages
+             * @example false
+             */
+            hasNext: boolean;
+            /** @description List of interview sessions without messages */
+            items: components["schemas"]["InterviewSessionWithoutMessages"][];
+        };
         StartInterviewDto: {
             /**
              * @description Applied position
@@ -1230,7 +1239,10 @@ export interface operations {
     };
     InterviewController_getInterviews: {
         parameters: {
-            query?: never;
+            query: {
+                skip: string;
+                take: string;
+            };
             header?: never;
             path?: never;
             cookie?: never;
@@ -1243,7 +1255,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["InterviewSessionWithoutMessages"][];
+                    "application/json": components["schemas"]["GetInterviewDTO"];
                 };
             };
             /** @description Unauthorized */

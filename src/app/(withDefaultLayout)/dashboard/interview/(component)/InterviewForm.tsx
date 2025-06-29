@@ -13,9 +13,9 @@ import {
   InterviewPositionKr,
   InterviewExperienceKr,
 } from "@/hooks/sicilian/interviewForm";
-import Form from "@/components/Form/Form";
-import { DropdownAnchor } from "@/components/Dropdown/InterviewDropdownButton";
-import { DropdownFloater } from "@/components/Dropdown/DropdownMenu";
+import { Form } from "@/components/Form/Form";
+import { DropdownAnchor } from "@/components/Popover/Dropdown/DropdownAnchor";
+import { DropdownMenu } from "@/components/Popover/Dropdown/DropdownMenu";
 import { For } from "@ilokesto/utilinent";
 import { useActionState, useEffect } from "react";
 import { Popover } from "@/components/Popover/Popover";
@@ -58,10 +58,11 @@ export function InterviewForm() {
                   />
                 )}
                 floaterElement={(floater, helpers) => (
-                  <DropdownFloater
+                  <DropdownMenu
                     floater={floater}
                     helpers={helpers}
                     options={item.options}
+                    className="min-w-132"
                     {...getStateByName(item.title[1])}
                   />
                 )}

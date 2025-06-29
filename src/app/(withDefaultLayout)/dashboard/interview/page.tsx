@@ -1,11 +1,7 @@
 import { InterviewForm } from "./(component)/InterviewForm";
-import { InterviewQuery } from "@/apis/interview.query";
 import { InterviewBinder } from "@/components/Binder/InterviewBinder";
 
 export default async function Home() {
-  const interview = new InterviewQuery();
-  const interviewData = await interview.getInterview();
-
   return (
     <>
       <h2 className="heading-01">기술 인터뷰</h2>
@@ -24,7 +20,7 @@ export default async function Home() {
         <p className="heading-03"></p>
       </div>
 
-      <InterviewBinder interview={interviewData} />
+      <InterviewBinder />
     </>
   );
 }
