@@ -28,7 +28,7 @@ export class InterviewClient extends Fetcher {
       };
     },
     refetchInterval: (query) => {
-      if (query.state.data?.pages.flatMap(page => page.items).find(item => !item.evaluation)) {
+      if (query.state.data?.pages.flatMap(page => page.items).find(item => !item.evaluation && item.isActive)) {
         return 30000;
       }
       return false;

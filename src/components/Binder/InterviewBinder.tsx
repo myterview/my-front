@@ -16,8 +16,6 @@ import { InterviewClient } from "@/apis/interview.client";
 export function InterviewBinder() {
   const { data: interviewList, fetchNextPage } = useInfiniteQuery(new InterviewClient().InfiniteInterviewList());
 
-  console.log(interviewList);
-
   return (
     <div className="grid grid-cols-1 gap-24 md:grid-cols-2 lg:grid-cols-3">
       <Show when={interviewList}>
