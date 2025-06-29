@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
+    "type": "npx openapi-typescript http://localhost:3000/api/swagger-json -o src/types/api.ts",
     "lint": "next lint",
     "format": "prettier --write .",
     "format:check": "prettier --check ."

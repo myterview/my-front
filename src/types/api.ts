@@ -68,7 +68,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/auth/logout": {
+    "/api/auth/signout": {
         parameters: {
             query?: never;
             header?: never;
@@ -238,6 +238,26 @@ export interface paths {
          * @description 관리자가 피드백의 상태를 업데이트합니다.
          */
         patch: operations["FeedbackController_patchFeedbackStatus"];
+        trace?: never;
+    };
+    "/api/interview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get interviews
+         * @description Retrieve all active interviews for the authenticated user.
+         */
+        get: operations["InterviewController_getInterviews"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
         trace?: never;
     };
     "/api/interview/start": {
@@ -454,6 +474,14 @@ export interface components {
              */
             status: "pending" | "reviewed" | "done";
         };
+        StartInterviewResponse: {
+            /** @description Success status */
+            success: boolean;
+            /** @description Session ID */
+            sessionId: string;
+            /** @description AI first message */
+            message: string;
+        };
         StartInterviewDto: {
             /**
              * @description Applied position
@@ -472,14 +500,6 @@ export interface components {
              * @example Frontend Developer Interview
              */
             title: string;
-        };
-        StartInterviewResponse: {
-            /** @description Success status */
-            success: boolean;
-            /** @description Session ID */
-            sessionId: string;
-            /** @description AI first message */
-            message: string;
         };
         SendMessageDto: {
             /**
@@ -1179,6 +1199,40 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["MessageDTO"];
                 };
+            };
+        };
+    };
+    InterviewController_getInterviews: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Interviews retrieved successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartInterviewResponse"][];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };

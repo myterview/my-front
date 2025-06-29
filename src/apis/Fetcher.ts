@@ -1,4 +1,4 @@
-import ky, { Options, Input } from "ky";
+import ky, { Options } from "ky";
 
 export enum HTTPMethod {
   GET = "get",
@@ -8,29 +8,51 @@ export enum HTTPMethod {
   PATCH = "patch",
 }
 
-export class Fetcher {
-  public instance = ky.create({
-    prefixUrl: "http://localhost:3000/api",
-    timeout: 5_000,
-    retry: 2,
-  });
+// ApiResponse 타입을 자동 추론하는 fetcher
+import type { ApiResponse, PathWithoutApi } from "@/types/apiUtils";
+import { paths } from "@/types/api";
 
-  public createCustomFetcher = (customOptions: Options) => {
-    // enum 값을 문자열 배열로 꺼내서 순회
-    return Object.values(HTTPMethod).reduce(
-      (acc, method) => {
-        acc[method] = <T>(input: Input, options?: Options) =>
-          this.instance[method]<T>(input, {
-            ...options,
-            ...customOptions,
-            prefixUrl: "http://localhost:3000/api" + customOptions.prefixUrl,
-          }).json();
-        return acc;
-      },
-      {} as Record<
-        HTTPMethod,
-        <T>(input: Input, options?: Options) => Promise<T>
-      >
-    );
+export class Fetcher {
+  public instance = (type: "server" | "client" = "server") =>
+    ky.create({
+      prefixUrl:
+        type === "server"
+          ? process.env.NEXT_PUBLIC_SERVER_API_URL
+          : process.env.NEXT_PUBLIC_CLIENT_API_URL,
+      timeout: 5_000,
+      retry: 2,
+    });
+
+  public serverFetcher = {
+    get: <P extends PathWithoutApi<keyof paths>>(
+      path: P,
+      options?: Options
+    ): Promise<ApiResponse<P, "get">> => {
+      return this.instance().get(path, options).json();
+    },
+    post: <P extends PathWithoutApi<keyof paths>>(
+      path: P,
+      options?: Options
+    ): Promise<ApiResponse<P, "post">> => {
+      return this.instance().post(path, options).json();
+    },
+    put: <P extends PathWithoutApi<keyof paths>>(
+      path: P,
+      options?: Options
+    ): Promise<ApiResponse<P, "put">> => {
+      return this.instance().put(path, options).json();
+    },
+    patch: <P extends PathWithoutApi<keyof paths>>(
+      path: P,
+      options?: Options
+    ): Promise<ApiResponse<P, "patch">> => {
+      return this.instance().patch(path, options).json();
+    },
+    delete: <P extends PathWithoutApi<keyof paths>>(
+      path: P,
+      options?: Options
+    ): Promise<ApiResponse<P, "delete">> => {
+      return this.instance().delete(path, options).json();
+    },
   };
 }

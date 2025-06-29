@@ -1,6 +1,17 @@
+// import { SearchParams } from "next/dist/server/request/search-params";
 import { InterviewForm } from "./(component)/InterviewForm";
+// import { InterviewQuery } from "@/apis/interview.query";
 
-export default function Home() {
+export default async function Home() {
+  //   {
+  //   searchParams,
+  // }: {
+  //   searchParams: Promise<SearchParams>;
+  // }
+  // const i = new InterviewQuery();
+
+  // console.log(await i.getInterview());
+
   return (
     <>
       <h2 className="heading-01">기술 인터뷰</h2>

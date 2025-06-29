@@ -14,7 +14,7 @@ export default function CallbackPage() {
     const doLogin = async () => {
       const { instance } = new Fetcher();
 
-      const res = await instance.get<{ redirectUrl: string }>(
+      const res = await instance("client").get<{ redirectUrl: string }>(
         `auth/${provider}/callback?${searchParams.toString()}`,
         {
           credentials: "include",
@@ -27,7 +27,6 @@ export default function CallbackPage() {
       } else {
         // 로그인 실패 처리
         console.error("로그인 실패:", res.statusText);
-        router.push("/login?error=login_failed");
       }
     };
 

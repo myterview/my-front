@@ -2,31 +2,21 @@ import { SwallowError } from "./decorators/SwallowError";
 import { thisBind } from "./decorators/thisBind";
 import { WithCookies } from "./decorators/WithCookie";
 import { Fetcher } from "./Fetcher";
-import { ApiResponse } from "@/types/apiUtils";
 
 @thisBind
 export class UserQuery extends Fetcher {
-  private userFetcher = this.createCustomFetcher({
-    prefixUrl: "/auth",
-  });
-
   @SwallowError()
   @WithCookies()
   public async getUser() {
-    return await this.userFetcher.get<ApiResponse<"/auth/user", "get">>(
-      "user",
-      {
-        searchParams: { include: "id,name,email" }, // json 대신 searchParams 사용
-      }
-    );
+    return await this.serverFetcher.get("auth/user", {
+      searchParams: { include: "id,name,email" },
+    });
   }
 
   @SwallowError()
   @WithCookies()
   public async patchUser() {
-    return await this.userFetcher.patch<
-      ApiResponse<"/auth/user/role", "patch">
-    >("user/role", {
+    return await this.serverFetcher.patch("auth/user/role", {
       json: { secret: "your_role_change_code" },
     });
   }

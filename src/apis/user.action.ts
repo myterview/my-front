@@ -1,26 +1,20 @@
 "use server";
 
-import { ApiResponse } from "@/types/apiUtils";
 import { Fetcher } from "./Fetcher";
 
 import { getCookieValue } from "@/utils/cookieUtils";
 import { cookies } from "next/headers";
 
-const userFetcher = new Fetcher().createCustomFetcher({
-  prefixUrl: "/auth",
-});
+const { serverFetcher: fetcher } = new Fetcher();
 
 export async function patchUserRoleAction() {
   try {
-    return await userFetcher.patch<ApiResponse<"/auth/user/role", "patch">>(
-      `user/role`,
-      {
-        json: { secret: "your_role_change_code" },
-        headers: {
-          Cookie: await getCookieValue(),
-        },
-      }
-    );
+    return await fetcher.patch("auth/user/role", {
+      json: { secret: "your_role_change_code" },
+      headers: {
+        Cookie: await getCookieValue(),
+      },
+    });
   } catch (error) {
     console.error("Error occurred while patching user role:", error);
   }
@@ -29,7 +23,7 @@ export async function patchUserRoleAction() {
 export async function logoutAction() {
   try {
     // 백엔드 로그아웃 API 호출
-    await userFetcher.post(`signout`, {
+    await fetcher.post(`auth/signout`, {
       headers: {
         Cookie: await getCookieValue(),
       },
