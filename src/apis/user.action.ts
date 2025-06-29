@@ -1,32 +1,38 @@
 "use server";
 
 import { Fetcher } from "./Fetcher";
+
+import { getCookieValue } from "@/utils/cookieUtils";
 import { cookies } from "next/headers";
 
-type User = {
-  id: string;
-  name: string;
-  email: string;
-  // 필요한 다른 필드들...
-};
+const { serverFetcher: fetcher } = new Fetcher();
 
 export async function patchUserRoleAction() {
-  const userFetcher = new Fetcher().createCustomFetcher({
-    prefixUrl: '/auth',
-  });
-
-  const cookieStore = await cookies();
-  const allCookies = cookieStore.getAll();
-  const Cookie = allCookies.reduce((acc, { name, value }) => `${acc}${name}=${value}; `, "");
-
   try {
-    return await userFetcher.patch<User>(`user/role`, {
-        json: { secret: "your_role_change_code" },
-        headers: {
-          Cookie
-        }
-      });
+    return await fetcher.patch("auth/user/role", {
+      json: { secret: "your_role_change_code" },
+      headers: {
+        Cookie: await getCookieValue(),
+      },
+    });
   } catch (error) {
-    console.error("Error occurred while patching user role:", error); 
+    console.error("Error occurred while patching user role:", error);
+  }
+}
+
+export async function logoutAction() {
+  try {
+    // 백엔드 로그아웃 API 호출
+    await fetcher.post(`auth/signout`, {
+      headers: {
+        Cookie: await getCookieValue(),
+      },
+    });
+  } catch (error) {
+    console.error("Error occurred during logout:", error);
+  } finally {
+    // 쿠키 삭제
+    const cookieStoreForDelete = await cookies();
+    cookieStoreForDelete.delete("connect.sid");
   }
 }

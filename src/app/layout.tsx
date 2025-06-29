@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import localFont from 'next/font/local';
+import localFont from "next/font/local";
 import "./globals.css";
+import { QueryProvider } from "./QueryProvider";
 
 export const metadata: Metadata = {
   title: "Myterview",
@@ -8,13 +9,12 @@ export const metadata: Metadata = {
 };
 
 const pretendard = localFont({
-  src: '../../public/fonts/PretendardVariable.woff2', // Variable 폰트는 하나의 파일
-  weight: '45 920', // 최소-최대 weight 범위
-  style: 'normal',
-  variable: '--font-pretendard',
-  display: 'swap',
+  src: "../../public/fonts/PretendardVariable.woff2", // Variable 폰트는 하나의 파일
+  weight: "45 920", // 최소-최대 weight 범위
+  style: "normal",
+  variable: "--font-pretendard",
+  display: "swap",
 });
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -22,10 +22,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body
-        className={`font-sans ${pretendard.variable} antialiased flex`}
-      >
-        {children}
+      <body className={`font-sans ${pretendard.variable} flex antialiased`}>
+        <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
   );

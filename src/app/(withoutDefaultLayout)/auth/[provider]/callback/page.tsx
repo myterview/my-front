@@ -1,5 +1,6 @@
-'use client';
+"use client";
 
+import { Fetcher } from "@/apis/Fetcher";
 import { useSearchParams, useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -8,22 +9,24 @@ export default function CallbackPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { provider } = useParams(); // 경로 파라미터 가져오기
-  
+
   useEffect(() => {
-    const doLogin = async () => {      
-      const res = await fetch(`http://localhost:3000/api/auth/${provider}/callback?${searchParams.toString()}`, {
-        method: 'GET',
-        credentials: 'include',
-      });
+    const doLogin = async () => {
+      const { instance } = new Fetcher();
+
+      const res = await instance("client").get<{ redirectUrl: string }>(
+        `auth/${provider}/callback?${searchParams.toString()}`,
+        {
+          credentials: "include",
+        }
+      );
 
       if (res.ok) {
         const data = await res.json();
-        // 로그인 성공 후 리다이렉트
-        router.push(data.redirectUrl || '/');
+        router.push(data.redirectUrl);
       } else {
         // 로그인 실패 처리
-        console.error('로그인 실패:', res.statusText);
-        router.push('/login?error=login_failed');
+        console.error("로그인 실패:", res.statusText);
       }
     };
 

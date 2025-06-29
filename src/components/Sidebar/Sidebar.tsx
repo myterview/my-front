@@ -1,0 +1,71 @@
+"use client";
+
+import Link from "next/link";
+import { Logo } from "../Logo/Logo";
+import { useRef } from "react";
+import { neato } from "neato";
+import { create } from "caro-kann";
+import { Clickable } from "../Clickable/Clickable";
+import Image from "next/image";
+
+export const useSidebar = create(false);
+
+export function Sidebar({ children }: { children: React.ReactNode }) {
+  const asideRef = useRef<HTMLElement>(null);
+  const [isOpen, setIsOpen] = useSidebar();
+
+  return (
+    <aside
+      ref={asideRef}
+      onClick={(e) => {
+        if (e.target === asideRef.current) {
+          setIsOpen(false);
+        }
+      }}
+      className={neato(
+        "desktop:w-280 max-desktop:absolute top-0 flex h-dvh flex-col bg-black/5 transition-all duration-200 ease-in-out",
+        isOpen ? "left-0 w-full" : "-left-300"
+      )}
+    >
+      <div className="relative flex h-dvh w-280 flex-col gap-80 bg-gray-100 bg-[url('/images/pattern.svg')] bg-size-[120] px-24 pt-60">
+        <div className="flex items-center justify-between">
+          <Logo size="small" />
+
+          <Clickable
+            types="shadow"
+            size="small"
+            className={neato(
+              "desktop:hidden absolute transition-all duration-200 ease-in-out",
+              isOpen
+                ? "-right-0 ml-0 rounded-r-none"
+                : "-right-50 mr-0 rounded-l-none"
+            )}
+          >
+            <button onClick={() => setIsOpen((prev) => !prev)}>
+              <Image
+                src="/icons/paw.svg"
+                alt="sidebar toggle image"
+                style={{
+                  transform: isOpen ? "scaleX(-1)" : "scaleX(1)",
+                }}
+                draggable={false}
+                width={28}
+                height={24}
+              />
+            </button>
+          </Clickable>
+        </div>
+
+        <menu className="menu text-primary-600 flex flex-col gap-40">
+          <Link href="/dashboard/interview">모의 인터뷰</Link>
+
+          <Link href="/dashboard/tech-question">기술 면접 질문</Link>
+
+          <Link href="/dashboard/feedback">피드백</Link>
+        </menu>
+      </div>
+
+      {children}
+    </aside>
+  );
+}
