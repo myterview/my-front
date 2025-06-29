@@ -15,7 +15,7 @@ export function SidebarFooter({
   useEffect(() => {
     setInterval(
       async () => {
-        fetch("http://localhost:3000/api/auth/user", {
+        fetch(process.env.NEXT_PUBLIC_CLIENT_API_URL + "/auth/user", {
           credentials: "include", // 쿠키를 포함하여 요청
         });
       },
@@ -27,7 +27,7 @@ export function SidebarFooter({
     <div className="bg-primary-600 flex w-280 flex-col gap-20 px-20 pt-18 pb-28">
       <div className="flex items-center justify-between">
         <Avatar src={user.profileImage} />
-        <div className="flex flex-col items-end gap-12 text-[16px]/12 font-semibold text-gray-100">
+        <div className="flex flex-col items-end gap-12 text-base/12 font-semibold text-gray-100">
           <p>{user.email}</p>
           <button onClick={logoutAction}>로그아웃</button>
         </div>

@@ -474,51 +474,6 @@ export interface components {
              */
             status: "pending" | "reviewed" | "done";
         };
-        StartInterviewResponse: {
-            /** @description Success status */
-            success: boolean;
-            /** @description Session ID */
-            sessionId: string;
-            /** @description AI first message */
-            message: string;
-        };
-        StartInterviewDto: {
-            /**
-             * @description Applied position
-             * @example frontend
-             * @enum {string}
-             */
-            position: "frontend" | "backend" | "infra" | "fullstack";
-            /**
-             * @description Experience level
-             * @example mid
-             * @enum {string}
-             */
-            experience: "junior" | "mid" | "senior";
-            /**
-             * @description Interview title
-             * @example Frontend Developer Interview
-             */
-            title: string;
-        };
-        SendMessageDto: {
-            /**
-             * @description User message
-             * @example Hello, I am a 3-year-old frontend developer.
-             */
-            message: string;
-        };
-        SendMessageResponse: {
-            /** @description Success status */
-            success: boolean;
-            /** @description AI response message */
-            aiMessage: string;
-            /**
-             * @description Indicates if the interview is finished
-             * @example false
-             */
-            isFinished: boolean;
-        };
         TechnicalExpertiseDto: {
             /**
              * @description 평가 점수 (1-10)
@@ -714,6 +669,77 @@ export interface components {
              */
             overallAssessment: components["schemas"]["OverallAssessmentDto"];
         };
+        InterviewSessionWithoutMessages: {
+            /** @description Session ID */
+            id: string;
+            /** @description User ID */
+            userId: string;
+            /**
+             * @description Interview evaluation type
+             * @enum {string}
+             */
+            evaluationType?: "default";
+            /** @description Interview evaluation data */
+            evaluation?: components["schemas"]["EvaluationDto"];
+            /** @description Interview title */
+            title: string;
+            /** @description Interview position */
+            position: string;
+            /** @description Experience level */
+            experience: string;
+            /** @description Interview active status */
+            isActive: boolean;
+            /**
+             * Format: date-time
+             * @description Creation time
+             */
+            createdAt: string;
+        };
+        StartInterviewDto: {
+            /**
+             * @description Applied position
+             * @example frontend
+             * @enum {string}
+             */
+            position: "frontend" | "backend" | "infra" | "fullstack";
+            /**
+             * @description Experience level
+             * @example mid
+             * @enum {string}
+             */
+            experience: "junior" | "mid" | "senior";
+            /**
+             * @description Interview title
+             * @example Frontend Developer Interview
+             */
+            title: string;
+        };
+        StartInterviewResponse: {
+            /** @description Success status */
+            success: boolean;
+            /** @description Session ID */
+            sessionId: string;
+            /** @description AI first message */
+            message: string;
+        };
+        SendMessageDto: {
+            /**
+             * @description User message
+             * @example Hello, I am a 3-year-old frontend developer.
+             */
+            message: string;
+        };
+        SendMessageResponse: {
+            /** @description Success status */
+            success: boolean;
+            /** @description AI response message */
+            aiMessage: string;
+            /**
+             * @description Indicates if the interview is finished
+             * @example false
+             */
+            isFinished: boolean;
+        };
         InterviewMessage: {
             /** @description Message ID */
             id: string;
@@ -741,21 +767,21 @@ export interface components {
             id: string;
             /** @description User ID */
             userId: string;
+            /**
+             * @description Interview evaluation type
+             * @enum {string}
+             */
+            evaluationType?: "default";
+            /** @description Interview evaluation data */
+            evaluation?: components["schemas"]["EvaluationDto"];
+            /** @description Interview title */
+            title: string;
             /** @description Interview position */
             position: string;
             /** @description Experience level */
             experience: string;
             /** @description Interview active status */
             isActive: boolean;
-            /**
-             * @description Interview evaluation type
-             * @enum {string}
-             */
-            evaluationType: "default";
-            /** @description Interview evaluation data */
-            evaluation?: components["schemas"]["EvaluationDto"];
-            /** @description Interview summary */
-            summary?: string;
             /** @description Message list */
             messages: components["schemas"]["InterviewMessage"][];
             /**
@@ -1217,7 +1243,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["StartInterviewResponse"][];
+                    "application/json": components["schemas"]["InterviewSessionWithoutMessages"][];
                 };
             };
             /** @description Unauthorized */

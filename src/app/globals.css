@@ -1,3 +1,12 @@
+/* Hide scrollbars for all elements */
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
 @import "tailwindcss";
 
 @theme inline {
@@ -19,7 +28,7 @@
   --color-primary-800: #113966;
   --color-primary-900: #091c33;
 
-  --secondary: #ffefbb;
+  --color-secondary: #ffefbb;
 
   --color-gray-100: #f8f8f7;
   --color-gray-200: #dbdbdb;
@@ -34,27 +43,27 @@
 }
 
 .heading-02 {
-  @apply font-sans text-[24px] leading-normal font-bold;
+  @apply font-sans text-2xl leading-normal font-bold;
 }
 
 .heading-03 {
-  @apply font-sans text-[20px] leading-[150%] font-semibold;
+  @apply font-sans text-xl/30 font-semibold;
 }
 
 .input {
-  @apply font-sans text-[20px] leading-[28px] font-semibold;
+  @apply font-sans text-xl/28 font-semibold;
 }
 
 .dropdown {
-  @apply font-sans text-[20px] leading-[150%] font-medium;
+  @apply font-sans text-xl/30 font-medium;
 }
 
 .label {
-  @apply font-sans text-[16px] leading-[16px] font-normal;
+  @apply font-sans text-base/16 font-normal;
 }
 
 .menu {
-  @apply font-sans text-[20px] leading-[20px] font-bold;
+  @apply font-sans text-xl/20 font-bold;
 }
 
 .dropdown-transition {
