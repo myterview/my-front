@@ -1,5 +1,5 @@
 import { neato } from "neato";
-import { For } from "utilinent";
+import { For } from "@ilokesto/utilinent";
 
 export function Card({
   children,

@@ -1,18 +1,24 @@
 import Image from "next/image";
 import { neato } from "neato";
-import { IDropdownButton } from "./Dropdown";
+import { IPopoverAnchor } from "../Popover/Popover";
+import { Show } from "@ilokesto/utilinent";
 
-export function InterviewDropdownButton({
+export function DropdownAnchor({
   anchor,
   helpers,
   title,
   selectedOption,
+  iconSrc,
 }: {
-  title: "직군" | "경력";
-} & IDropdownButton) {
+  title?: string;
+  iconSrc?: string;
+} & IPopoverAnchor) {
   return (
     <div className="flex w-full flex-col gap-8">
-      <div className="label">{title}</div>
+      <Show when={title}>
+        {(title) => <div className="label">{title}</div>}
+      </Show>
+
       <button
         type="button"
         className={neato(
@@ -21,16 +27,22 @@ export function InterviewDropdownButton({
         )}
         {...anchor}
       >
-        <Image
-          src={getImageByTitle(title)}
-          alt="Dropdown Arrow"
-          width={22}
-          draggable={false}
-          height={18}
-        />
+        <Show when={iconSrc}>
+          {(iconSrc) => (
+            <Image
+              src={iconSrc}
+              alt="Dropdown Icon"
+              width={22}
+              draggable={false}
+              height={18}
+            />
+          )}
+        </Show>
+
         <span className="dropdown min-h-30 flex-1 text-left">
           {selectedOption}
         </span>
+
         <Image
           src="/icons/dropdownArrow.svg"
           alt="Dropdown Arrow"
@@ -41,15 +53,4 @@ export function InterviewDropdownButton({
       </button>
     </div>
   );
-}
-
-function getImageByTitle(title: "직군" | "경력"): string {
-  switch (title) {
-    case "직군":
-      return "/icons/interviewLaptop.svg";
-    case "경력":
-      return "/icons/interviewLevel.svg";
-    default:
-      return "";
-  }
 }

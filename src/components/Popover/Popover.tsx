@@ -3,6 +3,20 @@
 import { useAnchorPosition } from "@/hooks/useAnchorPosition";
 import { Placement } from "@floating-ui/react";
 
+export interface IPopoverAnchor {
+  anchor: ReturnType<typeof useAnchorPosition>["anchor"];
+  helpers: ReturnType<typeof useAnchorPosition>["helper"];
+  selectedOption: string;
+}
+
+export interface IPopoverFloater {
+  floater: ReturnType<typeof useAnchorPosition>["floater"];
+  helpers: ReturnType<typeof useAnchorPosition>["helper"];
+  options: string[];
+  selectedOption: string;
+  setSelectedOption: (option: string) => void;
+}
+
 export function Popover({
   position = { mainAxis: 8, crossAxis: 0, placement: "bottom-start" },
   anchorElement,

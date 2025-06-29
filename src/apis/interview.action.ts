@@ -10,15 +10,18 @@ import { getCookieValue } from "@/utils/cookieUtils";
 
 const { serverFetcher: fetcher } = new Fetcher();
 
-export async function startInterview({
-  title,
-  position,
-  experience,
-}: {
-  title: string;
-  position: InterviewPositionKr | "";
-  experience: InterviewExperienceKr | "";
-}) {
+export async function startInterview(
+  prev: unknown,
+  {
+    title,
+    position,
+    experience,
+  }: {
+    title: string;
+    position: InterviewPositionKr | "";
+    experience: InterviewExperienceKr | "";
+  }
+) {
   try {
     return await fetcher.post(`interview/start`, {
       json: {

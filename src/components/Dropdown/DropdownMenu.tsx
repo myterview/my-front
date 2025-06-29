@@ -1,20 +1,14 @@
-import { useAnchorPosition } from "@/hooks/useAnchorPosition";
 import { neato } from "neato";
-import { For } from "utilinent";
+import { For } from "@ilokesto/utilinent";
+import { IPopoverFloater } from "../Popover/Popover";
 
-export function DropdownMenu({
+export function DropdownFloater({
   floater,
   helpers,
   options,
   selectedOption,
   setSelectedOption,
-}: {
-  floater: ReturnType<typeof useAnchorPosition>["floater"];
-  helpers: ReturnType<typeof useAnchorPosition>["helper"];
-  options: string[];
-  selectedOption: string;
-  setSelectedOption: (option: string) => void;
-}) {
+}: IPopoverFloater) {
   return (
     <div
       {...floater}

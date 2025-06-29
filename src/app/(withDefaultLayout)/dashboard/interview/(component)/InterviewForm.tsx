@@ -1,7 +1,6 @@
 "use client";
 
 import { startInterview } from "@/apis/interview.action";
-import { Dropdown } from "@/components/Dropdown/Dropdown";
 import { DefaultInputWrapper } from "@/components/Form/DefaultInputWrapper";
 import { Input } from "@/components/Form/Input";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
@@ -15,39 +14,25 @@ import {
   InterviewExperienceKr,
 } from "@/hooks/sicilian/interviewForm";
 import Form from "@/components/Form/Form";
-import useServerAction from "@/hooks/useServerAction";
-import { InterviewDropdownButton } from "@/components/Dropdown/InterviewDropdownButton";
-import { For } from "utilinent";
+import { DropdownAnchor } from "@/components/Dropdown/InterviewDropdownButton";
+import { DropdownFloater } from "@/components/Dropdown/DropdownMenu";
+import { For } from "@ilokesto/utilinent";
+import { useActionState, useEffect } from "react";
+import { Popover } from "@/components/Popover/Popover";
 
 export function InterviewForm() {
-  const [dispatch, isPending] = useServerAction(startInterview);
+  const [state, execute, isPending] = useActionState(startInterview, undefined);
   const router = useRouter();
 
-  const DROPDOWN_ARRAY = [
-    {
-      title: "직군" as const,
-      sicilian: {
-        name: "position",
-        state: getStateByName("position"),
-      },
-      options: Object.values(InterviewPositionKr),
-    },
-    {
-      title: "경력" as const,
-      sicilian: {
-        name: "experience",
-        state: getStateByName("experience"),
-      },
-      options: Object.values(InterviewExperienceKr),
-    },
-  ];
+  useEffect(() => {
+    if (state?.sessionId) {
+      router.push("/dashboard/interview/" + state.sessionId);
+    }
+  }, [state?.sessionId]);
 
   return (
     <Form
-      action={handleServerAction(async (data) => {
-        const result = await dispatch(data);
-        router.push("/dashboard/interview/" + result?.sessionId);
-      })}
+      action={handleServerAction(execute)}
       className="flex w-full flex-col gap-24"
     >
       <div className="flex max-w-480 flex-col gap-28">
@@ -60,20 +45,27 @@ export function InterviewForm() {
         <div className="flex w-full gap-16">
           <For each={DROPDOWN_ARRAY}>
             {(item) => (
-              <Dropdown
-                key={item.sicilian.name}
-                options={item.options}
-                {...item.sicilian.state}
-              >
-                {(anchor, helpers) => (
-                  <InterviewDropdownButton
+              <Popover
+                key={item.title[0]}
+                position={{ crossAxis: 30 }}
+                anchorElement={(anchor, helpers) => (
+                  <DropdownAnchor
                     anchor={anchor}
                     helpers={helpers}
-                    title={item.title}
-                    selectedOption={getValues(item.sicilian.name) as string}
+                    title={item.title[0]}
+                    iconSrc={item.iconSrc}
+                    {...getStateByName(item.title[1])}
                   />
                 )}
-              </Dropdown>
+                floaterElement={(floater, helpers) => (
+                  <DropdownFloater
+                    floater={floater}
+                    helpers={helpers}
+                    options={item.options}
+                    {...getStateByName(item.title[1])}
+                  />
+                )}
+              />
             )}
           </For>
         </div>
@@ -104,3 +96,16 @@ function getStateByName(name: string) {
 
   return { selectedOption, setSelectedOption };
 }
+
+const DROPDOWN_ARRAY = [
+  {
+    title: ["직군", "position"] as const,
+    iconSrc: "/icons/interviewLaptop.svg",
+    options: Object.values(InterviewPositionKr),
+  },
+  {
+    title: ["경력", "experience"] as const,
+    iconSrc: "/icons/interviewLevel.svg",
+    options: Object.values(InterviewExperienceKr),
+  },
+];

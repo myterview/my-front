@@ -2,7 +2,7 @@ import { Clickable } from "@/components/Clickable/Clickable";
 import { Logo } from "@/components/Logo/Logo";
 import Image from "next/image";
 import Link from "next/link";
-import { For } from "utilinent";
+import { For } from "@ilokesto/utilinent";
 
 export default function Page() {
   const SIGN_ARRAY = [
