@@ -14,55 +14,65 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { InterviewClient } from "@/apis/interview.client";
 
 export function InterviewBinder() {
-  const { data: interviewList, fetchNextPage } = useInfiniteQuery(new InterviewClient().InfiniteInterviewList());
+  const { data: interviewList, fetchNextPage } = useInfiniteQuery(
+    new InterviewClient().InfiniteInterviewList()
+  );
 
   return (
     <div className="grid grid-cols-1 gap-24 md:grid-cols-2 lg:grid-cols-3">
       <Show when={interviewList}>
-        {(interviewList) => <For each={interviewList.pages.flatMap(page => page.items)}>
-          {(interview) => {
-            const status = InterviewBinder.getInterviewProgressStatus(interview);
+        {(interviewList) => (
+          <For each={interviewList.pages.flatMap((page) => page.items)}>
+            {(interview) => {
+              const status =
+                InterviewBinder.getInterviewProgressStatus(interview);
 
-            return (
-              <InterviewBinder.CardWrapper
-                key={interview.id}
-                status={status}
-                interview={interview}
-              >
-                <Card
-                  className={neato(
-                    "border-l-8 pl-24",
-                    status === ProgressStatus.IN_PROGRESS &&
-                      "border-secondary bg-white",
-                    status === ProgressStatus.ANALYZING &&
-                      "border-gray-200 bg-gray-100",
-                    status === ProgressStatus.COMPLETED &&
-                      "border-blue-100 bg-white"
-                  )}
+              return (
+                <InterviewBinder.CardWrapper
+                  key={interview.id}
+                  status={status}
+                  interview={interview}
                 >
-                  <Card.Title>{interview.title}</Card.Title>
-                  <div className="mt-8 mb-72 flex items-center justify-between">
-                    <Card.subTitle>{interview.createdAt}</Card.subTitle>
-                    <Card.ProgressChip>{status}</Card.ProgressChip>
-                  </div>
-                  <Card.Tags
-                    each={[
-                      getEnumValueByKey(InterviewPositionKr, interview.position),
-                      getEnumValueByKey(
-                        InterviewExperienceKr,
-                        interview.experience
-                      ),
-                    ]}
-                  />
-                </Card>
-              </InterviewBinder.CardWrapper>
-            );
-          }}
-        </For>}
+                  <Card
+                    className={neato(
+                      "border-l-8 pl-24",
+                      status === ProgressStatus.IN_PROGRESS &&
+                        "border-secondary bg-white",
+                      status === ProgressStatus.ANALYZING &&
+                        "border-gray-200 bg-gray-100",
+                      status === ProgressStatus.COMPLETED &&
+                        "border-blue-100 bg-white"
+                    )}
+                  >
+                    <Card.Title>{interview.title}</Card.Title>
+                    <div className="mt-8 mb-72 flex items-center justify-between">
+                      <Card.subTitle>{interview.createdAt}</Card.subTitle>
+                      <Card.ProgressChip>{status}</Card.ProgressChip>
+                    </div>
+                    <Card.Tags
+                      each={[
+                        getEnumValueByKey(
+                          InterviewPositionKr,
+                          interview.position
+                        ),
+                        getEnumValueByKey(
+                          InterviewExperienceKr,
+                          interview.experience
+                        ),
+                      ]}
+                    />
+                  </Card>
+                </InterviewBinder.CardWrapper>
+              );
+            }}
+          </For>
+        )}
       </Show>
-      <Observer onIntersect={(isIntersecting) => {
-      if (isIntersecting) fetchNextPage();
-    }} />
+      <Observer
+        onIntersect={(isIntersecting) => {
+          if (isIntersecting) fetchNextPage();
+        }}
+      />
     </div>
   );
 }

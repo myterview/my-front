@@ -3,7 +3,7 @@ import { InterviewBinder } from "@/components/Binder/InterviewBinder";
 
 export default async function Home() {
   return (
-    <>
+    <main className="@container/main mx-auto h-dvh max-w-1160 flex-1 overflow-y-scroll px-40 py-100">
       <h2 className="heading-01">기술 인터뷰</h2>
 
       <div className="mt-24 mb-60 space-y-12">
@@ -21,6 +21,6 @@ export default async function Home() {
       </div>
 
       <InterviewBinder />
-    </>
+    </main>
   );
 }

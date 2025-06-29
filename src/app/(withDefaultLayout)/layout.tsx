@@ -22,9 +22,7 @@ export default async function RootLayout({
 
   return (
     <div className="flex w-full flex-row-reverse">
-      <main className="@container/main mx-auto h-dvh max-w-1160 flex-1 overflow-y-scroll px-40 py-100">
-        {children}
-      </main>
+      <main className="w-full">{children}</main>
       <Sidebar>
         <SidebarFooter user={user} />
       </Sidebar>

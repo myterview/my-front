@@ -28,7 +28,7 @@ export function InterviewForm() {
     if (state?.sessionId) {
       router.push("/dashboard/interview/" + state.sessionId);
     }
-  }, [state?.sessionId]);
+  }, [state?.sessionId, router]);
 
   return (
     <Form
