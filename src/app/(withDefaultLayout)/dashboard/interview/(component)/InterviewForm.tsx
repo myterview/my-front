@@ -9,6 +9,7 @@ import { Clickable } from "@/components/Clickable/Clickable";
 import {
   handleServerAction,
   register,
+  getValues,
   InterviewPositionKr,
   InterviewExperienceKr,
 } from "@/hooks/sicilian/interviewForm";
@@ -16,19 +17,11 @@ import { Form } from "@/components/Form/Form";
 import { DropdownAnchor } from "@/components/Popover/Dropdown/DropdownAnchor";
 import { DropdownMenu } from "@/components/Popover/Dropdown/DropdownMenu";
 import { For } from "@ilokesto/utilinent";
-import {
-  Dispatch,
-  SetStateAction,
-  useActionState,
-  useEffect,
-  useState,
-} from "react";
+import { useActionState, useEffect } from "react";
 import { Popover } from "@/components/Popover/Popover";
 
 export function InterviewForm() {
   const [state, execute, isPending] = useActionState(startInterview, undefined);
-  const [position, setPosition] = useState<InterviewPositionKr | "">("");
-  const [experience, setExperience] = useState<InterviewExperienceKr | "">("");
   const router = useRouter();
 
   useEffect(() => {
@@ -42,27 +35,19 @@ export function InterviewForm() {
       title: "직군" as const,
       iconSrc: "/icons/interviewLaptop.svg",
       options: Object.values(InterviewPositionKr),
-      hooks: {
-        selectedOption: position as string,
-        setSelectedOption: setPosition as Dispatch<SetStateAction<string>>,
-      },
+      hooks: getStateByName("position"),
     },
     {
       title: "경력" as const,
       iconSrc: "/icons/interviewLevel.svg",
       options: Object.values(InterviewExperienceKr),
-      hooks: {
-        selectedOption: experience as string,
-        setSelectedOption: setExperience as Dispatch<SetStateAction<string>>,
-      },
+      hooks: getStateByName("experience"),
     },
   ];
 
   return (
     <Form
-      action={handleServerAction((data) =>
-        execute({ ...data, position, experience })
-      )}
+      action={handleServerAction(execute)}
       className="flex w-full flex-col gap-24"
     >
       <div className="flex max-w-480 flex-col gap-28">
@@ -109,4 +94,21 @@ export function InterviewForm() {
       </Clickable>
     </Form>
   );
+}
+
+function getStateByName(name: string) {
+  const selectedOption = getValues(name) as string;
+
+  const { onChange } = register({ name });
+
+  const setSelectedOption = (option: string) => {
+    onChange({
+      target: {
+        value: option,
+        name,
+      },
+    });
+  };
+
+  return { selectedOption, setSelectedOption };
 }
