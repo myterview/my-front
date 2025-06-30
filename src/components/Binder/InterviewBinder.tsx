@@ -86,7 +86,7 @@ InterviewBinder.getInterviewProgressStatus = function ({
 }): ProgressStatus {
   if (isActive) return ProgressStatus.IN_PROGRESS;
 
-  if (evaluationType) return ProgressStatus.ANALYZING;
+  if (!evaluationType) return ProgressStatus.ANALYZING;
 
   return ProgressStatus.COMPLETED;
 };

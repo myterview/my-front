@@ -19,8 +19,6 @@ export class Fetcher {
         type === "server"
           ? process.env.NEXT_PUBLIC_SERVER_API_URL
           : process.env.NEXT_PUBLIC_CLIENT_API_URL,
-      timeout: 5_000,
-      retry: 2,
     });
 
   public serverFetcher = this.createFetcher("server");

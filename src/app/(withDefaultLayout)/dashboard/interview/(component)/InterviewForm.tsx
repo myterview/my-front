@@ -30,6 +30,21 @@ export function InterviewForm() {
     }
   }, [state?.sessionId, router]);
 
+  const DROPDOWN_ARRAY = [
+    {
+      title: ["직군", "position"] as const,
+      iconSrc: "/icons/interviewLaptop.svg",
+      options: Object.values(InterviewPositionKr),
+      hooks: getStateByName("position"),
+    },
+    {
+      title: ["경력", "experience"] as const,
+      iconSrc: "/icons/interviewLevel.svg",
+      options: Object.values(InterviewExperienceKr),
+      hooks: getStateByName("experience"),
+    },
+  ];
+
   return (
     <Form
       action={handleServerAction(execute)}
@@ -54,7 +69,7 @@ export function InterviewForm() {
                     helpers={helpers}
                     title={item.title[0]}
                     iconSrc={item.iconSrc}
-                    {...getStateByName(item.title[1])}
+                    {...item.hooks}
                   />
                 )}
                 floaterElement={(floater, helpers) => (
@@ -63,7 +78,7 @@ export function InterviewForm() {
                     helpers={helpers}
                     options={item.options}
                     className="min-w-132"
-                    {...getStateByName(item.title[1])}
+                    {...item.hooks}
                   />
                 )}
               />
@@ -97,16 +112,3 @@ function getStateByName(name: string) {
 
   return { selectedOption, setSelectedOption };
 }
-
-const DROPDOWN_ARRAY = [
-  {
-    title: ["직군", "position"] as const,
-    iconSrc: "/icons/interviewLaptop.svg",
-    options: Object.values(InterviewPositionKr),
-  },
-  {
-    title: ["경력", "experience"] as const,
-    iconSrc: "/icons/interviewLevel.svg",
-    options: Object.values(InterviewExperienceKr),
-  },
-];

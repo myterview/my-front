@@ -44,7 +44,7 @@ class DefaultClickableStrategy implements ClickableStrategy {
       "box-border flex items-center justify-center text-base font-bold text-primary-500 bg-white border-primary-400 border-1 rounded-xl px-12 py-8",
       "@desktop/main:text-xl @desktop/main:px-16 @desktop/main:py-12",
       "active:bg-blue-500 active:border-blue-500 active:text-white hover:bg-blue-100",
-      "disabled:bg-black"
+      "disabled:bg-gray-100 disabled:border-gray-200 disabled:text-gray-200"
     );
   }
 }
