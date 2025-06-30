@@ -9,12 +9,13 @@ import { mutationOptions } from "@/utils/m";
 import { components } from "@/types/api";
 import { Dispatch, SetStateAction } from "react";
 import { addDialog } from "grunfeld";
+import { ModalWrapper } from "@/components/Modal/ModalWrapper";
 
 @thisBind
 export class InterviewClient extends Fetcher {
   public InfiniteInterviewList = () =>
     infiniteQueryOptions({
-      queryKey: ["interview", "List"],
+      queryKey: ["interview", "list"],
       queryFn: ({
         pageParam,
       }: {
@@ -129,7 +130,7 @@ export class InterviewClient extends Fetcher {
         setIsLoading(false);
         if (data?.isFinished) {
           addDialog({
-            element: <>면접이 종료되었습니다.</>,
+            element: <ModalWrapper>면접이 종료되었습니다.</ModalWrapper>,
           });
         }
       },

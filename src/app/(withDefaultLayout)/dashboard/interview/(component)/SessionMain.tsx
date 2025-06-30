@@ -5,7 +5,7 @@ import SizeWrapper from "@/components/SizeWrapper/SizeWrapper";
 import { useInterviewLoading } from "@/hooks/caro-kann/useInterviewLoading";
 import { components } from "@/types/api";
 import { For, Show } from "@ilokesto/utilinent";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 
 export function SessionMain({ interviewId }: { interviewId: string }) {
@@ -20,6 +20,9 @@ export function SessionMain({ interviewId }: { interviewId: string }) {
 
       for (const word of newMessage) {
         const newWord = word.trim();
+
+        if (newWord === "") continue; // 빈 문자열은 제외
+
         acc.push({
           ...message,
           content: newWord,
@@ -34,6 +37,14 @@ export function SessionMain({ interviewId }: { interviewId: string }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const prevLengthRef = useRef(0);
   const [visibleCount, setVisibleCount] = useState(0);
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    queryClient.invalidateQueries({
+      queryKey: ["interview", "list"],
+      refetchType: "all",
+    });
+  }, [queryClient]);
 
   useEffect(() => {
     // 메시지 목록이 바뀌었을 때(길이가 늘어났을 때)

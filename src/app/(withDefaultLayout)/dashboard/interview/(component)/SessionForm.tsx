@@ -14,7 +14,7 @@ import {
 } from "@tanstack/react-query";
 import Image from "next/image";
 
-const { register, handleSubmit } = new CreateForm({
+const { register, handleSubmit, getValues } = new CreateForm({
   initValue: { message: "" },
   clearFormOn: ["submit"],
 });
@@ -41,7 +41,7 @@ export function SessionForm({ interviewId }: { interviewId: string }) {
       className="@container/main overflow-y-scroll py-10"
       onSubmit={handleSubmit((data) => mutate(data))}
     >
-      <SicilianProvider value={{ register, name: "message" }}>
+      <SicilianProvider value={{ register, name: "message", getValues }}>
         <DefaultTextAreaWrapper>
           <TextArea
             disabled={isLoading || !isActive}

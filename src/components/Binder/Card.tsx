@@ -16,11 +16,15 @@ export function Card({
 }
 
 Card.Title = function Title({ children }: { children: React.ReactNode }) {
-  return <h4 className="text-2xl font-extrabold">{children}</h4>;
+  return <h4 className="line-clamp-1 text-2xl font-extrabold">{children}</h4>;
 };
 
 Card.subTitle = function SubTitle({ children }: { children: React.ReactNode }) {
-  return <p className="text-base/24 font-medium text-gray-600">{children}</p>;
+  return (
+    <p className="line-clamp-2 text-base/24 font-medium text-gray-600">
+      {children}
+    </p>
+  );
 };
 
 export enum ProgressStatus {

@@ -1,14 +1,14 @@
 "use client";
 
 import { useSicilianContext } from "@ilokesto/sicilian/provider";
-
 import { useRef, useEffect } from "react";
 
 export function TextArea(
   props: React.TextareaHTMLAttributes<HTMLTextAreaElement>
 ) {
   const ref = useRef<HTMLTextAreaElement>(null);
-  const { register, name } = useSicilianContext();
+  const { register, name, getValues } = useSicilianContext();
+  const value = getValues(name);
 
   // 높이 자동 조절
   useEffect(() => {
@@ -19,13 +19,7 @@ export function TextArea(
       textarea.style.height = textarea.scrollHeight + "px";
     };
     resize();
-    textarea.addEventListener("change", resize);
-    textarea.addEventListener("input", resize);
-    return () => {
-      textarea.removeEventListener("change", resize);
-      textarea.removeEventListener("input", resize);
-    };
-  }, []);
+  }, [value]);
 
   return (
     <textarea
