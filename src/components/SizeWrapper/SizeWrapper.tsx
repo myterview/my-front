@@ -1,10 +1,10 @@
 import { neato } from "neato";
-import { ComponentPropsWithoutRef, ElementType } from "react";
+import { ComponentPropsWithRef, ElementType } from "react";
 
 type SizeWrapperProps<T extends ElementType> = {
   asChild: ElementType;
   children: React.ReactNode;
-} & ComponentPropsWithoutRef<T>;
+} & ComponentPropsWithRef<T>;
 
 export default function SizeWrapper<T extends ElementType = "main">({
   asChild = "main",

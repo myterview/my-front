@@ -8,12 +8,13 @@ import { Fetcher } from "./Fetcher";
 import { mutationOptions } from "@/utils/m";
 import { components } from "@/types/api";
 import { Dispatch, SetStateAction } from "react";
+import { addDialog } from "grunfeld";
 
 @thisBind
 export class InterviewClient extends Fetcher {
   public InfiniteInterviewList = () =>
     infiniteQueryOptions({
-      queryKey: ["interviewList"],
+      queryKey: ["interview", "List"],
       queryFn: ({
         pageParam,
       }: {
@@ -39,9 +40,9 @@ export class InterviewClient extends Fetcher {
         if (
           query.state.data?.pages
             .flatMap((page) => page.items)
-            .find((item) => !item.evaluation && item.isActive)
+            .find((item) => !item.evaluation && !item.isActive)
         ) {
-          return 30000;
+          return 10000;
         }
         return false;
       },
@@ -103,7 +104,7 @@ export class InterviewClient extends Fetcher {
                     id: crypto.randomUUID(),
                     content: message,
                     createdAt: new Date().toISOString(),
-                    isMine: true,
+                    type: "human",
                   },
                 ],
               },
@@ -116,11 +117,21 @@ export class InterviewClient extends Fetcher {
       onError(error) {
         console.error(error);
       },
-      onSettled: () => {
+      onSuccess: (data) => {
         queryClient.invalidateQueries({
-          queryKey: ["interview"],
+          queryKey: ["interview", "List"],
+          refetchType: "all",
+        });
+        queryClient.invalidateQueries({
+          queryKey: ["interview", interviewId],
+          refetchType: "all",
         });
         setIsLoading(false);
+        if (data?.isFinished) {
+          addDialog({
+            element: <>면접이 종료되었습니다.</>,
+          });
+        }
       },
     });
 }

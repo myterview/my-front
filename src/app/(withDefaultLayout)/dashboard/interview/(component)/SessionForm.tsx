@@ -7,14 +7,19 @@ import SizeWrapper from "@/components/SizeWrapper/SizeWrapper";
 import { useInterviewLoading } from "@/hooks/caro-kann/useInterviewLoading";
 import { CreateForm } from "@ilokesto/sicilian";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
+import Image from "next/image";
 
 const { register, handleSubmit } = new CreateForm({
   initValue: { message: "" },
   clearFormOn: ["submit"],
 });
 
-export function InterviewSessionForm({ interviewId }: { interviewId: string }) {
+export function SessionForm({ interviewId }: { interviewId: string }) {
   const [isLoading, setIsLoading] = useInterviewLoading();
   const queryClient = useQueryClient();
   const { mutate } = useMutation(
@@ -24,6 +29,11 @@ export function InterviewSessionForm({ interviewId }: { interviewId: string }) {
       setIsLoading,
     })
   );
+  const {
+    data: {
+      session: { isActive },
+    },
+  } = useSuspenseQuery(new InterviewClient().getInterviewById(interviewId));
 
   return (
     <SizeWrapper
@@ -33,8 +43,19 @@ export function InterviewSessionForm({ interviewId }: { interviewId: string }) {
     >
       <SicilianProvider value={{ register, name: "message" }}>
         <DefaultTextAreaWrapper>
-          <TextArea placeholder="메시지를 입력하세요..." />
-          <button disabled={isLoading}>전송</button>
+          <TextArea
+            disabled={isLoading || !isActive}
+            placeholder="메시지를 입력하세요..."
+          />
+          <button disabled={isLoading || !isActive}>
+            <Image
+              src="/icons/submitArrow.svg"
+              alt="Submit"
+              draggable={false}
+              width={24}
+              height={24}
+            />
+          </button>
         </DefaultTextAreaWrapper>
       </SicilianProvider>
     </SizeWrapper>

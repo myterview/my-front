@@ -18,7 +18,7 @@ export function DefaultTextAreaWrapper({
 
       <label
         htmlFor={name}
-        className="focus-within:border-primary-600 flex items-end justify-between rounded-[4] border-1 border-gray-200 px-42 py-18"
+        className="focus-within:border-primary-600 flex items-end justify-between gap-12 rounded-[4] border-1 border-gray-200 px-24 py-18"
       >
         {children}
       </label>

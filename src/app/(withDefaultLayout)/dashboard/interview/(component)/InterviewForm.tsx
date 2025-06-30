@@ -9,7 +9,6 @@ import { Clickable } from "@/components/Clickable/Clickable";
 import {
   handleServerAction,
   register,
-  getValues,
   InterviewPositionKr,
   InterviewExperienceKr,
 } from "@/hooks/sicilian/interviewForm";
@@ -17,11 +16,19 @@ import { Form } from "@/components/Form/Form";
 import { DropdownAnchor } from "@/components/Popover/Dropdown/DropdownAnchor";
 import { DropdownMenu } from "@/components/Popover/Dropdown/DropdownMenu";
 import { For } from "@ilokesto/utilinent";
-import { useActionState, useEffect } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useActionState,
+  useEffect,
+  useState,
+} from "react";
 import { Popover } from "@/components/Popover/Popover";
 
 export function InterviewForm() {
   const [state, execute, isPending] = useActionState(startInterview, undefined);
+  const [position, setPosition] = useState<InterviewPositionKr | "">("");
+  const [experience, setExperience] = useState<InterviewExperienceKr | "">("");
   const router = useRouter();
 
   useEffect(() => {
@@ -32,22 +39,30 @@ export function InterviewForm() {
 
   const DROPDOWN_ARRAY = [
     {
-      title: ["직군", "position"] as const,
+      title: "직군" as const,
       iconSrc: "/icons/interviewLaptop.svg",
       options: Object.values(InterviewPositionKr),
-      hooks: getStateByName("position"),
+      hooks: {
+        selectedOption: position as string,
+        setSelectedOption: setPosition as Dispatch<SetStateAction<string>>,
+      },
     },
     {
-      title: ["경력", "experience"] as const,
+      title: "경력" as const,
       iconSrc: "/icons/interviewLevel.svg",
       options: Object.values(InterviewExperienceKr),
-      hooks: getStateByName("experience"),
+      hooks: {
+        selectedOption: experience as string,
+        setSelectedOption: setExperience as Dispatch<SetStateAction<string>>,
+      },
     },
   ];
 
   return (
     <Form
-      action={handleServerAction(execute)}
+      action={handleServerAction((data) =>
+        execute({ ...data, position, experience })
+      )}
       className="flex w-full flex-col gap-24"
     >
       <div className="flex max-w-480 flex-col gap-28">
@@ -61,13 +76,13 @@ export function InterviewForm() {
           <For each={DROPDOWN_ARRAY}>
             {(item) => (
               <Popover
-                key={item.title[0]}
+                key={item.title}
                 position={{ crossAxis: 30 }}
                 anchorElement={(anchor, helpers) => (
                   <DropdownAnchor
                     anchor={anchor}
                     helpers={helpers}
-                    title={item.title[0]}
+                    title={item.title}
                     iconSrc={item.iconSrc}
                     {...item.hooks}
                   />
@@ -94,21 +109,4 @@ export function InterviewForm() {
       </Clickable>
     </Form>
   );
-}
-
-function getStateByName(name: string) {
-  const selectedOption = getValues(name) as string;
-
-  const { onChange } = register({ name });
-
-  const setSelectedOption = (option: string) => {
-    onChange({
-      target: {
-        value: option,
-        name,
-      },
-    });
-  };
-
-  return { selectedOption, setSelectedOption };
 }

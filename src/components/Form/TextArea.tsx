@@ -19,8 +19,12 @@ export function TextArea(
       textarea.style.height = textarea.scrollHeight + "px";
     };
     resize();
+    textarea.addEventListener("change", resize);
     textarea.addEventListener("input", resize);
-    return () => textarea.removeEventListener("input", resize);
+    return () => {
+      textarea.removeEventListener("change", resize);
+      textarea.removeEventListener("input", resize);
+    };
   }, []);
 
   return (

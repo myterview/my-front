@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { QueryProvider } from "./QueryProvider";
+import { Provider } from "./QueryProvider";
 
 export const metadata: Metadata = {
   title: "Myterview",
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`font-sans ${pretendard.variable} flex antialiased`}>
-        <QueryProvider>{children}</QueryProvider>
+        <Provider>{children}</Provider>
       </body>
     </html>
   );

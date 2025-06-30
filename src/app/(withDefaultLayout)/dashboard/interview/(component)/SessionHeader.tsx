@@ -11,14 +11,9 @@ import { getEnumValueByKey } from "@/utils/enumUtils";
 import { toKST } from "@/utils/toKST";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
-export function InterviewSessionHeader({
-  interviewId,
-}: {
-  interviewId: string;
-}) {
-  const interviewClient = new InterviewClient();
+export function SessionHeader({ interviewId }: { interviewId: string }) {
   const { data } = useSuspenseQuery(
-    interviewClient.getInterviewById(interviewId)
+    new InterviewClient().getInterviewById(interviewId)
   );
 
   return (

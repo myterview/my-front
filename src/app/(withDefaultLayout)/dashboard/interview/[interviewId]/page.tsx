@@ -1,6 +1,6 @@
-import { InterviewSessionHeader } from "../(component)/InterviewSessionHeader";
-import { InterviewSessionForm } from "../(component)/InterviewSessionForm";
-import { InterviewSessionMain } from "../(component)/InterviewSessionMain";
+import { SessionHeader } from "../(component)/SessionHeader";
+import { SessionForm } from "../(component)/SessionForm";
+import { SessionMain } from "../(component)/SessionMain";
 
 export default async function InterviewSessionPage({
   params,
@@ -11,11 +11,11 @@ export default async function InterviewSessionPage({
 
   return (
     <main className="flex h-dvh w-full flex-col overflow-y-scroll">
-      <InterviewSessionHeader interviewId={interviewId} />
+      <SessionHeader interviewId={interviewId} />
 
-      <InterviewSessionMain interviewId={interviewId} />
+      <SessionMain interviewId={interviewId} />
 
-      <InterviewSessionForm interviewId={interviewId} />
+      <SessionForm interviewId={interviewId} />
     </main>
   );
 }
