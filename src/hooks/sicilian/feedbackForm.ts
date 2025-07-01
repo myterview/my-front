@@ -18,12 +18,12 @@ export enum FeedbackTypeKr {
 export const { register, getValues, handleServerAction } = new CreateForm<{
   title: string;
   type: "" | FeedbackTypeKr;
-  // experience: "" | InterviewExperienceKr;
+  message: string;
 }>({
   initValue: {
     title: "",
     type: "",
-    // experience: "",
+    message: "",
   },
   clearFormOn: ["routeChange"],
 });

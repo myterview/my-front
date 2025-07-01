@@ -15,6 +15,7 @@ import {
   handleServerAction,
 } from "@/hooks/sicilian/feedbackForm";
 import { postFeedback } from "@/apis/feedback.action";
+import { TextArea } from "../Form/TextArea";
 
 export function FeedbackModal({}) {
   const [state, execute, isPending] = useActionState(postFeedback, undefined);
@@ -74,6 +75,12 @@ export function FeedbackModal({}) {
             )}
           </For>
         </div>
+      </div>
+
+      <div>
+        <SicilianProvider value={{ register, name: "message", getValues }}>
+          <TextArea rows={10} />
+        </SicilianProvider>
       </div>
 
       <Clickable types="default" className="self-end">

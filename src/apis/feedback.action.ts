@@ -12,9 +12,11 @@ export async function postFeedback(
   {
     title,
     type,
+    message,
   }: {
     title: string;
     type: FeedbackTypeKr | "";
+    message: string;
   }
 ) {
   try {
@@ -22,6 +24,7 @@ export async function postFeedback(
       json: {
         title,
         type: getEnumKeyByValue(FeedbackTypeKr, type),
+        message,
       },
       headers: {
         Cookie: await getCookieValue(),
