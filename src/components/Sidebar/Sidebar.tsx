@@ -7,6 +7,9 @@ import { neato } from "neato";
 import { create } from "caro-kann";
 import { Clickable } from "../Clickable/Clickable";
 import Image from "next/image";
+import { grunfeld } from "grunfeld";
+import { ModalWrapper } from "../Modal/ModalWrapper";
+import { FeedbackModal } from "../Modal/FeedbackModal";
 
 export const useSidebar = create(false);
 
@@ -56,12 +59,24 @@ export function Sidebar({ children }: { children: React.ReactNode }) {
           </Clickable>
         </div>
 
-        <menu className="menu text-primary-600 flex flex-col gap-40">
+        <menu className="menu text-primary-600 flex flex-col items-start gap-40">
           <Link href="/dashboard/interview">모의 인터뷰</Link>
 
           <Link href="/dashboard/tech-question">기술 면접 질문</Link>
 
-          <Link href="/dashboard/feedback">피드백</Link>
+          <button
+            onClick={() => {
+              grunfeld.add({
+                element: (
+                  <ModalWrapper>
+                    <FeedbackModal />
+                  </ModalWrapper>
+                ),
+              });
+            }}
+          >
+            피드백
+          </button>
         </menu>
       </div>
 

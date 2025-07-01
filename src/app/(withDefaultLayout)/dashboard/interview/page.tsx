@@ -1,6 +1,7 @@
 import SizeWrapper from "@/components/SizeWrapper/SizeWrapper";
 import { InterviewForm } from "./(component)/InterviewForm";
 import { InterviewBinder } from "@/components/Binder/InterviewBinder";
+import { Radar } from "@/components/Charts/Radar";
 
 export default async function Home() {
   return (
@@ -25,6 +26,17 @@ export default async function Home() {
       </div>
 
       <InterviewBinder />
+
+      <Radar
+        data={[
+          { name: "a", value: 100 },
+          { name: "b", value: 80 },
+          { name: "c", value: 100 },
+          { name: "d", value: 90 },
+          { name: "e", value: 20 },
+          { name: "f", value: 70 },
+        ]}
+      />
     </SizeWrapper>
   );
 }

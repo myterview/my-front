@@ -8,7 +8,7 @@ import { Fetcher } from "./Fetcher";
 import { mutationOptions } from "@/utils/m";
 import { components } from "@/types/api";
 import { Dispatch, SetStateAction } from "react";
-import { addDialog } from "grunfeld";
+import { grunfeld } from "grunfeld";
 import { ModalWrapper } from "@/components/Modal/ModalWrapper";
 
 @thisBind
@@ -129,7 +129,7 @@ export class InterviewClient extends Fetcher {
         });
         setIsLoading(false);
         if (data?.isFinished) {
-          addDialog({
+          grunfeld.add({
             element: <ModalWrapper>면접이 종료되었습니다.</ModalWrapper>,
           });
         }
