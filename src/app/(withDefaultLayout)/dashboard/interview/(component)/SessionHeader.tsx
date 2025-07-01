@@ -22,8 +22,8 @@ export function SessionHeader({ interviewId }: { interviewId: string }) {
   return (
     <div className="shadow-custom">
       <SizeWrapper asChild="header" className="space-y-24 pt-64 pb-48">
-        <div className="flex items-start justify-between">
-          <Card.Title>{data?.session.title}</Card.Title>
+        <div className="flex items-start justify-between gap-24">
+          <Card.Title>{data.session.title}</Card.Title>
           <button type="button" onClick={() => router.back()}>
             <Image
               src="/icons/close.svg"
@@ -34,6 +34,7 @@ export function SessionHeader({ interviewId }: { interviewId: string }) {
             />
           </button>
         </div>
+
         <div className="flex items-center justify-between">
           <Card.subTitle>{toKST(data.session.createdAt)}</Card.subTitle>
           <Card.Tags

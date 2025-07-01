@@ -49,7 +49,7 @@ export class InterviewClient extends Fetcher {
       },
     });
 
-  public getInterviewById = (interviewId: string) =>
+  public getInterviewById = (interviewId: string, withMessages: boolean = true) =>
     queryOptions({
       queryKey: ["interview", interviewId],
       queryFn: () =>
@@ -57,6 +57,9 @@ export class InterviewClient extends Fetcher {
           `interview/${interviewId}` as "interview/{sessionId}",
           {
             credentials: "include",
+            searchParams: {
+              withMessages
+            }
           }
         ),
     });

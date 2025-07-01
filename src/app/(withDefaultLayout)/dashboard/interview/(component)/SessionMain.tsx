@@ -15,7 +15,7 @@ export function SessionMain({ interviewId }: { interviewId: string }) {
     new InterviewClient().getInterviewById(interviewId)
   );
 
-  const messageList = data.session.messages.reduce(
+  const messageList = data.session.messages!.reduce(
     (acc, message) => {
       const newMessage = message.content.split("\n\n");
 

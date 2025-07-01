@@ -14,7 +14,8 @@ export function ModalWrapper({
   return (
     <div
       className={neato(
-        "shadow-custom flex flex-col rounded-[12] bg-white px-44 py-48"
+        "shadow-custom flex flex-col rounded-[12] bg-white px-44 py-48",
+        "max-desktop:w-dvw max-desktop:h-dvh max-desktop:rounded-none"
       )}
     >
       <div className="flex items-center justify-between">
