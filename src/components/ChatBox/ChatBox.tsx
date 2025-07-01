@@ -34,7 +34,7 @@ export function ChatBox({
     >
       <div
         className={neato(
-          "animate-slide-up-fade @desktop/main:max-w-[60cqw] relative max-w-[80cqw] rounded-md px-12 py-8 text-base/20 break-keep whitespace-pre-line shadow",
+          "animate-slide-up-fade @lg/main:max-w-[60cqw] relative max-w-[80cqw] rounded-md px-12 py-8 text-base/20 break-keep whitespace-pre-line shadow",
           isMine
             ? "bg-primary-100 ml-auto justify-end"
             : "mr-auto justify-start",

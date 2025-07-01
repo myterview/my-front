@@ -100,7 +100,7 @@ export class InterviewClient extends Fetcher {
               session: {
                 ...oldData.session,
                 messages: [
-                  ...oldData.session.messages,
+                  ...(oldData.session.messages ?? []),
                   {
                     id: crypto.randomUUID(),
                     content: message,

@@ -11,6 +11,7 @@ import { getEnumValueByKey } from "@/utils/enumUtils";
 import { toKST } from "@/utils/toKST";
 import { For, Observer, Show } from "@ilokesto/utilinent";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { grunfeld } from "grunfeld";
 import { neato } from "neato";
 import Link from "next/link";
 
@@ -20,7 +21,7 @@ export function InterviewBinder() {
   );
 
   return (
-    <div className="grid grid-cols-1 gap-24 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-24 @xl:grid-cols-2 @4xl:grid-cols-3">
       <Show when={interviewList}>
         {(interviewList) => (
           <For each={interviewList.pages.flatMap((page) => page.items)}>
@@ -111,6 +112,17 @@ InterviewBinder.CardWrapper = function CardWrapper({
     return <>{children}</>;
   } else {
     // 모달? 띄우는 곳
-    return <>{children}</>;
+    return (
+      <button
+        type="button"
+        onClick={() => {
+          grunfeld.add({
+            element: <>asdf</>,
+          });
+        }}
+      >
+        {children}
+      </button>
+    );
   }
 };
