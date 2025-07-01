@@ -1,3 +1,6 @@
+import { paths } from "@/types/api";
+// ApiResponse 타입을 자동 추론하는 fetcher
+import type { ApiResponse, PathWithoutApi } from "@/types/apiUtils";
 import ky, { Options } from "ky";
 
 export enum HTTPMethod {
@@ -7,10 +10,6 @@ export enum HTTPMethod {
   DELETE = "delete",
   PATCH = "patch",
 }
-
-// ApiResponse 타입을 자동 추론하는 fetcher
-import type { ApiResponse, PathWithoutApi } from "@/types/apiUtils";
-import { paths } from "@/types/api";
 
 export class Fetcher {
   public instance = (type: "server" | "client" = "server") =>

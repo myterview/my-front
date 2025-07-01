@@ -1,7 +1,7 @@
+import { Avatar } from "../Avatar/Avatar";
 import { components } from "@/types/api";
 import { OptionalWrapper, Show } from "@ilokesto/utilinent";
 import { neato } from "neato";
-import { Avatar } from "../Avatar/Avatar";
 
 export function ChatBox({
   content,

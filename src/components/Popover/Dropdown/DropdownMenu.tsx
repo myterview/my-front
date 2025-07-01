@@ -1,6 +1,6 @@
-import { neato } from "neato";
-import { For } from "@ilokesto/utilinent";
 import { IPopoverFloater } from "../Popover";
+import { For } from "@ilokesto/utilinent";
+import { neato } from "neato";
 
 export function DropdownMenu({
   floater,

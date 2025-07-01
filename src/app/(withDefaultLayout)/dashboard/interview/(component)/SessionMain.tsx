@@ -1,4 +1,5 @@
 "use client";
+
 import { InterviewClient } from "@/apis/interview.client";
 import { ChatBox } from "@/components/ChatBox/ChatBox";
 import SizeWrapper from "@/components/SizeWrapper/SizeWrapper";

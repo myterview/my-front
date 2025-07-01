@@ -1,10 +1,10 @@
 "use client";
 
-import { components } from "@/types/api";
 import { Avatar } from "../Avatar/Avatar";
-import Link from "next/link";
-import Image from "next/image";
 import { logoutAction } from "@/apis/user.action";
+import { components } from "@/types/api";
+import Image from "next/image";
+import Link from "next/link";
 import { useEffect } from "react";
 
 export function SidebarFooter({

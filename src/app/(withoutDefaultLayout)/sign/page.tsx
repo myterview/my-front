@@ -1,8 +1,8 @@
 import { Clickable } from "@/components/Clickable/Clickable";
 import { Logo } from "@/components/Logo/Logo";
+import { For } from "@ilokesto/utilinent";
 import Image from "next/image";
 import Link from "next/link";
-import { For } from "@ilokesto/utilinent";
 
 export default function Page() {
   const SIGN_ARRAY = [

@@ -1,12 +1,12 @@
 "use server";
 
 import { Fetcher } from "./Fetcher";
-import { getEnumKeyByValue } from "@/utils/enumUtils";
 import {
   InterviewPositionKr,
   InterviewExperienceKr,
 } from "@/hooks/sicilian/interviewForm";
 import { getCookieValue } from "@/utils/cookieUtils";
+import { getEnumKeyByValue } from "@/utils/enumUtils";
 
 const { serverFetcher: fetcher } = new Fetcher();
 

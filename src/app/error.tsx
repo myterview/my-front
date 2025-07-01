@@ -1,8 +1,8 @@
 "use client";
 
+import NotFound from "./not-found";
 import { HTTPError } from "ky";
 import { useRouter } from "next/navigation";
-import NotFound from "./not-found";
 
 export default function Error({
   error,

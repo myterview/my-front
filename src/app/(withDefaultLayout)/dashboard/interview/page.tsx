@@ -1,7 +1,7 @@
-import SizeWrapper from "@/components/SizeWrapper/SizeWrapper";
 import { InterviewForm } from "./(component)/InterviewForm";
 import { InterviewBinder } from "@/components/Binder/InterviewBinder";
 import { Radar } from "@/components/Charts/Radar";
+import SizeWrapper from "@/components/SizeWrapper/SizeWrapper";
 
 export default async function Home() {
   return (

@@ -1,15 +1,15 @@
 "use client";
 
-import Link from "next/link";
-import { Logo } from "../Logo/Logo";
-import { useRef } from "react";
-import { neato } from "neato";
-import { create } from "caro-kann";
 import { Clickable } from "../Clickable/Clickable";
-import Image from "next/image";
-import { grunfeld } from "grunfeld";
-import { ModalWrapper } from "../Modal/ModalWrapper";
+import { Logo } from "../Logo/Logo";
 import { FeedbackModal } from "../Modal/FeedbackModal";
+import { ModalWrapper } from "../Modal/ModalWrapper";
+import { create } from "caro-kann";
+import { grunfeld } from "grunfeld";
+import { neato } from "neato";
+import Image from "next/image";
+import Link from "next/link";
+import { useRef } from "react";
 
 export const useSidebar = create(false);
 

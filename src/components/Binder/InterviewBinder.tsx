@@ -1,17 +1,17 @@
 "use client";
 
-import { For, Observer, Show } from "@ilokesto/utilinent";
 import { Card, ProgressStatus } from "./Card";
-import { getEnumValueByKey } from "@/utils/enumUtils";
+import { InterviewClient } from "@/apis/interview.client";
 import {
   InterviewPositionKr,
   InterviewExperienceKr,
 } from "@/hooks/sicilian/interviewForm";
-import { neato } from "neato";
 import { components } from "@/types/api";
-import Link from "next/link";
+import { getEnumValueByKey } from "@/utils/enumUtils";
+import { For, Observer, Show } from "@ilokesto/utilinent";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { InterviewClient } from "@/apis/interview.client";
+import { neato } from "neato";
+import Link from "next/link";
 
 export function InterviewBinder() {
   const { data: interviewList, fetchNextPage } = useInfiniteQuery(
