@@ -104,7 +104,6 @@ export class InterviewClient extends Fetcher {
                   {
                     id: crypto.randomUUID(),
                     content: message,
-                    createdAt: new Date().toISOString(),
                     type: "human",
                   },
                 ],

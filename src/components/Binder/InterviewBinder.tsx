@@ -8,6 +8,7 @@ import {
 } from "@/hooks/sicilian/interviewForm";
 import { components } from "@/types/api";
 import { getEnumValueByKey } from "@/utils/enumUtils";
+import { toKST } from "@/utils/toKST";
 import { For, Observer, Show } from "@ilokesto/utilinent";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { neato } from "neato";
@@ -46,7 +47,9 @@ export function InterviewBinder() {
                   >
                     <Card.Title>{interview.title}</Card.Title>
                     <div className="mt-8 mb-72 flex items-center justify-between">
-                      <Card.subTitle>{interview.createdAt}</Card.subTitle>
+                      <Card.subTitle>
+                        {toKST(interview.createdAt)}
+                      </Card.subTitle>
                       <Card.ProgressChip>{status}</Card.ProgressChip>
                     </div>
                     <Card.Tags
