@@ -1,16 +1,21 @@
 "use client";
 
-import Link from "next/link";
-import { Logo } from "../Logo/Logo";
-import { useRef } from "react";
-import { neato } from "neato";
-import { create } from "caro-kann";
 import { Clickable } from "../Clickable/Clickable";
+import { Logo } from "../Logo/Logo";
+import { create } from "caro-kann";
+import { neato } from "neato";
 import Image from "next/image";
+import { useRef } from "react";
 
 export const useSidebar = create(false);
 
-export function Sidebar({ children }: { children: React.ReactNode }) {
+export function Sidebar({
+  children,
+  menu,
+}: {
+  children: React.ReactNode;
+  menu: React.ReactNode;
+}) {
   const asideRef = useRef<HTMLElement>(null);
   const [isOpen, setIsOpen] = useSidebar();
 
@@ -55,14 +60,7 @@ export function Sidebar({ children }: { children: React.ReactNode }) {
             </button>
           </Clickable>
         </div>
-
-        <menu className="menu text-primary-600 flex flex-col gap-40">
-          <Link href="/dashboard/interview">모의 인터뷰</Link>
-
-          <Link href="/dashboard/tech-question">기술 면접 질문</Link>
-
-          <Link href="/dashboard/feedback">피드백</Link>
-        </menu>
+        {menu}
       </div>
 
       {children}

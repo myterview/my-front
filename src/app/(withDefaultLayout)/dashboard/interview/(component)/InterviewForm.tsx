@@ -1,11 +1,13 @@
 "use client";
 
 import { startInterview } from "@/apis/interview.action";
-import { DefaultInputWrapper } from "@/components/Form/DefaultInputWrapper";
-import { Input } from "@/components/Form/Input";
-import { SicilianProvider } from "@ilokesto/sicilian/provider";
-import { useRouter } from "next/navigation";
 import { Clickable } from "@/components/Clickable/Clickable";
+import { DefaultInputWrapper } from "@/components/Form/DefaultInputWrapper";
+import { Form } from "@/components/Form/Form";
+import { Input } from "@/components/Form/Input";
+import { DropdownAnchor } from "@/components/Popover/Dropdown/DropdownAnchor";
+import { DropdownMenu } from "@/components/Popover/Dropdown/DropdownMenu";
+import { Popover } from "@/components/Popover/Popover";
 import {
   handleServerAction,
   register,
@@ -13,12 +15,10 @@ import {
   InterviewPositionKr,
   InterviewExperienceKr,
 } from "@/hooks/sicilian/interviewForm";
-import { Form } from "@/components/Form/Form";
-import { DropdownAnchor } from "@/components/Popover/Dropdown/DropdownAnchor";
-import { DropdownMenu } from "@/components/Popover/Dropdown/DropdownMenu";
+import { SicilianProvider } from "@ilokesto/sicilian/provider";
 import { For } from "@ilokesto/utilinent";
+import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
-import { Popover } from "@/components/Popover/Popover";
 
 export function InterviewForm() {
   const [state, execute, isPending] = useActionState(startInterview, undefined);
@@ -28,7 +28,22 @@ export function InterviewForm() {
     if (state?.sessionId) {
       router.push("/dashboard/interview/" + state.sessionId);
     }
-  }, [state?.sessionId]);
+  }, [state?.sessionId, router]);
+
+  const DROPDOWN_ARRAY = [
+    {
+      title: "직군" as const,
+      iconSrc: "/icons/interviewLaptop.svg",
+      options: Object.values(InterviewPositionKr),
+      hooks: getStateByName("position"),
+    },
+    {
+      title: "경력" as const,
+      iconSrc: "/icons/interviewLevel.svg",
+      options: Object.values(InterviewExperienceKr),
+      hooks: getStateByName("experience"),
+    },
+  ];
 
   return (
     <Form
@@ -46,15 +61,15 @@ export function InterviewForm() {
           <For each={DROPDOWN_ARRAY}>
             {(item) => (
               <Popover
-                key={item.title[0]}
+                key={item.title}
                 position={{ crossAxis: 30 }}
                 anchorElement={(anchor, helpers) => (
                   <DropdownAnchor
                     anchor={anchor}
                     helpers={helpers}
-                    title={item.title[0]}
+                    title={item.title}
                     iconSrc={item.iconSrc}
-                    {...getStateByName(item.title[1])}
+                    {...item.hooks}
                   />
                 )}
                 floaterElement={(floater, helpers) => (
@@ -63,7 +78,7 @@ export function InterviewForm() {
                     helpers={helpers}
                     options={item.options}
                     className="min-w-132"
-                    {...getStateByName(item.title[1])}
+                    {...item.hooks}
                   />
                 )}
               />
@@ -97,16 +112,3 @@ function getStateByName(name: string) {
 
   return { selectedOption, setSelectedOption };
 }
-
-const DROPDOWN_ARRAY = [
-  {
-    title: ["직군", "position"] as const,
-    iconSrc: "/icons/interviewLaptop.svg",
-    options: Object.values(InterviewPositionKr),
-  },
-  {
-    title: ["경력", "experience"] as const,
-    iconSrc: "/icons/interviewLevel.svg",
-    options: Object.values(InterviewExperienceKr),
-  },
-];

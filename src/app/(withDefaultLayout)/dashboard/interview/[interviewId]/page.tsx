@@ -1,5 +1,6 @@
-import { InterviewQuery } from "@/apis/interview.query";
-import { For } from "@ilokesto/utilinent";
+import { SessionForm } from "../(component)/SessionForm";
+import { SessionHeader } from "../(component)/SessionHeader";
+import { SessionMain } from "../(component)/SessionMain";
 
 export default async function InterviewSessionPage({
   params,
@@ -8,14 +9,13 @@ export default async function InterviewSessionPage({
 }) {
   const { interviewId } = await params;
 
-  const { getInterviewById } = new InterviewQuery();
-  const interview = await getInterviewById(interviewId);
-
   return (
-    <>
-      <For each={interview.session.messages}>
-        {(message) => <div key={message.id}>{message.content}</div>}
-      </For>
-    </>
+    <main className="flex h-dvh w-full flex-col overflow-y-scroll">
+      <SessionHeader interviewId={interviewId} />
+
+      <SessionMain interviewId={interviewId} />
+
+      <SessionForm interviewId={interviewId} />
+    </main>
   );
 }

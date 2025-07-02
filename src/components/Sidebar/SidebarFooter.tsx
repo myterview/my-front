@@ -1,28 +1,14 @@
-"use client";
-
-import { components } from "@/types/api";
 import { Avatar } from "../Avatar/Avatar";
-import Link from "next/link";
-import Image from "next/image";
 import { logoutAction } from "@/apis/user.action";
-import { useEffect } from "react";
+import { components } from "@/types/api";
+import Image from "next/image";
+import Link from "next/link";
 
 export function SidebarFooter({
   user,
 }: {
   user: components["schemas"]["UserResDTO"];
 }) {
-  useEffect(() => {
-    setInterval(
-      async () => {
-        fetch(process.env.NEXT_PUBLIC_CLIENT_API_URL + "/auth/user", {
-          credentials: "include", // 쿠키를 포함하여 요청
-        });
-      },
-      1000 * 60 * 30
-    ); // 30분마다 자동 로그아웃 방지
-  }, []);
-
   return (
     <div className="bg-primary-600 flex w-280 flex-col gap-20 px-20 pt-18 pb-28">
       <div className="flex items-center justify-between">

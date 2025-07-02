@@ -12,7 +12,7 @@ import {
   FloatingFocusManager,
   Placement,
 } from "@floating-ui/react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 
 export function useAnchorPosition({
   mainAxis = 8,
@@ -24,7 +24,6 @@ export function useAnchorPosition({
   placement?: Placement;
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpened, setIsOpened] = useState(false); // 이 부분은 필요하지 않을 수 있습니다.
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const listRef = useRef<Array<HTMLElement | null>>([]);
 
@@ -65,14 +64,6 @@ export function useAnchorPosition({
     setActiveIndex(null);
   };
 
-  useEffect(() => {
-    if (isOpen) {
-      setTimeout(() => setIsOpened(true), 20);
-    } else {
-      setTimeout(() => setIsOpened(false), 20);
-    }
-  }, [isOpen]);
-
   return {
     anchor: {
       ref: refs.setReference,
@@ -86,7 +77,6 @@ export function useAnchorPosition({
     helper: {
       isOpen,
       setIsOpen,
-      isOpened,
       getItemProps,
       activeIndex,
       selectItem,

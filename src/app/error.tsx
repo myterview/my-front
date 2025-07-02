@@ -1,5 +1,6 @@
 "use client";
 
+import NotFound from "./not-found";
 import { HTTPError } from "ky";
 import { useRouter } from "next/navigation";
 
@@ -12,8 +13,12 @@ export default function Error({
 }) {
   const router = useRouter();
 
+  if (error.response.status === 404) {
+    return <NotFound />;
+  }
+
   return (
-    <div className="flex h-screen flex-col items-center justify-center">
+    <div className="flex h-screen w-full flex-col items-center justify-center">
       <h1 className="mb-4 text-2xl font-bold">에러 발생</h1>
       <p className="mb-4 text-red-500">{error.message}</p>
       <button

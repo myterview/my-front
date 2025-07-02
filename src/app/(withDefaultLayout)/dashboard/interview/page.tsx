@@ -1,9 +1,13 @@
 import { InterviewForm } from "./(component)/InterviewForm";
 import { InterviewBinder } from "@/components/Binder/InterviewBinder";
+import SizeWrapper from "@/components/SizeWrapper/SizeWrapper";
 
 export default async function Home() {
   return (
-    <>
+    <SizeWrapper
+      asChild="main"
+      className="@container/main h-dvh flex-1 overflow-y-scroll py-100"
+    >
       <h2 className="heading-01">기술 인터뷰</h2>
 
       <div className="mt-24 mb-60 space-y-12">
@@ -21,6 +25,6 @@ export default async function Home() {
       </div>
 
       <InterviewBinder />
-    </>
+    </SizeWrapper>
   );
 }

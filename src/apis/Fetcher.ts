@@ -1,3 +1,6 @@
+import { paths } from "@/types/api";
+// ApiResponse 타입을 자동 추론하는 fetcher
+import type { ApiResponse, PathWithoutApi } from "@/types/apiUtils";
 import ky, { Options } from "ky";
 
 export enum HTTPMethod {
@@ -8,10 +11,6 @@ export enum HTTPMethod {
   PATCH = "patch",
 }
 
-// ApiResponse 타입을 자동 추론하는 fetcher
-import type { ApiResponse, PathWithoutApi } from "@/types/apiUtils";
-import { paths } from "@/types/api";
-
 export class Fetcher {
   public instance = (type: "server" | "client" = "server") =>
     ky.create({
@@ -19,8 +18,6 @@ export class Fetcher {
         type === "server"
           ? process.env.NEXT_PUBLIC_SERVER_API_URL
           : process.env.NEXT_PUBLIC_CLIENT_API_URL,
-      timeout: 5_000,
-      retry: 2,
     });
 
   public serverFetcher = this.createFetcher("server");

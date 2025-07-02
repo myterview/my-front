@@ -1,7 +1,7 @@
-import Image from "next/image";
-import { neato } from "neato";
 import { IPopoverAnchor } from "../Popover";
 import { Show } from "@ilokesto/utilinent";
+import { neato } from "neato";
+import Image from "next/image";
 
 export function DropdownAnchor({
   anchor,

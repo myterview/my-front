@@ -1,6 +1,7 @@
-import { neato } from "neato";
-import { For } from "@ilokesto/utilinent";
 import { IPopoverFloater } from "../Popover";
+import { For } from "@ilokesto/utilinent";
+import { neato } from "neato";
+import { useEffect, useState } from "react";
 
 export function DropdownMenu({
   floater,
@@ -12,12 +13,17 @@ export function DropdownMenu({
 }: IPopoverFloater & {
   className?: string;
 }) {
+  const [isOpened, setIsOpened] = useState(helpers.isOpen);
+  useEffect(() => {
+    setIsOpened(helpers.isOpen);
+  }, [helpers.isOpen]);
+
   return (
     <div
       {...floater}
       className={neato(
         "dropdown-transition",
-        helpers.isOpened ? "max-h-300 opacity-100" : "max-h-0 opacity-0"
+        isOpened ? "max-h-300 opacity-100" : "max-h-0 opacity-0"
       )}
     >
       <ul className="space-y-4 overflow-y-auto rounded-md border border-gray-200 bg-white px-12 py-10 shadow-lg">

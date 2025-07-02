@@ -12,11 +12,11 @@ html {
 @theme inline {
   --font-sans: var(--font-pretendard), ui-sans-serif, system-ui, sans-serif;
 
+  --font-nanum: var(--font-nanum-barunpen);
+
   --spacing: calc(1rem / 16);
 
   --breakpoint-desktop: 770px;
-
-  --container-desktop: 500px;
 
   --color-primary-100: #d5e8ff;
   --color-primary-200: #aad2ff;
@@ -35,6 +35,56 @@ html {
   --color-gray-600: #767676;
 
   --shadow-custom: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+
+  --animate-slide-up-fade: slide-up-fade 300ms ease-in-out;
+  --animate-pop-wave: pop-wave 700ms cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  --animate-wave: wave 700ms cubic-bezier(0.4, 0, 0.2, 1) infinite;
+
+  @keyframes slide-up-fade {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes wave {
+    0%,
+    60%,
+    100% {
+      transform: translateY(0); /* initial 대신 명시적으로 0으로 설정 */
+    }
+    30% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes pop-wave {
+    0%,
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    20% {
+      opacity: 1;
+      transform: translateY(-12px) scale(1.1);
+    }
+    40% {
+      opacity: 0.9;
+      transform: translateY(0) scale(0.95);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(-6px) scale(1.05);
+    }
+    80% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
 }
 
 /* Typography Styles */

@@ -1,0 +1,61 @@
+name: 🚀 Build and Deploy to EC2 from ECR
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2 # 서울 리전
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push Docker image to ECR
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:latest
+          build-args: |
+            NEXT_PUBLIC_SERVER_API_URL=${{ secrets.SERVER_API_URL }}
+            NEXT_PUBLIC_CLIENT_API_URL=${{ secrets.CLIENT_API_URL }}
+
+      # - name: SSH and deploy on EC2
+      #   uses: appleboy/ssh-action@v0.1.7
+      #   with:
+      #     host: ${{ secrets.EC2_HOST }}
+      #     key: ${{ secrets.EC2_PRIVATE_KEY }}
+      #     username: ec2-user
+      #     script: |
+      #       cd /home/ec2-user
+      #       # 먼저 실행 중인 컨테이너 중지
+      #       docker compose down
+      #       # 모든 Docker 이미지 강제 삭제
+      #       # docker rmi $(docker images -q) -f
+      #       # 프론트 이미지만 삭제
+      #       docker rmi ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:latest -f || true
+      #       # 미사용 리소스 정리
+      #       docker system prune -a -f --volumes
+      #       # ECR 로그인
+      #       aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}
+      #       # 이미지 새로 받고 실행
+      #       docker compose pull
+      #       docker compose up -d
