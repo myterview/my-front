@@ -1,7 +1,5 @@
 "use client";
 
-import { InterviewEvaluationModal } from "../Modal/InterviewEvaluationModal";
-import { ModalWrapper } from "../Modal/ModalWrapper";
 import { Card, ProgressStatus } from "./Card";
 import { InterviewClient } from "@/apis/interview.client";
 import {
@@ -13,7 +11,6 @@ import { getEnumValueByKey } from "@/utils/enumUtils";
 import { toKST } from "@/utils/toKST";
 import { For, Observer, Show } from "@ilokesto/utilinent";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { grunfeld } from "grunfeld";
 import { neato } from "neato";
 import Link from "next/link";
 
@@ -119,23 +116,9 @@ InterviewBinder.CardWrapper = function CardWrapper({
     case ProgressStatus.COMPLETED:
       // 모달? 띄우는 곳
       return (
-        <button
-          type="button"
-          onClick={() => {
-            grunfeld.add({
-              element: (
-                <ModalWrapper
-                  title={interview.title}
-                  className="gap-8 h-dvh desktop:max-h-[80dvh] desktop:min-h-0 overflow-y-scroll"
-                >
-                  <InterviewEvaluationModal {...interview} />
-                </ModalWrapper>
-              ),
-            });
-          }}
-        >
+        <Link href={`/dashboard/interview/${interview.id}/evaluation`}>
           {children}
-        </button>
+        </Link>
       );
   }
 };
