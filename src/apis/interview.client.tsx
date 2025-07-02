@@ -10,6 +10,7 @@ import { components } from "@/types/api";
 import { Dispatch, SetStateAction } from "react";
 import { grunfeld } from "grunfeld";
 import { ModalWrapper } from "@/components/Modal/ModalWrapper";
+import { FeedbackModal } from "@/components/Modal/FeedbackModal";
 
 @thisBind
 export class InterviewClient extends Fetcher {
@@ -114,7 +115,7 @@ export class InterviewClient extends Fetcher {
             };
           }
         );
-
+        
         return { prevState };
       },
       onError(error) {
@@ -131,9 +132,9 @@ export class InterviewClient extends Fetcher {
         });
         setIsLoading(false);
         if (data?.isFinished) {
-          grunfeld.add({
-            element: <ModalWrapper>면접이 종료되었습니다.</ModalWrapper>,
-          });
+          grunfeld.add(<ModalWrapper title="피드백">
+              <FeedbackModal />
+              </ModalWrapper>);
         }
       },
     });

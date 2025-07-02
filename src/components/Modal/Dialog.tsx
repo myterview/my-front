@@ -22,6 +22,7 @@ export function Dialog({
   useEffect(() => {
     if (!ref.current.open) {
       ref.current.showModal(); // 모달을 열기 위해 showModal 호출
+
       ref.current.scrollTo({
         top: 0,
         behavior: "smooth",
