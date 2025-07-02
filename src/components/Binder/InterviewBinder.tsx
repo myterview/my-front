@@ -1,5 +1,7 @@
 "use client";
 
+import { InterviewEvaluationModal } from "../Modal/InterviewEvaluationModal";
+import { ModalWrapper } from "../Modal/ModalWrapper";
 import { Card, ProgressStatus } from "./Card";
 import { InterviewClient } from "@/apis/interview.client";
 import {
@@ -47,12 +49,15 @@ export function InterviewBinder() {
                     )}
                   >
                     <Card.Title>{interview.title}</Card.Title>
-                    <div className="mt-8 mb-72 flex items-center justify-between">
+
+                    <div className="flex items-center justify-between mt-8 mb-72">
                       <Card.subTitle>
                         {toKST(interview.createdAt)}
                       </Card.subTitle>
+
                       <Card.ProgressChip>{status}</Card.ProgressChip>
                     </div>
+
                     <Card.Tags
                       each={[
                         getEnumValueByKey(
@@ -104,25 +109,33 @@ InterviewBinder.CardWrapper = function CardWrapper({
   interview: components["schemas"]["InterviewSessionWithoutMessages"];
   children: React.ReactNode;
 }) {
-  if (status === ProgressStatus.IN_PROGRESS) {
-    return (
-      <Link href={`/dashboard/interview/${interview.id}`}>{children}</Link>
-    );
-  } else if (status === ProgressStatus.ANALYZING) {
-    return <>{children}</>;
-  } else {
-    // 모달? 띄우는 곳
-    return (
-      <button
-        type="button"
-        onClick={() => {
-          grunfeld.add({
-            element: <>asdf</>,
-          });
-        }}
-      >
-        {children}
-      </button>
-    );
+  switch (status) {
+    case ProgressStatus.IN_PROGRESS:
+      return (
+        <Link href={`/dashboard/interview/${interview.id}`}>{children}</Link>
+      );
+    case ProgressStatus.ANALYZING:
+      return <>{children}</>;
+    case ProgressStatus.COMPLETED:
+      // 모달? 띄우는 곳
+      return (
+        <button
+          type="button"
+          onClick={() => {
+            grunfeld.add({
+              element: (
+                <ModalWrapper
+                  title={interview.title}
+                  className="gap-8 h-dvh desktop:max-h-[80dvh] desktop:min-h-0 overflow-y-scroll"
+                >
+                  <InterviewEvaluationModal {...interview} />
+                </ModalWrapper>
+              ),
+            });
+          }}
+        >
+          {children}
+        </button>
+      );
   }
 };

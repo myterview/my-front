@@ -15,6 +15,24 @@ const pretendard = localFont({
   variable: "--font-pretendard",
   display: "swap",
 });
+
+const nanumBarunpen = localFont({
+  src: [
+    {
+      path: "../../public/fonts/NanumBarunpenR.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/NanumBarunpenB.otf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-nanum-barunpen",
+  display: "swap",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -22,7 +40,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`font-sans ${pretendard.variable} flex antialiased`}>
+      <body
+        className={`font-sans ${pretendard.variable} ${nanumBarunpen.variable} flex antialiased`}
+      >
         <Provider>{children}</Provider>
       </body>
     </html>

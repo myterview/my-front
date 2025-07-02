@@ -8,13 +8,6 @@ export enum FeedbackTypeKr {
   other = "기타",
 }
 
-// export enum InterviewExperienceKr {
-//   junior = "주니어",
-//   mid = "미들급",
-//   senior = "시니어",
-//   expert = "테크 리더",
-// }
-
 export const { register, getValues, handleServerAction } = new CreateForm<{
   title: string;
   type: "" | FeedbackTypeKr;

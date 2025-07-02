@@ -3,6 +3,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GrunfeldProvider } from "grunfeld";
 import { ReactNode } from "react";
+import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,6 +18,12 @@ export function Provider({ children }: { children: ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <GrunfeldProvider>{children}</GrunfeldProvider>
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          className: "font-bold",
+        }}
+      />
     </QueryClientProvider>
   );
 }

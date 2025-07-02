@@ -14,78 +14,69 @@ import {
   handleServerAction,
 } from "@/hooks/sicilian/feedbackForm";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
-import { For } from "@ilokesto/utilinent";
+import { grunfeld } from "grunfeld";
 import { useActionState, useEffect } from "react";
+import { toast } from "react-hot-toast";
 
-export function FeedbackModal({}) {
+export function FeedbackModal() {
   const [state, execute, isPending] = useActionState(postFeedback, undefined);
 
   useEffect(() => {
     if (state?.message) {
-      console.log("a");
+      grunfeld.clear();
+      toast.success("피드백이 제출되었습니다.");
     }
   }, [state?.message]);
-
-  const DROPDOWN_ARRAY = [
-    {
-      title: "카테고리" as const,
-      iconSrc: "/icons/interviewLaptop.svg",
-      options: Object.values(FeedbackTypeKr),
-      hooks: getStateByName("type"),
-    },
-  ];
 
   return (
     <Form
       action={handleServerAction(execute)}
-      className="flex w-full flex-col gap-24"
+      className="flex flex-col w-full gap-24 overflow-y-scroll desktop:min-w-400"
     >
-      <div className="flex max-w-480 flex-col gap-28">
-        <SicilianProvider value={{ register, name: "title" }}>
-          <DefaultInputWrapper title="인터뷰 제목">
-            <Input />
-          </DefaultInputWrapper>
-        </SicilianProvider>
+      <SicilianProvider value={{ register, name: "title" }}>
+        <DefaultInputWrapper title="인터뷰 제목">
+          <Input />
+        </DefaultInputWrapper>
+      </SicilianProvider>
 
-        <div className="flex w-full gap-16">
-          <For each={DROPDOWN_ARRAY}>
-            {(item) => (
-              <Popover
-                key={item.title}
-                position={{ crossAxis: 30 }}
-                anchorElement={(anchor, helpers) => (
-                  <DropdownAnchor
-                    anchor={anchor}
-                    helpers={helpers}
-                    title={item.title}
-                    iconSrc={item.iconSrc}
-                    {...item.hooks}
-                  />
-                )}
-                floaterElement={(floater, helpers) => (
-                  <DropdownMenu
-                    floater={floater}
-                    helpers={helpers}
-                    options={item.options}
-                    className="min-w-132"
-                    {...item.hooks}
-                  />
-                )}
-              />
-            )}
-          </For>
+      <Popover
+        key="카테고리"
+        position={{ crossAxis: 30 }}
+        anchorElement={(anchor, helpers) => (
+          <DropdownAnchor
+            anchor={anchor}
+            helpers={helpers}
+            title="카테고리"
+            iconSrc="/icons/feedback.svg"
+            {...getStateByName("type")}
+          />
+        )}
+        floaterElement={(floater, helpers) => (
+          <DropdownMenu
+            floater={floater}
+            helpers={helpers}
+            options={Object.values(FeedbackTypeKr)}
+            className="min-w-132"
+            {...getStateByName("type")}
+          />
+        )}
+      />
+
+      <SicilianProvider value={{ register, name: "message", getValues }}>
+        <div className="flex flex-col w-full gap-16">
+          <div className="label">본문</div>
+          <label
+            htmlFor={"message"}
+            className="focus-within:border-primary-600 flex items-end justify-between gap-12 rounded-[4] bg-gray-100 px-24 py-18"
+          >
+            <TextArea rows={10} />
+          </label>
         </div>
-      </div>
-
-      <div>
-        <SicilianProvider value={{ register, name: "message", getValues }}>
-          <TextArea rows={10} />
-        </SicilianProvider>
-      </div>
+      </SicilianProvider>
 
       <Clickable types="default" className="self-end">
         <button type="submit" disabled={isPending}>
-          인터뷰 시작
+          {isPending ? "제출 중..." : "피드백 제출"}
         </button>
       </Clickable>
     </Form>

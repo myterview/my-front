@@ -12,6 +12,8 @@ html {
 @theme inline {
   --font-sans: var(--font-pretendard), ui-sans-serif, system-ui, sans-serif;
 
+  --font-nanum: var(--font-nanum-barunpen);
+
   --spacing: calc(1rem / 16);
 
   --breakpoint-desktop: 770px;

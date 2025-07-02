@@ -2,18 +2,20 @@
 
 import { Clickable } from "../Clickable/Clickable";
 import { Logo } from "../Logo/Logo";
-import { FeedbackModal } from "../Modal/FeedbackModal";
-import { ModalWrapper } from "../Modal/ModalWrapper";
 import { create } from "caro-kann";
-import { grunfeld } from "grunfeld";
 import { neato } from "neato";
 import Image from "next/image";
-import Link from "next/link";
 import { useRef } from "react";
 
 export const useSidebar = create(false);
 
-export function Sidebar({ children }: { children: React.ReactNode }) {
+export function Sidebar({
+  children,
+  menu,
+}: {
+  children: React.ReactNode;
+  menu: React.ReactNode;
+}) {
   const asideRef = useRef<HTMLElement>(null);
   const [isOpen, setIsOpen] = useSidebar();
 
@@ -58,26 +60,7 @@ export function Sidebar({ children }: { children: React.ReactNode }) {
             </button>
           </Clickable>
         </div>
-
-        <menu className="menu text-primary-600 flex flex-col items-start gap-40">
-          <Link href="/dashboard/interview">모의 인터뷰</Link>
-
-          <Link href="/dashboard/tech-question">기술 면접 질문</Link>
-
-          <button
-            onClick={() => {
-              grunfeld.add({
-                element: (
-                  <ModalWrapper>
-                    <FeedbackModal />
-                  </ModalWrapper>
-                ),
-              });
-            }}
-          >
-            피드백
-          </button>
-        </menu>
+        {menu}
       </div>
 
       {children}

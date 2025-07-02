@@ -4,1415 +4,1433 @@
  */
 
 export interface paths {
-    "/api/auth/google": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["AuthController_googleAuth"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+  "/api/auth/google": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/auth/google/callback": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["AuthController_googleAuthCallback"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get: operations["AuthController_googleAuth"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/auth/google/callback": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/auth/github": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["AuthController_githubAuth"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get: operations["AuthController_googleAuthCallback"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/auth/github": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/auth/github/callback": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["AuthController_githubAuthCallback"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get: operations["AuthController_githubAuth"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/auth/github/callback": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/auth/signout": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: operations["AuthController_logout"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get: operations["AuthController_githubAuthCallback"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/auth/signout": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/auth/user": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * 현재 로그인된 사용자 정보 가져오기
-         * @description 현재 로그인된 사용자의 정보를 반환합니다.
-         */
-        get: operations["AuthController_getUser"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    post: operations["AuthController_logout"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/auth/user": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/auth/user/role": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        /**
-         * 관리자 권한으로 프로모션
-         * @description 관리자 권한으로 사용자를 관리자 역할로 프로모션합니다.
-         */
-        patch: operations["AuthController_promoteToAdmin"];
-        trace?: never;
+    /**
+     * 현재 로그인된 사용자 정보 가져오기
+     * @description 현재 로그인된 사용자의 정보를 반환합니다.
+     */
+    get: operations["AuthController_getUser"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/auth/user/role": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/tech-question": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * 기술 질문 가져오기
-         * @description 기술 질문을 가져옵니다.
-         */
-        get: operations["TechQuestionController_getQuestion"];
-        put?: never;
-        /**
-         * 기술 질문 생성
-         * @description 관리자가 기술 질문을 생성합니다.
-         */
-        post: operations["TechQuestionController_createQuestion"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    /**
+     * 관리자 권한으로 프로모션
+     * @description 관리자 권한으로 사용자를 관리자 역할로 프로모션합니다.
+     */
+    patch: operations["AuthController_promoteToAdmin"];
+    trace?: never;
+  };
+  "/api/tech-question": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/tech-question/{questionId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        /**
-         * 기술 질문 삭제
-         * @description 관리자가 기술 질문을 삭제합니다.
-         */
-        delete: operations["TechQuestionController_deleteQuestion"];
-        options?: never;
-        head?: never;
-        /**
-         * 기술 질문 업데이트
-         * @description 관리자가 기술 질문을 업데이트합니다.
-         */
-        patch: operations["TechQuestionController_updateQuestion"];
-        trace?: never;
+    /**
+     * 기술 질문 가져오기
+     * @description 기술 질문을 가져옵니다.
+     */
+    get: operations["TechQuestionController_getQuestion"];
+    put?: never;
+    /**
+     * 기술 질문 생성
+     * @description 관리자가 기술 질문을 생성합니다.
+     */
+    post: operations["TechQuestionController_createQuestion"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/tech-question/{questionId}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/tech-question/{questionId}/solved": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * 유저가 답변한 질문 가져오기
-         * @description 특정 질문에 대해 유저가 답변한 내용을 가져옵니다.
-         */
-        get: operations["UserSolvedController_getUserSolvedQuestion"];
-        put?: never;
-        /**
-         * 유저 답안 생성
-         * @description 유저가 특정 질문에 대한 답안을 생성합니다.
-         */
-        post: operations["UserSolvedController_createUserSolvedQuestion"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    post?: never;
+    /**
+     * 기술 질문 삭제
+     * @description 관리자가 기술 질문을 삭제합니다.
+     */
+    delete: operations["TechQuestionController_deleteQuestion"];
+    options?: never;
+    head?: never;
+    /**
+     * 기술 질문 업데이트
+     * @description 관리자가 기술 질문을 업데이트합니다.
+     */
+    patch: operations["TechQuestionController_updateQuestion"];
+    trace?: never;
+  };
+  "/api/tech-question/{questionId}/solved": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/feedback": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * 피드백 목록 가져오기
-         * @description 관리자가 피드백 목록을 가져옵니다.
-         */
-        get: operations["FeedbackController_getFeedbackList"];
-        put?: never;
-        /**
-         * 피드백 생성
-         * @description 사용자가 피드백을 생성합니다.
-         */
-        post: operations["FeedbackController_createFeedback"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * 유저가 답변한 질문 가져오기
+     * @description 특정 질문에 대해 유저가 답변한 내용을 가져옵니다.
+     */
+    get: operations["UserSolvedController_getUserSolvedQuestion"];
+    put?: never;
+    /**
+     * 유저 답안 생성
+     * @description 유저가 특정 질문에 대한 답안을 생성합니다.
+     */
+    post: operations["UserSolvedController_createUserSolvedQuestion"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/feedback": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/feedback/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        /**
-         * 피드백 상태 업데이트
-         * @description 관리자가 피드백의 상태를 업데이트합니다.
-         */
-        patch: operations["FeedbackController_patchFeedbackStatus"];
-        trace?: never;
+    /**
+     * 피드백 목록 가져오기
+     * @description 관리자가 피드백 목록을 가져옵니다.
+     */
+    get: operations["FeedbackController_getFeedbackList"];
+    put?: never;
+    /**
+     * 피드백 생성
+     * @description 사용자가 피드백을 생성합니다.
+     */
+    post: operations["FeedbackController_createFeedback"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/feedback/{id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/interview": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get interviews
-         * @description Retrieve all active interviews for the authenticated user.
-         */
-        get: operations["InterviewController_getInterviews"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    /**
+     * 피드백 상태 업데이트
+     * @description 관리자가 피드백의 상태를 업데이트합니다.
+     */
+    patch: operations["FeedbackController_patchFeedbackStatus"];
+    trace?: never;
+  };
+  "/api/interview": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/interview/start": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Start interview
-         * @description Start a new interview session and receive the first message from the AI interviewer.
-         */
-        post: operations["InterviewController_startInterview"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Get interviews
+     * @description Retrieve all active interviews for the authenticated user.
+     */
+    get: operations["InterviewController_getInterviews"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/interview/start": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/interview/{sessionId}/message": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Send message
-         * @description Send a user message to the interview session and receive an AI response.
-         */
-        post: operations["InterviewController_createInterviewMessage"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Start interview
+     * @description Start a new interview session and receive the first message from the AI interviewer.
+     */
+    post: operations["InterviewController_startInterview"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/interview/{sessionId}/message": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/interview/{sessionId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get interview session
-         * @description Get the entire conversation history of the interview session.
-         */
-        get: operations["InterviewController_getSession"];
-        put?: never;
-        post?: never;
-        /**
-         * Delete interview
-         * @description Delete the interview.
-         */
-        delete: operations["InterviewController_deleteInterview"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Send message
+     * @description Send a user message to the interview session and receive an AI response.
+     */
+    post: operations["InterviewController_createInterviewMessage"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/interview/{sessionId}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
+    /**
+     * Get interview session
+     * @description Get the entire conversation history of the interview session.
+     */
+    get: operations["InterviewController_getSession"];
+    put?: never;
+    post?: never;
+    /**
+     * Delete interview
+     * @description Delete the interview.
+     */
+    delete: operations["InterviewController_deleteInterview"];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: {
-        SocialLoginResDTO: Record<string, never>;
-        MessageDTO: {
-            /**
-             * @description Response message indicating the result of the operation
-             * @example 질문이 성공적으로 생성되었습니다.
-             */
-            message: string;
-        };
-        UserResDTO: {
-            /**
-             * @description 사용자 ID
-             * @example 123e4567-e89b-12d3-a456-426614174000
-             */
-            id: string;
-            /**
-             * @description 사용자 이메일
-             * @example user@example.com
-             */
-            email: string;
-            /**
-             * @description 사용자 닉네임
-             * @example userNickname
-             */
-            nickname: string;
-            /**
-             * @description 사용자 공급자
-             * @example GOOGLE
-             * @enum {string}
-             */
-            provider: "GOOGLE" | "GITHUB" | "KAKAO" | "NAVER" | "APPLE";
-            /**
-             * @description 사용자 프로필 이미지
-             * @example https://example.com/profile.jpg
-             */
-            profileImage: string;
-            /**
-             * @description 사용자 소개
-             * @example 안녕하세요, 사용자입니다.
-             */
-            bio: string;
-        };
-        ErrorDTO: Record<string, never>;
-        PromoteToAdminReqDTO: {
-            secret: string;
-        };
-        GetQuestionResDTO: {
-            title: string;
-            /**
-             * @description Category of the technical question
-             * @enum {string}
-             */
-            category: "DATABASE" | "BACKEND" | "FRONTEND" | "DEVOPS" | "SECURITY" | "OTHER";
-            /** @description Optional tags for the question */
-            tags?: string[];
-            solution: string;
-            id: string;
-        };
-        CreateQuestionReqDTO: {
-            title: string;
-            /**
-             * @description Category of the technical question
-             * @enum {string}
-             */
-            category: "DATABASE" | "BACKEND" | "FRONTEND" | "DEVOPS" | "SECURITY" | "OTHER";
-            /** @description Optional tags for the question */
-            tags?: string[];
-            solution: string;
-        };
-        UpdateQuestionReqDTO: {
-            title?: string;
-            /**
-             * @description Category of the technical question
-             * @enum {string}
-             */
-            category?: "DATABASE" | "BACKEND" | "FRONTEND" | "DEVOPS" | "SECURITY" | "OTHER";
-            /** @description Optional tags for the question */
-            tags?: string[];
-            solution?: string;
-        };
-        InternalServerErrorException: Record<string, never>;
-        GetUserSolvedQuestionResDTO: {
-            id: string;
-            /** Format: date-time */
-            solvedAt: string;
-            answer: string;
-        };
-        CreateUserSolvedQuestionReqDTO: {
-            answer: string;
-            /** @enum {string} */
-            reviewFrequency: "NEVER" | "RARELY" | "OCCASIONALLY" | "FREQUENTLY";
-        };
-        GetFeedbackUserDTO: {
-            /**
-             * @description 사용자 ID
-             * @example 123e4567-e89b-12d3-a456-426614174000
-             */
-            id: string;
-            /**
-             * @description 사용자 이메일
-             * @example user@example.com
-             */
-            email: string;
-            /**
-             * @description 사용자 닉네임
-             * @example userNickname
-             */
-            nickname: string;
-            /**
-             * @description 사용자 공급자
-             * @example GOOGLE
-             * @enum {string}
-             */
-            provider: "GOOGLE" | "GITHUB" | "KAKAO" | "NAVER" | "APPLE";
-            /**
-             * @description 사용자 프로필 이미지
-             * @example https://example.com/profile.jpg
-             */
-            profileImage: string;
-        };
-        GetFeedbackResDTO: {
-            id: string;
-            message: string;
-            /** @enum {string} */
-            type: "suggestion" | "complaint" | "praise" | "bug" | "other";
-            /** @enum {string} */
-            status: "pending" | "reviewed" | "done";
-            /** Format: date-time */
-            createdAt: string;
-            user: components["schemas"]["GetFeedbackUserDTO"];
-        };
-        CreateFeedbackReqDTO: {
-            message: string;
-            /**
-             * @description 피드백 유형
-             * @enum {string}
-             */
-            type: "suggestion" | "complaint" | "praise" | "bug" | "other";
-        };
-        PatchFeedbackReqDTO: {
-            /**
-             * @description 피드백 상태
-             * @example done
-             * @enum {string}
-             */
-            status: "pending" | "reviewed" | "done";
-        };
-        TechnicalExpertiseDto: {
-            /**
-             * @description 평가 점수 (1-10)
-             * @example 7
-             */
-            score: number;
-            /**
-             * @description 기술적 전문성 분석
-             * @example React와 TypeScript에 대한 깊은 이해도를 보여주며, 최신 개발 트렌드를 잘 파악하고 있음
-             */
-            analysis: string;
-        };
-        ProblemSolvingDto: {
-            /**
-             * @description 평가 점수 (1-10)
-             * @example 7
-             */
-            score: number;
-            /**
-             * @description 문제 해결 능력 분석
-             * @example 복잡한 문제를 체계적으로 분석하고 창의적인 해결책을 제시하는 능력이 우수함
-             */
-            analysis: string;
-        };
-        KeyProjectDto: {
-            /**
-             * @description 프로젝트명
-             * @example 이커머스 플랫폼 개발
-             */
-            name: string;
-            /**
-             * @description 사용 기술 스택
-             * @example [
-             *       "React",
-             *       "Node.js",
-             *       "PostgreSQL"
-             *     ]
-             */
-            technologies: string[];
-            /**
-             * @description 프로젝트에서의 역할
-             * @example 프론트엔드 리드 개발자
-             */
-            role: string;
-            /**
-             * @description 프로젝트 성과 및 임팩트
-             * @example 사용자 전환율 30% 향상, 페이지 로딩 속도 50% 개선
-             */
-            impact: string;
-        };
-        ProjectExperienceDto: {
-            /**
-             * @description 평가 점수 (1-10)
-             * @example 7
-             */
-            score: number;
-            /**
-             * @description 프로젝트 경험 분석
-             * @example 다양한 규모의 프로젝트 경험을 보유하고 있으며, 프로젝트 임팩트가 구체적이고 측정 가능함
-             */
-            analysis: string;
-            /** @description 주요 프로젝트 목록 */
-            keyProjects: components["schemas"]["KeyProjectDto"][];
-        };
-        CodeQualityDto: {
-            /**
-             * @description 평가 점수 (1-10)
-             * @example 7
-             */
-            score: number;
-            /**
-             * @description 코드 품질 분석
-             * @example 클린 코드 원칙을 잘 이해하고 있으며, 테스트 코드 작성과 코드 리뷰에 대한 경험이 풍부함
-             */
-            analysis: string;
-        };
-        CommunicationDto: {
-            /**
-             * @description 평가 점수 (1-10)
-             * @example 7
-             */
-            score: number;
-            /**
-             * @description 커뮤니케이션 능력 분석
-             * @example 기술적 내용을 명확하게 설명할 수 있으며, 팀원들과의 협업에서 적극적인 자세를 보임
-             */
-            analysis: string;
-        };
-        GrowthPotentialDto: {
-            /**
-             * @description 평가 점수 (1-10)
-             * @example 7
-             */
-            score: number;
-            /**
-             * @description 성장 잠재력 분석
-             * @example 지속적인 학습 의지가 강하며, 새로운 기술에 대한 호기심과 적응력이 뛰어남
-             */
-            analysis: string;
-        };
-        OverallAssessmentDto: {
-            /**
-             * @description 평가 점수 (1-10)
-             * @example 7
-             */
-            score: number;
-            /**
-             * @description 종합 평가 분석
-             * @example 모든 영역에서 균형잡힌 역량을 보여주며, 팀에 긍정적인 기여를 할 수 있을 것으로 판단됨
-             */
-            analysis: string;
-            /**
-             * @description 채용 추천 여부
-             * @example HIRE
-             * @enum {string}
-             */
-            recommendation: "HIRE" | "NO_HIRE" | "CONSIDER";
-            /**
-             * @description 최종 의견
-             * @example 기술적 역량과 성장 잠재력이 우수한 후보자로 적극 채용을 추천합니다.
-             */
-            finalNotes: string;
-        };
-        EvaluationDto: {
-            /**
-             * @description 기술적 전문성 평가
-             * @example {
-             *       "score": 8,
-             *       "analysis": "React와 TypeScript에 대한 깊은 이해도를 보여주며, 최신 개발 트렌드를 잘 파악하고 있음"
-             *     }
-             */
-            technicalExpertise: components["schemas"]["TechnicalExpertiseDto"];
-            /**
-             * @description 문제 해결 능력 평가
-             * @example {
-             *       "score": 7,
-             *       "analysis": "복잡한 문제를 체계적으로 분석하고 창의적인 해결책을 제시하는 능력이 우수함"
-             *     }
-             */
-            problemSolving: components["schemas"]["ProblemSolvingDto"];
-            /**
-             * @description 프로젝트 경험 평가
-             * @example {
-             *       "score": 8,
-             *       "analysis": "다양한 규모의 프로젝트 경험을 보유하고 있으며, 프로젝트 임팩트가 구체적이고 측정 가능함",
-             *       "keyProjects": [
-             *         {
-             *           "name": "이커머스 플랫폼",
-             *           "technologies": [
-             *             "React",
-             *             "Node.js",
-             *             "PostgreSQL"
-             *           ],
-             *           "role": "프론트엔드 리드 개발자",
-             *           "impact": "사용자 전환율 30% 향상"
-             *         }
-             *       ]
-             *     }
-             */
-            projectExperience: components["schemas"]["ProjectExperienceDto"];
-            /**
-             * @description 코드 품질 평가
-             * @example {
-             *       "score": 7,
-             *       "analysis": "클린 코드 원칙을 잘 이해하고 있으며, 테스트 코드 작성과 코드 리뷰에 대한 경험이 풍부함"
-             *     }
-             */
-            codeQuality: components["schemas"]["CodeQualityDto"];
-            /**
-             * @description 커뮤니케이션 능력 평가
-             * @example {
-             *       "score": 9,
-             *       "analysis": "기술적 내용을 명확하게 설명할 수 있으며, 팀원들과의 협업에서 적극적인 자세를 보임"
-             *     }
-             */
-            communication: components["schemas"]["CommunicationDto"];
-            /**
-             * @description 성장 잠재력 평가
-             * @example {
-             *       "score": 8,
-             *       "analysis": "지속적인 학습 의지가 강하며, 새로운 기술에 대한 호기심과 적응력이 뛰어남"
-             *     }
-             */
-            growthPotential: components["schemas"]["GrowthPotentialDto"];
-            /**
-             * @description 종합 평가
-             * @example {
-             *       "score": 8,
-             *       "analysis": "모든 영역에서 균형잡힌 역량을 보여주며, 팀에 긍정적인 기여를 할 수 있을 것으로 판단됨",
-             *       "recommendation": "HIRE",
-             *       "finalNotes": "기술적 역량과 성장 잠재력이 우수한 후보자로 적극 채용을 추천합니다."
-             *     }
-             */
-            overallAssessment: components["schemas"]["OverallAssessmentDto"];
-        };
-        InterviewSessionWithoutMessages: {
-            /** @description Session ID */
-            id: string;
-            /** @description User ID */
-            userId: string;
-            /**
-             * @description Interview evaluation type
-             * @enum {string}
-             */
-            evaluationType?: "default";
-            /** @description Interview evaluation data */
-            evaluation?: components["schemas"]["EvaluationDto"];
-            /** @description Interview title */
-            title: string;
-            /** @description Interview position */
-            position: string;
-            /** @description Experience level */
-            experience: string;
-            /** @description Interview active status */
-            isActive: boolean;
-            /**
-             * Format: date-time
-             * @description Creation time
-             */
-            createdAt: string;
-        };
-        GetInterviewDTO: {
-            /**
-             * @description Indicates if there are more pages
-             * @example false
-             */
-            hasNext: boolean;
-            /** @description List of interview sessions without messages */
-            items: components["schemas"]["InterviewSessionWithoutMessages"][];
-        };
-        StartInterviewDto: {
-            /**
-             * @description Applied position
-             * @example frontend
-             * @enum {string}
-             */
-            position: "frontend" | "backend" | "infra" | "fullstack";
-            /**
-             * @description Experience level
-             * @example mid
-             * @enum {string}
-             */
-            experience: "junior" | "mid" | "senior";
-            /**
-             * @description Interview title
-             * @example Frontend Developer Interview
-             */
-            title: string;
-        };
-        StartInterviewResponse: {
-            /** @description Success status */
-            success: boolean;
-            /** @description Session ID */
-            sessionId: string;
-            /** @description AI first message */
-            message: string;
-        };
-        SendMessageDto: {
-            /**
-             * @description User message
-             * @example Hello, I am a 3-year-old frontend developer.
-             */
-            message: string;
-        };
-        SendMessageResponse: {
-            /** @description Success status */
-            success: boolean;
-            /** @description AI response message */
-            aiMessage: string;
-            /**
-             * @description Indicates if the interview is finished
-             * @example false
-             */
-            isFinished: boolean;
-        };
-        InterviewMessage: {
-            /** @description Message ID */
-            id: string;
-            /** @description Session ID */
-            interviewId: string;
-            /** @description Message content */
-            content: string;
-            /**
-             * @description Message role
-             * @enum {string}
-             */
-            type: "human" | "ai" | "system" | "function" | "tool";
-            /**
-             * Format: date-time
-             * @description Message creation time
-             */
-            createdAt: string;
-            /** @description Message sender name */
-            name?: string;
-            /** @description Tool calls */
-            toolCalls?: Record<string, never>;
-        };
-        InterviewSession: {
-            /** @description Session ID */
-            id: string;
-            /** @description User ID */
-            userId: string;
-            /**
-             * @description Interview evaluation type
-             * @enum {string}
-             */
-            evaluationType?: "default";
-            /** @description Interview evaluation data */
-            evaluation?: components["schemas"]["EvaluationDto"];
-            /** @description Interview title */
-            title: string;
-            /** @description Interview position */
-            position: string;
-            /** @description Experience level */
-            experience: string;
-            /** @description Interview active status */
-            isActive: boolean;
-            /** @description Message list */
-            messages?: components["schemas"]["InterviewMessage"][];
-            /**
-             * Format: date-time
-             * @description Creation time
-             */
-            createdAt: string;
-        };
-        GetSessionResponse: {
-            /** @description Success status */
-            success: boolean;
-            /** @description Interview session information */
-            session: components["schemas"]["InterviewSession"];
-        };
-        DeleteInterviewResponse: {
-            /** @description Success status */
-            success: boolean;
-            /** @description Response message */
-            message: string;
-        };
+  schemas: {
+    SocialLoginResDTO: Record<string, never>;
+    MessageDTO: {
+      /**
+       * @description Response message indicating the result of the operation
+       * @example 질문이 성공적으로 생성되었습니다.
+       */
+      message: string;
     };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+    UserResDTO: {
+      /**
+       * @description 사용자 ID
+       * @example 123e4567-e89b-12d3-a456-426614174000
+       */
+      id: string;
+      /**
+       * @description 사용자 이메일
+       * @example user@example.com
+       */
+      email: string;
+      /**
+       * @description 사용자 닉네임
+       * @example userNickname
+       */
+      nickname: string;
+      /**
+       * @description 사용자 공급자
+       * @example GOOGLE
+       * @enum {string}
+       */
+      provider: "GOOGLE" | "GITHUB" | "KAKAO" | "NAVER" | "APPLE";
+      /**
+       * @description 사용자 프로필 이미지
+       * @example https://example.com/profile.jpg
+       */
+      profileImage: string;
+      /**
+       * @description 사용자 소개
+       * @example 안녕하세요, 사용자입니다.
+       */
+      bio: string;
+    };
+    ErrorDTO: Record<string, never>;
+    PromoteToAdminReqDTO: {
+      secret: string;
+    };
+    GetQuestionResDTO: {
+      title: string;
+      /**
+       * @description Category of the technical question
+       * @enum {string}
+       */
+      category:
+        | "DATABASE"
+        | "BACKEND"
+        | "FRONTEND"
+        | "DEVOPS"
+        | "SECURITY"
+        | "OTHER";
+      /** @description Optional tags for the question */
+      tags?: string[];
+      solution: string;
+      id: string;
+    };
+    CreateQuestionReqDTO: {
+      title: string;
+      /**
+       * @description Category of the technical question
+       * @enum {string}
+       */
+      category:
+        | "DATABASE"
+        | "BACKEND"
+        | "FRONTEND"
+        | "DEVOPS"
+        | "SECURITY"
+        | "OTHER";
+      /** @description Optional tags for the question */
+      tags?: string[];
+      solution: string;
+    };
+    UpdateQuestionReqDTO: {
+      title?: string;
+      /**
+       * @description Category of the technical question
+       * @enum {string}
+       */
+      category?:
+        | "DATABASE"
+        | "BACKEND"
+        | "FRONTEND"
+        | "DEVOPS"
+        | "SECURITY"
+        | "OTHER";
+      /** @description Optional tags for the question */
+      tags?: string[];
+      solution?: string;
+    };
+    InternalServerErrorException: Record<string, never>;
+    GetUserSolvedQuestionResDTO: {
+      id: string;
+      /** Format: date-time */
+      solvedAt: string;
+      answer: string;
+    };
+    CreateUserSolvedQuestionReqDTO: {
+      answer: string;
+      /** @enum {string} */
+      reviewFrequency: "NEVER" | "RARELY" | "OCCASIONALLY" | "FREQUENTLY";
+    };
+    GetFeedbackUserDTO: {
+      /**
+       * @description 사용자 ID
+       * @example 123e4567-e89b-12d3-a456-426614174000
+       */
+      id: string;
+      /**
+       * @description 사용자 이메일
+       * @example user@example.com
+       */
+      email: string;
+      /**
+       * @description 사용자 닉네임
+       * @example userNickname
+       */
+      nickname: string;
+      /**
+       * @description 사용자 공급자
+       * @example GOOGLE
+       * @enum {string}
+       */
+      provider: "GOOGLE" | "GITHUB" | "KAKAO" | "NAVER" | "APPLE";
+      /**
+       * @description 사용자 프로필 이미지
+       * @example https://example.com/profile.jpg
+       */
+      profileImage: string;
+    };
+    GetFeedbackResDTO: {
+      id: string;
+      message: string;
+      /** @enum {string} */
+      type: "suggestion" | "complaint" | "praise" | "bug" | "other";
+      /** @enum {string} */
+      status: "pending" | "reviewed" | "done";
+      /** Format: date-time */
+      createdAt: string;
+      user: components["schemas"]["GetFeedbackUserDTO"];
+    };
+    CreateFeedbackReqDTO: {
+      message: string;
+      /**
+       * @description 피드백 유형
+       * @enum {string}
+       */
+      type: "suggestion" | "complaint" | "praise" | "bug" | "other";
+    };
+    PatchFeedbackReqDTO: {
+      /**
+       * @description 피드백 상태
+       * @example done
+       * @enum {string}
+       */
+      status: "pending" | "reviewed" | "done";
+    };
+    TechnicalExpertiseDto: {
+      /**
+       * @description 평가 점수 (1-10)
+       * @example 7
+       */
+      score: number;
+      /**
+       * @description 기술적 전문성 분석
+       * @example React와 TypeScript에 대한 깊은 이해도를 보여주며, 최신 개발 트렌드를 잘 파악하고 있음
+       */
+      analysis: string;
+    };
+    ProblemSolvingDto: {
+      /**
+       * @description 평가 점수 (1-10)
+       * @example 7
+       */
+      score: number;
+      /**
+       * @description 문제 해결 능력 분석
+       * @example 복잡한 문제를 체계적으로 분석하고 창의적인 해결책을 제시하는 능력이 우수함
+       */
+      analysis: string;
+    };
+    KeyProjectDto: {
+      /**
+       * @description 프로젝트명
+       * @example 이커머스 플랫폼 개발
+       */
+      name: string;
+      /**
+       * @description 사용 기술 스택
+       * @example [
+       *       "React",
+       *       "Node.js",
+       *       "PostgreSQL"
+       *     ]
+       */
+      technologies: string[];
+      /**
+       * @description 프로젝트에서의 역할
+       * @example 프론트엔드 리드 개발자
+       */
+      role: string;
+      /**
+       * @description 프로젝트 성과 및 임팩트
+       * @example 사용자 전환율 30% 향상, 페이지 로딩 속도 50% 개선
+       */
+      impact: string;
+    };
+    ProjectExperienceDto: {
+      /**
+       * @description 평가 점수 (1-10)
+       * @example 7
+       */
+      score: number;
+      /**
+       * @description 프로젝트 경험 분석
+       * @example 다양한 규모의 프로젝트 경험을 보유하고 있으며, 프로젝트 임팩트가 구체적이고 측정 가능함
+       */
+      analysis: string;
+      /** @description 주요 프로젝트 목록 */
+      keyProjects: components["schemas"]["KeyProjectDto"][];
+    };
+    CodeQualityDto: {
+      /**
+       * @description 평가 점수 (1-10)
+       * @example 7
+       */
+      score: number;
+      /**
+       * @description 코드 품질 분석
+       * @example 클린 코드 원칙을 잘 이해하고 있으며, 테스트 코드 작성과 코드 리뷰에 대한 경험이 풍부함
+       */
+      analysis: string;
+    };
+    CommunicationDto: {
+      /**
+       * @description 평가 점수 (1-10)
+       * @example 7
+       */
+      score: number;
+      /**
+       * @description 커뮤니케이션 능력 분석
+       * @example 기술적 내용을 명확하게 설명할 수 있으며, 팀원들과의 협업에서 적극적인 자세를 보임
+       */
+      analysis: string;
+    };
+    GrowthPotentialDto: {
+      /**
+       * @description 평가 점수 (1-10)
+       * @example 7
+       */
+      score: number;
+      /**
+       * @description 성장 잠재력 분석
+       * @example 지속적인 학습 의지가 강하며, 새로운 기술에 대한 호기심과 적응력이 뛰어남
+       */
+      analysis: string;
+    };
+    OverallAssessmentDto: {
+      /**
+       * @description 평가 점수 (1-10)
+       * @example 7
+       */
+      score: number;
+      /**
+       * @description 종합 평가 분석
+       * @example 모든 영역에서 균형잡힌 역량을 보여주며, 팀에 긍정적인 기여를 할 수 있을 것으로 판단됨
+       */
+      analysis: string;
+      /**
+       * @description 채용 추천 여부
+       * @example HIRE
+       * @enum {string}
+       */
+      recommendation: "HIRE" | "NO_HIRE" | "CONSIDER";
+      /**
+       * @description 최종 의견
+       * @example 기술적 역량과 성장 잠재력이 우수한 후보자로 적극 채용을 추천합니다.
+       */
+      finalNotes: string;
+    };
+    EvaluationDto: {
+      /**
+       * @description 기술적 전문성 평가
+       * @example {
+       *       "score": 8,
+       *       "analysis": "React와 TypeScript에 대한 깊은 이해도를 보여주며, 최신 개발 트렌드를 잘 파악하고 있음"
+       *     }
+       */
+      technicalExpertise: components["schemas"]["TechnicalExpertiseDto"];
+      /**
+       * @description 문제 해결 능력 평가
+       * @example {
+       *       "score": 7,
+       *       "analysis": "복잡한 문제를 체계적으로 분석하고 창의적인 해결책을 제시하는 능력이 우수함"
+       *     }
+       */
+      problemSolving: components["schemas"]["ProblemSolvingDto"];
+      /**
+       * @description 프로젝트 경험 평가
+       * @example {
+       *       "score": 8,
+       *       "analysis": "다양한 규모의 프로젝트 경험을 보유하고 있으며, 프로젝트 임팩트가 구체적이고 측정 가능함",
+       *       "keyProjects": [
+       *         {
+       *           "name": "이커머스 플랫폼",
+       *           "technologies": [
+       *             "React",
+       *             "Node.js",
+       *             "PostgreSQL"
+       *           ],
+       *           "role": "프론트엔드 리드 개발자",
+       *           "impact": "사용자 전환율 30% 향상"
+       *         }
+       *       ]
+       *     }
+       */
+      projectExperience: components["schemas"]["ProjectExperienceDto"];
+      /**
+       * @description 코드 품질 평가
+       * @example {
+       *       "score": 7,
+       *       "analysis": "클린 코드 원칙을 잘 이해하고 있으며, 테스트 코드 작성과 코드 리뷰에 대한 경험이 풍부함"
+       *     }
+       */
+      codeQuality: components["schemas"]["CodeQualityDto"];
+      /**
+       * @description 커뮤니케이션 능력 평가
+       * @example {
+       *       "score": 9,
+       *       "analysis": "기술적 내용을 명확하게 설명할 수 있으며, 팀원들과의 협업에서 적극적인 자세를 보임"
+       *     }
+       */
+      communication: components["schemas"]["CommunicationDto"];
+      /**
+       * @description 성장 잠재력 평가
+       * @example {
+       *       "score": 8,
+       *       "analysis": "지속적인 학습 의지가 강하며, 새로운 기술에 대한 호기심과 적응력이 뛰어남"
+       *     }
+       */
+      growthPotential: components["schemas"]["GrowthPotentialDto"];
+      /**
+       * @description 종합 평가
+       * @example {
+       *       "score": 8,
+       *       "analysis": "모든 영역에서 균형잡힌 역량을 보여주며, 팀에 긍정적인 기여를 할 수 있을 것으로 판단됨",
+       *       "recommendation": "HIRE",
+       *       "finalNotes": "기술적 역량과 성장 잠재력이 우수한 후보자로 적극 채용을 추천합니다."
+       *     }
+       */
+      overallAssessment: components["schemas"]["OverallAssessmentDto"];
+    };
+    InterviewSessionWithoutMessages: {
+      /** @description Session ID */
+      id: string;
+      /** @description User ID */
+      userId: string;
+      /**
+       * @description Interview evaluation type
+       * @enum {string}
+       */
+      evaluationType?: "default";
+      /** @description Interview evaluation data */
+      evaluation?: components["schemas"]["EvaluationDto"];
+      /** @description Interview title */
+      title: string;
+      /** @description Interview position */
+      position: string;
+      /** @description Experience level */
+      experience: string;
+      /** @description Interview active status */
+      isActive: boolean;
+      /**
+       * Format: date-time
+       * @description Creation time
+       */
+      createdAt: string;
+    };
+    GetInterviewDTO: {
+      /**
+       * @description Indicates if there are more pages
+       * @example false
+       */
+      hasNext: boolean;
+      /** @description List of interview sessions without messages */
+      items: components["schemas"]["InterviewSessionWithoutMessages"][];
+    };
+    StartInterviewDto: {
+      /**
+       * @description Applied position
+       * @example frontend
+       * @enum {string}
+       */
+      position: "frontend" | "backend" | "infra" | "fullstack";
+      /**
+       * @description Experience level
+       * @example mid
+       * @enum {string}
+       */
+      experience: "junior" | "mid" | "senior";
+      /**
+       * @description Interview title
+       * @example Frontend Developer Interview
+       */
+      title: string;
+    };
+    StartInterviewResponse: {
+      /** @description Success status */
+      success: boolean;
+      /** @description Session ID */
+      sessionId: string;
+      /** @description AI first message */
+      message: string;
+    };
+    SendMessageDto: {
+      /**
+       * @description User message
+       * @example Hello, I am a 3-year-old frontend developer.
+       */
+      message: string;
+    };
+    SendMessageResponse: {
+      /** @description Success status */
+      success: boolean;
+      /** @description AI response message */
+      aiMessage: string;
+      /**
+       * @description Indicates if the interview is finished
+       * @example false
+       */
+      isFinished: boolean;
+    };
+    InterviewMessage: {
+      /** @description Message ID */
+      id: string;
+      /** @description Session ID */
+      interviewId: string;
+      /** @description Message content */
+      content: string;
+      /**
+       * @description Message role
+       * @enum {string}
+       */
+      type: "human" | "ai" | "system" | "function" | "tool";
+      /**
+       * Format: date-time
+       * @description Message creation time
+       */
+      createdAt: string;
+      /** @description Message sender name */
+      name?: string;
+      /** @description Tool calls */
+      toolCalls?: Record<string, never>;
+    };
+    InterviewSession: {
+      /** @description Session ID */
+      id: string;
+      /** @description User ID */
+      userId: string;
+      /**
+       * @description Interview evaluation type
+       * @enum {string}
+       */
+      evaluationType?: "default";
+      /** @description Interview evaluation data */
+      evaluation?: components["schemas"]["EvaluationDto"];
+      /** @description Interview title */
+      title: string;
+      /** @description Interview position */
+      position: string;
+      /** @description Experience level */
+      experience: string;
+      /** @description Interview active status */
+      isActive: boolean;
+      /** @description Message list */
+      messages?: components["schemas"]["InterviewMessage"][];
+      /**
+       * Format: date-time
+       * @description Creation time
+       */
+      createdAt: string;
+    };
+    GetSessionResponse: {
+      /** @description Success status */
+      success: boolean;
+      /** @description Interview session information */
+      session: components["schemas"]["InterviewSession"];
+    };
+    DeleteInterviewResponse: {
+      /** @description Success status */
+      success: boolean;
+      /** @description Response message */
+      message: string;
+    };
+  };
+  responses: never;
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    AuthController_googleAuth: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  AuthController_googleAuth: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    AuthController_googleAuthCallback: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description 로그인 성공 후 리디렉션 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /** @example {
-                     *       "success": true,
-                     *       "redirectUrl": "/dashboard"
-                     *     } */
-                    "application/json": components["schemas"]["SocialLoginResDTO"];
-                };
-            };
-        };
+        content?: never;
+      };
     };
-    AuthController_githubAuth: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  AuthController_googleAuthCallback: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    AuthController_githubAuthCallback: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description 로그인 성공 후 리디렉션 */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description 로그인 성공 후 리디렉션 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /** @example {
-                     *       "success": true,
-                     *       "redirectUrl": "/dashboard"
-                     *     } */
-                    "application/json": components["schemas"]["SocialLoginResDTO"];
-                };
-            };
+        content: {
+          /** @example {
+           *       "success": true,
+           *       "redirectUrl": "/dashboard"
+           *     } */
+          "application/json": components["schemas"]["SocialLoginResDTO"];
         };
+      };
     };
-    AuthController_logout: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description 로그아웃 성공 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /** @example {
-                     *       "message": "로그아웃 완료"
-                     *     } */
-                    "application/json": components["schemas"]["MessageDTO"];
-                };
-            };
-        };
+  };
+  AuthController_githubAuth: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    AuthController_getUser: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description 현재 로그인된 사용자 정보 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /** @example {
-                     *       "id": "8a463aa4-b1dc-4f27-9c3f-53b94dc45e74",
-                     *       "email": "wpfekdml@naver.com",
-                     *       "role": "USER",
-                     *       "nickname": "본롸",
-                     *       "provider": "GOOGLE",
-                     *       "profileImage": "",
-                     *       "bio": ""
-                     *     } */
-                    "application/json": components["schemas"]["UserResDTO"];
-                };
-            };
-            /** @description 인증되지 않은 사용자 */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /** @example {
-                     *       "message": "인증되지 않은 사용자",
-                     *       "error": "Unauthorized",
-                     *       "statusCode": 401
-                     *     } */
-                    "application/json": components["schemas"]["ErrorDTO"];
-                };
-            };
-        };
+        content?: never;
+      };
     };
-    AuthController_promoteToAdmin: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PromoteToAdminReqDTO"];
-            };
-        };
-        responses: {
-            /** @description 프로모션이 완료되었습니다. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /** @example {
-                     *       "message": "프로모션이 완료되었습니다"
-                     *     } */
-                    "application/json": components["schemas"]["MessageDTO"];
-                };
-            };
-        };
+  };
+  AuthController_githubAuthCallback: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    TechQuestionController_getQuestion: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description 로그인 성공 후 리디렉션 */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description 기술 질문을 성공적으로 가져왔습니다. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetQuestionResDTO"];
-                };
-            };
+        content: {
+          /** @example {
+           *       "success": true,
+           *       "redirectUrl": "/dashboard"
+           *     } */
+          "application/json": components["schemas"]["SocialLoginResDTO"];
         };
+      };
     };
-    TechQuestionController_createQuestion: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** @description 기술 질문 생성 요청 DTO */
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["CreateQuestionReqDTO"];
-            };
-        };
-        responses: {
-            /** @description 기술 질문이 성공적으로 생성되었습니다. */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MessageDTO"];
-                };
-            };
-        };
+  };
+  AuthController_logout: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    TechQuestionController_deleteQuestion: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                questionId: string;
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description 로그아웃 성공 */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description 기술 질문이 성공적으로 삭제되었습니다. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MessageDTO"];
-                };
-            };
-            /** @description 기술 질문 삭제에 실패했습니다. */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["InternalServerErrorException"];
-                };
-            };
+        content: {
+          /** @example {
+           *       "message": "로그아웃 완료"
+           *     } */
+          "application/json": components["schemas"]["MessageDTO"];
         };
+      };
     };
-    TechQuestionController_updateQuestion: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                questionId: string;
-            };
-            cookie?: never;
-        };
-        /** @description 기술 질문 업데이트 요청 DTO */
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["UpdateQuestionReqDTO"];
-            };
-        };
-        responses: {
-            /** @description 기술 질문이 성공적으로 업데이트되었습니다. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MessageDTO"];
-                };
-            };
-        };
+  };
+  AuthController_getUser: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    UserSolvedController_getUserSolvedQuestion: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The ID of the question */
-                questionId: string;
-            };
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description 현재 로그인된 사용자 정보 */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description 유저 답안을 성공적으로 가져왔습니다. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetUserSolvedQuestionResDTO"][];
-                };
-            };
-            /** @description 유저 답안을 가져오는 데 실패했습니다. 다시 시도해주세요. */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["InternalServerErrorException"];
-                };
-            };
+        content: {
+          /** @example {
+           *       "id": "8a463aa4-b1dc-4f27-9c3f-53b94dc45e74",
+           *       "email": "wpfekdml@naver.com",
+           *       "role": "USER",
+           *       "nickname": "본롸",
+           *       "provider": "GOOGLE",
+           *       "profileImage": "",
+           *       "bio": ""
+           *     } */
+          "application/json": components["schemas"]["UserResDTO"];
         };
+      };
+      /** @description 인증되지 않은 사용자 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          /** @example {
+           *       "message": "인증되지 않은 사용자",
+           *       "error": "Unauthorized",
+           *       "statusCode": 401
+           *     } */
+          "application/json": components["schemas"]["ErrorDTO"];
+        };
+      };
     };
-    UserSolvedController_createUserSolvedQuestion: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The ID of the question */
-                questionId: string;
-            };
-            cookie?: never;
-        };
-        /** @description 유저 답안 제출 요청 DTO */
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["CreateUserSolvedQuestionReqDTO"];
-            };
-        };
-        responses: {
-            /** @description 유저 답안 제출에 성공하였습니다. */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MessageDTO"];
-                };
-            };
-            /** @description 유저 답안 제출에 실패하였습니다. 다시 시도해주세요. */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["InternalServerErrorException"];
-                };
-            };
-        };
+  };
+  AuthController_promoteToAdmin: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    FeedbackController_getFeedbackList: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description 피드백 목록이 성공적으로 반환되었습니다. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetFeedbackResDTO"][];
-                };
-            };
-        };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["PromoteToAdminReqDTO"];
+      };
     };
-    FeedbackController_createFeedback: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    responses: {
+      /** @description 프로모션이 완료되었습니다. */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["CreateFeedbackReqDTO"];
-            };
+        content: {
+          /** @example {
+           *       "message": "프로모션이 완료되었습니다"
+           *     } */
+          "application/json": components["schemas"]["MessageDTO"];
         };
-        responses: {
-            /** @description 피드백이 성공적으로 생성되었습니다. */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MessageDTO"];
-                };
-            };
-        };
+      };
     };
-    FeedbackController_patchFeedbackStatus: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PatchFeedbackReqDTO"];
-            };
-        };
-        responses: {
-            /** @description 피드백 상태가 성공적으로 업데이트되었습니다. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MessageDTO"];
-                };
-            };
-        };
+  };
+  TechQuestionController_getQuestion: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    InterviewController_getInterviews: {
-        parameters: {
-            query: {
-                skip: string;
-                take: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description 기술 질문을 성공적으로 가져왔습니다. */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Interviews retrieved successfully */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetInterviewDTO"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Internal server error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          "application/json": components["schemas"]["GetQuestionResDTO"];
         };
+      };
     };
-    InterviewController_startInterview: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["StartInterviewDto"];
-            };
-        };
-        responses: {
-            /** @description Interview start success */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["StartInterviewResponse"];
-                };
-            };
-            /** @description Invalid request data */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description AI response generation failed */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  TechQuestionController_createQuestion: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    InterviewController_createInterviewMessage: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Interview session ID */
-                sessionId: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SendMessageDto"];
-            };
-        };
-        responses: {
-            /** @description Message send success */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SendMessageResponse"];
-                };
-            };
-            /** @description Interview session not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description AI response generation failed */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+    /** @description 기술 질문 생성 요청 DTO */
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CreateQuestionReqDTO"];
+      };
     };
-    InterviewController_getSession: {
-        parameters: {
-            query: {
-                withMessages: boolean;
-            };
-            header?: never;
-            path: {
-                /** @description Interview session ID */
-                sessionId: string;
-            };
-            cookie?: never;
+    responses: {
+      /** @description 기술 질문이 성공적으로 생성되었습니다. */
+      201: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Session get success */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetSessionResponse"];
-                };
-            };
-            /** @description Interview session not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          "application/json": components["schemas"]["MessageDTO"];
         };
+      };
     };
-    InterviewController_deleteInterview: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Interview session ID */
-                sessionId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Interview deleted successfully */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DeleteInterviewResponse"];
-                };
-            };
-            /** @description Interview deletion failed */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  TechQuestionController_deleteQuestion: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        questionId: string;
+      };
+      cookie?: never;
     };
+    requestBody?: never;
+    responses: {
+      /** @description 기술 질문이 성공적으로 삭제되었습니다. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["MessageDTO"];
+        };
+      };
+      /** @description 기술 질문 삭제에 실패했습니다. */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["InternalServerErrorException"];
+        };
+      };
+    };
+  };
+  TechQuestionController_updateQuestion: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        questionId: string;
+      };
+      cookie?: never;
+    };
+    /** @description 기술 질문 업데이트 요청 DTO */
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UpdateQuestionReqDTO"];
+      };
+    };
+    responses: {
+      /** @description 기술 질문이 성공적으로 업데이트되었습니다. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["MessageDTO"];
+        };
+      };
+    };
+  };
+  UserSolvedController_getUserSolvedQuestion: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description The ID of the question */
+        questionId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 유저 답안을 성공적으로 가져왔습니다. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["GetUserSolvedQuestionResDTO"][];
+        };
+      };
+      /** @description 유저 답안을 가져오는 데 실패했습니다. 다시 시도해주세요. */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["InternalServerErrorException"];
+        };
+      };
+    };
+  };
+  UserSolvedController_createUserSolvedQuestion: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description The ID of the question */
+        questionId: string;
+      };
+      cookie?: never;
+    };
+    /** @description 유저 답안 제출 요청 DTO */
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CreateUserSolvedQuestionReqDTO"];
+      };
+    };
+    responses: {
+      /** @description 유저 답안 제출에 성공하였습니다. */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["MessageDTO"];
+        };
+      };
+      /** @description 유저 답안 제출에 실패하였습니다. 다시 시도해주세요. */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["InternalServerErrorException"];
+        };
+      };
+    };
+  };
+  FeedbackController_getFeedbackList: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 피드백 목록이 성공적으로 반환되었습니다. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["GetFeedbackResDTO"][];
+        };
+      };
+    };
+  };
+  FeedbackController_createFeedback: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CreateFeedbackReqDTO"];
+      };
+    };
+    responses: {
+      /** @description 피드백이 성공적으로 생성되었습니다. */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["MessageDTO"];
+        };
+      };
+    };
+  };
+  FeedbackController_patchFeedbackStatus: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["PatchFeedbackReqDTO"];
+      };
+    };
+    responses: {
+      /** @description 피드백 상태가 성공적으로 업데이트되었습니다. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["MessageDTO"];
+        };
+      };
+    };
+  };
+  InterviewController_getInterviews: {
+    parameters: {
+      query: {
+        skip: string;
+        take: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Interviews retrieved successfully */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["GetInterviewDTO"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Internal server error */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  InterviewController_startInterview: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["StartInterviewDto"];
+      };
+    };
+    responses: {
+      /** @description Interview start success */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["StartInterviewResponse"];
+        };
+      };
+      /** @description Invalid request data */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description AI response generation failed */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  InterviewController_createInterviewMessage: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description Interview session ID */
+        sessionId: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["SendMessageDto"];
+      };
+    };
+    responses: {
+      /** @description Message send success */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["SendMessageResponse"];
+        };
+      };
+      /** @description Interview session not found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description AI response generation failed */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  InterviewController_getSession: {
+    parameters: {
+      query: {
+        withMessages: boolean;
+      };
+      header?: never;
+      path: {
+        /** @description Interview session ID */
+        sessionId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Session get success */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["GetSessionResponse"];
+        };
+      };
+      /** @description Interview session not found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  InterviewController_deleteInterview: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description Interview session ID */
+        sessionId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Interview deleted successfully */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["DeleteInterviewResponse"];
+        };
+      };
+      /** @description Interview deletion failed */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
 }

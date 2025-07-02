@@ -1,5 +1,6 @@
 import { UserQuery } from "@/apis/user.query";
 import { Sidebar } from "@/components/Sidebar/Sidebar";
+import { SidebarDefaultMenu } from "@/components/Sidebar/SidebarDefaultMenu";
 import { SidebarFooter } from "@/components/Sidebar/SidebarFooter";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
@@ -23,7 +24,7 @@ export default async function RootLayout({
   return (
     <div className="flex w-full flex-row-reverse">
       <main className="w-full">{children}</main>
-      <Sidebar>
+      <Sidebar menu={<SidebarDefaultMenu />}>
         <SidebarFooter user={user} />
       </Sidebar>
     </div>

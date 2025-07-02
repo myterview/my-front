@@ -16,7 +16,11 @@ export function Card({
 }
 
 Card.Title = function Title({ children }: { children: React.ReactNode }) {
-  return <h4 className="line-clamp-1 text-2xl font-extrabold">{children}</h4>;
+  return (
+    <h4 className="line-clamp-1 text-2xl font-extrabold self-start">
+      {children}
+    </h4>
+  );
 };
 
 Card.subTitle = function SubTitle({ children }: { children: React.ReactNode }) {
