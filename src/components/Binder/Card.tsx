@@ -17,7 +17,7 @@ export function Card({
 
 Card.Title = function Title({ children }: { children: React.ReactNode }) {
   return (
-    <h4 className="line-clamp-1 text-2xl font-extrabold self-start">
+    <h4 className="line-clamp-1 text-2xl font-extrabold text-left">
       {children}
     </h4>
   );
