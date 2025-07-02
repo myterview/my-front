@@ -11,7 +11,8 @@ export function Avatar({
   return (
     <div
       className={neato(
-        `relative h-44 w-44 overflow-hidden rounded-full ${className}`
+        "relative h-44 w-44 overflow-hidden rounded-full",
+        className
       )}
     >
       <Image
