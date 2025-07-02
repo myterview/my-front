@@ -123,7 +123,7 @@ export class InterviewClient extends Fetcher {
       },
       onSuccess: (data) => {
         queryClient.invalidateQueries({
-          queryKey: ["interview", "List"],
+          queryKey: ["interview", "list"],
           refetchType: "all",
         });
         queryClient.invalidateQueries({
