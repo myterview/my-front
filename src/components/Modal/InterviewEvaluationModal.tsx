@@ -114,14 +114,7 @@ export function InterviewEvaluationModal({
         <For each={DETAIL_ARRAY}>
           {({ name, value, image, analysis }) => (
             <div key={name}>
-              <h5
-                className={neato(
-                  "flex items-center gap-4 heading-03",
-                  value >= 80 && "text-green-500",
-                  value >= 50 && value < 80 && "text-yellow-400",
-                  value < 50 && "text-red-500"
-                )}
-              >
+              <h5 className={neato("flex items-center gap-4 heading-03")}>
                 <Image
                   src={image}
                   alt={name}
@@ -129,7 +122,16 @@ export function InterviewEvaluationModal({
                   height={20}
                   draggable={false}
                 />
-                {name} - {value}점
+                {name} -{" "}
+                <span
+                  className={neato(
+                    value >= 80 && "text-green-500",
+                    value >= 50 && value < 80 && "text-yellow-400",
+                    value < 50 && "text-red-500"
+                  )}
+                >
+                  {value}점
+                </span>
               </h5>
 
               <hr className="my-4 border-t-1 border-gray-200" />
