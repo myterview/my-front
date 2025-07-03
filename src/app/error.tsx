@@ -13,7 +13,7 @@ export default function Error({
 }) {
   const router = useRouter();
 
-  if (error.response.status === 404) {
+  if (error.response?.status === 404) {
     return <NotFound />;
   }
 

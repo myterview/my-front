@@ -1,5 +1,6 @@
 import { Card } from "../Binder/Card";
 import { Radar } from "../Charts/Radar";
+import { Donate } from "../Donate/Donate";
 import {
   InterviewPositionKr,
   InterviewExperienceKr,
@@ -92,6 +93,8 @@ export function InterviewEvaluationModal({
           ]}
         />
       </div>
+
+      <Donate />
 
       <div>
         <div className="heading-02">종합 평가</div>
