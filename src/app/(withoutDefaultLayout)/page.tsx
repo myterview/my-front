@@ -1,4 +1,3 @@
-// import { UserQuery } from "@/apis/user.query";
 import { redirect } from "next/navigation";
 
 export default async function Home() {
