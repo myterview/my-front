@@ -17,8 +17,6 @@ export default async function RootLayout({
   const { getUser } = new UserQuery();
   const user = await getUser();
 
-  console.log("user", user);
-
   if (!user) {
     redirect("/sign");
   }
