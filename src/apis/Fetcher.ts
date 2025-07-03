@@ -21,6 +21,30 @@ export class Fetcher {
       // type === "server"
       //   ? process.env.NEXT_PUBLIC_SERVER_API_URL
       //   : process.env.NEXT_PUBLIC_CLIENT_API_URL,
+      hooks: {
+        beforeRequest: [
+          (request) => {
+            // 서버사이드에서 필요한 헤더 추가
+            if (type === "server") {
+              request.headers.set("User-Agent", "MyTerview-NextJS-Server/1.0");
+              request.headers.set("Accept", "application/json");
+              // X-Forwarded-For 헤더 추가 (로드밸런서 환경에서 필요할 수 있음)
+              request.headers.set("X-Forwarded-Proto", "https");
+            }
+            console.log(`[${type}] Request to:`, request.url);
+          },
+        ],
+        beforeError: [
+          (error) => {
+            console.error(
+              `[${type}] Request failed:`,
+              error.message,
+              error.response?.status
+            );
+            return error;
+          },
+        ],
+      },
     });
 
   public serverFetcher = this.createFetcher("server");
