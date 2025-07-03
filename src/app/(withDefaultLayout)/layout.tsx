@@ -19,10 +19,6 @@ export default async function RootLayout({
 
   console.log("user", user);
 
-  console.log(process.env.NEXT_PUBLIC_CLIENT_API_URL);
-
-  console.log(process.env.NEXT_PUBLIC_SERVER_API_URL);
-
   if (!user) {
     redirect("/sign");
   }

@@ -16,12 +16,14 @@ export class Fetcher {
     ky.create({
       prefixUrl:
         type === "server"
-          ? process.env.NEXT_PUBLIC_SERVER_API_URL
-          : process.env.NEXT_PUBLIC_CLIENT_API_URL,
+          ? "https://myterview.com/api"
+          : "https://myterview.com/api",
+      // type === "server"
+      //   ? process.env.NEXT_PUBLIC_SERVER_API_URL
+      //   : process.env.NEXT_PUBLIC_CLIENT_API_URL,
     });
 
   public serverFetcher = this.createFetcher("server");
-
   public clientFetcher = this.createFetcher("client");
 
   private createFetcher(type: "server" | "client") {

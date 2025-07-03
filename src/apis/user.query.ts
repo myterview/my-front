@@ -5,7 +5,7 @@ import { Fetcher } from "./Fetcher";
 
 @thisBind
 export class UserQuery extends Fetcher {
-  @SwallowError()
+  // @SwallowError()
   @WithCookies()
   public async getUser() {
     return await this.serverFetcher.get("auth/user");
