@@ -18,9 +18,16 @@ export class Fetcher {
         type === "server"
           ? "https://myterview.com/api"
           : "https://myterview.com/api",
+
       // type === "server"
       //   ? process.env.NEXT_PUBLIC_SERVER_API_URL
       //   : process.env.NEXT_PUBLIC_CLIENT_API_URL,
+      timeout: 30000, // 타임아웃 추가
+      // retry: {
+      //   limit: 2,
+      //   methods: ["get", "post", "put", "patch", "delete"],
+      //   statusCodes: [408, 413, 429, 500, 502, 503, 504],
+      // },
       hooks: {
         beforeRequest: [
           (request) => {
@@ -31,16 +38,38 @@ export class Fetcher {
               // X-Forwarded-For 헤더 추가 (로드밸런서 환경에서 필요할 수 있음)
               request.headers.set("X-Forwarded-Proto", "https");
             }
-            console.log(`[${type}] Request to:`, request.url);
+            console.log(`[${type}] 🚀 Starting request:`, {
+              method: request.method,
+              url: request.url,
+              headers: Object.fromEntries(request.headers.entries()),
+              timestamp: new Date().toISOString(),
+            });
+          },
+        ],
+        afterResponse: [
+          (request, options, response) => {
+            console.log(`[${type}] ✅ Request successful:`, {
+              method: request.method,
+              url: request.url,
+              status: response.status,
+              statusText: response.statusText,
+              timestamp: new Date().toISOString(),
+            });
+            return response;
           },
         ],
         beforeError: [
           (error) => {
-            console.error(
-              `[${type}] Request failed:`,
-              error.message,
-              error.response?.status
-            );
+            console.error(`[${type}] ❌ Request failed:`, {
+              message: error.message,
+              name: error.name,
+              status: error.response?.status,
+              statusText: error.response?.statusText,
+              url: error.request?.url,
+              method: error.request?.method,
+              timestamp: new Date().toISOString(),
+              stack: error.stack,
+            });
             return error;
           },
         ],
