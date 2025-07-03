@@ -7,13 +7,13 @@ import Link from "next/link";
 export default function Page() {
   const SIGN_ARRAY = [
     {
-      href: "http://localhost:3000/api/auth/google",
+      href: process.env.NEXT_PUBLIC_CLIENT_API_URL + "/auth/google",
       imageSrc: "/images/google.svg",
       altText: "Google Logo",
       text: "Google 로그인",
     },
     {
-      href: "http://localhost:3000/api/auth/github",
+      href: process.env.NEXT_PUBLIC_CLIENT_API_URL + "/auth/github",
       imageSrc: "/images/github.svg",
       altText: "Github Logo",
       text: "github 로그인",
