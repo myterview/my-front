@@ -5,7 +5,9 @@ import { Fetcher } from "./Fetcher";
 @thisBind
 export class InterviewQuery extends Fetcher {
   @WithCookies()
-  public async getInterview() {
-    return await this.serverFetcher.get("interview");
+  public async getInterviewById(interviewId: string, withMessages: boolean = false) {
+    return await this.serverFetcher.get(`interview/${interviewId}` as "interview/{sessionId}", {
+      searchParams: { withMessages },
+    });
   }
 }

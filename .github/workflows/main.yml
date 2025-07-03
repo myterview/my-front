@@ -1,4 +1,4 @@
-name: 🚀 Build and Deploy to EC2 from ECR
+name: 🚀 Build and Deploy to ECS from ECR
 
 on:
   pull_request:
@@ -35,24 +35,42 @@ jobs:
             NEXT_PUBLIC_SERVER_API_URL=${{ secrets.SERVER_API_URL }}
             NEXT_PUBLIC_CLIENT_API_URL=${{ secrets.CLIENT_API_URL }}
 
-      # - name: SSH and deploy on EC2
-      #   uses: appleboy/ssh-action@v0.1.7
-      #   with:
-      #     host: ${{ secrets.EC2_HOST }}
-      #     key: ${{ secrets.EC2_PRIVATE_KEY }}
-      #     username: ec2-user
-      #     script: |
-      #       cd /home/ec2-user
-      #       # 먼저 실행 중인 컨테이너 중지
-      #       docker compose down
-      #       # 모든 Docker 이미지 강제 삭제
-      #       # docker rmi $(docker images -q) -f
-      #       # 프론트 이미지만 삭제
-      #       docker rmi ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:latest -f || true
-      #       # 미사용 리소스 정리
-      #       docker system prune -a -f --volumes
-      #       # ECR 로그인
-      #       aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}
-      #       # 이미지 새로 받고 실행
-      #       docker compose pull
-      #       docker compose up -d
+      - name: Update ECS Task Definition
+        id: update-task-def
+        run: |
+          # 현재 태스크 정의 가져오기
+          aws ecs describe-task-definition \
+            --task-definition myterview-frontend-task \
+            --query 'taskDefinition' \
+            --output json | jq 'del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .placementConstraints, .compatibilities, .registeredAt, .registeredBy)' > task-definition.json
+
+          # 새 이미지 URI로 업데이트
+          jq --arg IMAGE_URI "${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:latest" \
+            '.containerDefinitions[0].image = $IMAGE_URI' \
+            task-definition.json > updated-task-definition.json
+
+          # 새 태스크 정의 등록
+          aws ecs register-task-definition \
+            --cli-input-json file://updated-task-definition.json \
+            --query 'taskDefinition.taskDefinitionArn' \
+            --output text > task-definition-arn.txt
+
+          echo "TASK_DEFINITION_ARN=$(cat task-definition-arn.txt)" >> $GITHUB_OUTPUT
+
+      - name: Update ECS Service
+        run: |
+          # ECS 서비스 업데이트
+          aws ecs update-service \
+            --cluster myterview \
+            --service myterview-frontend-task-service \
+            --task-definition ${{ steps.update-task-def.outputs.TASK_DEFINITION_ARN }} \
+            --force-new-deployment
+
+      - name: Wait for Service Deployment
+        run: |
+          echo "Waiting for service deployment to complete..."
+          aws ecs wait services-stable \
+            --cluster myterview \
+            --services myterview-frontend-task-service
+
+          echo "✅ Deployment completed successfully!"
