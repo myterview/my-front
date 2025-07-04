@@ -18,14 +18,13 @@ export function DefaultEvaluationOverall({
   ];
 
   return (
-    <div>
+    <div className="space-y-48">
       <div className="heading-02">종합 평가</div>
 
       <For each={OVERALL_ARRAY}>
         {({ name, value }) => (
-          <div key={name} className="space-y-48">
+          <div key={name}>
             <h5 className="heading-03">{name}</h5>
-            <hr className="my-4 border-t-1 border-gray-200" />
             <p className="text-lg/32 break-keep font-nanum font-bold">
               {value}
             </p>
