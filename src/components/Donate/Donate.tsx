@@ -13,7 +13,7 @@ export function Donate() {
         <Image
           className="cover"
           fill
-          src="/images/donateCat.svg"
+          src="/images/donateToMrCat.svg"
           alt="Donate"
           draggable={false}
         />
