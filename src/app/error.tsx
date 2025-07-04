@@ -1,6 +1,6 @@
 "use client";
 
-import NotFound from "./not-found";
+import NotFound from "./(optionalUserLayout)/not-found";
 import { HTTPError } from "ky";
 import { useRouter } from "next/navigation";
 
@@ -13,7 +13,7 @@ export default function Error({
 }) {
   const router = useRouter();
 
-  if (error.response.status === 404) {
+  if (error.response?.status === 404) {
     return <NotFound />;
   }
 

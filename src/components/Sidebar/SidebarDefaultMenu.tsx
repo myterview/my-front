@@ -16,7 +16,8 @@ export function SidebarDefaultMenu() {
         onClick={() => {
           grunfeld.add({
             element: (
-              <ModalWrapper title="피드백" className="gap-32">
+              <ModalWrapper className="gap-32">
+                <ModalWrapper.Title title="피드백" />
                 <FeedbackModal />
               </ModalWrapper>
             ),

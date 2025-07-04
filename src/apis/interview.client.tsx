@@ -1,16 +1,16 @@
+import { FeedbackModal } from "@/components/Modal/FeedbackModal";
+import { ModalWrapper } from "@/components/Modal/ModalWrapper";
+import { components } from "@/types/api";
+import { mutationOptions } from "@/utils/m";
 import {
   infiniteQueryOptions,
   QueryClient,
   queryOptions,
 } from "@tanstack/react-query";
+import { grunfeld } from "grunfeld";
+import { Dispatch, SetStateAction } from "react";
 import { thisBind } from "./decorators/thisBind";
 import { Fetcher } from "./Fetcher";
-import { mutationOptions } from "@/utils/m";
-import { components } from "@/types/api";
-import { Dispatch, SetStateAction } from "react";
-import { grunfeld } from "grunfeld";
-import { ModalWrapper } from "@/components/Modal/ModalWrapper";
-import { FeedbackModal } from "@/components/Modal/FeedbackModal";
 
 @thisBind
 export class InterviewClient extends Fetcher {
@@ -132,9 +132,12 @@ export class InterviewClient extends Fetcher {
         });
         setIsLoading(false);
         if (data?.isFinished) {
-          grunfeld.add(<ModalWrapper title="피드백">
+          grunfeld.add(
+            <ModalWrapper>
+              <ModalWrapper.Title title="피드백" />
               <FeedbackModal />
-              </ModalWrapper>);
+            </ModalWrapper>
+          );
         }
       },
     });

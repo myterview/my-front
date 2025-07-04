@@ -1,7 +1,7 @@
 "use client";
 
 import { useSicilianContext } from "@ilokesto/sicilian/provider";
-import { useRef, useEffect } from "react";
+import { KeyboardEvent, useEffect, useRef } from "react";
 
 export function TextArea(
   props: React.TextareaHTMLAttributes<HTMLTextAreaElement>
@@ -21,10 +21,22 @@ export function TextArea(
     resize();
   }, [value]);
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+      e.preventDefault();
+      // form의 submit 이벤트 트리거
+      const form = e.currentTarget.closest("form");
+      if (form) {
+        form.requestSubmit();
+      }
+    }
+  };
+
   return (
     <textarea
       rows={1}
       ref={ref}
+      onKeyDown={handleKeyDown}
       className="w-full flex-1 resize-none text-base"
       {...props}
       {...register({ name })}

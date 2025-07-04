@@ -17,12 +17,12 @@ export default async function InterviewSessionPage({
   const currentUser = await userQuery.getUser();
   const currentInterview = await interviewQuery.getInterviewById(interviewId);
 
-  if (!currentUser) {
-    redirect("/sign");
-  }
-
   if (!currentInterview) {
     notFound();
+  }
+
+  if (!currentUser) {
+    redirect("/sign");
   }
 
   if (currentUser.id !== currentInterview.session.userId) {

@@ -10,8 +10,8 @@ import { postFeedback } from "@/apis/feedback.action";
 import {
   FeedbackTypeKr,
   getValues,
-  register,
   handleServerAction,
+  register,
 } from "@/hooks/sicilian/feedbackForm";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
 import { grunfeld } from "grunfeld";
@@ -27,6 +27,8 @@ export function FeedbackModal() {
       toast.success("피드백이 제출되었습니다.");
     }
   }, [state?.message]);
+
+  const { selectedOption, setSelectedOption } = getStateByName("type");
 
   return (
     <Form
@@ -48,7 +50,7 @@ export function FeedbackModal() {
             helpers={helpers}
             title="카테고리"
             iconSrc="/icons/feedback.svg"
-            {...getStateByName("type")}
+            selectedOption={selectedOption}
           />
         )}
         floaterElement={(floater, helpers) => (
@@ -57,7 +59,8 @@ export function FeedbackModal() {
             helpers={helpers}
             options={Object.values(FeedbackTypeKr)}
             className="min-w-132"
-            {...getStateByName("type")}
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
           />
         )}
       />
