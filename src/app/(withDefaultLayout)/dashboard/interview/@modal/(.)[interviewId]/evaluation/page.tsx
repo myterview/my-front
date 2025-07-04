@@ -30,7 +30,11 @@ export default function InterceptPage({
         router.back();
       },
     });
-  }, []);
+
+    return () => {
+      grunfeld.remove();
+    };
+  }, [interview, router]);
 
   return <></>;
 }
