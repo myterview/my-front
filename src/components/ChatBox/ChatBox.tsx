@@ -22,7 +22,10 @@ export function ChatBox({
           fallback={<div className="mt-16 flex">{children}</div>}
         >
           <div className="mt-16 flex gap-4">
-            <Avatar src="/icons/mrcat.svg" className="-translate-y-10" />
+            <Avatar
+              src="/icons/mrCatInInterviewSession.svg"
+              className="-translate-y-10"
+            />
 
             <div className="space-y-8">
               <div className={neato("text-base/16 font-medium")}>먀팀장</div>
