@@ -1,5 +1,5 @@
-import { SessionHeader } from "../../(component)/SessionHeader";
 import { InterviewQuery } from "@/apis/interview.query";
+import { SessionHeader } from "@/app/(withDefaultLayout)/dashboard/interview/(component)/SessionHeader";
 import {
   DefaultEvaluation,
   DefaultEvaluationOverall,
