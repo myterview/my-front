@@ -28,6 +28,8 @@ export function FeedbackModal() {
     }
   }, [state?.message]);
 
+  const { selectedOption, setSelectedOption } = getStateByName("type");
+
   return (
     <Form
       action={handleServerAction(execute)}
@@ -48,7 +50,7 @@ export function FeedbackModal() {
             helpers={helpers}
             title="카테고리"
             iconSrc="/icons/feedback.svg"
-            {...getStateByName("type")}
+            selectedOption={selectedOption}
           />
         )}
         floaterElement={(floater, helpers) => (
@@ -57,7 +59,8 @@ export function FeedbackModal() {
             helpers={helpers}
             options={Object.values(FeedbackTypeKr)}
             className="min-w-132"
-            {...getStateByName("type")}
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
           />
         )}
       />
