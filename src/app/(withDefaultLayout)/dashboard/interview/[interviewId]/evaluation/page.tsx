@@ -32,7 +32,7 @@ export default async function NotInter({
         asChild={"main"}
         className="@container/main flex-1 flex w-full flex-col overflow-y-scroll py-48 gap-60"
       >
-        <div>
+        <div className="@3xl/main:flex @3xl/main:flex-row-reverse gap-56">
           <DefaultEvaluationOverall evaluation={e} />
 
           <DefaultEvaluationRadar evaluation={e} />

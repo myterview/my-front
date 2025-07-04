@@ -1,12 +1,13 @@
 import { DonateWrapper } from "./DonateWrapper";
+import { neato } from "neato";
 import Image from "next/image";
 
 export function Donate() {
   return (
     <div
-      className={
+      className={neato(
         "flex items-center justify-evenly w-full h-full bg-primary-100 rounded-[8px]"
-      }
+      )}
     >
       <div className="relative w-260 h-95">
         <Image
@@ -27,7 +28,7 @@ export function Donate() {
             height={24}
             draggable={false}
           />
-          토스로 후원하기
+          먀터뷰 후원하기
         </DonateWrapper>
       </div>
     </div>

@@ -26,7 +26,7 @@ export function DefaultEvaluationOverall({
         alt="paw"
         width={200}
         height={200}
-        className="absolute -top-12 -right-12 opacity-70 -rotate-40 z-10"
+        className="absolute -top-48 -right-20 opacity-70 -rotate-40 z-10"
         draggable={false}
       />
 
