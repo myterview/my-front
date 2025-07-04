@@ -18,8 +18,17 @@ export function DefaultEvaluationOverall({
   ];
 
   return (
-    <div className="space-y-48">
+    <div className="space-y-48 relative">
       <div className="heading-02">종합 평가</div>
+
+      <Image
+        src="/paw.png"
+        alt="paw"
+        width={200}
+        height={200}
+        className="absolute -top-12 -right-12 opacity-70 -rotate-40 z-10"
+        draggable={false}
+      />
 
       <For each={OVERALL_ARRAY}>
         {({ name, value }) => (
@@ -115,24 +124,30 @@ export function DefaultEvaluation({
   ];
 
   return (
-    <div className="space-y-48">
+    <div className="space-y-24">
       <For each={EVALUATION_ARRAY}>
         {({ name, value, image, analysis }) => (
-          <div key={name}>
-            <h5 className={neato("flex items-center gap-4 heading-03")}>
-              <Image
-                src={image}
-                alt={name}
-                width={20}
-                height={20}
-                draggable={false}
-              />
-              {name} -{" "}
+          <div key={name} className="shadow-custom px-12 py-8 rounded-[12]">
+            <h5
+              className={neato("flex items-center heading-03 justify-between")}
+            >
+              <span className="flex gap-4 items-center">
+                <Image
+                  src={image}
+                  alt={name}
+                  width={20}
+                  height={20}
+                  draggable={false}
+                />
+                {name}
+              </span>
+
               <span
                 className={neato(
-                  value >= 80 && "text-green-500",
-                  value >= 50 && value < 80 && "text-yellow-400",
-                  value < 50 && "text-red-500"
+                  "rounded-[12] px-12 py-8 text-base/16 font-bold text-white",
+                  value >= 80 && "bg-green-500",
+                  value >= 50 && value < 80 && "bg-yellow-400",
+                  value < 50 && "bg-red-500"
                 )}
               >
                 {value}점

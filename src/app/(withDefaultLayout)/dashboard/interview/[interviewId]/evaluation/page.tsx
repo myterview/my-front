@@ -1,4 +1,12 @@
 import { SessionHeader } from "../../(component)/SessionHeader";
+import { InterviewQuery } from "@/apis/interview.query";
+import {
+  DefaultEvaluation,
+  DefaultEvaluationOverall,
+  DefaultEvaluationRadar,
+} from "@/components/Evaluation/DefaultEvaluation";
+import SizeWrapper from "@/components/SizeWrapper/SizeWrapper";
+import { EvaluationProps } from "@/types/evaluation";
 
 export default async function NotInter({
   params,
@@ -6,5 +14,32 @@ export default async function NotInter({
   params: Promise<{ interviewId: string }>;
 }) {
   const { interviewId } = await params;
-  return <SessionHeader interviewId={interviewId} />;
+  const interviewQuery = new InterviewQuery();
+  const { session } = await interviewQuery.getInterviewById(interviewId, false);
+
+  const { evaluation: e, evaluationType: eT } = {
+    evaluation: session.evaluation,
+    evaluationType: session.evaluationType,
+  } as EvaluationProps;
+
+  if (!eT) return;
+
+  return (
+    <div className="flex flex-col h-dvh">
+      <SessionHeader interviewId={interviewId} />
+
+      <SizeWrapper
+        asChild={"main"}
+        className="@container/main flex-1 flex w-full flex-col overflow-y-scroll py-48 gap-60"
+      >
+        <div>
+          <DefaultEvaluationOverall evaluation={e} />
+
+          <DefaultEvaluationRadar evaluation={e} />
+        </div>
+
+        <DefaultEvaluation evaluation={e} />
+      </SizeWrapper>
+    </div>
+  );
 }

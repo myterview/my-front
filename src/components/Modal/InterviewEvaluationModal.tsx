@@ -2,7 +2,6 @@ import { Donate } from "../Donate/Donate";
 import {
   DefaultEvaluation,
   DefaultEvaluationOverall,
-  DefaultEvaluationProps,
   DefaultEvaluationRadar,
 } from "../Evaluation/DefaultEvaluation";
 import { EvaluationHeader } from "../Evaluation/EvaluationHeader";
@@ -11,15 +10,9 @@ import {
   InterviewPositionKr,
 } from "@/hooks/sicilian/interviewForm";
 import { components } from "@/types/api";
+import { EvaluationProps } from "@/types/evaluation";
 import { getEnumValueByKey } from "@/utils/enumUtils";
 import { grunfeld } from "grunfeld";
-
-type EvaluationProps =
-  | DefaultEvaluationProps
-  | {
-      evaluation?: undefined;
-      evaluationType?: undefined;
-    };
 
 export function InterviewEvaluationModal({
   evaluation,
