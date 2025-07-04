@@ -2,8 +2,8 @@ import { Card } from "../Binder/Card";
 import { Radar } from "../Charts/Radar";
 import { Donate } from "../Donate/Donate";
 import {
-  InterviewPositionKr,
   InterviewExperienceKr,
+  InterviewPositionKr,
 } from "@/hooks/sicilian/interviewForm";
 import { components } from "@/types/api";
 import { getEnumValueByKey } from "@/utils/enumUtils";
