@@ -58,18 +58,29 @@ function DonateDesktop() {
         <button
           onClick={() =>
             grunfeld.add(
-              <ModalWrapper>
+              <ModalWrapper className="space-y-16">
+                <div>
+                  <ModalWrapper.Title title="QR 코드로 후원" />
+                  <p className="dropdown">스캔하면 토스로 이동합니다</p>
+                </div>
                 <Image
                   src="/images/donateQR.png"
                   alt="QR Code"
-                  width={200}
-                  height={200}
+                  width={218}
+                  height={218}
                   draggable={false}
                 />
               </ModalWrapper>
             )
           }
         >
+          <Image
+            src="/icons/toss.png"
+            alt="toss"
+            width={20}
+            height={20}
+            draggable={false}
+          />
           먀터뷰 후원하기
         </button>
       </Clickable>

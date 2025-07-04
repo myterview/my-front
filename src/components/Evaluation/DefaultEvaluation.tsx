@@ -44,36 +44,41 @@ export function DefaultEvaluationOverall({
   );
 }
 
+export enum EvaluationKeysKr {
+  technicalExpertise = "기술 전문성",
+  projectExperience = "프로젝트 경험",
+  problemSolving = "문제 해결력",
+  communication = "커뮤니케이션 능력",
+  codeQuality = "코드 품질",
+  growthPotential = "성장 가능성",
+}
+
 export function DefaultEvaluationRadar({
   evaluation,
 }: Pick<DefaultEvaluationProps, "evaluation">) {
   const RADAR_ARRAY = [
     {
-      name: "기술 전문성",
+      name: EvaluationKeysKr.technicalExpertise,
       value: evaluation.technicalExpertise.score,
     },
     {
-      name: "프로젝트 경험",
-
+      name: EvaluationKeysKr.projectExperience,
       value: evaluation.projectExperience.score,
     },
     {
-      name: "문제 해결력",
-
+      name: EvaluationKeysKr.problemSolving,
       value: evaluation.problemSolving.score,
     },
     {
-      name: "커뮤니케이션 능력",
-
+      name: EvaluationKeysKr.communication,
       value: evaluation.communication.score,
     },
     {
-      name: "코드 품질",
-
+      name: EvaluationKeysKr.codeQuality,
       value: evaluation.codeQuality.score,
     },
     {
-      name: "성장 가능성",
+      name: EvaluationKeysKr.growthPotential,
       value: evaluation.growthPotential.score,
     },
   ];
@@ -86,37 +91,37 @@ export function DefaultEvaluation({
 }: Pick<DefaultEvaluationProps, "evaluation">) {
   const EVALUATION_ARRAY = [
     {
-      name: "기술 전문성",
+      name: EvaluationKeysKr.technicalExpertise,
       image: "/icons/evaluation/technical-expertise.svg",
       value: evaluation.technicalExpertise.score,
       analysis: evaluation.technicalExpertise.analysis,
     },
     {
-      name: "프로젝트 경험",
+      name: EvaluationKeysKr.projectExperience,
       image: "/icons/evaluation/project-experience.svg",
       value: evaluation.projectExperience.score,
       analysis: evaluation.projectExperience.analysis,
     },
     {
-      name: "문제 해결력",
+      name: EvaluationKeysKr.problemSolving,
       image: "/icons/evaluation/problem-solving.svg",
       value: evaluation.problemSolving.score,
       analysis: evaluation.problemSolving.analysis,
     },
     {
-      name: "커뮤니케이션 능력",
+      name: EvaluationKeysKr.communication,
       image: "/icons/evaluation/communication.svg",
       value: evaluation.communication.score,
       analysis: evaluation.communication.analysis,
     },
     {
-      name: "코드 품질",
+      name: EvaluationKeysKr.codeQuality,
       image: "/icons/evaluation/code-quality.svg",
       value: evaluation.codeQuality.score,
       analysis: evaluation.codeQuality.analysis,
     },
     {
-      name: "성장 가능성",
+      name: EvaluationKeysKr.growthPotential,
       image: "/icons/evaluation/growth-potential.svg",
       value: evaluation.growthPotential.score,
       analysis: evaluation.growthPotential.analysis,
@@ -142,16 +147,7 @@ export function DefaultEvaluation({
                 {name}
               </span>
 
-              <span
-                className={neato(
-                  "rounded-[12] px-12 py-8 text-base/16 font-bold text-white",
-                  value >= 80 && "bg-green-500",
-                  value >= 50 && value < 80 && "bg-yellow-400",
-                  value < 50 && "bg-red-500"
-                )}
-              >
-                {value}점
-              </span>
+              <EvaluationScore value={value} />
             </h5>
 
             <hr className="my-4 border-t-1 border-gray-200" />
@@ -162,6 +158,21 @@ export function DefaultEvaluation({
           </div>
         )}
       </For>
+    </div>
+  );
+}
+
+export function EvaluationScore({ value }: { value: number }) {
+  return (
+    <div
+      className={neato(
+        "rounded-[12] px-12 py-8 text-base/16 font-bold text-white w-fit",
+        value >= 80 && "bg-green-500",
+        value >= 50 && value < 80 && "bg-yellow-400",
+        value < 50 && "bg-red-500"
+      )}
+    >
+      {value}점
     </div>
   );
 }
