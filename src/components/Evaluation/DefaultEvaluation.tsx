@@ -22,11 +22,11 @@ export function DefaultEvaluationOverall({
       <div className="heading-02">종합 평가</div>
 
       <Image
-        src="/paw.png"
-        alt="paw"
-        width={200}
-        height={200}
-        className="absolute -top-48 -right-20 opacity-70 -rotate-40 z-10"
+        src={`/icons/evaluation/paw/${evaluation.overallAssessment.recommendation}.svg`}
+        alt={evaluation.overallAssessment.recommendation}
+        width={160}
+        height={160}
+        className="absolute -top-24 -right-12 opacity-70 -rotate-40 z-10"
         draggable={false}
       />
 

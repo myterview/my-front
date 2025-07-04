@@ -9,7 +9,7 @@ export function Donate() {
         "flex items-center justify-evenly w-full h-full bg-primary-100 rounded-[8px]"
       )}
     >
-      <div className="relative w-260 h-95">
+      <div className="relative w-220 h-90">
         <Image
           className="cover"
           fill
