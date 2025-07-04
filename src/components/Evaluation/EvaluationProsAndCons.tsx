@@ -112,7 +112,7 @@ export function findPros({
   let max: { key: string; score: number } | undefined = undefined;
   for (const item of array) {
     const [key, value] = Object.entries(item)[0];
-    if (value > 50 && (!max || value > max.score)) {
+    if (value > 79 && (!max || value > max.score)) {
       max = { key, score: value };
     }
   }
@@ -128,7 +128,7 @@ export function findCons({
   let min: { key: string; score: number } | undefined = undefined;
   for (const item of array) {
     const [key, value] = Object.entries(item)[0];
-    if (value < 50 && (!min || value < min.score)) {
+    if (value < 80 && (!min || value < min.score)) {
       min = { key, score: value };
     }
   }
