@@ -132,9 +132,12 @@ export class InterviewClient extends Fetcher {
         });
         setIsLoading(false);
         if (data?.isFinished) {
-          grunfeld.add(<ModalWrapper title="피드백">
+          grunfeld.add(
+            <ModalWrapper>
+              <ModalWrapper.Title title="피드백" />
               <FeedbackModal />
-              </ModalWrapper>);
+            </ModalWrapper>
+          );
         }
       },
     });

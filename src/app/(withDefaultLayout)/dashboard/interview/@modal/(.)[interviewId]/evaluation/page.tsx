@@ -22,10 +22,8 @@ export default function InterceptPage({
   useEffect(() => {
     grunfeld.add({
       element: (
-        <ModalWrapper
-          title={interview.title}
-          className="gap-8 desktop:w-700 h-dvh desktop:max-h-[80dvh] desktop:min-h-0 overflow-y-scroll py-60"
-        >
+        <ModalWrapper className="gap-8 desktop:w-700 h-dvh desktop:max-h-[80dvh] desktop:min-h-0 overflow-y-scroll py-60">
+          <ModalWrapper.Title title={interview.title} />
           <InterviewEvaluationModal {...interview} />
         </ModalWrapper>
       ),

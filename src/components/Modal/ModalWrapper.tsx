@@ -6,7 +6,6 @@ import Image from "next/image";
 
 export function ModalWrapper({
   children,
-  title,
   className,
 }: {
   children: React.ReactNode;
@@ -21,23 +20,27 @@ export function ModalWrapper({
         className
       )}
     >
-      <div className="flex items-start justify-between gap-24">
-        <Show when={title} fallback={<div className="flex-1"></div>}>
-          {(title) => <Card.Title>{title}</Card.Title>}
-        </Show>
-
-        <button type="button" onClick={grunfeld.remove}>
-          <Image
-            src="/icons/close.svg"
-            alt="modal close"
-            width={24}
-            height={24}
-            draggable={false}
-          />
-        </button>
-      </div>
-
       {children}
     </div>
   );
 }
+
+ModalWrapper.Title = function ModalWrapperTitle({ title }: { title?: string }) {
+  return (
+    <div className="flex items-start justify-between gap-24">
+      <Show when={title} fallback={<div className="flex-1"></div>}>
+        {(title) => <Card.Title>{title}</Card.Title>}
+      </Show>
+
+      <button type="button" onClick={grunfeld.remove}>
+        <Image
+          src="/icons/close.svg"
+          alt="modal close"
+          width={24}
+          height={24}
+          draggable={false}
+        />
+      </button>
+    </div>
+  );
+};
