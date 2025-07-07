@@ -14,14 +14,12 @@ export function SidebarDefaultMenu() {
 
       <button
         onClick={() => {
-          grunfeld.add({
-            element: (
-              <ModalWrapper className="gap-32">
-                <ModalWrapper.Title title="피드백" />
-                <FeedbackModal />
-              </ModalWrapper>
-            ),
-          });
+          grunfeld.add(() => (
+            <ModalWrapper className="gap-32">
+              <ModalWrapper.Title title="피드백" />
+              <FeedbackModal />
+            </ModalWrapper>
+          ));
         }}
       >
         피드백

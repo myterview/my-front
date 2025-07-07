@@ -57,7 +57,7 @@ function DonateDesktop() {
       <Clickable types="shadow" size="large" className="gap-8">
         <button
           onClick={() =>
-            grunfeld.add(
+            grunfeld.add(() => (
               <ModalWrapper className="space-y-16">
                 <div>
                   <ModalWrapper.Title title="QR 코드로 후원" />
@@ -71,7 +71,7 @@ function DonateDesktop() {
                   draggable={false}
                 />
               </ModalWrapper>
-            )
+            ))
           }
         >
           <Image

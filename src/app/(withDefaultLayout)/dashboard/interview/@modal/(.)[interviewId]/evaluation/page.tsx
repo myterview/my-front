@@ -20,7 +20,7 @@ export default function InterceptPage({
   } = useSuspenseQuery(new InterviewClient().getInterviewById(interviewId));
 
   useEffect(() => {
-    grunfeld.add({
+    grunfeld.add(() => ({
       element: (
         <ModalWrapper className="gap-8 desktop:w-700 h-dvh desktop:max-h-[80dvh] desktop:min-h-0 overflow-y-scroll py-60">
           <InterviewEvaluationModal {...interview} />
@@ -29,7 +29,7 @@ export default function InterceptPage({
       dismissCallback: () => {
         router.back();
       },
-    });
+    }));
 
     return () => {
       grunfeld.remove();
