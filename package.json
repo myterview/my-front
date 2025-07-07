@@ -20,7 +20,7 @@
     "@tanstack/react-query": "^5.81.5",
     "caro-kann": "^4.0.3",
     "common-resolver": "^1.0.1",
-    "grunfeld": "^0.0.16",
+    "grunfeld": "^0.0.17",
     "ky": "^1.8.1",
     "neato": "^0.0.2",
     "next": "15.3.5",
