@@ -2,7 +2,7 @@
 
 import { FeedbackModal } from "../Modal/FeedbackModal";
 import { ModalWrapper } from "../Modal/ModalWrapper";
-import { grunfeld } from "grunfeld";
+import { grunfeld } from "@ilokesto/grunfeld";
 import Link from "next/link";
 
 export function SidebarDefaultMenu() {

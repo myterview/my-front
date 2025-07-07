@@ -1,6 +1,6 @@
 import { Card } from "../Binder/Card";
+import { grunfeld } from "@ilokesto/grunfeld";
 import { Show } from "@ilokesto/utilinent";
-import { grunfeld } from "grunfeld";
 import { neato } from "neato";
 import Image from "next/image";
 

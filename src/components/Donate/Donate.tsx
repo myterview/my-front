@@ -2,8 +2,8 @@
 
 import { Clickable } from "../Clickable/Clickable";
 import { ModalWrapper } from "../Modal/ModalWrapper";
+import { grunfeld } from "@ilokesto/grunfeld";
 import { Show } from "@ilokesto/utilinent";
-import { grunfeld } from "grunfeld";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";

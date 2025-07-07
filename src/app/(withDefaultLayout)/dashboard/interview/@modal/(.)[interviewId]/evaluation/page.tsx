@@ -3,8 +3,8 @@
 import { InterviewClient } from "@/apis/interview.client";
 import { InterviewEvaluationModal } from "@/components/Modal/InterviewEvaluationModal";
 import { ModalWrapper } from "@/components/Modal/ModalWrapper";
+import { grunfeld } from "@ilokesto/grunfeld";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { grunfeld } from "grunfeld";
 import { useRouter } from "next/navigation";
 import { use, useEffect } from "react";
 

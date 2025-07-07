@@ -11,8 +11,8 @@ import {
   handleServerAction,
   register,
 } from "@/hooks/sicilian/feedbackForm";
+import { grunfeld } from "@ilokesto/grunfeld";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
-import { grunfeld } from "grunfeld";
 import { useActionState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 

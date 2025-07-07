@@ -13,7 +13,7 @@ import {
 import { components } from "@/types/api";
 import { EvaluationProps } from "@/types/evaluation";
 import { getEnumValueByKey } from "@/utils/enumUtils";
-import { grunfeld } from "grunfeld";
+import { grunfeld } from "@ilokesto/grunfeld";
 
 export function InterviewEvaluationModal({
   evaluation,

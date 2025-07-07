@@ -2,7 +2,7 @@
 
 import { Clickable } from "../Clickable/Clickable";
 import { Logo } from "../Logo/Logo";
-import { create } from "caro-kann";
+import { create } from "@ilokesto/caro-kann";
 import { neato } from "neato";
 import Image from "next/image";
 import { useRef } from "react";
