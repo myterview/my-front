@@ -9,12 +9,10 @@ export enum FeedbackTypeKr {
 }
 
 export const { register, getValues, handleServerAction } = new CreateForm<{
-  title: string;
   type: "" | FeedbackTypeKr;
   message: string;
 }>({
   initValue: {
-    title: "",
     type: "",
     message: "",
   },

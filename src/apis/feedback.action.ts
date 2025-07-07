@@ -10,11 +10,9 @@ const { serverFetcher: fetcher } = new Fetcher();
 export async function postFeedback(
   prev: unknown,
   {
-    title,
     type,
     message,
   }: {
-    title: string;
     type: FeedbackTypeKr | "";
     message: string;
   }
@@ -22,7 +20,6 @@ export async function postFeedback(
   try {
     return await fetcher.post(`feedback`, {
       json: {
-        title,
         type: getEnumKeyByValue(FeedbackTypeKr, type),
         message,
       },
