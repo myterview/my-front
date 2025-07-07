@@ -1,7 +1,5 @@
 import { Clickable } from "../Clickable/Clickable";
-import { DefaultInputWrapper } from "../Form/DefaultInputWrapper";
 import { Form } from "../Form/Form";
-import { Input } from "../Form/Input";
 import { TextArea } from "../Form/TextArea";
 import { DropdownAnchor } from "../Popover/Dropdown/DropdownAnchor";
 import { DropdownMenu } from "../Popover/Dropdown/DropdownMenu";
@@ -35,12 +33,6 @@ export function FeedbackModal() {
       action={handleServerAction(execute)}
       className="flex flex-col w-full gap-24 overflow-y-scroll desktop:min-w-400"
     >
-      <SicilianProvider value={{ register, name: "title" }}>
-        <DefaultInputWrapper title="인터뷰 제목">
-          <Input />
-        </DefaultInputWrapper>
-      </SicilianProvider>
-
       <Popover
         key="카테고리"
         position={{ crossAxis: 30 }}
