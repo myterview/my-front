@@ -1,6 +1,6 @@
 "use client";
 
-import { startInterview } from "@/apis/interview.action";
+import { startInterview } from "@/apis/interview.server";
 import { Clickable } from "@/components/Clickable/Clickable";
 import { DefaultInputWrapper } from "@/components/Form/DefaultInputWrapper";
 import { Form } from "@/components/Form/Form";
@@ -47,9 +47,9 @@ export function InterviewForm() {
   return (
     <Form
       action={handleServerAction(execute)}
-      className="flex w-full flex-col gap-24"
+      className="flex flex-col w-full gap-24"
     >
-      <div className="flex max-w-480 flex-col gap-28">
+      <div className="flex flex-col max-w-480 gap-28">
         <SicilianProvider value={{ register, name: "title" }}>
           <DefaultInputWrapper title="인터뷰 제목">
             <Input />

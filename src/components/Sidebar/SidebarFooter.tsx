@@ -1,5 +1,5 @@
 import { Avatar } from "../Avatar/Avatar";
-import { logoutAction } from "@/apis/user.action";
+import { logoutAction } from "@/apis/user.server";
 import { components } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,10 +10,10 @@ export function SidebarFooter({
   user: components["schemas"]["UserResDTO"];
 }) {
   return (
-    <div className="bg-primary-600 flex w-280 flex-col gap-20 px-20 pt-18 pb-28">
+    <div className="flex flex-col gap-20 px-20 bg-primary-600 w-280 pt-18 pb-28">
       <div className="flex items-center justify-between">
         <Avatar src={user.profileImage} />
-        <div className="flex flex-col items-end gap-12 text-base/12 font-semibold text-gray-100">
+        <div className="flex flex-col items-end gap-12 font-semibold text-gray-100 text-base/12">
           <p>{user.email}</p>
           <button onClick={logoutAction}>로그아웃</button>
         </div>
