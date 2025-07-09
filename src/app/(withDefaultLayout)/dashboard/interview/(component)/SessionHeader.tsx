@@ -2,11 +2,8 @@
 
 import { InterviewClient } from "@/apis/interview.client";
 import { EvaluationHeader } from "@/components/Evaluation/EvaluationHeader";
-import SizeWrapper from "@/components/SizeWrapper/SizeWrapper";
-import {
-  InterviewExperienceKr,
-  InterviewPositionKr,
-} from "@/hooks/sicilian/interviewForm";
+import { SizeWrapper } from "@/components/SizeWrapper/SizeWrapper";
+import { InterviewExperienceKr, InterviewPositionKr } from "@/types";
 import { getEnumValueByKey } from "@/utils/enumUtils";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";

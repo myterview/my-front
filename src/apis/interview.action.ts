@@ -1,10 +1,7 @@
 "use server";
 
 import { Fetcher } from "./Fetcher";
-import {
-  InterviewPositionKr,
-  InterviewExperienceKr,
-} from "@/hooks/sicilian/interviewForm";
+import { InterviewExperienceKr, InterviewPositionKr } from "@/types";
 import { getCookieValue } from "@/utils/cookieUtils";
 import { getEnumKeyByValue } from "@/utils/enumUtils";
 

@@ -1,7 +1,7 @@
 "use server";
 
 import { Fetcher } from "./Fetcher";
-import { FeedbackTypeKr } from "@/hooks/sicilian/feedbackForm";
+import { FeedbackTypeKr } from "@/types";
 import { getCookieValue } from "@/utils/cookieUtils";
 import { getEnumKeyByValue } from "@/utils/enumUtils";
 

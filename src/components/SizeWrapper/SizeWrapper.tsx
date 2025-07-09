@@ -6,7 +6,7 @@ type SizeWrapperProps<T extends ElementType> = {
   children: React.ReactNode;
 } & ComponentPropsWithRef<T>;
 
-export default function SizeWrapper<T extends ElementType = "main">({
+export function SizeWrapper<T extends ElementType = "main">({
   asChild = "main",
   children,
   className,

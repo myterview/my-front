@@ -6,11 +6,11 @@ import { DropdownMenu } from "../Popover/Dropdown/DropdownMenu";
 import { Popover } from "../Popover/Popover";
 import { postFeedback } from "@/apis/feedback.action";
 import {
-  FeedbackTypeKr,
   getValues,
   handleServerAction,
   register,
 } from "@/hooks/sicilian/feedbackForm";
+import { FeedbackTypeKr } from "@/types";
 import { grunfeld } from "@ilokesto/grunfeld";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
 import { useActionState, useEffect } from "react";

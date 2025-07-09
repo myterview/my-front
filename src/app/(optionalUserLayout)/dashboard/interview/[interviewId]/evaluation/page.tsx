@@ -6,7 +6,7 @@ import {
   DefaultEvaluationRadar,
 } from "@/components/Evaluation/DefaultEvaluation";
 import { EvaluationProsAndCons } from "@/components/Evaluation/EvaluationProsAndCons";
-import SizeWrapper from "@/components/SizeWrapper/SizeWrapper";
+import { SizeWrapper } from "@/components/SizeWrapper/SizeWrapper";
 import { EvaluationProps } from "@/types";
 
 export default async function NotInter({

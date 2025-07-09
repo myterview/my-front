@@ -3,7 +3,7 @@
 import { InterviewClient } from "@/apis/interview.client";
 import { DefaultTextAreaWrapper } from "@/components/Form/DefaultTextAreaWrapper";
 import { TextArea } from "@/components/Form/TextArea";
-import SizeWrapper from "@/components/SizeWrapper/SizeWrapper";
+import { SizeWrapper } from "@/components/SizeWrapper/SizeWrapper";
 import { useInterviewLoading } from "@/hooks/caro-kann/useInterviewLoading";
 import {
   getValues,

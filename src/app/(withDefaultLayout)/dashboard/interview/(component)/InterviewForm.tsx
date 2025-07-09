@@ -9,12 +9,11 @@ import { DropdownAnchor } from "@/components/Popover/Dropdown/DropdownAnchor";
 import { DropdownMenu } from "@/components/Popover/Dropdown/DropdownMenu";
 import { Popover } from "@/components/Popover/Popover";
 import {
+  getValues,
   handleServerAction,
   register,
-  getValues,
-  InterviewPositionKr,
-  InterviewExperienceKr,
 } from "@/hooks/sicilian/interviewForm";
+import { InterviewExperienceKr, InterviewPositionKr } from "@/types";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
 import { For } from "@ilokesto/utilinent";
 import { useRouter } from "next/navigation";
