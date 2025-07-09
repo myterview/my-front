@@ -34,3 +34,11 @@ export enum ProgressStatus {
   ANALYZING = "분석 중",
   COMPLETED = "분석 완료",
 }
+
+export enum GradedScore {
+  good = "good",
+  normal = "normal",
+  bad = "bad",
+  no_pros = "장점 없음",
+  no_cons = "단점 없음",
+}

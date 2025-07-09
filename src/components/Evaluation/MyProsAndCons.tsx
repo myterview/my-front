@@ -1,7 +1,6 @@
 import { EvaluationScore } from "./DefaultEvaluation";
-import { gradeScore } from "@/business/gradeScore";
-import { EvaluationKeysKr } from "@/types";
-import { getEnumValueByKey } from "@/utils/enumUtils";
+import { GradedScore } from "@/types";
+import { getEnumKeyByValue, getEnumValueByKey } from "@/utils/enumUtils";
 import { filter, map, pipe, reduce } from "@fxts/core";
 import { neato } from "neato";
 import Image from "next/image";
@@ -14,108 +13,95 @@ export function MyProsAndCons({
   const { pros, cons } = new ProsAndCons(evaluation);
 
   return (
-    <div className="@container/pac bg-primary-100 w-full">
+    <div className="@container/pac">
       <div
         className={neato(
-          "@5xl/pac:flex @5xl/pac:py-48 @5xl/pac:flex-row @5xl/pac:justify-center @5xl/pac:items-center",
-          "py-24 space-y-12"
+          "flex flex-col items-center justify-center gap-24 bg-primary-100 w-full py-48 ",
+          "@5xl/pac:flex-row @5xl/pac:gap-52 @5xl/pac:rounded-[12]"
         )}
       >
-        <div
-          className={neato(
-            "flex flex-col items-center justify-center space-y-12",
-            "@5xl/pac:flex-row @5xl/pac:justify-center @5xl/pac:gap-0"
-          )}
-        >
-          <div className="rounded-full relative shadow-custom w-80 h-80 overflow-hidden bg-white">
-            <Image
-              className="object-cover"
-              src="/images/mrCatToSayHi.svg"
-              alt="Pros and Cons"
-              fill
-              draggable={false}
-            />
-          </div>
-
-          <div className="heading-03 text-white px-12 bg-primary-600 py-4 w-fit rounded-[12] @5xl/pac:mx-50 ">
-            내 강점과 약점은?
-          </div>
-        </div>
+        <MyProsAndCons.Title />
 
         <div
           className={neato(
-            "flex flex-col items-center justify-center gap-12 @3xl/pac:flex-row"
+            "flex flex-col justify-center items-center gap-24",
+            "@2xl/pac:flex-row"
           )}
         >
-          <ComProsAndCons type="pros" item={pros} />
-          <ComProsAndCons type="cons" item={cons} />
+          <MyProsAndCons.Card {...pros} />
+          <MyProsAndCons.Card {...cons} />
         </div>
       </div>
     </div>
   );
 }
 
-export function ProsAndConsHighlight() {
-  return <></>;
-}
+MyProsAndCons.Title = function MyProsAndConsTitle() {
+  return (
+    <div
+      className={neato(
+        "@5xl/pac:flex-row @5xl/pac:gap-24",
+        "flex flex-col items-center justify-center gap-12"
+      )}
+    >
+      <div className="relative overflow-hidden bg-white rounded-full shadow-custom w-80 h-80">
+        <Image
+          fill
+          className="object-cover"
+          src="/images/mrCatToSayHi.svg"
+          alt="Pros and Cons"
+          draggable={false}
+        />
+      </div>
 
-export function ComProsAndCons({
-  type,
-  item,
+      <div className="text-center text-white w-200 bg-primary-600 heading-03 rounded-[12]">
+        내 강점과 약점은?
+      </div>
+    </div>
+  );
+};
+
+MyProsAndCons.Card = function MyProsAndConsCard({
+  keyName,
+  score,
+  grade,
 }: {
-  type: "pros" | "cons";
-  item: { key: string; score: number } | undefined;
+  keyName?: string;
+  score?: number;
+  grade: GradedScore;
 }) {
   return (
     <div
       className={neato(
         "flex flex-row items-center px-24 py-8 gap-24 bg-white rounded-[12] shadow-custom border-1",
-        item === undefined && "border-primary-600",
-        item?.score !== undefined && item.score >= 80 && "border-green-500",
-        item?.score !== undefined &&
-          item.score >= 50 &&
-          item.score < 80 &&
-          "border-yellow-400",
-        item?.score !== undefined && item.score < 50 && "border-red-500"
+        {
+          "border-green-500": grade === GradedScore.good,
+          "border-yellow-400": grade === GradedScore.normal,
+          "border-red-500": grade === GradedScore.bad,
+          "border-primary-600":
+            grade === GradedScore.no_pros || grade === GradedScore.no_cons,
+        }
       )}
     >
       <Image
-        src={`/icons/evaluation/face/${findFace({ type, item })}.svg`}
+        src={`/icons/evaluation/face/${getEnumKeyByValue(grade)}.svg`}
         alt=""
         width={90}
         height={90}
       />
       <div>
         <div className="heading-03 @3xl/pac:heading-02">
-          {item
-            ? getEnumValueByKey(EvaluationKeysKr, item.key)
-            : type === "cons"
-              ? "단점 없음"
-              : "장점 없음"}
+          {keyName ? getEnumValueByKey(keyName) : grade}
         </div>
-        {item && <EvaluationScore value={item.score} />}
+        {score !== undefined && <EvaluationScore score={score} />}
       </div>
     </div>
   );
-}
+};
 
-function findFace({
-  type,
-  item,
-}: {
-  type: "pros" | "cons";
-  item: { key: string; score: number } | undefined;
-}) {
-  if (!item) {
-    return type === "pros" ? "no_pros" : "no_cons";
-  }
-
-  return gradeScore(item.score);
-}
-
-class ProsAndCons {
-  public pros: { key: string; score: number } | undefined;
-  public cons: { key: string; score: number } | undefined;
+export class ProsAndCons {
+  public pros: { keyName?: string; score?: number; grade: GradedScore };
+  public cons: { keyName?: string; score?: number; grade: GradedScore };
 
   constructor(private evaluation: { [x: string]: { score: number } }) {
     this.pros = this.getProsPipe();
@@ -126,7 +112,7 @@ class ProsAndCons {
     return pipe(
       Object.entries(this.evaluation),
       filter(([key]) => key !== "overallAssessment"),
-      map(([key, value]) => ({ key: key, score: value.score }))
+      map(([key, value]) => ({ keyName: key, score: value.score }))
     );
   }
 
@@ -137,9 +123,13 @@ class ProsAndCons {
       (arr) =>
         reduce(
           (acc, item) => (!acc || item.score > acc.score ? item : acc),
-          undefined as { key: string; score: number } | undefined,
+          undefined as { keyName: string; score: number } | undefined,
           arr
-        )
+        ),
+      (item) => ({
+        ...item,
+        grade: ProsAndCons.gradeScore({ score: item?.score, type: "pros" }),
+      })
     );
   }
 
@@ -150,9 +140,34 @@ class ProsAndCons {
       (arr) =>
         reduce(
           (acc, item) => (!acc || item.score < acc.score ? item : acc),
-          undefined as { key: string; score: number } | undefined,
+          undefined as { keyName: string; score: number } | undefined,
           arr
-        )
+        ),
+      (item) => ({
+        ...item,
+        grade: ProsAndCons.gradeScore({ score: item?.score, type: "cons" }),
+      })
     );
+  }
+
+  static gradeScore({
+    type,
+    score,
+  }: {
+    score: number | undefined;
+    type?: "pros" | "cons";
+  }) {
+    if (score === undefined) {
+      return type === "pros" ? GradedScore.no_pros : GradedScore.no_cons;
+    }
+
+    switch (true) {
+      case score >= 80:
+        return GradedScore.good;
+      case score >= 50:
+        return GradedScore.normal;
+      default:
+        return GradedScore.bad;
+    }
   }
 }

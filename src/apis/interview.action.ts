@@ -23,8 +23,8 @@ export async function startInterview(
     return await fetcher.post(`interview/start`, {
       json: {
         title,
-        position: getEnumKeyByValue(InterviewPositionKr, position),
-        experience: getEnumKeyByValue(InterviewExperienceKr, experience),
+        position: getEnumKeyByValue(position),
+        experience: getEnumKeyByValue(experience),
       },
       headers: {
         Cookie: await getCookieValue(),

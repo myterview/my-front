@@ -2,12 +2,7 @@
 
 import { Card } from "./Card";
 import { InterviewClient } from "@/apis/interview.client";
-import {
-  components,
-  InterviewExperienceKr,
-  InterviewPositionKr,
-  ProgressStatus,
-} from "@/types";
+import { components, ProgressStatus } from "@/types";
 import { getEnumValueByKey } from "@/utils/enumUtils";
 import { toKST } from "@/utils/toKST";
 import { For, Observer, Show } from "@ilokesto/utilinent";
@@ -58,14 +53,8 @@ export function InterviewBinder() {
 
                     <Card.Tags
                       each={[
-                        getEnumValueByKey(
-                          InterviewPositionKr,
-                          interview.position
-                        ),
-                        getEnumValueByKey(
-                          InterviewExperienceKr,
-                          interview.experience
-                        ),
+                        getEnumValueByKey(interview.position),
+                        getEnumValueByKey(interview.experience),
                       ]}
                     />
                   </Card>

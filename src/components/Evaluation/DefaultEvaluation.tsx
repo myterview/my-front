@@ -1,5 +1,6 @@
 import { Radar } from "../Charts/Radar";
-import { components, EvaluationKeysKr } from "@/types";
+import { ProsAndCons } from "./MyProsAndCons";
+import { components, EvaluationKeysKr, GradedScore } from "@/types";
 import { For } from "@ilokesto/utilinent";
 import { neato } from "neato";
 import Image from "next/image";
@@ -18,7 +19,7 @@ export function DefaultEvaluationOverall({
   ];
 
   return (
-    <div className="relative space-y-48">
+    <div className="relative space-y-28">
       <div className="heading-02">종합 평가</div>
 
       <Image
@@ -138,7 +139,7 @@ export function DefaultEvaluation({
                 {name}
               </span>
 
-              <EvaluationScore value={value} />
+              <EvaluationScore score={value} />
             </h5>
 
             <hr className="my-4 border-gray-200 border-t-1" />
@@ -153,17 +154,21 @@ export function DefaultEvaluation({
   );
 }
 
-export function EvaluationScore({ value }: { value: number }) {
+export function EvaluationScore({ score }: { score: number }) {
+  const grade = ProsAndCons.gradeScore({ score });
+
   return (
     <div
       className={neato(
         "rounded-[12] px-12 py-8 text-base/16 font-bold text-white w-fit",
-        value >= 80 && "bg-green-500",
-        value >= 50 && value < 80 && "bg-yellow-400",
-        value < 50 && "bg-red-500"
+        {
+          "bg-green-500": grade === GradedScore.good,
+          "bg-yellow-400": grade === GradedScore.normal,
+          "bg-red-500": grade === GradedScore.bad,
+        }
       )}
     >
-      {value}점
+      {score}점
     </div>
   );
 }

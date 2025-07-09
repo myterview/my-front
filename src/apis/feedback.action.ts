@@ -20,7 +20,7 @@ export async function postFeedback(
   try {
     return await fetcher.post(`feedback`, {
       json: {
-        type: getEnumKeyByValue(FeedbackTypeKr, type),
+        type: getEnumKeyByValue(type),
         message,
       },
       headers: {
