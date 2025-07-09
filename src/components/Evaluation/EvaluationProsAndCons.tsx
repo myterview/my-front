@@ -12,7 +12,7 @@ export function EvaluationProsAndCons({
 }: {
   evaluation: { [x: string]: { score: number } };
 }) {
-  const { pros, cons } = new ProsAndConst(evaluation);
+  const { pros, cons } = new ProsAndCons(evaluation);
 
   return (
     <div className="@container/pac bg-primary-100 w-full">
@@ -48,15 +48,15 @@ export function EvaluationProsAndCons({
             "flex flex-col items-center justify-center gap-12 @3xl/pac:flex-row"
           )}
         >
-          <ProsAndCons type="pros" item={pros} />
-          <ProsAndCons type="cons" item={cons} />
+          <ComProsAndCons type="pros" item={pros} />
+          <ComProsAndCons type="cons" item={cons} />
         </div>
       </div>
     </div>
   );
 }
 
-export function ProsAndCons({
+export function ComProsAndCons({
   type,
   item,
 }: {
@@ -96,18 +96,19 @@ export function ProsAndCons({
   );
 }
 
-class ProsAndConst {
+class ProsAndCons {
   public pros: { key: string; score: number } | undefined;
   public cons: { key: string; score: number } | undefined;
 
   constructor(private evaluation: { [x: string]: { score: number } }) {
+    console.log(evaluation);
     this.pros = this.findProsAndCons("pros");
     this.cons = this.findProsAndCons("cons");
   }
 
-  private flatEvaluation() {
+  private flatEvaluation(evaluation: Array<[string, { score: number }]>) {
     return pipe(
-      Object.entries(this.evaluation),
+      evaluation,
       filter(([key]) => key !== "overallAssessment"),
       map(([key, value]) => ({ key: key, score: value.score }))
     );

@@ -28,7 +28,7 @@ export function Sidebar({
         }
       }}
       className={neato(
-        "desktop:w-280 max-desktop:absolute top-0 flex h-dvh flex-col bg-black/5 transition-all duration-200 ease-in-out",
+        "md:w-280 max-md:absolute top-0 flex h-dvh flex-col bg-black/5 transition-all duration-200 ease-in-out",
         isOpen ? "left-0 w-full" : "-left-300"
       )}
     >
@@ -40,7 +40,7 @@ export function Sidebar({
             types="shadow"
             size="small"
             className={neato(
-              "desktop:hidden absolute transition-all duration-200 ease-in-out",
+              "md:hidden absolute transition-all duration-200 ease-in-out",
               isOpen
                 ? "-right-0 ml-0 rounded-r-none"
                 : "-right-50 mr-0 rounded-l-none"

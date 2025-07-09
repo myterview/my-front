@@ -16,7 +16,7 @@ export function ModalWrapper({
     <div
       className={neato(
         "shadow-custom flex flex-col rounded-[12] bg-white px-40 py-48",
-        "max-desktop:w-dvw max-desktop:h-dvh max-desktop:rounded-none",
+        "max-md:w-dvw max-md:h-dvh max-md:rounded-none",
         className
       )}
     >

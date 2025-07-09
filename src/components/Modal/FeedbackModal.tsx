@@ -31,7 +31,7 @@ export function FeedbackModal() {
   return (
     <Form
       action={handleServerAction(execute)}
-      className="flex flex-col w-full gap-24 overflow-y-scroll desktop:min-w-400"
+      className="flex flex-col w-full gap-24 overflow-y-scroll md:min-w-400"
     >
       <Popover
         key="카테고리"

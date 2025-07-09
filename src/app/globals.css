@@ -16,8 +16,6 @@ html {
 
   --spacing: calc(1rem / 16);
 
-  --breakpoint-desktop: 770px;
-
   --color-primary-100: #d5e8ff;
   --color-primary-200: #aad2ff;
   --color-primary-300: #80bbff;
