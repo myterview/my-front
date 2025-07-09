@@ -2,12 +2,11 @@ import { EvaluationScore } from "./DefaultEvaluation";
 import { gradeScore } from "@/business/gradeScore";
 import { EvaluationKeysKr } from "@/types";
 import { getEnumValueByKey } from "@/utils/enumUtils";
-import { ifElse } from "@/utils/logic";
 import { filter, map, pipe, reduce } from "@fxts/core";
 import { neato } from "neato";
 import Image from "next/image";
 
-export function EvaluationProsAndCons({
+export function MyProsAndCons({
   evaluation,
 }: {
   evaluation: { [x: string]: { score: number } };
@@ -56,6 +55,10 @@ export function EvaluationProsAndCons({
   );
 }
 
+export function ProsAndConsHighlight() {
+  return <></>;
+}
+
 export function ComProsAndCons({
   type,
   item,
@@ -96,52 +99,6 @@ export function ComProsAndCons({
   );
 }
 
-class ProsAndCons {
-  public pros: { key: string; score: number } | undefined;
-  public cons: { key: string; score: number } | undefined;
-
-  constructor(private evaluation: { [x: string]: { score: number } }) {
-    console.log(evaluation);
-    this.pros = this.findProsAndCons("pros");
-    this.cons = this.findProsAndCons("cons");
-  }
-
-  private flatEvaluation(evaluation: Array<[string, { score: number }]>) {
-    return pipe(
-      evaluation,
-      filter(([key]) => key !== "overallAssessment"),
-      map(([key, value]) => ({ key: key, score: value.score }))
-    );
-  }
-
-  private findProsAndCons(type: "pros" | "cons") {
-    return pipe(
-      Object.entries(this.evaluation),
-      this.flatEvaluation,
-      ifElse(
-        () => type === "pros",
-        filter((item) => item.score >= 80),
-        filter((item) => item.score < 80)
-      ),
-      ifElse(
-        () => type === "pros",
-        (arr) =>
-          reduce(
-            (acc, item) => (!acc || item.score > acc.score ? item : acc),
-            undefined as { key: string; score: number } | undefined,
-            arr
-          ),
-        (arr) =>
-          reduce(
-            (acc, item) => (!acc || item.score < acc.score ? item : acc),
-            undefined as { key: string; score: number } | undefined,
-            arr
-          )
-      )
-    );
-  }
-}
-
 function findFace({
   type,
   item,
@@ -154,4 +111,48 @@ function findFace({
   }
 
   return gradeScore(item.score);
+}
+
+class ProsAndCons {
+  public pros: { key: string; score: number } | undefined;
+  public cons: { key: string; score: number } | undefined;
+
+  constructor(private evaluation: { [x: string]: { score: number } }) {
+    this.pros = this.getProsPipe();
+    this.cons = this.getConsPipe();
+  }
+
+  private getFlatEvaluation() {
+    return pipe(
+      Object.entries(this.evaluation),
+      filter(([key]) => key !== "overallAssessment"),
+      map(([key, value]) => ({ key: key, score: value.score }))
+    );
+  }
+
+  private getProsPipe() {
+    return pipe(
+      this.getFlatEvaluation(),
+      filter((item) => item.score >= 80),
+      (arr) =>
+        reduce(
+          (acc, item) => (!acc || item.score > acc.score ? item : acc),
+          undefined as { key: string; score: number } | undefined,
+          arr
+        )
+    );
+  }
+
+  private getConsPipe() {
+    return pipe(
+      this.getFlatEvaluation(),
+      filter((item) => item.score < 80),
+      (arr) =>
+        reduce(
+          (acc, item) => (!acc || item.score < acc.score ? item : acc),
+          undefined as { key: string; score: number } | undefined,
+          arr
+        )
+    );
+  }
 }

@@ -85,6 +85,11 @@ html {
   }
 }
 
+/* recharts-surface 수동 */
+.recharts-surface {
+  overflow: visible;
+}
+
 /* Typography Styles */
 .heading-01 {
   @apply font-sans text-[32px] leading-normal font-extrabold;

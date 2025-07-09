@@ -5,7 +5,7 @@ import {
   DefaultEvaluationOverall,
   DefaultEvaluationRadar,
 } from "@/components/Evaluation/DefaultEvaluation";
-import { EvaluationProsAndCons } from "@/components/Evaluation/EvaluationProsAndCons";
+import { MyProsAndCons } from "@/components/Evaluation/MyProsAndCons";
 import { SizeWrapper } from "@/components/SizeWrapper/SizeWrapper";
 import { EvaluationProps } from "@/types";
 
@@ -39,7 +39,7 @@ export default async function NotInter({
           <DefaultEvaluationRadar evaluation={e} />
         </div>
 
-        <EvaluationProsAndCons evaluation={e} />
+        <MyProsAndCons evaluation={e} />
 
         <DefaultEvaluation evaluation={e} />
       </SizeWrapper>

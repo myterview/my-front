@@ -5,7 +5,7 @@ import {
   DefaultEvaluationRadar,
 } from "../Evaluation/DefaultEvaluation";
 import { EvaluationHeader } from "../Evaluation/EvaluationHeader";
-import { EvaluationProsAndCons } from "../Evaluation/EvaluationProsAndCons";
+import { MyProsAndCons } from "../Evaluation/MyProsAndCons";
 import {
   components,
   EvaluationProps,
@@ -49,7 +49,7 @@ export function InterviewEvaluationModal({
 
         <DefaultEvaluationRadar evaluation={e} />
 
-        <EvaluationProsAndCons evaluation={e} />
+        <MyProsAndCons evaluation={e} />
 
         <DefaultEvaluation evaluation={e} />
       </div>
