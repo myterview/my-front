@@ -1,15 +1,18 @@
-import { DefaultEvaluationProps, EvaluationScore } from "./DefaultEvaluation";
+import { EvaluationScore } from "./DefaultEvaluation";
+import { gradeScore } from "@/business/gradeScore";
 import { EvaluationKeysKr } from "@/types";
 import { getEnumValueByKey } from "@/utils/enumUtils";
-import { filter, map, pipe, reduce, toArray } from "@fxts/core";
+import { ifElse } from "@/utils/logic";
+import { filter, map, pipe, reduce } from "@fxts/core";
 import { neato } from "neato";
 import Image from "next/image";
 
 export function EvaluationProsAndCons({
   evaluation,
-}: Pick<DefaultEvaluationProps, "evaluation">) {
-  const pros = findPros(evaluation);
-  const cons = findCons(evaluation);
+}: {
+  evaluation: { [x: string]: { score: number } };
+}) {
+  const { pros, cons } = new ProsAndConst(evaluation);
 
   return (
     <div className="@container/pac bg-primary-100 w-full">
@@ -93,41 +96,48 @@ export function ProsAndCons({
   );
 }
 
-export function FlatEvaluation(evaluation: Array<[string, { score: number }]>) {
-  return pipe(
-    evaluation,
-    filter(([key]) => key !== "overallAssessment"),
-    map(([key, value]) => ({ key: key, score: value.score }))
-  );
-}
+class ProsAndConst {
+  public pros: { key: string; score: number } | undefined;
+  public cons: { key: string; score: number } | undefined;
 
-export function findPros(evaluation: { [x: string]: { score: number } }) {
-  const a = pipe(
-    Object.entries(evaluation),
-    FlatEvaluation,
-    filter((item) => item.score >= 80),
-    toArray
-  );
-
-  if (a.length === 0) {
-    return undefined;
-  } else {
-    return reduce((item, acc) => (item.score > acc.score ? item : acc), a);
+  constructor(private evaluation: { [x: string]: { score: number } }) {
+    this.pros = this.findProsAndCons("pros");
+    this.cons = this.findProsAndCons("cons");
   }
-}
 
-export function findCons(evaluation: { [x: string]: { score: number } }) {
-  const a = pipe(
-    Object.entries(evaluation),
-    FlatEvaluation,
-    filter((item) => item.score < 80),
-    toArray
-  );
+  private flatEvaluation() {
+    return pipe(
+      Object.entries(this.evaluation),
+      filter(([key]) => key !== "overallAssessment"),
+      map(([key, value]) => ({ key: key, score: value.score }))
+    );
+  }
 
-  if (a.length === 0) {
-    return undefined;
-  } else {
-    return reduce((item, acc) => (item.score < acc.score ? item : acc), a);
+  private findProsAndCons(type: "pros" | "cons") {
+    return pipe(
+      Object.entries(this.evaluation),
+      this.flatEvaluation,
+      ifElse(
+        () => type === "pros",
+        filter((item) => item.score >= 80),
+        filter((item) => item.score < 80)
+      ),
+      ifElse(
+        () => type === "pros",
+        (arr) =>
+          reduce(
+            (acc, item) => (!acc || item.score > acc.score ? item : acc),
+            undefined as { key: string; score: number } | undefined,
+            arr
+          ),
+        (arr) =>
+          reduce(
+            (acc, item) => (!acc || item.score < acc.score ? item : acc),
+            undefined as { key: string; score: number } | undefined,
+            arr
+          )
+      )
+    );
   }
 }
 
@@ -142,11 +152,5 @@ function findFace({
     return type === "pros" ? "no_pros" : "no_cons";
   }
 
-  if (item.score >= 80) {
-    return "good";
-  } else if (item.score >= 50) {
-    return "normal";
-  } else {
-    return "bad";
-  }
+  return gradeScore(item.score);
 }
