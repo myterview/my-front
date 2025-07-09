@@ -1,6 +1,6 @@
 "use client";
 
-import { startInterview } from "@/apis/interview.server";
+import { startInterview } from "@/apis/interview.serverAction";
 import { Clickable } from "@/components/Clickable/Clickable";
 import { DefaultInputWrapper } from "@/components/Form/DefaultInputWrapper";
 import { Form } from "@/components/Form/Form";

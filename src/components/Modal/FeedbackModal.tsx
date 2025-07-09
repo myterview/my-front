@@ -4,7 +4,7 @@ import { TextArea } from "../Form/TextArea";
 import { DropdownAnchor } from "../Popover/Dropdown/DropdownAnchor";
 import { DropdownMenu } from "../Popover/Dropdown/DropdownMenu";
 import { Popover } from "../Popover/Popover";
-import { postFeedback } from "@/apis/feedback.server";
+import { postFeedback } from "@/apis/feedback.serverAction";
 import {
   getValues,
   handleServerAction,
