@@ -18,7 +18,7 @@ export function DefaultEvaluationOverall({
   ];
 
   return (
-    <div className="space-y-48 relative">
+    <div className="relative space-y-48">
       <div className="heading-02">종합 평가</div>
 
       <Image
@@ -26,7 +26,7 @@ export function DefaultEvaluationOverall({
         alt={evaluation.overallAssessment.recommendation}
         width={160}
         height={160}
-        className="absolute -top-24 -right-12 opacity-70 -rotate-40 z-10"
+        className="absolute z-10 -top-24 -right-12 opacity-70 -rotate-40"
         draggable={false}
       />
 
@@ -34,7 +34,7 @@ export function DefaultEvaluationOverall({
         {({ name, value }) => (
           <div key={name}>
             <h5 className="heading-03">{name}</h5>
-            <p className="text-lg/32 break-keep font-nanum font-bold">
+            <p className="font-bold text-lg/32 break-keep font-nanum">
               {value}
             </p>
           </div>
@@ -127,7 +127,7 @@ export function DefaultEvaluation({
             <h5
               className={neato("flex items-center heading-03 justify-between")}
             >
-              <span className="flex gap-4 items-center">
+              <span className="flex items-center gap-4">
                 <Image
                   src={image}
                   alt={name}
@@ -141,9 +141,9 @@ export function DefaultEvaluation({
               <EvaluationScore value={value} />
             </h5>
 
-            <hr className="my-4 border-t-1 border-gray-200" />
+            <hr className="my-4 border-gray-200 border-t-1" />
 
-            <p className="text-lg/32 break-keep font-nanum font-bold">
+            <p className="font-bold text-lg/32 break-keep font-nanum">
               {analysis}
             </p>
           </div>
