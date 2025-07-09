@@ -1,6 +1,6 @@
 import { Avatar } from "../Avatar/Avatar";
 import { logoutAction } from "@/apis/user.action";
-import { components } from "@/types/api";
+import { components } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 

@@ -1,5 +1,5 @@
 import { Radar } from "../Charts/Radar";
-import { components } from "@/types/api";
+import { components, EvaluationKeysKr } from "@/types";
 import { For } from "@ilokesto/utilinent";
 import { neato } from "neato";
 import Image from "next/image";
@@ -42,15 +42,6 @@ export function DefaultEvaluationOverall({
       </For>
     </div>
   );
-}
-
-export enum EvaluationKeysKr {
-  technicalExpertise = "기술 전문성",
-  projectExperience = "프로젝트 경험",
-  problemSolving = "문제 해결력",
-  communication = "커뮤니케이션 능력",
-  codeQuality = "코드 품질",
-  growthPotential = "성장 가능성",
 }
 
 export function DefaultEvaluationRadar({

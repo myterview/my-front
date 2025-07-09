@@ -1,12 +1,12 @@
 import { FeedbackModal } from "@/components/Modal/FeedbackModal";
 import { ModalWrapper } from "@/components/Modal/ModalWrapper";
-import { components } from "@/types/api";
+import { components } from "@/types";
 import { mutationOptions } from "@/utils/m";
 import { grunfeld } from "@ilokesto/grunfeld";
 import {
-  infiniteQueryOptions,
-  QueryClient,
-  queryOptions,
+    infiniteQueryOptions,
+    QueryClient,
+    queryOptions,
 } from "@tanstack/react-query";
 import { Dispatch, SetStateAction } from "react";
 import { thisBind } from "./decorators/thisBind";

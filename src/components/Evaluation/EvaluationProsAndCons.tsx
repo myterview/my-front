@@ -1,17 +1,15 @@
-import {
-  DefaultEvaluationProps,
-  EvaluationKeysKr,
-  EvaluationScore,
-} from "./DefaultEvaluation";
+import { DefaultEvaluationProps, EvaluationScore } from "./DefaultEvaluation";
+import { EvaluationKeysKr } from "@/types";
 import { getEnumValueByKey } from "@/utils/enumUtils";
+import { filter, map, pipe, reduce, toArray } from "@fxts/core";
 import { neato } from "neato";
 import Image from "next/image";
 
 export function EvaluationProsAndCons({
   evaluation,
 }: Pick<DefaultEvaluationProps, "evaluation">) {
-  const pros = findPros({ evaluation });
-  const cons = findCons({ evaluation });
+  const pros = findPros(evaluation);
+  const cons = findCons(evaluation);
 
   return (
     <div className="@container/pac bg-primary-100 w-full">
@@ -95,44 +93,42 @@ export function ProsAndCons({
   );
 }
 
-export function FlatEvaluation({
-  evaluation,
-}: Pick<DefaultEvaluationProps, "evaluation">) {
-  return Object.entries(evaluation)
-    .filter(([key]) => key !== "overallAssessment")
-    .map(([key, value]) => ({ [key]: value.score as number }));
+export function FlatEvaluation(evaluation: Array<[string, { score: number }]>) {
+  return pipe(
+    evaluation,
+    filter(([key]) => key !== "overallAssessment"),
+    map(([key, value]) => ({ key: key, score: value.score }))
+  );
 }
 
-export function findPros({
-  evaluation,
-}: Pick<DefaultEvaluationProps, "evaluation">):
-  | { key: string; score: number }
-  | undefined {
-  const array = FlatEvaluation({ evaluation });
-  let max: { key: string; score: number } | undefined = undefined;
-  for (const item of array) {
-    const [key, value] = Object.entries(item)[0];
-    if (value > 79 && (!max || value > max.score)) {
-      max = { key, score: value };
-    }
+export function findPros(evaluation: { [x: string]: { score: number } }) {
+  const a = pipe(
+    Object.entries(evaluation),
+    FlatEvaluation,
+    filter((item) => item.score >= 80),
+    toArray
+  );
+
+  if (a.length === 0) {
+    return undefined;
+  } else {
+    return reduce((item, acc) => (item.score > acc.score ? item : acc), a);
   }
-  return max;
 }
 
-export function findCons({
-  evaluation,
-}: Pick<DefaultEvaluationProps, "evaluation">):
-  | { key: string; score: number }
-  | undefined {
-  const array = FlatEvaluation({ evaluation });
-  let min: { key: string; score: number } | undefined = undefined;
-  for (const item of array) {
-    const [key, value] = Object.entries(item)[0];
-    if (value < 80 && (!min || value < min.score)) {
-      min = { key, score: value };
-    }
+export function findCons(evaluation: { [x: string]: { score: number } }) {
+  const a = pipe(
+    Object.entries(evaluation),
+    FlatEvaluation,
+    filter((item) => item.score < 80),
+    toArray
+  );
+
+  if (a.length === 0) {
+    return undefined;
+  } else {
+    return reduce((item, acc) => (item.score < acc.score ? item : acc), a);
   }
-  return min;
 }
 
 function findFace({

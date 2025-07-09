@@ -7,11 +7,11 @@ import {
 import { EvaluationHeader } from "../Evaluation/EvaluationHeader";
 import { EvaluationProsAndCons } from "../Evaluation/EvaluationProsAndCons";
 import {
+  components,
+  EvaluationProps,
   InterviewExperienceKr,
   InterviewPositionKr,
-} from "@/hooks/sicilian/interviewForm";
-import { components } from "@/types/api";
-import { EvaluationProps } from "@/types/evaluation";
+} from "@/types";
 import { getEnumValueByKey } from "@/utils/enumUtils";
 import { grunfeld } from "@ilokesto/grunfeld";
 

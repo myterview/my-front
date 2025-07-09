@@ -1,6 +1,6 @@
-import { paths } from "@/types/api";
+import { paths } from "@/types";
 // ApiResponse 타입을 자동 추론하는 fetcher
-import type { ApiResponse, PathWithoutApi } from "@/types/apiUtils";
+import type { ApiResponse, PathWithoutApi } from "@/types";
 import ky, { Options } from "ky";
 
 export enum HTTPMethod {

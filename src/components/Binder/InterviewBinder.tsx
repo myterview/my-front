@@ -1,12 +1,13 @@
 "use client";
 
-import { Card, ProgressStatus } from "./Card";
+import { Card } from "./Card";
 import { InterviewClient } from "@/apis/interview.client";
 import {
-  InterviewPositionKr,
+  components,
   InterviewExperienceKr,
-} from "@/hooks/sicilian/interviewForm";
-import { components } from "@/types/api";
+  InterviewPositionKr,
+  ProgressStatus,
+} from "@/types";
 import { getEnumValueByKey } from "@/utils/enumUtils";
 import { toKST } from "@/utils/toKST";
 import { For, Observer, Show } from "@ilokesto/utilinent";
