@@ -32,7 +32,7 @@ export function Sidebar({
         isOpen ? "left-0 w-full" : "-left-300"
       )}
     >
-      <div className="relative flex h-dvh w-280 flex-col gap-80 bg-gray-100 bg-[url('/images/pattern.svg')] bg-size-[120] px-24 pt-60">
+      <div className="relative flex h-dvh w-280 flex-col gap-80 bg-gray-100 bg-[url('/images/sidebar-pattern.svg')] bg-size-[120] px-24 pt-60">
         <div className="flex items-center justify-between">
           <Logo size="small" />
 
