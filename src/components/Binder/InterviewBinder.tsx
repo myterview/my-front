@@ -16,7 +16,7 @@ export function InterviewBinder() {
   );
 
   return (
-    <div className="grid grid-cols-1 gap-24 @xl:grid-cols-2 @4xl:grid-cols-3">
+    <div className="grid grid-cols-1 gap-24 @xl/main:grid-cols-2 @4xl/main:grid-cols-3">
       <Show when={interviewList}>
         {(interviewList) => (
           <For each={interviewList.pages.flatMap((page) => page.items)}>

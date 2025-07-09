@@ -48,6 +48,7 @@ html {
   --container-4xl: 896px;
   --container-3xl: 768px;
   --container-2xl: 672px;
+  --container-xl: 576px;
   --container-sm: 384px;
 
   @keyframes slide-up-fade {
