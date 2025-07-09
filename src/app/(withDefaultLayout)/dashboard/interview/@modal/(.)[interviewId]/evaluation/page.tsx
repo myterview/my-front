@@ -44,6 +44,7 @@ export default function InterceptPage({
               onClose={() => grunfeld.clear()}
               title={interview.title}
               createdAt={interview.createdAt}
+              className="space-y-8"
               tags={[
                 getEnumValueByKey(interview.position),
                 getEnumValueByKey(interview.experience),

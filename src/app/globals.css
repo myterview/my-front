@@ -104,31 +104,31 @@ html {
 
 /* Typography Styles */
 .heading-01 {
-  @apply font-sans text-[32px] leading-normal font-extrabold;
+  @apply text-[32px] leading-normal font-extrabold;
 }
 
 .heading-02 {
-  @apply font-sans text-2xl leading-normal font-bold;
+  @apply text-2xl leading-normal font-bold;
 }
 
 .heading-03 {
-  @apply font-sans text-xl/30 font-semibold;
+  @apply text-xl/30 font-semibold;
 }
 
 .input {
-  @apply font-sans text-xl/28 font-semibold;
+  @apply text-xl/28 font-semibold;
 }
 
 .dropdown {
-  @apply font-sans text-xl/30 font-medium;
+  @apply text-xl/30 font-medium;
 }
 
 .label {
-  @apply font-sans text-base/16 font-normal;
+  @apply text-base/16 font-normal;
 }
 
 .menu {
-  @apply font-sans text-xl/20 font-bold;
+  @apply text-xl/20 font-bold;
 }
 
 .dropdown-transition {

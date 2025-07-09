@@ -34,7 +34,7 @@ export function DefaultEvaluationOverall({
       <For each={OVERALL_ARRAY}>
         {({ name, value }) => (
           <div key={name}>
-            <h5 className="heading-03">{name}</h5>
+            <h5 className="heading-03 font-nanum">{name}</h5>
             <p className="font-bold text-lg/32 break-keep font-nanum">
               {value}
             </p>
