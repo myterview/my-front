@@ -1,16 +1,18 @@
 import { FeedbackModal } from "@/components/Modal/FeedbackModal";
 import { ModalWrapper } from "@/components/Modal/ModalWrapper";
 import { components } from "@/types";
-import { mutationOptions } from "@/utils/mutationOptions";
 import { grunfeld } from "@ilokesto/grunfeld";
 import {
-  infiniteQueryOptions,
   QueryClient,
-  queryOptions,
 } from "@tanstack/react-query";
 import { Dispatch, SetStateAction } from "react";
 import { thisBind } from "./decorators/thisBind";
-import { Fetcher } from "./Fetcher";
+import {
+  Fetcher,
+  infiniteQueryOptions,
+  mutationOptions,
+  queryOptions,
+} from "./Fetcher";
 
 @thisBind
 export class InterviewClient extends Fetcher {
