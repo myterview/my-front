@@ -18,7 +18,7 @@ export function SessionHeader({ interviewId }: { interviewId: string }) {
       <SizeWrapper asChild="header">
         <EvaluationHeader
           className="pb-48 space-y-8 pt-52"
-          onClose={() => router.back()}
+          onClose={router.back}
           title={data.session.title}
           createdAt={data.session.createdAt}
           tags={[

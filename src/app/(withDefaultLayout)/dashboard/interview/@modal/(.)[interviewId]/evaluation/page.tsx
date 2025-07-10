@@ -41,7 +41,7 @@ export default function InterceptPage({
         <ModalWrapper className="md:w-770 h-dvh md:max-h-[80dvh] py-60 px-0 md:min-h-0 overflow-y-scroll flex flex-col gap-60">
           <div className="flex flex-col px-40 gap-28">
             <EvaluationHeader
-              onClose={() => grunfeld.clear()}
+              onClose={grunfeld.clear}
               title={interview.title}
               createdAt={interview.createdAt}
               className="space-y-8"
@@ -65,14 +65,10 @@ export default function InterceptPage({
           </div>
         </ModalWrapper>
       ),
-      dismissCallback: () => {
-        router.back();
-      },
+      dismissCallback: router.back,
     }));
 
-    return () => {
-      grunfeld.remove();
-    };
+    return grunfeld.remove;
   }, [interview, router, e, eT]);
 
   return <></>;
