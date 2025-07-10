@@ -6,7 +6,7 @@ import { filter, map, pipe, reduce } from "@fxts/core";
 import { neato } from "neato";
 import Image from "next/image";
 
-export function MyProsAndCons({
+export function UserInterviewProsAndCons({
   evaluation,
 }: {
   evaluation: { [x: string]: { score: number } };
@@ -21,7 +21,7 @@ export function MyProsAndCons({
           "@5xl/pac:flex-row @5xl/pac:gap-52 @5xl/pac:rounded-[12]"
         )}
       >
-        <MyProsAndCons.Title />
+        <UserInterviewProsAndCons.Title />
 
         <div
           className={neato(
@@ -29,15 +29,15 @@ export function MyProsAndCons({
             "@2xl/pac:flex-row"
           )}
         >
-          <MyProsAndCons.Card {...pros} />
-          <MyProsAndCons.Card {...cons} />
+          <UserInterviewProsAndCons.Card {...pros} />
+          <UserInterviewProsAndCons.Card {...cons} />
         </div>
       </div>
     </div>
   );
 }
 
-MyProsAndCons.Title = function MyProsAndConsTitle() {
+UserInterviewProsAndCons.Title = function MyProsAndConsTitle() {
   return (
     <div
       className={neato(
@@ -62,7 +62,7 @@ MyProsAndCons.Title = function MyProsAndConsTitle() {
   );
 };
 
-MyProsAndCons.Card = function MyProsAndConsCard({
+UserInterviewProsAndCons.Card = function MyProsAndConsCard({
   keyName,
   score,
   grade,
@@ -104,22 +104,33 @@ export class ProsAndCons {
   public pros: { keyName?: string; score?: number; grade: GradedScore };
   public cons: { keyName?: string; score?: number; grade: GradedScore };
 
-  constructor(private evaluation: { [x: string]: { score: number } }) {
-    this.pros = this.getProsPipe();
-    this.cons = this.getConsPipe();
+  constructor(evaluation: { [x: string]: { score: number } }) {
+    const { pros, cons } = this.extractProsAndCons(evaluation);
+    this.pros = pros;
+    this.cons = cons;
   }
 
-  private getFlatEvaluation() {
+  private extractProsAndCons(evaluation: { [x: string]: { score: number } }) {
     return pipe(
-      Object.entries(this.evaluation),
+      evaluation,
+      Object.entries,
       filter(([key]) => key !== "overallAssessment"),
-      map(([key, value]) => ({ keyName: key, score: value.score }))
+      map(([key, value]) => ({ keyName: key, score: value.score })),
+      (arr) => ({
+        pros: this.getPros(arr),
+        cons: this.getCons(arr),
+      })
     );
   }
 
-  private getProsPipe() {
+  private getPros(
+    arr: IterableIterator<{
+      keyName: string;
+      score: number;
+    }>
+  ) {
     return pipe(
-      this.getFlatEvaluation(),
+      arr,
       filter((item) => item.score >= 80),
       (arr) =>
         reduce(
@@ -134,9 +145,14 @@ export class ProsAndCons {
     );
   }
 
-  private getConsPipe() {
+  private getCons(
+    arr: IterableIterator<{
+      keyName: string;
+      score: number;
+    }>
+  ) {
     return pipe(
-      this.getFlatEvaluation(),
+      arr,
       filter((item) => item.score < 80),
       (arr) =>
         reduce(

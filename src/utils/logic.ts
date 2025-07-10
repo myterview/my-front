@@ -8,18 +8,6 @@ export const ifElse =
   (val: T): R =>
     pred(val) ? onTrue(val) : onFalse(val);
 
-// 조건이 true일 때만 실행
-export const when =
-  <T>(pred: (val: T) => boolean, fn: (val: T) => T) =>
-  (val: T): T =>
-    pred(val) ? fn(val) : val;
-
-// 조건이 false일 때만 실행
-export const unless =
-  <T>(pred: (val: T) => boolean, fn: (val: T) => T) =>
-  (val: T): T =>
-    !pred(val) ? fn(val) : val;
-
 // 여러 조건 중 첫 번째 만족하는 분기를 실행
 export const cond =
   <T, R>(...pairs: Array<[(val: T) => boolean, (val: T) => R]>) =>

@@ -5,7 +5,7 @@ import {
   DefaultEvaluationOverall,
   DefaultEvaluationRadar,
 } from "@/components/Evaluation/DefaultEvaluation";
-import { MyProsAndCons } from "@/components/Evaluation/MyProsAndCons";
+import { UserInterviewProsAndCons } from "@/components/Evaluation/MyProsAndCons";
 import { SizeWrapper } from "@/components/SizeWrapper/SizeWrapper";
 import { EvaluationProps } from "@/types";
 import { neato } from "neato";
@@ -51,7 +51,7 @@ export default async function NotInter({
           asChild={"div"}
           className={neato("px-0", "@5xl/main:px-40")}
         >
-          <MyProsAndCons evaluation={e} />
+          <UserInterviewProsAndCons evaluation={e} />
         </SizeWrapper>
 
         <SizeWrapper asChild={"div"}>

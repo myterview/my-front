@@ -8,7 +8,7 @@ import {
   DefaultEvaluationRadar,
 } from "@/components/Evaluation/DefaultEvaluation";
 import { EvaluationHeader } from "@/components/Evaluation/EvaluationHeader";
-import { MyProsAndCons } from "@/components/Evaluation/MyProsAndCons";
+import { UserInterviewProsAndCons } from "@/components/Evaluation/MyProsAndCons";
 import { ModalWrapper } from "@/components/Modal/ModalWrapper";
 import { EvaluationProps } from "@/types";
 import { getEnumValueByKey } from "@/utils/enumUtils";
@@ -58,7 +58,7 @@ export default function InterceptPage({
             <DefaultEvaluationRadar evaluation={e} />
           </div>
 
-          <MyProsAndCons evaluation={e} />
+          <UserInterviewProsAndCons evaluation={e} />
 
           <div className="flex flex-col gap-24 px-40">
             <DefaultEvaluation evaluation={e} />
