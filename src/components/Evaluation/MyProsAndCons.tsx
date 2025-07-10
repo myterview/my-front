@@ -1,6 +1,7 @@
-import { EvaluationScore } from "./DefaultEvaluation";
+import { ScoreChip } from "../Chips/ScoreChip";
 import { GradedScore } from "@/types";
 import { getEnumKeyByValue, getEnumValueByKey } from "@/utils/enumUtils";
+import { gradeScore } from "@/utils/gradeScore";
 import { filter, map, pipe, reduce } from "@fxts/core";
 import { neato } from "neato";
 import Image from "next/image";
@@ -93,7 +94,7 @@ MyProsAndCons.Card = function MyProsAndConsCard({
         <div className="heading-03 @3xl/pac:heading-02">
           {keyName ? getEnumValueByKey(keyName) : grade}
         </div>
-        {score !== undefined && <EvaluationScore score={score} />}
+        {score !== undefined && <ScoreChip score={score} />}
       </div>
     </div>
   );
@@ -128,7 +129,7 @@ export class ProsAndCons {
         ),
       (item) => ({
         ...item,
-        grade: ProsAndCons.gradeScore({ score: item?.score, type: "pros" }),
+        grade: gradeScore({ score: item?.score, type: "pros" }),
       })
     );
   }
@@ -145,29 +146,8 @@ export class ProsAndCons {
         ),
       (item) => ({
         ...item,
-        grade: ProsAndCons.gradeScore({ score: item?.score, type: "cons" }),
+        grade: gradeScore({ score: item?.score, type: "cons" }),
       })
     );
-  }
-
-  static gradeScore({
-    type,
-    score,
-  }: {
-    score: number | undefined;
-    type?: "pros" | "cons";
-  }) {
-    if (score === undefined) {
-      return type === "pros" ? GradedScore.no_pros : GradedScore.no_cons;
-    }
-
-    switch (true) {
-      case score >= 80:
-        return GradedScore.good;
-      case score >= 50:
-        return GradedScore.normal;
-      default:
-        return GradedScore.bad;
-    }
   }
 }
