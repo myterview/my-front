@@ -4,15 +4,15 @@ import { TextArea } from "../Form/TextArea";
 import { DropdownAnchor } from "../Popover/Dropdown/DropdownAnchor";
 import { DropdownMenu } from "../Popover/Dropdown/DropdownMenu";
 import { Popover } from "../Popover/Popover";
-import { postFeedback } from "@/apis/feedback.action";
+import { postFeedback } from "@/apis/feedback.serverAction";
 import {
-  FeedbackTypeKr,
   getValues,
   handleServerAction,
   register,
 } from "@/hooks/sicilian/feedbackForm";
+import { FeedbackTypeKr } from "@/types";
+import { grunfeld } from "@ilokesto/grunfeld";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
-import { grunfeld } from "grunfeld";
 import { useActionState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 
@@ -31,7 +31,7 @@ export function FeedbackModal() {
   return (
     <Form
       action={handleServerAction(execute)}
-      className="flex flex-col w-full gap-24 overflow-y-scroll desktop:min-w-400"
+      className="flex flex-col w-full gap-24 overflow-y-scroll md:min-w-400"
     >
       <Popover
         key="카테고리"

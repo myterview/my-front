@@ -1,16 +1,18 @@
 import { FeedbackModal } from "@/components/Modal/FeedbackModal";
 import { ModalWrapper } from "@/components/Modal/ModalWrapper";
-import { components } from "@/types/api";
-import { mutationOptions } from "@/utils/m";
+import { components } from "@/types";
+import { grunfeld } from "@ilokesto/grunfeld";
 import {
-  infiniteQueryOptions,
   QueryClient,
-  queryOptions,
 } from "@tanstack/react-query";
-import { grunfeld } from "grunfeld";
 import { Dispatch, SetStateAction } from "react";
 import { thisBind } from "./decorators/thisBind";
-import { Fetcher } from "./Fetcher";
+import {
+  Fetcher,
+  infiniteQueryOptions,
+  mutationOptions,
+  queryOptions,
+} from "./Fetcher";
 
 @thisBind
 export class InterviewClient extends Fetcher {
@@ -132,7 +134,7 @@ export class InterviewClient extends Fetcher {
         });
         setIsLoading(false);
         if (data?.isFinished) {
-          grunfeld.add(
+          grunfeld.add(() =>
             <ModalWrapper>
               <ModalWrapper.Title title="피드백" />
               <FeedbackModal />

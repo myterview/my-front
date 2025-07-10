@@ -1,3 +1,4 @@
+import { ProgressStatus } from "@/types";
 import { For } from "@ilokesto/utilinent";
 import { neato } from "neato";
 
@@ -30,12 +31,6 @@ Card.subTitle = function SubTitle({ children }: { children: React.ReactNode }) {
     </p>
   );
 };
-
-export enum ProgressStatus {
-  IN_PROGRESS = "진행 중",
-  ANALYZING = "분석 중",
-  COMPLETED = "분석 완료",
-}
 
 Card.ProgressChip = function Progress({
   children,

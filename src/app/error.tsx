@@ -18,7 +18,7 @@ export default function Error({
   }
 
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center w-full h-screen">
       <h1 className="mb-4 text-2xl font-bold">에러 발생</h1>
       <p className="mb-4 text-red-500">{error.message}</p>
       <button
@@ -26,7 +26,7 @@ export default function Error({
           router.refresh();
           reset();
         }}
-        className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+        className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
       >
         다시 시도
       </button>

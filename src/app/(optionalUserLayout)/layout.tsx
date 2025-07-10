@@ -1,4 +1,4 @@
-import { UserQuery } from "@/apis/user.query";
+import { UserQuery } from "@/apis/user.serverQuery";
 import { Sidebar } from "@/components/Sidebar/Sidebar";
 import { SidebarDefaultMenu } from "@/components/Sidebar/SidebarDefaultMenu";
 import { SidebarFooter } from "@/components/Sidebar/SidebarFooter";

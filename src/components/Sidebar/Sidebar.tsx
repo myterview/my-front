@@ -2,7 +2,7 @@
 
 import { Clickable } from "../Clickable/Clickable";
 import { Logo } from "../Logo/Logo";
-import { create } from "caro-kann";
+import { create } from "@ilokesto/caro-kann";
 import { neato } from "neato";
 import Image from "next/image";
 import { useRef } from "react";
@@ -28,11 +28,11 @@ export function Sidebar({
         }
       }}
       className={neato(
-        "desktop:w-280 max-desktop:absolute top-0 flex h-dvh flex-col bg-black/5 transition-all duration-200 ease-in-out",
+        "md:w-280 max-md:absolute top-0 flex h-dvh flex-col bg-black/5 transition-all duration-200 ease-in-out",
         isOpen ? "left-0 w-full" : "-left-300"
       )}
     >
-      <div className="relative flex h-dvh w-280 flex-col gap-80 bg-gray-100 bg-[url('/images/pattern.svg')] bg-size-[120] px-24 pt-60">
+      <div className="relative flex h-dvh w-280 flex-col gap-80 bg-gray-100 bg-[url('/images/sidebar-pattern.svg')] bg-size-[120] px-24 pt-60">
         <div className="flex items-center justify-between">
           <Logo size="small" />
 
@@ -40,7 +40,7 @@ export function Sidebar({
             types="shadow"
             size="small"
             className={neato(
-              "desktop:hidden absolute transition-all duration-200 ease-in-out",
+              "md:hidden absolute transition-all duration-200 ease-in-out",
               isOpen
                 ? "-right-0 ml-0 rounded-r-none"
                 : "-right-50 mr-0 rounded-l-none"

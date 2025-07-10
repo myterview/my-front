@@ -5,8 +5,8 @@ import {
   PolarGrid,
   PolarRadiusAxis,
   RadarChart,
-  ResponsiveContainer,
   Radar as RechartsRadar,
+  ResponsiveContainer,
   Tooltip,
 } from "recharts";
 import { TickItemTextProps } from "recharts/types/polar/PolarAngleAxis";

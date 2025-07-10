@@ -1,13 +1,14 @@
-import { InterviewQuery } from "@/apis/interview.query";
+import { InterviewQuery } from "@/apis/interview.serverQuery";
 import { SessionHeader } from "@/app/(withDefaultLayout)/dashboard/interview/(component)/SessionHeader";
 import {
   DefaultEvaluation,
   DefaultEvaluationOverall,
   DefaultEvaluationRadar,
 } from "@/components/Evaluation/DefaultEvaluation";
-import { EvaluationProsAndCons } from "@/components/Evaluation/EvaluationProsAndCons";
-import SizeWrapper from "@/components/SizeWrapper/SizeWrapper";
-import { EvaluationProps } from "@/types/evaluation";
+import { MyProsAndCons } from "@/components/Evaluation/MyProsAndCons";
+import { SizeWrapper } from "@/components/SizeWrapper/SizeWrapper";
+import { EvaluationProps } from "@/types";
+import { neato } from "neato";
 
 export default async function NotInter({
   params,
@@ -26,23 +27,37 @@ export default async function NotInter({
   if (!eT) return;
 
   return (
-    <div className="flex flex-col h-dvh">
+    <main className="flex flex-col h-dvh">
       <SessionHeader interviewId={interviewId} />
 
-      <SizeWrapper
-        asChild={"main"}
-        className="@container/main flex-1 flex w-full flex-col overflow-y-scroll py-48 gap-60"
+      <div
+        className={neato(
+          "@container/main flex flex-col overflow-y-scroll gap-48 py-48"
+        )}
       >
-        <div className="@3xl/main:flex @3xl/main:flex-row-reverse gap-56">
+        <SizeWrapper
+          asChild={"div"}
+          className={neato(
+            "flex flex-col gap-56",
+            "@4xl/main:flex-row-reverse"
+          )}
+        >
           <DefaultEvaluationOverall evaluation={e} />
 
           <DefaultEvaluationRadar evaluation={e} />
-        </div>
+        </SizeWrapper>
 
-        <EvaluationProsAndCons evaluation={e} />
+        <SizeWrapper
+          asChild={"div"}
+          className={neato("px-0", "@5xl/main:px-40")}
+        >
+          <MyProsAndCons evaluation={e} />
+        </SizeWrapper>
 
-        <DefaultEvaluation evaluation={e} />
-      </SizeWrapper>
-    </div>
+        <SizeWrapper asChild={"div"}>
+          <DefaultEvaluation evaluation={e} />
+        </SizeWrapper>
+      </div>
+    </main>
   );
 }

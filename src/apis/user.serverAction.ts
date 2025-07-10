@@ -6,18 +6,19 @@ import { cookies } from "next/headers";
 
 const { serverFetcher: fetcher } = new Fetcher();
 
-export async function patchUserRoleAction() {
-  try {
-    return await fetcher.patch("auth/user/role", {
-      json: { secret: "your_role_change_code" },
-      headers: {
-        Cookie: await getCookieValue(),
-      },
-    });
-  } catch (error) {
-    console.error("Error occurred while patching user role:", error);
-  }
-}
+// 사용되지 않고 있음
+// export async function patchUserRoleAction() {
+//   try {
+//     return await fetcher.patch("auth/user/role", {
+//       json: { secret: "your_role_change_code" },
+//       headers: {
+//         Cookie: await getCookieValue(),
+//       },
+//     });
+//   } catch (error) {
+//     console.error("Error occurred while patching user role:", error);
+//   }
+// }
 
 export async function logoutAction() {
   try {

@@ -1,8 +1,8 @@
 import { SessionForm } from "../(component)/SessionForm";
 import { SessionHeader } from "../(component)/SessionHeader";
 import { SessionMain } from "../(component)/SessionMain";
-import { InterviewQuery } from "@/apis/interview.query";
-import { UserQuery } from "@/apis/user.query";
+import { InterviewQuery } from "@/apis/interview.serverQuery";
+import { UserQuery } from "@/apis/user.serverQuery";
 import { notFound, redirect } from "next/navigation";
 
 export default async function InterviewSessionPage({
@@ -30,7 +30,7 @@ export default async function InterviewSessionPage({
   }
 
   return (
-    <main className="flex h-dvh w-full flex-col overflow-y-scroll">
+    <main className="flex flex-col w-full overflow-y-scroll h-dvh">
       <SessionHeader interviewId={interviewId} />
 
       <SessionMain interviewId={interviewId} />

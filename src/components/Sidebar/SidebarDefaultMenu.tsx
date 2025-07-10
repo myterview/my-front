@@ -2,7 +2,7 @@
 
 import { FeedbackModal } from "../Modal/FeedbackModal";
 import { ModalWrapper } from "../Modal/ModalWrapper";
-import { grunfeld } from "grunfeld";
+import { grunfeld } from "@ilokesto/grunfeld";
 import Link from "next/link";
 
 export function SidebarDefaultMenu() {
@@ -14,14 +14,12 @@ export function SidebarDefaultMenu() {
 
       <button
         onClick={() => {
-          grunfeld.add({
-            element: (
-              <ModalWrapper className="gap-32">
-                <ModalWrapper.Title title="피드백" />
-                <FeedbackModal />
-              </ModalWrapper>
-            ),
-          });
+          grunfeld.add(() => (
+            <ModalWrapper className="gap-32">
+              <ModalWrapper.Title title="피드백" />
+              <FeedbackModal />
+            </ModalWrapper>
+          ));
         }}
       >
         피드백

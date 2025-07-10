@@ -1,9 +1,11 @@
-import { UserQuery } from "@/apis/user.query";
+import { UserQuery } from "@/apis/user.serverQuery";
 import { Sidebar } from "@/components/Sidebar/Sidebar";
 import { SidebarDefaultMenu } from "@/components/Sidebar/SidebarDefaultMenu";
 import { SidebarFooter } from "@/components/Sidebar/SidebarFooter";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Myterview",

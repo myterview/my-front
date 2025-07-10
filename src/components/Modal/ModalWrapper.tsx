@@ -1,6 +1,6 @@
 import { Card } from "../Binder/Card";
+import { grunfeld } from "@ilokesto/grunfeld";
 import { Show } from "@ilokesto/utilinent";
-import { grunfeld } from "grunfeld";
 import { neato } from "neato";
 import Image from "next/image";
 
@@ -16,7 +16,7 @@ export function ModalWrapper({
     <div
       className={neato(
         "shadow-custom flex flex-col rounded-[12] bg-white px-40 py-48",
-        "max-desktop:w-dvw max-desktop:h-dvh max-desktop:rounded-none",
+        "max-md:w-dvw max-md:h-dvh max-md:rounded-none",
         className
       )}
     >

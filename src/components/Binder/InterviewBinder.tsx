@@ -1,12 +1,8 @@
 "use client";
 
-import { Card, ProgressStatus } from "./Card";
+import { Card } from "./Card";
 import { InterviewClient } from "@/apis/interview.client";
-import {
-  InterviewPositionKr,
-  InterviewExperienceKr,
-} from "@/hooks/sicilian/interviewForm";
-import { components } from "@/types/api";
+import { components, ProgressStatus } from "@/types";
 import { getEnumValueByKey } from "@/utils/enumUtils";
 import { toKST } from "@/utils/toKST";
 import { For, Observer, Show } from "@ilokesto/utilinent";
@@ -20,7 +16,7 @@ export function InterviewBinder() {
   );
 
   return (
-    <div className="grid grid-cols-1 gap-24 @xl:grid-cols-2 @4xl:grid-cols-3">
+    <div className="grid grid-cols-1 gap-24 @xl/main:grid-cols-2 @4xl/main:grid-cols-3">
       <Show when={interviewList}>
         {(interviewList) => (
           <For each={interviewList.pages.flatMap((page) => page.items)}>
@@ -57,14 +53,8 @@ export function InterviewBinder() {
 
                     <Card.Tags
                       each={[
-                        getEnumValueByKey(
-                          InterviewPositionKr,
-                          interview.position
-                        ),
-                        getEnumValueByKey(
-                          InterviewExperienceKr,
-                          interview.experience
-                        ),
+                        getEnumValueByKey(interview.position),
+                        getEnumValueByKey(interview.experience),
                       ]}
                     />
                   </Card>

@@ -2,11 +2,15 @@
 
 import { InterviewClient } from "@/apis/interview.client";
 import { ChatBox } from "@/components/ChatBox/ChatBox";
-import SizeWrapper from "@/components/SizeWrapper/SizeWrapper";
+import { SizeWrapper } from "@/components/SizeWrapper/SizeWrapper";
 import { useInterviewLoading } from "@/hooks/caro-kann/useInterviewLoading";
-import { components } from "@/types/api";
+import { components } from "@/types";
 import { For, Show } from "@ilokesto/utilinent";
-import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  InfiniteData,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 
 export function SessionMain({ interviewId }: { interviewId: string }) {
@@ -40,12 +44,37 @@ export function SessionMain({ interviewId }: { interviewId: string }) {
   const [visibleCount, setVisibleCount] = useState(0);
   const queryClient = useQueryClient();
 
+  type InterviewListData = InfiniteData<{
+    hasNext: boolean;
+    items: Array<components["schemas"]["InterviewSessionWithoutMessages"]>;
+  }>;
+
+  // 스크롤이 항상 맨 아래로 이동하도록 설정
   useEffect(() => {
-    queryClient.invalidateQueries({
-      queryKey: ["interview", "list"],
-      refetchType: "all",
+    scrollRef.current?.scrollTo({
+      top: scrollRef.current.scrollHeight,
+      behavior: "smooth",
     });
-  }, [queryClient]);
+  }, [visibleCount]);
+
+  // 인터뷰가 존재하지 않을 때만 인터뷰 목록을 새로고침
+  useEffect(() => {
+    const interview = queryClient.getQueryData<InterviewListData>([
+      "interview",
+      "list",
+    ]);
+
+    const foundInterview = interview?.pages
+      .flatMap((page) => page.items)
+      .find((item) => item.id === interviewId);
+
+    if (foundInterview) {
+      queryClient.invalidateQueries({
+        queryKey: ["interview", "list"],
+        refetchType: "all",
+      });
+    }
+  }, [queryClient, interviewId]);
 
   useEffect(() => {
     // 메시지 목록이 바뀌었을 때(길이가 늘어났을 때)
@@ -69,15 +98,6 @@ export function SessionMain({ interviewId }: { interviewId: string }) {
       prevLengthRef.current = messageList.length;
     }
   }, [messageList.length]);
-
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({
-        top: scrollRef.current.scrollHeight,
-        behavior: "smooth",
-      });
-    }
-  }, [visibleCount]);
 
   return (
     <SizeWrapper

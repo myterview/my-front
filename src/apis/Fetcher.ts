@@ -1,7 +1,21 @@
-import { paths } from "@/types/api";
+import { paths } from "@/types";
 // ApiResponse 타입을 자동 추론하는 fetcher
-import type { ApiResponse, PathWithoutApi } from "@/types/apiUtils";
+import type { ApiResponse, PathWithoutApi } from "@/types";
+import {
+  UseMutationOptions,
+  infiniteQueryOptions,
+  queryOptions,
+} from "@tanstack/react-query";
 import ky, { Options } from "ky";
+
+const mutationOptions = <
+  TData = unknown,
+  TError = Error,
+  TVariables = void,
+  TContext = unknown,
+>(
+  options: UseMutationOptions<TData, TError, TVariables, TContext>
+): UseMutationOptions<TData, TError, TVariables, TContext> => options;
 
 export enum HTTPMethod {
   GET = "get",
@@ -10,6 +24,8 @@ export enum HTTPMethod {
   DELETE = "delete",
   PATCH = "patch",
 }
+
+export { infiniteQueryOptions, mutationOptions, queryOptions };
 
 export class Fetcher {
   public instance = (type: "server" | "client" = "server") =>

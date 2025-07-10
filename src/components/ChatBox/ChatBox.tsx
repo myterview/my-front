@@ -1,5 +1,5 @@
 import { Avatar } from "../Avatar/Avatar";
-import { components } from "@/types/api";
+import { components } from "@/types";
 import { OptionalWrapper, Show } from "@ilokesto/utilinent";
 import { neato } from "neato";
 

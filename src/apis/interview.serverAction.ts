@@ -1,27 +1,30 @@
 "use server";
 
 import { Fetcher } from "./Fetcher";
-import { FeedbackTypeKr } from "@/hooks/sicilian/feedbackForm";
+import { InterviewExperienceKr, InterviewPositionKr } from "@/types";
 import { getCookieValue } from "@/utils/cookieUtils";
 import { getEnumKeyByValue } from "@/utils/enumUtils";
 
 const { serverFetcher: fetcher } = new Fetcher();
 
-export async function postFeedback(
+export async function startInterview(
   prev: unknown,
   {
-    type,
-    message,
+    title,
+    position,
+    experience,
   }: {
-    type: FeedbackTypeKr | "";
-    message: string;
+    title: string;
+    position: InterviewPositionKr | "";
+    experience: InterviewExperienceKr | "";
   }
 ) {
   try {
-    return await fetcher.post(`feedback`, {
+    return await fetcher.post(`interview/start`, {
       json: {
-        type: getEnumKeyByValue(FeedbackTypeKr, type),
-        message,
+        title,
+        position: getEnumKeyByValue(position),
+        experience: getEnumKeyByValue(experience),
       },
       headers: {
         Cookie: await getCookieValue(),
