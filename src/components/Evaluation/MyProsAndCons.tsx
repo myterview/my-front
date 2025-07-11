@@ -1,8 +1,7 @@
 import { ScoreChip } from "../Chips/ScoreChip";
+import { ProsAndCons } from "@/domain/evaluation/ProsAndCons";
 import { GradedScore } from "@/types";
 import { getEnumKeyByValue, getEnumValueByKey } from "@/utils/enumUtils";
-import { gradeScore } from "@/utils/gradeScore";
-import { filter, map, pipe, reduce } from "@fxts/core";
 import { neato } from "neato";
 import Image from "next/image";
 
@@ -11,7 +10,7 @@ export function UserInterviewProsAndCons({
 }: {
   evaluation: { [x: string]: { score: number } };
 }) {
-  const { pros, cons } = new ProsAndCons(evaluation);
+  const { pros, cons } = ProsAndCons.extract(evaluation);
 
   return (
     <div className="@container/pac">
@@ -99,71 +98,3 @@ UserInterviewProsAndCons.Card = function MyProsAndConsCard({
     </div>
   );
 };
-
-export class ProsAndCons {
-  public pros: { keyName?: string; score?: number; grade: GradedScore };
-  public cons: { keyName?: string; score?: number; grade: GradedScore };
-
-  constructor(evaluation: { [x: string]: { score: number } }) {
-    const { pros, cons } = this.extractProsAndCons(evaluation);
-    this.pros = pros;
-    this.cons = cons;
-  }
-
-  private extractProsAndCons(evaluation: { [x: string]: { score: number } }) {
-    return pipe(
-      evaluation,
-      Object.entries,
-      filter(([key]) => key !== "overallAssessment"),
-      map(([key, value]) => ({ keyName: key, score: value.score })),
-      (arr) => ({
-        pros: this.getPros(arr),
-        cons: this.getCons(arr),
-      })
-    );
-  }
-
-  private getPros(
-    arr: IterableIterator<{
-      keyName: string;
-      score: number;
-    }>
-  ) {
-    return pipe(
-      arr,
-      filter((item) => item.score >= 80),
-      (arr) =>
-        reduce(
-          (acc, item) => (!acc || item.score > acc.score ? item : acc),
-          undefined as { keyName: string; score: number } | undefined,
-          arr
-        ),
-      (item) => ({
-        ...item,
-        grade: gradeScore({ score: item?.score, type: "pros" }),
-      })
-    );
-  }
-
-  private getCons(
-    arr: IterableIterator<{
-      keyName: string;
-      score: number;
-    }>
-  ) {
-    return pipe(
-      arr,
-      filter((item) => item.score < 80),
-      (arr) =>
-        reduce(
-          (acc, item) => (!acc || item.score < acc.score ? item : acc),
-          undefined as { keyName: string; score: number } | undefined,
-          arr
-        ),
-      (item) => ({
-        ...item,
-        grade: gradeScore({ score: item?.score, type: "cons" }),
-      })
-    );
-  }
-}
