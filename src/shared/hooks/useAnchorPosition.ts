@@ -1,18 +1,18 @@
 import {
+  autoUpdate,
   flip,
+  FloatingFocusManager,
   offset,
+  Placement,
   shift,
   useClick,
   useDismiss,
   useFloating,
   useInteractions,
-  autoUpdate,
   useListNavigation,
   useRole,
-  FloatingFocusManager,
-  Placement,
 } from "@floating-ui/react";
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 
 export function useAnchorPosition({
   mainAxis = 8,
