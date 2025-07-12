@@ -1,5 +1,5 @@
 import { Avatar } from "../Avatar/Avatar";
-import { logoutAction } from "@/apis/user.serverAction";
+import { logoutAction } from "@/api/user.serverAction";
 import { components } from "@/types";
 import Image from "next/image";
 import Link from "next/link";

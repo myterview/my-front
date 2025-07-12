@@ -1,8 +1,7 @@
 "use client";
 
-import { Fetcher } from "@/apis/Fetcher";
-import { useSearchParams, useParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { Fetcher } from "@/api/Fetcher";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 export default function CallbackPage() {

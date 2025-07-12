@@ -1,7 +1,7 @@
 "use server";
 
 import { Fetcher } from "./Fetcher";
-import { getCookieValue } from "@/utils/cookieUtils";
+import { getCookieValue } from "@/shared/utils/cookieUtils";
 import { cookies } from "next/headers";
 
 const { serverFetcher: fetcher } = new Fetcher();

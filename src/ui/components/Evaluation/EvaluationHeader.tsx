@@ -1,5 +1,5 @@
 import { Card } from "../Binder/Card";
-import { toKST } from "@/utils/toKST";
+import { toKST } from "@/shared/utils/toKST";
 import Image from "next/image";
 
 export function EvaluationHeader({

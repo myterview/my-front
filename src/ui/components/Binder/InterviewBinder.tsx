@@ -1,10 +1,10 @@
 "use client";
 
 import { Card } from "./Card";
-import { InterviewClient } from "@/apis/interview.client";
+import { InterviewClient } from "@/api/interview.client";
+import { getEnumValueByKey } from "@/shared/utils/enumUtils";
+import { toKST } from "@/shared/utils/toKST";
 import { components, ProgressStatus } from "@/types";
-import { getEnumValueByKey } from "@/utils/enumUtils";
-import { toKST } from "@/utils/toKST";
 import { For, Observer, Show } from "@ilokesto/utilinent";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { neato } from "neato";

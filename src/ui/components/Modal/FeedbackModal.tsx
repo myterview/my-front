@@ -4,12 +4,12 @@ import { TextArea } from "../Form/TextArea";
 import { DropdownAnchor } from "../Popover/Dropdown/DropdownAnchor";
 import { DropdownMenu } from "../Popover/Dropdown/DropdownMenu";
 import { Popover } from "../Popover/Popover";
-import { postFeedback } from "@/apis/feedback.serverAction";
+import { postFeedback } from "@/api/feedback.serverAction";
 import {
   getValues,
   handleServerAction,
   register,
-} from "@/hooks/sicilian/feedbackForm";
+} from "@/shared/sicilian/feedbackForm";
 import { FeedbackTypeKr } from "@/types";
 import { grunfeld } from "@ilokesto/grunfeld";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";

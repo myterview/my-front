@@ -1,9 +1,9 @@
 "use client";
 
-import { InterviewClient } from "@/apis/interview.client";
+import { InterviewClient } from "@/api/interview.client";
+import { getEnumValueByKey } from "@/shared/utils/enumUtils";
 import { EvaluationHeader } from "@/ui/components/Evaluation/EvaluationHeader";
 import { SizeWrapper } from "@/ui/components/SizeWrapper/SizeWrapper";
-import { getEnumValueByKey } from "@/utils/enumUtils";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 

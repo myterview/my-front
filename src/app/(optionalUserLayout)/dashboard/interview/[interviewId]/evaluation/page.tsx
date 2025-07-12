@@ -1,4 +1,4 @@
-import { InterviewQuery } from "@/apis/interview.serverQuery";
+import { InterviewQuery } from "@/api/interview.serverQuery";
 import { EvaluationProps } from "@/types";
 import {
   DefaultEvaluation,

@@ -1,11 +1,11 @@
 "use client";
 
-import { startInterview } from "@/apis/interview.serverAction";
+import { startInterview } from "@/api/interview.serverAction";
 import {
   getValues,
   handleServerAction,
   register,
-} from "@/hooks/sicilian/interviewForm";
+} from "@/shared/sicilian/interviewForm";
 import { InterviewExperienceKr, InterviewPositionKr } from "@/types";
 import { Clickable } from "@/ui/components/Clickable/Clickable";
 import { DefaultInputWrapper } from "@/ui/components/Form/DefaultInputWrapper";

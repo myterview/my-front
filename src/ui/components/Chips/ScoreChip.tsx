@@ -1,5 +1,5 @@
+import { gradeScore } from "@/shared/utils/gradeScore";
 import { GradedScore } from "@/types";
-import { gradeScore } from "@/utils/gradeScore";
 import { neato } from "neato";
 
 export function ScoreChip({ score }: { score: number }) {

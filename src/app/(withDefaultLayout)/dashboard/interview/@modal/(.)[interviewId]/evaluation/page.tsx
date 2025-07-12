@@ -1,6 +1,7 @@
 "use client";
 
-import { InterviewClient } from "@/apis/interview.client";
+import { InterviewClient } from "@/api/interview.client";
+import { getEnumValueByKey } from "@/shared/utils/enumUtils";
 import { EvaluationProps } from "@/types";
 import { Donate } from "@/ui/components/Donate/Donate";
 import {
@@ -11,7 +12,6 @@ import {
 import { EvaluationHeader } from "@/ui/components/Evaluation/EvaluationHeader";
 import { UserInterviewProsAndCons } from "@/ui/components/Evaluation/MyProsAndCons";
 import { ModalWrapper } from "@/ui/components/Modal/ModalWrapper";
-import { getEnumValueByKey } from "@/utils/enumUtils";
 import { grunfeld } from "@ilokesto/grunfeld";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";

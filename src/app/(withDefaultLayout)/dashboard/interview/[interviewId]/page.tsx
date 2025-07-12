@@ -1,8 +1,8 @@
 import { SessionForm } from "../../../../../ui/sections/SessionForm";
 import { SessionHeader } from "../../../../../ui/sections/SessionHeader";
 import { SessionMain } from "../../../../../ui/sections/SessionMain";
-import { InterviewQuery } from "@/apis/interview.serverQuery";
-import { UserQuery } from "@/apis/user.serverQuery";
+import { InterviewQuery } from "@/api/interview.serverQuery";
+import { UserQuery } from "@/api/user.serverQuery";
 import { notFound, redirect } from "next/navigation";
 
 export default async function InterviewSessionPage({

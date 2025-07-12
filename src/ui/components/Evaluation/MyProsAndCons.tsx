@@ -1,7 +1,7 @@
 import { ScoreChip } from "../Chips/ScoreChip";
-import { ProsAndCons } from "@/domains/evaluation/ProsAndCons";
+import { ProsAndCons } from "@/shared/domains/evaluation/ProsAndCons";
+import { getEnumKeyByValue, getEnumValueByKey } from "@/shared/utils/enumUtils";
 import { GradedScore } from "@/types";
-import { getEnumKeyByValue, getEnumValueByKey } from "@/utils/enumUtils";
 import { neato } from "neato";
 import Image from "next/image";
 

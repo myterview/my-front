@@ -1,4 +1,4 @@
-import { gradeScore } from "@/utils/gradeScore";
+import { gradeScore } from "@/shared/utils/gradeScore";
 import { filter, map, pipe, reduce } from "@fxts/core";
 
 export class ProsAndCons {

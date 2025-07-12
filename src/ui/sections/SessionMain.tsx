@@ -1,7 +1,7 @@
 "use client";
 
-import { InterviewClient } from "@/apis/interview.client";
-import { useInterviewLoading } from "@/hooks/caro-kann/useInterviewLoading";
+import { InterviewClient } from "@/api/interview.client";
+import { useInterviewLoading } from "@/shared/caro-kann/useInterviewLoading";
 import { components } from "@/types";
 import { ChatBox } from "@/ui/components/ChatBox/ChatBox";
 import { SizeWrapper } from "@/ui/components/SizeWrapper/SizeWrapper";

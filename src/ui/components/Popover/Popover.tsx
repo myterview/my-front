@@ -1,6 +1,6 @@
 "use client";
 
-import { useAnchorPosition } from "@/hooks/useAnchorPosition";
+import { useAnchorPosition } from "@/shared/hooks/useAnchorPosition";
 import { Placement } from "@floating-ui/react";
 
 export interface IPopoverAnchor {
