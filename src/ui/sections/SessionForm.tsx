@@ -1,15 +1,15 @@
 "use client";
 
 import { InterviewClient } from "@/apis/interview.client";
-import { DefaultTextAreaWrapper } from "@/components/Form/DefaultTextAreaWrapper";
-import { TextArea } from "@/components/Form/TextArea";
-import { SizeWrapper } from "@/components/SizeWrapper/SizeWrapper";
 import { useInterviewLoading } from "@/hooks/caro-kann/useInterviewLoading";
 import {
   getValues,
   handleSubmit,
   register,
 } from "@/hooks/sicilian/sessionForm";
+import { DefaultTextAreaWrapper } from "@/ui/components/Form/DefaultTextAreaWrapper";
+import { TextArea } from "@/ui/components/Form/TextArea";
+import { SizeWrapper } from "@/ui/components/SizeWrapper/SizeWrapper";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
 import {
   useMutation,

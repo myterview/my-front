@@ -1,6 +1,6 @@
-import { SessionForm } from "../(component)/SessionForm";
-import { SessionHeader } from "../(component)/SessionHeader";
-import { SessionMain } from "../(component)/SessionMain";
+import { SessionForm } from "../../../../../ui/sections/SessionForm";
+import { SessionHeader } from "../../../../../ui/sections/SessionHeader";
+import { SessionMain } from "../../../../../ui/sections/SessionMain";
 import { InterviewQuery } from "@/apis/interview.serverQuery";
 import { UserQuery } from "@/apis/user.serverQuery";
 import { notFound, redirect } from "next/navigation";

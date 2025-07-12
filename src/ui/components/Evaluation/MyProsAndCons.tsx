@@ -1,5 +1,5 @@
 import { ScoreChip } from "../Chips/ScoreChip";
-import { ProsAndCons } from "@/domain/evaluation/ProsAndCons";
+import { ProsAndCons } from "@/domains/evaluation/ProsAndCons";
 import { GradedScore } from "@/types";
 import { getEnumKeyByValue, getEnumValueByKey } from "@/utils/enumUtils";
 import { neato } from "neato";

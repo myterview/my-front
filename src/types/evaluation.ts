@@ -1,4 +1,4 @@
-import { DefaultEvaluationProps } from "@/components/Evaluation/DefaultEvaluation";
+import { DefaultEvaluationProps } from "@/ui/components/Evaluation/DefaultEvaluation";
 
 export type EvaluationProps =
   | DefaultEvaluationProps

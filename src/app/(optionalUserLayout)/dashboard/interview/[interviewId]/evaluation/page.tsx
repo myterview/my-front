@@ -1,13 +1,13 @@
 import { InterviewQuery } from "@/apis/interview.serverQuery";
-import { SessionHeader } from "@/app/(withDefaultLayout)/dashboard/interview/(component)/SessionHeader";
+import { EvaluationProps } from "@/types";
 import {
   DefaultEvaluation,
   DefaultEvaluationOverall,
   DefaultEvaluationRadar,
-} from "@/components/Evaluation/DefaultEvaluation";
-import { UserInterviewProsAndCons } from "@/components/Evaluation/MyProsAndCons";
-import { SizeWrapper } from "@/components/SizeWrapper/SizeWrapper";
-import { EvaluationProps } from "@/types";
+} from "@/ui/components/Evaluation/DefaultEvaluation";
+import { UserInterviewProsAndCons } from "@/ui/components/Evaluation/MyProsAndCons";
+import { SizeWrapper } from "@/ui/components/SizeWrapper/SizeWrapper";
+import { SessionHeader } from "@/ui/sections/SessionHeader";
 import { neato } from "neato";
 
 export default async function NotInter({

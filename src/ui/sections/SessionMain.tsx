@@ -1,10 +1,10 @@
 "use client";
 
 import { InterviewClient } from "@/apis/interview.client";
-import { ChatBox } from "@/components/ChatBox/ChatBox";
-import { SizeWrapper } from "@/components/SizeWrapper/SizeWrapper";
 import { useInterviewLoading } from "@/hooks/caro-kann/useInterviewLoading";
 import { components } from "@/types";
+import { ChatBox } from "@/ui/components/ChatBox/ChatBox";
+import { SizeWrapper } from "@/ui/components/SizeWrapper/SizeWrapper";
 import { For, Show } from "@ilokesto/utilinent";
 import {
   InfiniteData,

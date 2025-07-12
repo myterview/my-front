@@ -1,4 +1,4 @@
-import { SizeWrapper } from "@/components/SizeWrapper/SizeWrapper";
+import { SizeWrapper } from "@/ui/components/SizeWrapper/SizeWrapper";
 
 export default function TechQuestionPage() {
   return (

@@ -1,19 +1,19 @@
 "use client";
 
 import { startInterview } from "@/apis/interview.serverAction";
-import { Clickable } from "@/components/Clickable/Clickable";
-import { DefaultInputWrapper } from "@/components/Form/DefaultInputWrapper";
-import { Form } from "@/components/Form/Form";
-import { Input } from "@/components/Form/Input";
-import { DropdownAnchor } from "@/components/Popover/Dropdown/DropdownAnchor";
-import { DropdownMenu } from "@/components/Popover/Dropdown/DropdownMenu";
-import { Popover } from "@/components/Popover/Popover";
 import {
   getValues,
   handleServerAction,
   register,
 } from "@/hooks/sicilian/interviewForm";
 import { InterviewExperienceKr, InterviewPositionKr } from "@/types";
+import { Clickable } from "@/ui/components/Clickable/Clickable";
+import { DefaultInputWrapper } from "@/ui/components/Form/DefaultInputWrapper";
+import { Form } from "@/ui/components/Form/Form";
+import { Input } from "@/ui/components/Form/Input";
+import { DropdownAnchor } from "@/ui/components/Popover/Dropdown/DropdownAnchor";
+import { DropdownMenu } from "@/ui/components/Popover/Dropdown/DropdownMenu";
+import { Popover } from "@/ui/components/Popover/Popover";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
 import { For } from "@ilokesto/utilinent";
 import { useRouter } from "next/navigation";
