@@ -39,7 +39,7 @@ function getEnumByKey(key: string) {
 }
 
 // value(한글) → key(영문)
-export function getEnumKeyByValue(value: string) {
+export function getEnumKeyByValue(value: string): string {
   const enumObj = getEnumByValue(value); // Validate the value against known enums
 
   return (Object.keys(enumObj) as Array<keyof typeof enumObj>).find(
