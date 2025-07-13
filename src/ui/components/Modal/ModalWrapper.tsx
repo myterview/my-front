@@ -1,4 +1,4 @@
-import { Card } from "../Binder/Card";
+import { Card } from "../Card/Card";
 import { grunfeld } from "@ilokesto/grunfeld";
 import { Show } from "@ilokesto/utilinent";
 import { neato } from "neato";

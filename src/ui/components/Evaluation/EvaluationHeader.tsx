@@ -1,4 +1,4 @@
-import { Card } from "../Binder/Card";
+import { Card } from "../Card/Card";
 import { toKST } from "@/shared/utils/toKST";
 import Image from "next/image";
 
