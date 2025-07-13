@@ -25,11 +25,13 @@ export class InterviewClient extends Fetcher {
         pageParam: { take: number; skip: number };
       }) => {
         return this.onClient.get("interview", {
-          credentials: "include", // 쿠키를 포함하여 요청
-          searchParams: {
-            take: pageParam.take,
-            skip: pageParam.skip,
+          query: {
+            take: String(pageParam.take),
+            skip: String(pageParam.skip),
           },
+        },
+        {
+          credentials: "include", // 쿠키를 포함하여 요청
         });
       },
       initialPageParam: { take: 12, skip: 0 },
@@ -57,12 +59,16 @@ export class InterviewClient extends Fetcher {
       queryKey: ["interview", interviewId],
       queryFn: () =>
         this.onClient.get(
-          `interview/${interviewId}` as "interview/{sessionId}",
+          "interview/{sessionId}",
           {
-            credentials: "include",
-            searchParams: {
+            query: {
               withMessages
-            }
+            },
+            path: {
+              sessionId: interviewId,
+            },
+          }, {
+            credentials: "include", // 쿠키를 포함하여 요청
           }
         ),
     });
@@ -79,11 +85,11 @@ export class InterviewClient extends Fetcher {
     mutationOptions({
       mutationFn: ({ message }: { message: string }) =>
         this.onClient.post(
-          `interview/${interviewId}/message` as "interview/{sessionId}/message",
+          "interview/{sessionId}/message",
           {
-            json: { message },
-            credentials: "include",
-          }
+            body: { message },
+            path: { sessionId: interviewId },
+          }, {credentials: "include",}
         ),
       onMutate: async ({ message }) => {
         setIsLoading(true);

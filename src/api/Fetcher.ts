@@ -47,11 +47,104 @@ type KyMethodSignature = (url: string, options?: Options) => Promise<Response>;
 
 type Environment = "server" | "client";
 
-export class Fetcher {
+/**
+ * 기본 HTTP 클라이언트 추상 클래스
+ * 환경별 설정과 기본 HTTP 요청 처리를 담당
+ */
+abstract class BaseHttpClient {
+  protected abstract createKyInstance(
+    environment: Environment
+  ): ReturnType<typeof ky.create>;
+
+  /**
+   * 요청 파라미터를 처리하여 최종 경로와 옵션을 반환합니다.
+   */
+  protected processRequestParams(
+    path: string,
+    paramsOrOptions?: Record<string, unknown> | Options,
+    additionalOptions?: Options
+  ): { finalPath: string; finalOptions: Options } {
+    let finalPath = path;
+    let finalOptions: Options = {};
+
+    if (this.isApiRequestParams(paramsOrOptions)) {
+      // ApiRequestParams의 각 속성을 ky options로 변환
+      finalPath = this.processPathParams(
+        path,
+        paramsOrOptions.path as Record<string, string>
+      );
+      finalOptions = this.buildKyOptions(paramsOrOptions);
+
+      // 추가 options 병합
+      if (additionalOptions) {
+        finalOptions = { ...finalOptions, ...additionalOptions };
+      }
+    } else {
+      // paramsOrOptions가 Options인 경우
+      finalOptions = paramsOrOptions || {};
+    }
+
+    return { finalPath, finalOptions };
+  }
+
+  /**
+   * 객체가 ApiRequestParams인지 확인합니다.
+   */
+  protected isApiRequestParams(obj: unknown): obj is Record<string, unknown> {
+    return (
+      obj !== null &&
+      typeof obj === "object" &&
+      ("body" in obj || "query" in obj || "path" in obj || "header" in obj)
+    );
+  }
+
+  /**
+   * path 파라미터를 URL에 치환합니다.
+   */
+  protected processPathParams(
+    path: string,
+    pathParams?: Record<string, string>
+  ): string {
+    if (!pathParams) return path;
+
+    let finalPath = path;
+    Object.entries(pathParams).forEach(([key, value]) => {
+      finalPath = finalPath.replace(`{${key}}`, value);
+    });
+    return finalPath;
+  }
+
+  /**
+   * ApiRequestParams를 ky Options로 변환합니다.
+   */
+  protected buildKyOptions(params: Record<string, unknown>): Options {
+    const options: Options = {};
+
+    if (params.body) {
+      options.json = params.body;
+    }
+
+    if (params.query) {
+      options.searchParams = params.query as Record<string, string>;
+    }
+
+    if (params.header) {
+      options.headers = params.header as Record<string, string>;
+    }
+
+    return options;
+  }
+}
+
+/**
+ * API 요청을 위한 타입 안전한 HTTP 클라이언트
+ * OpenAPI 스펙 기반으로 자동 타입 추론을 제공합니다.
+ */
+export class Fetcher extends BaseHttpClient {
   public readonly onServer = this.createFetcher("server");
   public readonly onClient = this.createFetcher("client");
 
-  private createKyInstance = (environment: Environment) => {
+  protected createKyInstance = (environment: Environment) => {
     switch (environment) {
       case "server":
         return ky.create({
@@ -94,84 +187,5 @@ export class Fetcher {
     });
 
     return fetcher;
-  }
-
-  /**
-   * 요청 파라미터를 처리하여 최종 경로와 옵션을 반환합니다.
-   */
-  private processRequestParams(
-    path: string,
-    paramsOrOptions?: Record<string, unknown> | Options,
-    additionalOptions?: Options
-  ): { finalPath: string; finalOptions: Options } {
-    let finalPath = path;
-    let finalOptions: Options = {};
-
-    if (this.isApiRequestParams(paramsOrOptions)) {
-      // ApiRequestParams의 각 속성을 ky options로 변환
-      finalPath = this.processPathParams(
-        path,
-        paramsOrOptions.path as Record<string, string>
-      );
-      finalOptions = this.buildKyOptions(paramsOrOptions);
-
-      // 추가 options 병합
-      if (additionalOptions) {
-        finalOptions = { ...finalOptions, ...additionalOptions };
-      }
-    } else {
-      // paramsOrOptions가 Options인 경우
-      finalOptions = paramsOrOptions || {};
-    }
-
-    return { finalPath, finalOptions };
-  }
-
-  /**
-   * 객체가 ApiRequestParams인지 확인합니다.
-   */
-  private isApiRequestParams(obj: unknown): obj is Record<string, unknown> {
-    return (
-      obj !== null &&
-      typeof obj === "object" &&
-      ("body" in obj || "query" in obj || "path" in obj || "header" in obj)
-    );
-  }
-
-  /**
-   * path 파라미터를 URL에 치환합니다.
-   */
-  private processPathParams(
-    path: string,
-    pathParams?: Record<string, string>
-  ): string {
-    if (!pathParams) return path;
-
-    let finalPath = path;
-    Object.entries(pathParams).forEach(([key, value]) => {
-      finalPath = finalPath.replace(`{${key}}`, value);
-    });
-    return finalPath;
-  }
-
-  /**
-   * ApiRequestParams를 ky Options로 변환합니다.
-   */
-  private buildKyOptions(params: Record<string, unknown>): Options {
-    const options: Options = {};
-
-    if (params.body) {
-      options.json = params.body;
-    }
-
-    if (params.query) {
-      options.searchParams = params.query as Record<string, string>;
-    }
-
-    if (params.header) {
-      options.headers = params.header as Record<string, string>;
-    }
-
-    return options;
   }
 }

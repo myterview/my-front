@@ -344,7 +344,18 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        SocialLoginResDTO: Record<string, never>;
+        SocialLoginResDTO: {
+            /**
+             * @description 로그인 성공 여부
+             * @example true
+             */
+            success: boolean;
+            /**
+             * @description 리디렉션 URL
+             * @example https://example.com/dashboard
+             */
+            redirectUrl: string;
+        };
         MessageDTO: {
             /**
              * @description Response message indicating the result of the operation

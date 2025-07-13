@@ -18,15 +18,20 @@ export async function postFeedback(
   }
 ) {
   try {
-    return await fetcher.post(`feedback`, {
-      json: {
-        type: getEnumKeyByValue(type),
-        message,
+    return await fetcher.post(
+      `feedback`,
+      {
+        body: {
+          type: getEnumKeyByValue(type, FeedbackTypeKr),
+          message,
+        },
       },
-      headers: {
-        Cookie: await getCookieValue(),
-      },
-    });
+      {
+        headers: {
+          Cookie: await getCookieValue(),
+        },
+      }
+    );
   } catch (error) {
     console.error("Error occurred while starting interview:", error);
   }
