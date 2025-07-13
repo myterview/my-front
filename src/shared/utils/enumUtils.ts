@@ -39,16 +39,53 @@ function getEnumByKey(key: string) {
 }
 
 // value(한글) → key(영문)
-export function getEnumKeyByValue(value: string): string {
-  const enumObj = getEnumByValue(value); // Validate the value against known enums
+export function getEnumKeyByValue(value: string): string;
+export function getEnumKeyByValue<E extends Record<string, string>>(
+  value: string,
+  enumType: E
+): keyof E;
+export function getEnumKeyByValue<E extends Record<string, string>>(
+  value: string,
+  enumType?: E
+): string | keyof E {
+  if (enumType) {
+    return Object.keys(enumType).find(
+      (key) => enumType[key] === value
+    ) as keyof E;
+  }
 
-  return (Object.keys(enumObj) as Array<keyof typeof enumObj>).find(
-    (key) => enumObj[key] === value
-  )!;
+  try {
+    const enumObj = getEnumByValue(value);
+    return (
+      Object.keys(enumObj).find(
+        (key) => (enumObj as Record<string, string>)[key] === value
+      ) || ""
+    );
+  } catch {
+    console.warn(`Could not find enum for value: ${value}`);
+    return "";
+  }
 }
 
 // key(영문) → value(한글)
-export function getEnumValueByKey(key: string): string {
-  const enumObj = getEnumByKey(key); // Validate the key against known enums
-  return enumObj[key as keyof typeof enumObj];
+export function getEnumValueByKey(key: string): string;
+export function getEnumValueByKey<E extends Record<string, string>>(
+  key: string,
+  enumType: E
+): E[keyof E];
+export function getEnumValueByKey<E extends Record<string, string>>(
+  key: string,
+  enumType?: E
+): string | E[keyof E] {
+  if (enumType) {
+    return enumType[key];
+  }
+
+  try {
+    const enumObj = getEnumByKey(key);
+    return (enumObj as Record<string, string>)[key];
+  } catch {
+    console.warn(`Could not find enum for key: ${key}`);
+    return "";
+  }
 }

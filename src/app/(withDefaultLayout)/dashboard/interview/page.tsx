@@ -21,7 +21,6 @@ export default async function Home() {
 
       <div className="mt-60 mb-24 space-y-12">
         <h3 className="heading-02">나의 인터뷰</h3>
-        <p className="heading-03"></p>
       </div>
 
       <InterviewBinder />
