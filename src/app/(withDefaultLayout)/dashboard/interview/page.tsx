@@ -1,6 +1,6 @@
 import { InterviewForm } from "../../../../ui/sections/InterviewForm";
-import { InterviewBinder } from "@/ui/components/Binder/InterviewBinder";
 import { SizeWrapper } from "@/ui/components/SizeWrapper/SizeWrapper";
+import { InterviewBinder } from "@/ui/sections/InterviewBinder";
 
 export default async function Home() {
   return (
