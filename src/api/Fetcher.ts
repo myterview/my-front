@@ -48,18 +48,59 @@ type KyMethodSignature = (url: string, options?: Options) => Promise<Response>;
 type Environment = "server" | "client";
 
 /**
- * 기본 HTTP 클라이언트 추상 클래스
- * 환경별 설정과 기본 HTTP 요청 처리를 담당
+ * API 요청을 위한 타입 안전한 HTTP 클라이언트
+ * OpenAPI 스펙 기반으로 자동 타입 추론을 제공합니다.
  */
-abstract class BaseHttpClient {
-  protected abstract createKyInstance(
-    environment: Environment
-  ): ReturnType<typeof ky.create>;
+export class Fetcher {
+  public onServer = this.createFetcher("server");
+  public onClient = this.createFetcher("client");
 
-  /**
-   * 요청 파라미터를 처리하여 최종 경로와 옵션을 반환합니다.
-   */
-  protected processRequestParams(
+  private createKyInstance(environment: Environment) {
+    switch (environment) {
+      case "server":
+        return ky.create({
+          prefixUrl: process.env.NEXT_PUBLIC_SERVER_API_URL,
+        });
+      case "client":
+        return ky.create({
+          prefixUrl: process.env.NEXT_PUBLIC_CLIENT_API_URL,
+        });
+      default:
+        throw new Error(`Unknown environment: ${environment}`);
+    }
+  }
+
+  private createFetcher(environment: Environment): FetcherInstance {
+    const kyInstance = this.createKyInstance(environment);
+    const fetcher = {} as FetcherInstance;
+
+    // HTTP 메서드별 fetcher 함수 생성
+    (Object.values(HTTPMethod) as HttpMethod[]).forEach((method) => {
+      fetcher[method] = async <P extends PathWithoutApi<keyof paths>>(
+        path: P,
+        paramsOrOptions?: ApiRequestParams<P, typeof method> | Options,
+        options?: Options
+      ) => {
+        const { finalPath, finalOptions } = this.processRequestParams(
+          path as string,
+          paramsOrOptions,
+          options
+        );
+
+        const kyMethod = kyInstance[method] as KyMethodSignature;
+        const response = await kyMethod.call(
+          kyInstance,
+          finalPath,
+          finalOptions
+        );
+        return response.json();
+      };
+    });
+
+    return fetcher;
+  }
+
+  private processRequestParams(
     path: string,
     paramsOrOptions?: Record<string, unknown> | Options,
     additionalOptions?: Options
@@ -90,7 +131,7 @@ abstract class BaseHttpClient {
   /**
    * 객체가 ApiRequestParams인지 확인합니다.
    */
-  protected isApiRequestParams(obj: unknown): obj is Record<string, unknown> {
+  private isApiRequestParams(obj: unknown): obj is Record<string, unknown> {
     return (
       obj !== null &&
       typeof obj === "object" &&
@@ -101,7 +142,7 @@ abstract class BaseHttpClient {
   /**
    * path 파라미터를 URL에 치환합니다.
    */
-  protected processPathParams(
+  private processPathParams(
     path: string,
     pathParams?: Record<string, string>
   ): string {
@@ -117,7 +158,7 @@ abstract class BaseHttpClient {
   /**
    * ApiRequestParams를 ky Options로 변환합니다.
    */
-  protected buildKyOptions(params: Record<string, unknown>): Options {
+  private buildKyOptions(params: Record<string, unknown>): Options {
     const options: Options = {};
 
     if (params.body) {
@@ -133,59 +174,5 @@ abstract class BaseHttpClient {
     }
 
     return options;
-  }
-}
-
-/**
- * API 요청을 위한 타입 안전한 HTTP 클라이언트
- * OpenAPI 스펙 기반으로 자동 타입 추론을 제공합니다.
- */
-export class Fetcher extends BaseHttpClient {
-  public readonly onServer = this.createFetcher("server");
-  public readonly onClient = this.createFetcher("client");
-
-  protected createKyInstance = (environment: Environment) => {
-    switch (environment) {
-      case "server":
-        return ky.create({
-          prefixUrl: process.env.NEXT_PUBLIC_SERVER_API_URL,
-        });
-      case "client":
-        return ky.create({
-          prefixUrl: process.env.NEXT_PUBLIC_CLIENT_API_URL,
-        });
-      default:
-        throw new Error(`Unknown environment: ${environment}`);
-    }
-  };
-
-  private createFetcher(environment: Environment): FetcherInstance {
-    const kyInstance = this.createKyInstance(environment);
-    const fetcher = {} as FetcherInstance;
-
-    // HTTP 메서드별 fetcher 함수 생성
-    (Object.values(HTTPMethod) as HttpMethod[]).forEach((method) => {
-      fetcher[method] = async <P extends PathWithoutApi<keyof paths>>(
-        path: P,
-        paramsOrOptions?: ApiRequestParams<P, typeof method> | Options,
-        options?: Options
-      ) => {
-        const { finalPath, finalOptions } = this.processRequestParams(
-          path as string,
-          paramsOrOptions,
-          options
-        );
-
-        const kyMethod = kyInstance[method] as KyMethodSignature;
-        const response = await kyMethod.call(
-          kyInstance,
-          finalPath,
-          finalOptions
-        );
-        return response.json();
-      };
-    });
-
-    return fetcher;
   }
 }
