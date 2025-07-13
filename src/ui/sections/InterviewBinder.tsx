@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "./Card";
+import { Card } from "../components/Card/Card";
 import { InterviewClient } from "@/api/interview.client";
 import { getEnumValueByKey } from "@/shared/utils/enumUtils";
 import { toKST } from "@/shared/utils/toKST";
