@@ -8,14 +8,16 @@ export class UserQuery extends Fetcher {
   @SwallowError()
   @WithCookies()
   public async getUser() {
-    return await this.serverFetcher.get("auth/user");
+    return await this.onServer.get("auth/user");
   }
 
   @SwallowError()
   @WithCookies()
   public async patchUser() {
-    return await this.serverFetcher.patch("auth/user/role", {
-      json: { secret: "your_role_change_code" },
+    return await this.onServer.patch("auth/user/role", {
+      body: {
+        secret: "admin-secret", // API 스펙에 따르면 secret 필드가 필요
+      },
     });
   }
 }

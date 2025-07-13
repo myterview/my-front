@@ -3,15 +3,15 @@ import { FeedbackModal } from "@/ui/components/Modal/FeedbackModal";
 import { ModalWrapper } from "@/ui/components/Modal/ModalWrapper";
 import { grunfeld } from "@ilokesto/grunfeld";
 import {
-    QueryClient,
+  QueryClient,
 } from "@tanstack/react-query";
 import { Dispatch, SetStateAction } from "react";
 import { thisBind } from "./decorators/thisBind";
 import {
-    Fetcher,
-    infiniteQueryOptions,
-    mutationOptions,
-    queryOptions,
+  Fetcher,
+  infiniteQueryOptions,
+  mutationOptions,
+  queryOptions,
 } from "./Fetcher";
 
 @thisBind
@@ -24,7 +24,7 @@ export class InterviewClient extends Fetcher {
       }: {
         pageParam: { take: number; skip: number };
       }) => {
-        return this.clientFetcher.get("interview", {
+        return this.onClient.get("interview", {
           credentials: "include", // 쿠키를 포함하여 요청
           searchParams: {
             take: pageParam.take,
@@ -56,7 +56,7 @@ export class InterviewClient extends Fetcher {
     queryOptions({
       queryKey: ["interview", interviewId],
       queryFn: () =>
-        this.clientFetcher.get(
+        this.onClient.get(
           `interview/${interviewId}` as "interview/{sessionId}",
           {
             credentials: "include",
@@ -78,7 +78,7 @@ export class InterviewClient extends Fetcher {
   }) =>
     mutationOptions({
       mutationFn: ({ message }: { message: string }) =>
-        this.clientFetcher.post(
+        this.onClient.post(
           `interview/${interviewId}/message` as "interview/{sessionId}/message",
           {
             json: { message },

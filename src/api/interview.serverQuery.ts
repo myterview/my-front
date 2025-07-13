@@ -8,8 +8,9 @@ export class InterviewQuery extends Fetcher {
   @SwallowError()
   @WithCookies()
   public async getInterviewById(interviewId: string, withMessages: boolean = false) {
-    return await this.serverFetcher.get(`interview/${interviewId}` as "interview/{sessionId}", {
-      searchParams: { withMessages },
+    return await this.onServer.get("interview/{sessionId}", {
+      query: { withMessages },
+      path: { sessionId: interviewId },
     });
   }
 }
