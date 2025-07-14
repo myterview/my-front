@@ -1,6 +1,7 @@
 import { InterviewForm } from "../../../../ui/sections/InterviewForm";
 import { SizeWrapper } from "@/ui/components/SizeWrapper/SizeWrapper";
 import { InterviewBinder } from "@/ui/sections/InterviewBinder";
+import { Suspense } from "react";
 
 export default async function Home() {
   return (
@@ -23,7 +24,9 @@ export default async function Home() {
         <h3 className="heading-02">나의 인터뷰</h3>
       </div>
 
-      <InterviewBinder />
+      <Suspense>
+        <InterviewBinder />
+      </Suspense>
     </SizeWrapper>
   );
 }
