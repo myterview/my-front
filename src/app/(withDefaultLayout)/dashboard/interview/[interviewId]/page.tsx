@@ -1,8 +1,9 @@
-import { SessionForm } from "../../../../../ui/sections/SessionForm";
-import { SessionHeader } from "../../../../../ui/sections/SessionHeader";
-import { SessionMain } from "../../../../../ui/sections/SessionMain";
 import { InterviewQuery } from "@/api/interview.serverQuery";
 import { UserQuery } from "@/api/user.serverQuery";
+import { getEnumValueByKey } from "@/shared/utils/enumUtils";
+import { SessionForm } from "@/ui/sections/SessionForm";
+import { SessionHeader } from "@/ui/sections/SessionHeader";
+import { SessionMain } from "@/ui/sections/SessionMain";
 import { notFound, redirect } from "next/navigation";
 
 export default async function InterviewSessionPage({
@@ -31,7 +32,14 @@ export default async function InterviewSessionPage({
 
   return (
     <main className="flex flex-col w-full overflow-y-scroll h-dvh">
-      <SessionHeader interviewId={interviewId} />
+      <SessionHeader
+        title={currentInterview.session.title}
+        createdAt={currentInterview.session.createdAt}
+        tags={[
+          getEnumValueByKey(currentInterview.session.position),
+          getEnumValueByKey(currentInterview.session.experience),
+        ]}
+      />
 
       <SessionMain interviewId={interviewId} />
 

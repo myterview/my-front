@@ -1,4 +1,5 @@
 import { InterviewQuery } from "@/api/interview.serverQuery";
+import { getEnumValueByKey } from "@/shared/utils/enumUtils";
 import { EvaluationProps } from "@/types";
 import {
   DefaultEvaluation,
@@ -28,7 +29,14 @@ export default async function NotInter({
 
   return (
     <main className="flex flex-col h-dvh">
-      <SessionHeader interviewId={interviewId} />
+      <SessionHeader
+        title={session.title}
+        createdAt={session.createdAt}
+        tags={[
+          getEnumValueByKey(session.position),
+          getEnumValueByKey(session.experience),
+        ]}
+      />
 
       <div
         className={neato(
