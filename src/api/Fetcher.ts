@@ -54,9 +54,20 @@ type Environment = "server" | "client";
  * 이를 통해 HTTP 요청 처리의 일관성을 보장하면서도 다양한 환경별 설정을 유연하게 지원합니다.
  */
 abstract class BaseHttpClient {
-  protected abstract createKyInstance(
-    environment: Environment
-  ): ReturnType<typeof ky.create>;
+  protected createKyInstance(environment: Environment) {
+    switch (environment) {
+      case "server":
+        return ky.create({
+          prefixUrl: process.env.NEXT_PUBLIC_SERVER_API_URL,
+        });
+      case "client":
+        return ky.create({
+          prefixUrl: process.env.NEXT_PUBLIC_CLIENT_API_URL,
+        });
+      default:
+        throw new Error(`Unknown environment: ${environment}`);
+    }
+  }
 
   /**
    * 요청 파라미터를 처리하여 최종 경로와 옵션을 반환합니다.
@@ -145,8 +156,8 @@ abstract class BaseHttpClient {
  * 이를 통해 컴파일 타임에 API 경로와 파라미터의 유효성을 검증하고, 런타임 오류를 사전에 방지할 수 있습니다.
  */
 export class Fetcher extends BaseHttpClient {
-  public onServer = this.createFetcher("server");
-  public onClient = this.createFetcher("client");
+  public fetcher = this.createFetcher(this.detectEnvironment());
+
   protected queryOptions = queryOptions;
   protected infiniteQueryOptions = infiniteQueryOptions;
   protected mutationOptions = <
@@ -157,6 +168,16 @@ export class Fetcher extends BaseHttpClient {
   >(
     options: UseMutationOptions<TData, TError, TVariables, TContext>
   ): UseMutationOptions<TData, TError, TVariables, TContext> => options;
+
+  private detectEnvironment(): Environment {
+    // typeof window === 'undefined'는 서버 사이드 렌더링 환경을 의미
+    if (typeof window === "undefined") {
+      return "server";
+    }
+
+    // window 객체가 존재하면 클라이언트 환경
+    return "client";
+  }
 
   protected createKyInstance(environment: Environment) {
     switch (environment) {

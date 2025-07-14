@@ -4,7 +4,7 @@ import { Fetcher } from "./Fetcher";
 import { getCookieValue } from "@/shared/utils/cookieUtils";
 import { cookies } from "next/headers";
 
-const { onServer: fetcher } = new Fetcher();
+const { fetcher } = new Fetcher();
 
 // 사용되지 않고 있음
 // export async function patchUserRoleAction() {

@@ -5,7 +5,7 @@ import { getCookieValue } from "@/shared/utils/cookieUtils";
 import { getEnumKeyByValue } from "@/shared/utils/enumUtils";
 import { FeedbackTypeKr } from "@/types";
 
-const { onServer: fetcher } = new Fetcher();
+const { fetcher } = new Fetcher();
 
 export async function postFeedback(
   prev: unknown,

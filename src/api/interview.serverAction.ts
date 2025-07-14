@@ -5,7 +5,7 @@ import { getCookieValue } from "@/shared/utils/cookieUtils";
 import { getEnumKeyByValue } from "@/shared/utils/enumUtils";
 import { InterviewExperienceKr, InterviewPositionKr } from "@/types";
 
-const { onServer } = new Fetcher();
+const { fetcher } = new Fetcher();
 
 export async function startInterview(
   prev: unknown,
@@ -20,7 +20,7 @@ export async function startInterview(
   }
 ) {
   try {
-    return await onServer.post(
+    return await fetcher.post(
       "interview/start",
       {
         body: {

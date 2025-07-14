@@ -10,28 +10,22 @@ export function WithCookies() {
     if (!originalMethod) return descriptor;
 
     descriptor.value = async function (...args: Args): Promise<T> {
-      // 쿠키 가져오기 (next/headers의 cookies는 동기 함수)
+      // 쿠키 가져오기
       const cookieStore = await cookies();
       const allCookies = cookieStore.getAll();
       const Cookie = allCookies
         .map(({ name, value }) => `${name}=${value}`)
         .join("; ");
 
-      // this.onServer 또는 this.serverFetcher의 HTTP 메서드 오버라이드
+      // Fetcher 클래스의 fetcher 프로퍼티에 접근
       const self = this as {
-        onServer?: Record<
-          string,
-          (input: string, options?: Record<string, unknown>) => Promise<unknown>
-        >;
-        serverFetcher?: Record<
+        fetcher?: Record<
           string,
           (input: string, options?: Record<string, unknown>) => Promise<unknown>
         >;
       };
 
-      // onServer 또는 serverFetcher 중 사용 가능한 것을 선택
-      const fetcher = self.onServer || self.serverFetcher;
-
+      const fetcher = self.fetcher;
       const httpMethods = ["get", "post", "put", "patch", "delete"] as const;
       type Method = (typeof httpMethods)[number];
       const originalFetcherMethods: Partial<
@@ -42,6 +36,7 @@ export function WithCookies() {
       > = {};
 
       if (fetcher) {
+        // 원본 메서드들을 백업하고 쿠키 헤더를 추가하는 래퍼로 교체
         httpMethods.forEach((method) => {
           if (typeof fetcher[method] === "function") {
             originalFetcherMethods[method] = fetcher[method];
@@ -49,13 +44,19 @@ export function WithCookies() {
               input: string,
               options: Record<string, unknown> = {}
             ) {
-              return originalFetcherMethods[method]!.call(this, input, {
+              // options의 headers에 Cookie 추가
+              const mergedOptions = {
                 ...options,
                 headers: {
                   ...(options.headers || {}),
                   Cookie,
                 },
-              });
+              };
+              return originalFetcherMethods[method]!.call(
+                this,
+                input,
+                mergedOptions
+              );
             };
           }
         });

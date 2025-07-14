@@ -11,10 +11,10 @@ export default function CallbackPage() {
 
   useEffect(() => {
     const doLogin = async () => {
-      const { onClient } = new Fetcher();
+      const { fetcher } = new Fetcher();
 
       try {
-        const response = await onClient.get(
+        const response = await fetcher.get(
           `auth/${provider}/callback?${searchParams.toString()}` as `auth/google/callback`,
           {
             credentials: "include",
