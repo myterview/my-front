@@ -10,7 +10,7 @@ import {
 } from "@/types";
 import { BackendResponse } from "@/types/response";
 
-interface InterviewDomain {
+export interface InterviewDomain {
   readonly id: string;
   readonly userId: string;
   readonly title: string;
@@ -20,6 +20,11 @@ interface InterviewDomain {
   readonly createdAt: DateTimeDomain;
   readonly messages?: BackendResponse["interviewMessages"];
   readonly evaluation: IInterviewEvaluationFactory | undefined;
+
+  get progressStatus(): ProgressStatus;
+  isCompleted(): boolean;
+  isAnalyzing(): boolean;
+  isInProgress(): boolean;
 }
 
 export class Interview implements InterviewDomain {
