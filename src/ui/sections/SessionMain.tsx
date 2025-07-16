@@ -2,7 +2,7 @@
 
 import { InterviewClient } from "@/api/interview.client";
 import { useInterviewLoading } from "@/shared/caro-kann/useInterviewLoading";
-import { BackendResponse } from "@/types/response";
+import { BackendResponse } from "@/shared/types/response";
 import { ChatBox } from "@/ui/components/ChatBox/ChatBox";
 import { SizeWrapper } from "@/ui/components/SizeWrapper/SizeWrapper";
 import { For, Show } from "@ilokesto/utilinent";

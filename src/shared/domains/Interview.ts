@@ -7,8 +7,8 @@ import {
   InterviewExperienceKr,
   InterviewPositionKr,
   ProgressStatus,
-} from "@/types";
-import { BackendResponse } from "@/types/response";
+} from "@/shared/types";
+import { BackendResponse } from "@/shared/types/response";
 
 export interface InterviewDomain {
   readonly id: string;

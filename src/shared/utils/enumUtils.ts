@@ -5,7 +5,7 @@ import {
   InterviewExperienceKr,
   InterviewPositionKr,
   ProgressStatus,
-} from "@/types";
+} from "@/shared/types";
 
 const enumArray = [
   InterviewPositionKr,

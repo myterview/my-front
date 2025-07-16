@@ -1,4 +1,4 @@
-import { GradedScore } from "@/types";
+import { GradedScore } from "@/shared/types";
 
 export interface ScoreDomain {
   score: number;

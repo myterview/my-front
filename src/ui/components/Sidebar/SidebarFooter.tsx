@@ -1,6 +1,6 @@
 import { Avatar } from "../Avatar/Avatar";
 import { logoutAction } from "@/api/user.serverAction";
-import { BackendResponse } from "@/types/response";
+import { BackendResponse } from "@/shared/types/response";
 import Image from "next/image";
 import Link from "next/link";
 

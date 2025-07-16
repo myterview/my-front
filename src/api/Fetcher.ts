@@ -3,7 +3,7 @@ import type {
   ApiResponse,
   PathWithoutApi,
   paths,
-} from "@/types";
+} from "@/shared/types";
 import {
   type UseMutationOptions,
   infiniteQueryOptions,

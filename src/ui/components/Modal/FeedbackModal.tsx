@@ -10,7 +10,7 @@ import {
   handleServerAction,
   register,
 } from "@/shared/sicilian/feedbackForm";
-import { FeedbackTypeKr } from "@/types";
+import { FeedbackTypeKr } from "@/shared/types";
 import { grunfeld } from "@ilokesto/grunfeld";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
 import { useActionState, useEffect } from "react";

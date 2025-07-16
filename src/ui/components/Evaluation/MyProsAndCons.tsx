@@ -1,8 +1,8 @@
 import { ScoreChip } from "../Chips/ScoreChip";
 import { InterviewEvaluationFactory } from "@/shared/domains/InterviewEvaluation/InterviewEvaluationFactory";
 import { Score } from "@/shared/domains/Score";
+import { BackendResponse } from "@/shared/types";
 import { getEnumKeyByValue, getEnumValueByKey } from "@/shared/utils/enumUtils";
-import { BackendResponse } from "@/types/response";
 import { neato } from "neato";
 import Image from "next/image";
 

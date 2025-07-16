@@ -1,5 +1,5 @@
 import { DefaultInterviewEvaluation } from "./DefaultInterviewEvaluation";
-import { BackendResponse } from "@/types/response";
+import { BackendResponse } from "@/shared/types/response";
 
 export interface TDefaultInterviewEvaluation {
   evaluationType: "default";

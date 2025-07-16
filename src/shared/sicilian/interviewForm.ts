@@ -1,4 +1,4 @@
-import { InterviewExperienceKr, InterviewPositionKr } from "@/types";
+import { InterviewExperienceKr, InterviewPositionKr } from "@/shared/types";
 import { CreateForm } from "@ilokesto/sicilian";
 
 export const { register, getValues, handleServerAction } = new CreateForm<{

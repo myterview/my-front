@@ -1,5 +1,5 @@
 import { Avatar } from "../Avatar/Avatar";
-import { BackendResponse } from "@/types/response";
+import { BackendResponse } from "@/shared/types/response";
 import { OptionalWrapper, Show } from "@ilokesto/utilinent";
 import { neato } from "neato";
 

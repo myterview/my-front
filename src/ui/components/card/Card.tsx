@@ -1,4 +1,4 @@
-import { ProgressStatus } from "@/types";
+import { ProgressStatus } from "@/shared/types";
 import { For } from "@ilokesto/utilinent";
 import { neato } from "neato";
 

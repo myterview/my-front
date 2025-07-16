@@ -6,7 +6,7 @@ import {
   handleServerAction,
   register,
 } from "@/shared/sicilian/interviewForm";
-import { InterviewExperienceKr, InterviewPositionKr } from "@/types";
+import { InterviewExperienceKr, InterviewPositionKr } from "@/shared/types";
 import { Clickable } from "@/ui/components/Clickable/Clickable";
 import { DefaultInputWrapper } from "@/ui/components/Form/DefaultInputWrapper";
 import { Form } from "@/ui/components/Form/Form";

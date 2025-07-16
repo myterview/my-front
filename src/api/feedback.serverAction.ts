@@ -1,9 +1,9 @@
 "use server";
 
 import { Fetcher } from "./Fetcher";
+import { FeedbackTypeKr } from "@/shared/types";
 import { getCookieValue } from "@/shared/utils/cookieUtils";
 import { getEnumKeyByValue } from "@/shared/utils/enumUtils";
-import { FeedbackTypeKr } from "@/types";
 
 const { fetcher } = new Fetcher();
 

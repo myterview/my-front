@@ -4,7 +4,7 @@ import {
   TDefaultInterviewEvaluation,
   TInterviewEvaluation,
 } from "@/shared/domains/InterviewEvaluation/InterviewEvaluationFactory";
-import { EvaluationKeysKr } from "@/types";
+import { EvaluationKeysKr } from "@/shared/types";
 import { For } from "@ilokesto/utilinent";
 import { neato } from "neato";
 import Image from "next/image";
