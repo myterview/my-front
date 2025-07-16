@@ -67,7 +67,6 @@ UserInterviewProsAndCons.Title = function MyProsAndConsTitle() {
   );
 };
 
-// TODO: 객체지향적으로 객체가 스스로 평가할 방법을 찾으면 좋겠다
 UserInterviewProsAndCons.Card = function MyProsAndConsCard({
   type,
   item,
