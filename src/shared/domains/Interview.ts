@@ -4,11 +4,11 @@ import {
   InterviewEvaluationFactory,
 } from "./InterviewEvaluation/InterviewEvaluationFactory";
 import {
+  BackendResponse,
   InterviewExperienceKr,
   InterviewPositionKr,
   ProgressStatus,
 } from "@/shared/types";
-import { BackendResponse } from "@/shared/types/response";
 
 export interface InterviewDomain {
   readonly id: string;
