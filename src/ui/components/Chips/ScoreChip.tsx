@@ -1,9 +1,9 @@
-import { gradeScore } from "@/shared/utils/gradeScore";
+import { InterviewEvaluation } from "@/shared/domains/InterviewEvaluation/InterviewEvaluation";
 import { GradedScore } from "@/types";
 import { neato } from "neato";
 
 export function ScoreChip({ score }: { score: number }) {
-  const grade = gradeScore({ score });
+  const grade = InterviewEvaluation.gradeScore({ score });
 
   return (
     <div
