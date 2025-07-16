@@ -1,18 +1,14 @@
 import { Radar } from "../Charts/Radar";
 import { ScoreChip } from "../Chips/ScoreChip";
-import { components, EvaluationKeysKr } from "@/types";
+import { TDefaultInterviewEvaluation } from "@/shared/domains/InterviewEvaluation/InterviewEvaluationFactory";
+import { EvaluationKeysKr } from "@/types";
 import { For } from "@ilokesto/utilinent";
 import { neato } from "neato";
 import Image from "next/image";
 
-export type DefaultEvaluationProps = {
-  evaluation: components["schemas"]["EvaluationDto"];
-  evaluationType: "default";
-};
-
 export function DefaultEvaluationOverall({
   evaluation,
-}: Pick<DefaultEvaluationProps, "evaluation">) {
+}: Pick<TDefaultInterviewEvaluation, "evaluation">) {
   const OVERALL_ARRAY = [
     { name: "분석", value: evaluation.overallAssessment.analysis },
     { name: "결론", value: evaluation.overallAssessment.finalNotes },
@@ -47,7 +43,7 @@ export function DefaultEvaluationOverall({
 
 export function DefaultEvaluationRadar({
   evaluation,
-}: Pick<DefaultEvaluationProps, "evaluation">) {
+}: Pick<TDefaultInterviewEvaluation, "evaluation">) {
   const RADAR_ARRAY = [
     {
       name: EvaluationKeysKr.technicalExpertise,
@@ -80,7 +76,7 @@ export function DefaultEvaluationRadar({
 
 export function DefaultEvaluation({
   evaluation,
-}: Pick<DefaultEvaluationProps, "evaluation">) {
+}: Pick<TDefaultInterviewEvaluation, "evaluation">) {
   const EVALUATION_ARRAY = [
     {
       name: EvaluationKeysKr.technicalExpertise,

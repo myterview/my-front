@@ -1,9 +1,9 @@
 import { DefaultInterviewEvaluation } from "./DefaultInterviewEvaluation";
-import { components } from "@/types";
+import { BackendResponse } from "@/types/response";
 
 export interface TDefaultInterviewEvaluation {
   evaluationType: "default";
-  evaluation: components["schemas"]["EvaluationDto"];
+  evaluation: BackendResponse["evaluation"]["default"];
 }
 
 export type TUndefinedInterviewEvaluation = {

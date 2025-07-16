@@ -2,7 +2,7 @@
 
 import { InterviewClient } from "@/api/interview.client";
 import { useInterviewLoading } from "@/shared/caro-kann/useInterviewLoading";
-import { components } from "@/types";
+import { BackendResponse } from "@/types/response";
 import { ChatBox } from "@/ui/components/ChatBox/ChatBox";
 import { SizeWrapper } from "@/ui/components/SizeWrapper/SizeWrapper";
 import { For, Show } from "@ilokesto/utilinent";
@@ -36,7 +36,7 @@ export function SessionMain({ interviewId }: { interviewId: string }) {
 
       return acc;
     },
-    [] as Array<components["schemas"]["InterviewMessage"]>
+    [] as Array<BackendResponse["interviewMessage"]>
   );
 
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -46,7 +46,7 @@ export function SessionMain({ interviewId }: { interviewId: string }) {
 
   type InterviewListData = InfiniteData<{
     hasNext: boolean;
-    items: Array<components["schemas"]["InterviewSessionWithoutMessages"]>;
+    items: Array<BackendResponse["interview"]>;
   }>;
 
   // 스크롤이 항상 맨 아래로 이동하도록 설정

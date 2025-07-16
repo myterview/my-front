@@ -1,5 +1,5 @@
 import { Avatar } from "../Avatar/Avatar";
-import { components } from "@/types";
+import { BackendResponse } from "@/types/response";
 import { OptionalWrapper, Show } from "@ilokesto/utilinent";
 import { neato } from "neato";
 
@@ -7,7 +7,7 @@ export function ChatBox({
   content,
   type,
   isConnected,
-}: Pick<components["schemas"]["InterviewMessage"], "type"> & {
+}: Pick<BackendResponse["interviewMessage"], "type"> & {
   isConnected: boolean;
   content: React.ReactNode;
 }) {

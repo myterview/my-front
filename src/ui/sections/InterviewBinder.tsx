@@ -4,7 +4,8 @@ import { Card } from "../components/Card/Card";
 import { InterviewClient } from "@/api/interview.client";
 import { getEnumValueByKey } from "@/shared/utils/enumUtils";
 import { toKST } from "@/shared/utils/toKST";
-import { components, ProgressStatus } from "@/types";
+import { ProgressStatus } from "@/types";
+import { BackendResponse } from "@/types/response";
 import { For, Observer, Show } from "@ilokesto/utilinent";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { neato } from "neato";
@@ -93,7 +94,7 @@ InterviewBinder.CardWrapper = function CardWrapper({
   children,
 }: {
   status: ProgressStatus;
-  interview: components["schemas"]["InterviewSessionWithoutMessages"];
+  interview: BackendResponse["interview"];
   children: React.ReactNode;
 }) {
   switch (status) {

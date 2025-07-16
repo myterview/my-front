@@ -1,4 +1,4 @@
-import { components } from "@/types";
+import { BackendResponse } from "@/types/response";
 import { FeedbackModal } from "@/ui/components/Modal/FeedbackModal";
 import { ModalWrapper } from "@/ui/components/Modal/ModalWrapper";
 import { grunfeld } from "@ilokesto/grunfeld";
@@ -103,7 +103,7 @@ export class InterviewClient extends Fetcher {
           ["interview", interviewId],
           (oldData: {
             success: true;
-            session: components["schemas"]["InterviewSession"];
+            session: BackendResponse["interview"];
           }) => {
             if (!oldData) return oldData;
 

@@ -1,14 +1,10 @@
 import { Avatar } from "../Avatar/Avatar";
 import { logoutAction } from "@/api/user.serverAction";
-import { components } from "@/types";
+import { BackendResponse } from "@/types/response";
 import Image from "next/image";
 import Link from "next/link";
 
-export function SidebarFooter({
-  user,
-}: {
-  user: components["schemas"]["UserResDTO"];
-}) {
+export function SidebarFooter({ user }: { user: BackendResponse["user"] }) {
   return (
     <div className="flex flex-col gap-20 px-20 bg-primary-600 w-280 pt-18 pb-28">
       <div className="flex items-center justify-between">

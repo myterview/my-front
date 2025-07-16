@@ -4,11 +4,11 @@ import {
   InterviewEvaluationFactory,
 } from "./InterviewEvaluation/InterviewEvaluationFactory";
 import {
-  components,
   InterviewExperienceKr,
   InterviewPositionKr,
   ProgressStatus,
 } from "@/types";
+import { BackendResponse } from "@/types/response";
 
 interface InterviewDomain {
   readonly id: string;
@@ -18,40 +18,37 @@ interface InterviewDomain {
   readonly experience: InterviewExperienceKr;
   readonly isActive: boolean;
   readonly createdAt: DateTimeDomain;
-  readonly messages?: components["schemas"]["InterviewMessage"][];
+  readonly messages?: BackendResponse["interviewMessages"];
   readonly evaluation: IInterviewEvaluationFactory;
 }
 
 export class Interview implements InterviewDomain {
-  public readonly id: string;
-  public readonly userId: string;
-  public readonly title: string;
-  public readonly position: InterviewPositionKr;
-  public readonly experience: InterviewExperienceKr;
-  public readonly isActive: boolean;
-  public readonly createdAt: DateTimeDomain;
-  public readonly messages?: components["schemas"]["InterviewMessage"][];
-  public readonly evaluation: IInterviewEvaluationFactory;
+  public readonly id;
+  public readonly userId;
+  public readonly title;
+  public readonly position;
+  public readonly experience;
+  public readonly isActive;
+  public readonly createdAt;
+  public readonly messages;
+  public readonly evaluation;
 
-  constructor(data: {
-    success: boolean;
-    session: components["schemas"]["InterviewSession"];
-  }) {
-    this.id = data.session.id;
-    this.userId = data.session.userId;
-    this.title = data.session.title;
-    this.position = data.session.position as InterviewPositionKr;
-    this.experience = data.session.experience as InterviewExperienceKr;
-    this.isActive = data.session.isActive;
-    this.createdAt = new DateTime(data.session.createdAt);
-    this.messages = data.session.messages;
+  constructor(session: BackendResponse["interview"]) {
+    this.id = session.id;
+    this.userId = session.userId;
+    this.title = session.title;
+    this.position = session.position as InterviewPositionKr;
+    this.experience = session.experience as InterviewExperienceKr;
+    this.isActive = session.isActive;
+    this.createdAt = new DateTime(session.createdAt);
+    this.messages = session.messages;
 
     // API 데이터를 TInterviewEvaluation 타입에 맞게 변환
-    if (data.session.evaluation && data.session.evaluationType === "default") {
+    if (session.evaluation && session.evaluationType === "default") {
       // 평가 데이터가 있고 타입이 "default"인 경우
       this.evaluation = new InterviewEvaluationFactory({
         evaluationType: "default",
-        evaluation: data.session.evaluation,
+        evaluation: session.evaluation,
       });
     } else {
       // 평가 데이터가 없거나 타입이 undefined인 경우
