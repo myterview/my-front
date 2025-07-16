@@ -10,7 +10,9 @@ export function Card({
   className?: string;
 }) {
   return (
-    <div className={neato("shadow-custom rounded-[4] px-32 py-20", className)}>
+    <div
+      className={neato("shadow-custom rounded-[4px] px-32 py-20", className)}
+    >
       {children}
     </div>
   );
@@ -40,7 +42,7 @@ Card.ProgressChip = function Progress({
   return (
     <div
       className={neato(
-        "flex items-center justify-center rounded-[4] px-4 text-xs/18 font-medium text-black",
+        "flex items-center justify-center rounded-[4px] px-4 text-xs/18 font-medium text-black",
         children === ProgressStatus.IN_PROGRESS && "bg-secondary",
         children === ProgressStatus.ANALYZING && "bg-gray-200",
         children === ProgressStatus.COMPLETED && "bg-blue-100"
@@ -66,7 +68,7 @@ Card.Tags = function Tags({ each }: { each: Array<string> }) {
         {(tag) => (
           <span
             key={tag}
-            className="shadow-custom flex items-center justify-center rounded-[4] px-4 text-xs/18 font-medium text-blue-600"
+            className="shadow-custom flex items-center justify-center rounded-[4px] px-4 text-xs/18 font-medium text-blue-600"
           >
             #{tag}
           </span>
