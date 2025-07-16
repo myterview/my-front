@@ -6,24 +6,15 @@ export interface TDefaultInterviewEvaluation {
   evaluation: BackendResponse["evaluation"]["default"];
 }
 
-export type TUndefinedInterviewEvaluation = {
-  evaluationType?: undefined;
-  evaluation?: undefined;
-};
-
-export type TInterviewEvaluationWithoutUndefined = TDefaultInterviewEvaluation;
-
-export type TInterviewEvaluation =
-  | TInterviewEvaluationWithoutUndefined
-  | TUndefinedInterviewEvaluation;
+export type TInterviewEvaluation = TDefaultInterviewEvaluation;
 
 export interface IInterviewEvaluationFactory {
-  instance: DefaultInterviewEvaluation | TUndefinedInterviewEvaluation;
+  instance: DefaultInterviewEvaluation;
   isDefaultEvaluation(): this is { instance: DefaultInterviewEvaluation };
 }
 
 export class InterviewEvaluationFactory implements IInterviewEvaluationFactory {
-  public instance: DefaultInterviewEvaluation | TUndefinedInterviewEvaluation;
+  public instance: DefaultInterviewEvaluation;
 
   constructor({ evaluationType, evaluation }: TInterviewEvaluation) {
     switch (evaluationType) {
@@ -32,10 +23,6 @@ export class InterviewEvaluationFactory implements IInterviewEvaluationFactory {
           evaluation,
           evaluationType,
         });
-        break;
-
-      case undefined:
-        this.instance = { evaluationType: undefined, evaluation: undefined };
         break;
 
       default:

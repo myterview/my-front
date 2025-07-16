@@ -1,5 +1,4 @@
 import { Card } from "../Card/Card";
-import { toKST } from "@/shared/utils/toKST";
 import Image from "next/image";
 
 export function EvaluationHeader({
@@ -32,7 +31,7 @@ export function EvaluationHeader({
       </div>
 
       <div className="flex items-center justify-between">
-        <Card.subTitle>{toKST(createdAt)}</Card.subTitle>
+        <Card.subTitle>{createdAt}</Card.subTitle>
         <Card.Tags each={tags} />
       </div>
     </div>

@@ -1,10 +1,8 @@
-import { TInterviewEvaluationWithoutUndefined } from "./InterviewEvaluationFactory";
+import { TInterviewEvaluation } from "./InterviewEvaluationFactory";
 import { gradeScore } from "@/shared/utils/gradeScore";
 import { filter, map, pipe, reduce } from "@fxts/core";
 
-export abstract class InterviewEvaluation<
-  T extends TInterviewEvaluationWithoutUndefined,
-> {
+export abstract class InterviewEvaluation<T extends TInterviewEvaluation> {
   public evaluation: T["evaluation"];
   public evaluationType: T["evaluationType"];
 

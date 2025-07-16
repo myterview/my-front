@@ -1,16 +1,22 @@
 import { ScoreChip } from "../Chips/ScoreChip";
-import { ProsAndCons } from "@/shared/domains/evaluation/ProsAndCons";
+import { InterviewEvaluationFactory } from "@/shared/domains/InterviewEvaluation/InterviewEvaluationFactory";
 import { getEnumKeyByValue, getEnumValueByKey } from "@/shared/utils/enumUtils";
 import { GradedScore } from "@/types";
+import { BackendResponse } from "@/types/response";
 import { neato } from "neato";
 import Image from "next/image";
 
 export function UserInterviewProsAndCons({
   evaluation,
 }: {
-  evaluation: { [x: string]: { score: number } };
+  evaluation: BackendResponse["evaluation"]["default"];
 }) {
-  const { pros, cons } = ProsAndCons.extract(evaluation);
+  const interviewEvaluation = new InterviewEvaluationFactory({
+    evaluationType: "default",
+    evaluation,
+  });
+
+  const { pros, cons } = interviewEvaluation.instance.getProsAndCons();
 
   return (
     <div className="@container/pac">

@@ -19,7 +19,7 @@ interface InterviewDomain {
   readonly isActive: boolean;
   readonly createdAt: DateTimeDomain;
   readonly messages?: BackendResponse["interviewMessages"];
-  readonly evaluation: IInterviewEvaluationFactory;
+  readonly evaluation: IInterviewEvaluationFactory | undefined;
 }
 
 export class Interview implements InterviewDomain {
@@ -52,16 +52,13 @@ export class Interview implements InterviewDomain {
       });
     } else {
       // 평가 데이터가 없거나 타입이 undefined인 경우
-      this.evaluation = new InterviewEvaluationFactory({
-        evaluationType: undefined,
-        evaluation: undefined,
-      });
+      this.evaluation = undefined;
     }
   }
 
   public get progressStatus(): ProgressStatus {
     if (this.isActive) return ProgressStatus.IN_PROGRESS;
-    if (!this.evaluation.instance.evaluationType)
+    if (!this.evaluation?.instance.evaluationType)
       return ProgressStatus.ANALYZING;
     return ProgressStatus.COMPLETED;
   }

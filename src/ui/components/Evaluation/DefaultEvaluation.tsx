@@ -1,6 +1,9 @@
 import { Radar } from "../Charts/Radar";
 import { ScoreChip } from "../Chips/ScoreChip";
-import { TDefaultInterviewEvaluation } from "@/shared/domains/InterviewEvaluation/InterviewEvaluationFactory";
+import {
+  TDefaultInterviewEvaluation,
+  TInterviewEvaluation,
+} from "@/shared/domains/InterviewEvaluation/InterviewEvaluationFactory";
 import { EvaluationKeysKr } from "@/types";
 import { For } from "@ilokesto/utilinent";
 import { neato } from "neato";
@@ -8,7 +11,9 @@ import Image from "next/image";
 
 export function DefaultEvaluationOverall({
   evaluation,
-}: Pick<TDefaultInterviewEvaluation, "evaluation">) {
+}: {
+  evaluation: TInterviewEvaluation["evaluation"];
+}) {
   const OVERALL_ARRAY = [
     { name: "분석", value: evaluation.overallAssessment.analysis },
     { name: "결론", value: evaluation.overallAssessment.finalNotes },

@@ -21,15 +21,15 @@ export default async function NotInter({
   const { session } = await interviewQuery.getInterviewById(interviewId, false);
   const interview = new Interview(session);
 
-  if (interview.evaluation.isDefaultEvaluation()) {
+  if (interview.evaluation?.isDefaultEvaluation()) {
     return (
       <main className="flex flex-col h-dvh">
         <SessionHeader
-          title={session.title}
-          createdAt={session.createdAt}
+          title={interview.title}
+          createdAt={interview.createdAt}
           tags={[
-            getEnumValueByKey(session.position),
-            getEnumValueByKey(session.experience),
+            getEnumValueByKey(interview.position),
+            getEnumValueByKey(interview.experience),
           ]}
         />
 
