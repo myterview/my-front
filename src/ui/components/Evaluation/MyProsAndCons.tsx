@@ -34,8 +34,25 @@ export function UserInterviewProsAndCons({
             "@2xl/pac:flex-row"
           )}
         >
-          <UserInterviewProsAndCons.Card {...pros} />
-          <UserInterviewProsAndCons.Card {...cons} />
+          {typeof pros === "object" ? (
+            <UserInterviewProsAndCons.Card
+              keyName={pros.keyName}
+              score={pros.score.score}
+              grade={pros.score.grade()}
+            />
+          ) : (
+            <UserInterviewProsAndCons.Card grade={pros} />
+          )}
+
+          {typeof cons === "object" ? (
+            <UserInterviewProsAndCons.Card
+              keyName={cons.keyName}
+              score={cons.score.score}
+              grade={cons.score.grade()}
+            />
+          ) : (
+            <UserInterviewProsAndCons.Card grade={cons} />
+          )}
         </div>
       </div>
     </div>
@@ -67,6 +84,7 @@ UserInterviewProsAndCons.Title = function MyProsAndConsTitle() {
   );
 };
 
+// TODO: 객체지향적으로 객체가 스스로 평가할 방법을 찾으면 좋겠다
 UserInterviewProsAndCons.Card = function MyProsAndConsCard({
   keyName,
   score,
