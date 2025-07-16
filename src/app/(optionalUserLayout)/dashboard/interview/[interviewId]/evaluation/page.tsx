@@ -26,7 +26,7 @@ export default async function NotInter({
       <main className="flex flex-col h-dvh">
         <SessionHeader
           title={interview.title}
-          createdAt={interview.createdAt}
+          createdAt={session.createdAt}
           tags={[
             getEnumValueByKey(interview.position),
             getEnumValueByKey(interview.experience),

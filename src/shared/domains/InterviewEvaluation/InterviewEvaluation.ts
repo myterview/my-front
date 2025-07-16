@@ -1,5 +1,5 @@
 import { TInterviewEvaluation } from "./InterviewEvaluationFactory";
-import { filter, map, pipe, reduce } from "@fxts/core";
+import { filter, map, pipe, reduce, toArray } from "@fxts/core";
 
 type ProsAndCons = {
   pros: { keyName: string; score: number } | undefined;
@@ -29,15 +29,16 @@ export abstract class InterviewEvaluation<T extends TInterviewEvaluation>
       Object.entries,
       filter(([key]) => key !== "overallAssessment"),
       map(([key, value]) => ({ keyName: key, score: value.score })),
+      toArray,
       (arr) => ({
-        pros: this.getPros(arr),
-        cons: this.getCons(arr),
+        pros: this.getPros([...arr]),
+        cons: this.getCons([...arr]),
       })
     ) as ProsAndCons;
   }
 
   private getPros(
-    arr: IterableIterator<{
+    arr: Array<{
       keyName: string;
       score: number;
     }>
@@ -55,7 +56,7 @@ export abstract class InterviewEvaluation<T extends TInterviewEvaluation>
   }
 
   private getCons(
-    arr: IterableIterator<{
+    arr: Array<{
       keyName: string;
       score: number;
     }>
@@ -71,25 +72,4 @@ export abstract class InterviewEvaluation<T extends TInterviewEvaluation>
         )
     );
   }
-
-  // static gradeScore({
-  //   type,
-  //   score,
-  // }: {
-  //   score: number | undefined;
-  //   type?: "pros" | "cons";
-  // }) {
-  //   if (score === undefined) {
-  //     return type === "pros" ? GradedScore.no_pros : GradedScore.no_cons;
-  //   }
-
-  //   switch (true) {
-  //     case score >= 80:
-  //       return GradedScore.good;
-  //     case score >= 50:
-  //       return GradedScore.normal;
-  //     default:
-  //       return GradedScore.bad;
-  //   }
-  // }
 }

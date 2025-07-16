@@ -96,8 +96,11 @@ UserInterviewProsAndCons.Card = function MyProsAndConsCard({
       />
       <div>
         <div className="heading-03 @3xl/pac:heading-02">
-          {item && getEnumValueByKey(item.keyName)}
-          {type === "pros" ? "장점 없음" : "단점 없음"}
+          {item
+            ? getEnumValueByKey(item.keyName)
+            : type === "pros"
+              ? "장점 없음"
+              : "단점 없음"}
         </div>
         {item && <ScoreChip score={item.score} />}
       </div>
