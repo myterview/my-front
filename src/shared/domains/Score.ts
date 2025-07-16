@@ -2,35 +2,35 @@ import { GradedScore } from "@/types";
 
 export interface ScoreDomain {
   score: number;
-  grade: () => GradedScore;
+  grade: GradedScore.good | GradedScore.normal | GradedScore.bad;
   isGood: () => boolean;
   isNormal: () => boolean;
   isBad: () => boolean;
 }
 
 export class Score implements ScoreDomain {
-  constructor(public score: number) {}
+  public grade: GradedScore.good | GradedScore.normal | GradedScore.bad;
 
-  public grade() {
+  constructor(public score: number) {
     switch (true) {
       case this.score >= 80:
-        return GradedScore.good;
+        this.grade = GradedScore.good;
       case this.score >= 50:
-        return GradedScore.normal;
+        this.grade = GradedScore.normal;
       default:
-        return GradedScore.bad;
+        this.grade = GradedScore.bad;
     }
   }
 
   public isGood() {
-    return this.grade() === GradedScore.good;
+    return this.grade === GradedScore.good;
   }
 
   public isNormal() {
-    return this.grade() === GradedScore.normal;
+    return this.grade === GradedScore.normal;
   }
 
   public isBad() {
-    return this.grade() === GradedScore.bad;
+    return this.grade === GradedScore.bad;
   }
 }

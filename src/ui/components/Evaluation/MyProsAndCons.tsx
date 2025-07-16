@@ -38,7 +38,7 @@ export function UserInterviewProsAndCons({
             <UserInterviewProsAndCons.Card
               keyName={pros.keyName}
               score={pros.score.score}
-              grade={pros.score.grade()}
+              grade={pros.score.grade}
             />
           ) : (
             <UserInterviewProsAndCons.Card grade={pros} />
@@ -48,7 +48,7 @@ export function UserInterviewProsAndCons({
             <UserInterviewProsAndCons.Card
               keyName={cons.keyName}
               score={cons.score.score}
-              grade={cons.score.grade()}
+              grade={cons.score.grade}
             />
           ) : (
             <UserInterviewProsAndCons.Card grade={cons} />
