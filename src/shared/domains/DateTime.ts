@@ -2,8 +2,14 @@
  * DateTime 클래스는 서버에서 받은 표준시간(UTC)을 원하는 시간대로 변환하고
  * 정해진 형식으로 포매팅하는 기능을 제공합니다.
  */
-export class DateTime {
-  private date: Date;
+export interface DateTimeDomain {
+  readonly date: Date;
+  toTimezone(timezone?: string): Date;
+  format(pattern?: string, timezone?: string): string;
+}
+
+export class DateTime implements DateTimeDomain {
+  public date: Date;
 
   constructor(dateInput: string | Date | number) {
     if (typeof dateInput === "string") {
