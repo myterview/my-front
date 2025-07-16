@@ -1,11 +1,9 @@
-import { Score, ScoreDomain } from "../Score";
 import { TInterviewEvaluation } from "./InterviewEvaluationFactory";
-import { GradedScore } from "@/types/enum";
 import { filter, map, pipe, reduce } from "@fxts/core";
 
 type ProsAndCons = {
-  pros: { keyName: string; score: ScoreDomain } | GradedScore.no_pros;
-  cons: { keyName: string; score: ScoreDomain } | GradedScore.no_cons;
+  pros: { keyName: string; score: number } | undefined;
+  cons: { keyName: string; score: number } | undefined;
 };
 
 export interface InterviewEvaluationDomain<T extends TInterviewEvaluation> {
@@ -52,9 +50,7 @@ export abstract class InterviewEvaluation<T extends TInterviewEvaluation>
           (acc, item) => (!acc || item.score > acc.score ? item : acc),
           undefined as { keyName: string; score: number } | undefined,
           arr
-        ),
-      (item) =>
-        item ? { ...item, score: new Score(item.score) } : GradedScore.no_pros
+        )
     );
   }
 
@@ -72,9 +68,7 @@ export abstract class InterviewEvaluation<T extends TInterviewEvaluation>
           (acc, item) => (!acc || item.score < acc.score ? item : acc),
           undefined as { keyName: string; score: number } | undefined,
           arr
-        ),
-      (item) =>
-        item ? { ...item, score: new Score(item.score) } : GradedScore.no_cons
+        )
     );
   }
 
