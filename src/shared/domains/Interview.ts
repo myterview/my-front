@@ -63,8 +63,7 @@ export class Interview implements InterviewDomain {
 
   public get progressStatus(): ProgressStatus {
     if (this.isActive) return ProgressStatus.IN_PROGRESS;
-    if (!this.evaluation?.instance.evaluationType)
-      return ProgressStatus.ANALYZING;
+    if (!this.evaluation) return ProgressStatus.ANALYZING;
     return ProgressStatus.COMPLETED;
   }
 

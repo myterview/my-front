@@ -15,8 +15,12 @@ export class Score implements ScoreDomain {
     switch (true) {
       case this.score >= 80:
         this.grade = GradedScore.good;
+        break;
+
       case this.score >= 50:
         this.grade = GradedScore.normal;
+        break;
+
       default:
         this.grade = GradedScore.bad;
     }
