@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "type": "npx openapi-typescript http://localhost:3000/api/swagger-json -o src/types/api.ts",
+    "type": "npx openapi-typescript http://localhost:3000/api/swagger-json -o src/shared/types/api.ts",
     "lint": "next lint",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
@@ -23,13 +23,12 @@
     "@svgr/webpack": "^8.1.0",
     "@tanstack/react-query": "^5.81.5",
     "ky": "^1.8.1",
-    "neato": "^0.0.2",
+    "neato": "^0.0.10",
     "next": "15.3.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hot-toast": "^2.5.2",
-    "recharts": "^3.0.2",
-    "zod": "^3.25.75"
+    "recharts": "^3.0.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

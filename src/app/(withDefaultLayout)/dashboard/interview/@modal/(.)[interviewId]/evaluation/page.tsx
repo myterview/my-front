@@ -1,21 +1,21 @@
 "use client";
 
-import { InterviewClient } from "@/apis/interview.client";
-import { Donate } from "@/components/Donate/Donate";
+import { InterviewClient } from "@/api/interview.client";
+import { Interview } from "@/shared/domains/Interview";
+import { getEnumValueByKey } from "@/shared/utils/enumUtils";
+import { Donate } from "@/ui/components/Donate/Donate";
 import {
   DefaultEvaluation,
   DefaultEvaluationOverall,
   DefaultEvaluationRadar,
-} from "@/components/Evaluation/DefaultEvaluation";
-import { EvaluationHeader } from "@/components/Evaluation/EvaluationHeader";
-import { MyProsAndCons } from "@/components/Evaluation/MyProsAndCons";
-import { ModalWrapper } from "@/components/Modal/ModalWrapper";
-import { EvaluationProps } from "@/types";
-import { getEnumValueByKey } from "@/utils/enumUtils";
+} from "@/ui/components/Evaluation/DefaultEvaluation";
+import { EvaluationHeader } from "@/ui/components/Evaluation/EvaluationHeader";
+import { UserInterviewProsAndCons } from "@/ui/components/Evaluation/MyProsAndCons";
+import { ModalWrapper } from "@/ui/components/Modal/ModalWrapper";
 import { grunfeld } from "@ilokesto/grunfeld";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { use, useEffect } from "react";
+import { use, useEffect, useMemo } from "react";
 
 export default function InterceptPage({
   params,
@@ -25,51 +25,55 @@ export default function InterceptPage({
   const router = useRouter();
   const { interviewId } = use(params);
   const {
-    data: { session: interview },
+    data: { session },
   } = useSuspenseQuery(new InterviewClient().getInterviewById(interviewId));
 
-  const { evaluation: e, evaluationType: eT } = {
-    evaluation: interview.evaluation,
-    evaluationType: interview.evaluationType,
-  } as EvaluationProps;
+  const interview = useMemo(() => new Interview(session), [session]);
 
   useEffect(() => {
-    if (!eT) return;
+    const evaluation = interview.evaluation;
+    if (evaluation && evaluation?.isDefaultEvaluation()) {
+      grunfeld.add(() => ({
+        element: (
+          <ModalWrapper className="md:w-770 h-dvh md:max-h-[80dvh] py-60 px-0 md:min-h-0 overflow-y-scroll flex flex-col gap-60">
+            <div className="flex flex-col px-40 gap-28">
+              <EvaluationHeader
+                onClose={grunfeld.clear}
+                title={interview.title}
+                createdAt={interview.createdAt.format()}
+                className="space-y-8"
+                tags={[
+                  getEnumValueByKey(interview.position),
+                  getEnumValueByKey(interview.experience),
+                ]}
+              />
 
-    grunfeld.add(() => ({
-      element: (
-        <ModalWrapper className="md:w-770 h-dvh md:max-h-[80dvh] py-60 px-0 md:min-h-0 overflow-y-scroll flex flex-col gap-60">
-          <div className="flex flex-col px-40 gap-28">
-            <EvaluationHeader
-              onClose={grunfeld.clear}
-              title={interview.title}
-              createdAt={interview.createdAt}
-              className="space-y-8"
-              tags={[
-                getEnumValueByKey(interview.position),
-                getEnumValueByKey(interview.experience),
-              ]}
+              <Donate />
+
+              <DefaultEvaluationOverall
+                evaluation={evaluation.instance.evaluation}
+              />
+
+              <DefaultEvaluationRadar
+                evaluation={evaluation.instance.evaluation}
+              />
+            </div>
+
+            <UserInterviewProsAndCons
+              evaluation={evaluation.instance.evaluation}
             />
 
-            <Donate />
+            <div className="flex flex-col gap-24 px-40">
+              <DefaultEvaluation evaluation={evaluation.instance.evaluation} />
+            </div>
+          </ModalWrapper>
+        ),
+        dismissCallback: router.back,
+      }));
 
-            <DefaultEvaluationOverall evaluation={e} />
-
-            <DefaultEvaluationRadar evaluation={e} />
-          </div>
-
-          <MyProsAndCons evaluation={e} />
-
-          <div className="flex flex-col gap-24 px-40">
-            <DefaultEvaluation evaluation={e} />
-          </div>
-        </ModalWrapper>
-      ),
-      dismissCallback: router.back,
-    }));
-
-    return grunfeld.remove;
-  }, [interview, router, e, eT]);
+      return grunfeld.remove;
+    }
+  }, [interview, router]);
 
   return <></>;
 }

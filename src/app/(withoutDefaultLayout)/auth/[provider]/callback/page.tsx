@@ -1,8 +1,7 @@
 "use client";
 
-import { Fetcher } from "@/apis/Fetcher";
-import { useSearchParams, useParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { Fetcher } from "@/api/Fetcher";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 export default function CallbackPage() {
@@ -12,21 +11,19 @@ export default function CallbackPage() {
 
   useEffect(() => {
     const doLogin = async () => {
-      const { instance } = new Fetcher();
+      const { fetcher } = new Fetcher();
 
-      const res = await instance("client").get<{ redirectUrl: string }>(
-        `auth/${provider}/callback?${searchParams.toString()}`,
-        {
-          credentials: "include",
-        }
-      );
+      try {
+        const response = await fetcher.get(
+          `auth/${provider}/callback?${searchParams.toString()}` as `auth/google/callback`,
+          {
+            credentials: "include",
+          }
+        );
 
-      if (res.ok) {
-        const data = await res.json();
-        router.push(data.redirectUrl);
-      } else {
-        // 로그인 실패 처리
-        console.error("로그인 실패:", res.statusText);
+        router.push(response.redirectUrl || "/");
+      } catch (error) {
+        console.error("Error occurred while logging in:", error);
       }
     };
 

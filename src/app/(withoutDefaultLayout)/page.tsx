@@ -8,7 +8,7 @@ export default async function Home() {
   //   redirect("/dashboard")
   // }
 
-  redirect("/dashboard");
+  redirect("/dashboard/interview");
 
   return <></>;
 }

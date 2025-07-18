@@ -1,5 +1,5 @@
-import { Clickable } from "@/components/Clickable/Clickable";
-import { Logo } from "@/components/Logo/Logo";
+import { Clickable } from "@/ui/components/Clickable/Clickable";
+import { Logo } from "@/ui/components/Logo/Logo";
 import { For } from "@ilokesto/utilinent";
 import Image from "next/image";
 import Link from "next/link";

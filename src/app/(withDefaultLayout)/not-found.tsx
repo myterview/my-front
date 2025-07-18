@@ -1,6 +1,6 @@
 "use client";
 
-import { Clickable } from "@/components/Clickable/Clickable";
+import { Clickable } from "@/ui/components/Clickable/Clickable";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
