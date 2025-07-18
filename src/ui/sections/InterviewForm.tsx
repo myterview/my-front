@@ -13,7 +13,7 @@ import { DefaultInputWrapper } from "@/ui/components/Form/DefaultInputWrapper";
 import { Form } from "@/ui/components/Form/Form";
 import { Input } from "@/ui/components/Form/Input";
 import { DropdownInput } from "@/ui/components/Popover/Dropdown/DropdownInput";
-import { DropdownMenu } from "@/ui/components/Popover/Dropdown/DropdownMenu";
+import { DropdownOption } from "@/ui/components/Popover/Dropdown/DropdownOption";
 import { Popover } from "@/ui/components/Popover/Popover";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
 import { For } from "@ilokesto/utilinent";
@@ -73,7 +73,7 @@ export function InterviewForm() {
                   </SicilianProvider>
                 )}
                 floaterElement={(floaterElementProps) => (
-                  <DropdownMenu
+                  <DropdownOption
                     {...floaterElementProps}
                     {...item.hooks}
                     options={item.options}

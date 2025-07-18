@@ -5,7 +5,7 @@ import { neato } from "neato";
 import { useEffect, useState } from "react";
 import { PopoverProps } from "../Popover";
 
-export function DropdownMenu({
+export function DropdownOption({
   floater,
   helper,
   options,

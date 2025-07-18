@@ -14,7 +14,7 @@ import { Clickable } from "../Clickable/Clickable";
 import { Form } from "../Form/Form";
 import { TextArea } from "../Form/TextArea";
 import { DropdownInput } from "../Popover/Dropdown/DropdownInput";
-import { DropdownMenu } from "../Popover/Dropdown/DropdownMenu";
+import { DropdownOption } from "../Popover/Dropdown/DropdownOption";
 import { Popover } from "../Popover/Popover";
 
 export function FeedbackModal() {
@@ -47,12 +47,12 @@ export function FeedbackModal() {
           </SicilianProvider>
         )}
         floaterElement={(floaterElementProps) => (
-          <DropdownMenu
+          <DropdownOption
             {...floaterElementProps}
             options={Object.values(FeedbackTypeKr)}
-            className="min-w-132"
             selectedOption={selectedOption}
             setSelectedOption={setSelectedOption}
+            className="min-w-132"
           />
         )}
       />
