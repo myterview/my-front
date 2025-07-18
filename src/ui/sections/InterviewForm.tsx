@@ -12,7 +12,7 @@ import { Clickable } from "@/ui/components/Clickable/Clickable";
 import { DefaultInputWrapper } from "@/ui/components/Form/DefaultInputWrapper";
 import { Form } from "@/ui/components/Form/Form";
 import { Input } from "@/ui/components/Form/Input";
-import { DropdownInput } from "@/ui/components/Popover/Dropdown/DropdownAnchor";
+import { DropdownInput } from "@/ui/components/Popover/Dropdown/DropdownInput";
 import { DropdownMenu } from "@/ui/components/Popover/Dropdown/DropdownMenu";
 import { Popover } from "@/ui/components/Popover/Popover";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";

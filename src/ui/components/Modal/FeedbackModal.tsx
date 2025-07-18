@@ -13,7 +13,7 @@ import { toast } from "react-hot-toast";
 import { Clickable } from "../Clickable/Clickable";
 import { Form } from "../Form/Form";
 import { TextArea } from "../Form/TextArea";
-import { DropdownInput } from "../Popover/Dropdown/DropdownAnchor";
+import { DropdownInput } from "../Popover/Dropdown/DropdownInput";
 import { DropdownMenu } from "../Popover/Dropdown/DropdownMenu";
 import { Popover } from "../Popover/Popover";
 

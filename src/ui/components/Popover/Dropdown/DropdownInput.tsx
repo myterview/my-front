@@ -15,6 +15,9 @@ export function DropdownInput({
 } & PopoverProps["anchorElement"]) {
   const { register, name, getErrors } = useSicilianContext()
 
+  const handleClick = () => {
+    document.querySelector<HTMLInputElement>(`input[name="${name}"]`)?.focus();
+  }
 
   return (
     <div className="w-full space-y-8">
@@ -43,7 +46,7 @@ export function DropdownInput({
           )}
         </Show>
 
-        <input {...register({ name })} readOnly className="dropdown block min-h-30 flex-1 w-1 text-left  cursor-pointer" />
+        <input {...register({ name })} onClick={handleClick} readOnly className="dropdown block min-h-30 flex-1 w-0 text-left cursor-pointer" />
 
         <Image
           src="/icons/dropdownArrow.svg"
