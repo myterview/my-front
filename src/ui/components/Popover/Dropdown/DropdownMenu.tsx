@@ -1,22 +1,27 @@
-import { IPopoverFloater } from "../Popover";
+"use client"
+
 import { For } from "@ilokesto/utilinent";
 import { neato } from "neato";
 import { useEffect, useState } from "react";
+import { PopoverProps } from "../Popover";
 
 export function DropdownMenu({
   floater,
-  helpers,
+  helper,
   options,
   selectedOption,
   className,
   setSelectedOption,
-}: IPopoverFloater & {
+}: PopoverProps["floaterElement"] & {
   className?: string;
+  options: string[];
+  selectedOption: string;
+  setSelectedOption: (option: string) => void;
 }) {
-  const [isOpened, setIsOpened] = useState(helpers.isOpen);
+  const [isOpened, setIsOpened] = useState(helper.isOpen);
   useEffect(() => {
-    setIsOpened(helpers.isOpen);
-  }, [helpers.isOpen]);
+    setIsOpened(helper.isOpen);
+  }, [helper.isOpen]);
 
   return (
     <div
@@ -32,17 +37,17 @@ export function DropdownMenu({
             <li
               key={option}
               ref={(node) => {
-                helpers.listRef.current[index] = node;
+                helper.listRef.current[index] = node;
               }}
               className={neato(
                 "cursor-pointer px-4 py-2 font-semibold text-gray-600",
-                helpers.activeIndex === index && "bg-blue-100",
+                helper.activeIndex === index && "bg-blue-100",
                 selectedOption === option && "text-blue-600",
                 className
               )}
-              {...helpers.getItemProps({
+              {...helper.getItemProps({
                 onClick: () =>
-                  helpers.selectItem(() => setSelectedOption(option)),
+                  helper.selectItem(() => setSelectedOption(option)),
               })}
             >
               {option}

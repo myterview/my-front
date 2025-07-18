@@ -2,16 +2,17 @@
 
 import { startInterview } from "@/api/interview.serverAction";
 import {
+  getErrors,
   getValues,
   handleServerAction,
-  register,
+  register
 } from "@/shared/sicilian/interviewForm";
 import { InterviewExperienceKr, InterviewPositionKr } from "@/shared/types";
 import { Clickable } from "@/ui/components/Clickable/Clickable";
 import { DefaultInputWrapper } from "@/ui/components/Form/DefaultInputWrapper";
 import { Form } from "@/ui/components/Form/Form";
 import { Input } from "@/ui/components/Form/Input";
-import { DropdownAnchor } from "@/ui/components/Popover/Dropdown/DropdownAnchor";
+import { DropdownInput } from "@/ui/components/Popover/Dropdown/DropdownAnchor";
 import { DropdownMenu } from "@/ui/components/Popover/Dropdown/DropdownMenu";
 import { Popover } from "@/ui/components/Popover/Popover";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
@@ -50,7 +51,7 @@ export function InterviewForm() {
       className="flex flex-col w-full gap-24"
     >
       <div className="flex flex-col max-w-480 gap-28">
-        <SicilianProvider value={{ register, name: "title" }}>
+        <SicilianProvider value={{ register, getErrors, name: "title" }}>
           <DefaultInputWrapper title="인터뷰 제목">
             <Input />
           </DefaultInputWrapper>
@@ -61,23 +62,22 @@ export function InterviewForm() {
             {(item) => (
               <Popover
                 key={item.title}
-                position={{ crossAxis: 30 }}
-                anchorElement={(anchor, helpers) => (
-                  <DropdownAnchor
-                    anchor={anchor}
-                    helpers={helpers}
-                    title={item.title}
-                    iconSrc={item.iconSrc}
-                    {...item.hooks}
-                  />
+                position={{ mainAxis: 0, crossAxis: 30, placement: "bottom-start" }}
+                anchorElement={(anchorElementProps) => (
+                  <SicilianProvider value={{ register, getErrors, name: item.title === "직군" ? "position" : "experience" }}>
+                    <DropdownInput
+                      {...anchorElementProps}
+                      title={item.title}
+                      iconSrc={item.iconSrc}
+                    />
+                  </SicilianProvider>
                 )}
-                floaterElement={(floater, helpers) => (
+                floaterElement={(floaterElementProps) => (
                   <DropdownMenu
-                    floater={floater}
-                    helpers={helpers}
+                    {...floaterElementProps}
+                    {...item.hooks}
                     options={item.options}
                     className="min-w-132"
-                    {...item.hooks}
                   />
                 )}
               />

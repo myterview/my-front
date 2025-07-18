@@ -1,20 +1,23 @@
-import { IPopoverAnchor } from "../Popover";
+import { useSicilianContext } from "@ilokesto/sicilian/provider";
 import { Show } from "@ilokesto/utilinent";
 import { neato } from "neato";
 import Image from "next/image";
+import { PopoverProps } from "../Popover";
 
-export function DropdownAnchor({
+export function DropdownInput({
   anchor,
-  helpers,
+  helper,
   title,
-  selectedOption,
   iconSrc,
 }: {
   title?: string;
   iconSrc?: string;
-} & IPopoverAnchor) {
+} & PopoverProps["anchorElement"]) {
+  const { register, name, getErrors } = useSicilianContext()
+
+
   return (
-    <div className="flex w-full flex-col gap-8">
+    <div className="w-full space-y-8">
       <Show when={title}>
         {(title) => <div className="label">{title}</div>}
       </Show>
@@ -22,8 +25,9 @@ export function DropdownAnchor({
       <button
         type="button"
         className={neato(
-          "flex w-full items-center justify-between gap-16 border-b-1 border-b-black py-8",
-          helpers.isOpen && "border-b-primary-600"
+          "flex w-full items-center justify-between gap-16 border-b-1 border-b-black py-8 cursor-pointer",
+          helper.isOpen && "border-b-primary-600",
+          getErrors(name) && "border-b-red-600"
         )}
         {...anchor}
       >
@@ -39,9 +43,7 @@ export function DropdownAnchor({
           )}
         </Show>
 
-        <span className="dropdown min-h-30 flex-1 text-left">
-          {selectedOption}
-        </span>
+        <input {...register({ name })} readOnly className="dropdown block min-h-30 flex-1 w-1 text-left  cursor-pointer" />
 
         <Image
           src="/icons/dropdownArrow.svg"
