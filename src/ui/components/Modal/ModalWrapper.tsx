@@ -1,8 +1,9 @@
-import { Card } from "../Card/Card";
+
 import { grunfeld } from "@ilokesto/grunfeld";
 import { Show } from "@ilokesto/utilinent";
 import { neato } from "neato";
 import Image from "next/image";
+import { Card } from "../Card/Card";
 
 export function ModalWrapper({
   children,
