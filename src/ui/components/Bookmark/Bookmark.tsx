@@ -1,5 +1,7 @@
+"use client"
+
 import React, { MouseEvent, useState } from "react";
-import './BookmarkIcon.css';
+import './Bookmark.css';
 
 interface BookmarkIconProps {
   width?: number;
@@ -7,7 +9,7 @@ interface BookmarkIconProps {
   strokeWidth?: number;
 }
 
-const BookmarkIcon: React.FC<BookmarkIconProps> = ({ width = 24, height = 32, strokeWidth = 1 }) => {
+const Bookmark: React.FC<BookmarkIconProps> = ({ width = 24, height = 32, strokeWidth = 1 }) => {
   const [active, setActive] = useState(false);
   const [animating, setAnimating] = useState(false);
 
@@ -44,4 +46,4 @@ const BookmarkIcon: React.FC<BookmarkIconProps> = ({ width = 24, height = 32, st
   );
 };
 
-export default BookmarkIcon;
+export default Bookmark;
