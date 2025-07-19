@@ -1,6 +1,5 @@
 "use client";
 
-import { Card } from "../components/Card/Card";
 import { InterviewClient } from "@/api/interview.client";
 import { Interview, InterviewDomain } from "@/shared/domains/Interview";
 import { getEnumValueByKey } from "@/shared/utils/enumUtils";
@@ -8,6 +7,7 @@ import { For, Observer, Show } from "@ilokesto/utilinent";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { neato } from "neato";
 import Link from "next/link";
+import { Card } from "../components/CardComponent/Card";
 
 export function InterviewBinder() {
   const { data, fetchNextPage } = useInfiniteQuery(
