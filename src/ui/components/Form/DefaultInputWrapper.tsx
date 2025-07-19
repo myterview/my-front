@@ -1,4 +1,5 @@
 import { useSicilianContext } from "@ilokesto/sicilian/provider";
+import { neato } from "neato";
 
 export function DefaultInputWrapper({
   children,
@@ -7,14 +8,14 @@ export function DefaultInputWrapper({
   children: React.ReactNode;
   title: string;
 }) {
-  const { name } = useSicilianContext();
+  const { name, getErrors } = useSicilianContext();
 
   return (
     <div className="flex w-full flex-col gap-8">
       <div className="label">{title}</div>
       <label
         htmlFor={name}
-        className="focus-within:border-b-primary-600 border-b-1 border-b-black py-8"
+        className={neato("focus-within:border-b-primary-600 border-b-1 border-b-black py-8", getErrors(name) && "border-b-red-600")}
       >
         {children}
       </label>

@@ -44,9 +44,9 @@ Card.ProgressChip = function Progress({
       className={neato(
         "flex items-center justify-center rounded-[4px] px-4 text-xs/18 font-medium text-black",
         {
-          "text-secondary": children === ProgressStatus.IN_PROGRESS,
-          "text-gray-200": children === ProgressStatus.ANALYZING,
-          "text-blue-100": children === ProgressStatus.COMPLETED,
+          "bg-secondary": children === ProgressStatus.IN_PROGRESS,
+          "bg-gray-200": children === ProgressStatus.ANALYZING,
+          "bg-blue-100": children === ProgressStatus.COMPLETED,
         }
       )}
     >

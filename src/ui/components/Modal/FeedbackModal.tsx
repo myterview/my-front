@@ -1,20 +1,21 @@
-import { Clickable } from "../Clickable/Clickable";
-import { Form } from "../Form/Form";
-import { TextArea } from "../Form/TextArea";
-import { DropdownAnchor } from "../Popover/Dropdown/DropdownAnchor";
-import { DropdownMenu } from "../Popover/Dropdown/DropdownMenu";
-import { Popover } from "../Popover/Popover";
 import { postFeedback } from "@/api/feedback.serverAction";
 import {
+  getErrors,
   getValues,
   handleServerAction,
-  register,
+  register
 } from "@/shared/sicilian/feedbackForm";
 import { FeedbackTypeKr } from "@/shared/types";
 import { grunfeld } from "@ilokesto/grunfeld";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
 import { useActionState, useEffect } from "react";
 import { toast } from "react-hot-toast";
+import { Clickable } from "../Clickable/Clickable";
+import { Form } from "../Form/Form";
+import { TextArea } from "../Form/TextArea";
+import { DropdownInput } from "../Popover/Dropdown/DropdownInput";
+import { DropdownOption } from "../Popover/Dropdown/DropdownOption";
+import { Popover } from "../Popover/Popover";
 
 export function FeedbackModal() {
   const [state, execute, isPending] = useActionState(postFeedback, undefined);
@@ -35,24 +36,23 @@ export function FeedbackModal() {
     >
       <Popover
         key="카테고리"
-        position={{ crossAxis: 30 }}
-        anchorElement={(anchor, helpers) => (
-          <DropdownAnchor
-            anchor={anchor}
-            helpers={helpers}
-            title="카테고리"
-            iconSrc="/icons/feedback.svg"
-            selectedOption={selectedOption}
-          />
+        position={{ mainAxis: 0, crossAxis: 30, placement: "bottom-start" }}
+        anchorElement={(anchorElementProps) => (
+          <SicilianProvider value={{ register, getErrors, name: "type" }}>
+            <DropdownInput
+              {...anchorElementProps}
+              title="카테고리"
+              iconSrc="/icons/feedback.svg"
+            />
+          </SicilianProvider>
         )}
-        floaterElement={(floater, helpers) => (
-          <DropdownMenu
-            floater={floater}
-            helpers={helpers}
+        floaterElement={(floaterElementProps) => (
+          <DropdownOption
+            {...floaterElementProps}
             options={Object.values(FeedbackTypeKr)}
-            className="min-w-132"
             selectedOption={selectedOption}
             setSelectedOption={setSelectedOption}
+            className="min-w-132"
           />
         )}
       />
