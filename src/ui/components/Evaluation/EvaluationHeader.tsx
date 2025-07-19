@@ -1,5 +1,5 @@
-import { Card } from "../Card/Card";
 import Image from "next/image";
+import { Card } from "../CardComponent/Card";
 
 export function EvaluationHeader({
   onClose,
