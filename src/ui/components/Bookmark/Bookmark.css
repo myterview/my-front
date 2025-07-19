@@ -1,0 +1,56 @@
+
+.bookmark-icon {
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.77,0,0.175,1), box-shadow 0.2s;
+}
+
+/* 내부 빨간색 채움 */
+.bookmark-fill {
+  fill: transparent;
+  transition: fill 0.3s;
+}
+.bookmark-fill.hovered {
+  fill: #e0e0e0;
+}
+.bookmark-fill.active {
+  fill: #e53935;
+}
+.bookmark-fill.animating {
+  animation: flutter 0.5s cubic-bezier(0.77,0,0.175,1);
+}
+
+.bookmark-shape {
+  stroke: #e0e0e0;
+  border-radius: 10px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: none;
+  stroke-dashoffset: 0;
+  transition: stroke 0.3s;
+}
+.bookmark-shape.active {
+  stroke: #e53935;
+}
+.bookmark-shape.hovered {
+  stroke: #e0e0e0;
+}
+.bookmark-shape.animating {
+  animation: flutter 0.5s cubic-bezier(0.77,0,0.175,1);
+}
+
+@keyframes flutter {
+  0% {
+    transform: scaleY(1);
+  }
+  30% {
+    transform: scaleY(1.25);
+  }
+  60% {
+    transform: scaleY(0.8);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
