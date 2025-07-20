@@ -140,78 +140,6 @@ export interface paths {
     patch: operations["AuthController_promoteToAdmin"];
     trace?: never;
   };
-  "/api/tech-question": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * 기술 질문 가져오기
-     * @description 기술 질문을 가져옵니다.
-     */
-    get: operations["TechQuestionController_getQuestion"];
-    put?: never;
-    /**
-     * 기술 질문 생성
-     * @description 관리자가 기술 질문을 생성합니다.
-     */
-    post: operations["TechQuestionController_createQuestion"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/tech-question/{questionId}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post?: never;
-    /**
-     * 기술 질문 삭제
-     * @description 관리자가 기술 질문을 삭제합니다.
-     */
-    delete: operations["TechQuestionController_deleteQuestion"];
-    options?: never;
-    head?: never;
-    /**
-     * 기술 질문 업데이트
-     * @description 관리자가 기술 질문을 업데이트합니다.
-     */
-    patch: operations["TechQuestionController_updateQuestion"];
-    trace?: never;
-  };
-  "/api/tech-question/{questionId}/solved": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * 유저가 답변한 질문 가져오기
-     * @description 특정 질문에 대해 유저가 답변한 내용을 가져옵니다.
-     */
-    get: operations["UserSolvedController_getUserSolvedQuestion"];
-    put?: never;
-    /**
-     * 유저 답안 생성
-     * @description 유저가 특정 질문에 대한 답안을 생성합니다.
-     */
-    post: operations["UserSolvedController_createUserSolvedQuestion"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   "/api/feedback": {
     parameters: {
       query?: never;
@@ -340,18 +268,90 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/tech-question": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Get paginated tech questions with optional tag filter */
+    get: operations["TechQuestionController_getTechQuestions"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/tech-question/create": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** Create a new tech question */
+    post: operations["TechQuestionController_createQuestion"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/tech-question/{questionId}/bookmark": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Bookmark a tech question
+     * @description Bookmark a tech question by its ID for the authenticated user.
+     */
+    post: operations["TechQuestionController_bookmarkQuestion"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/tech-question/{questionId}/answer": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** Submit an answer for a tech question */
+    post: operations["TechQuestionController_answerQuestion"];
+    /** Delete an existing answer for a tech question */
+    delete: operations["TechQuestionController_deleteTechQuestionAnswer"];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
     SocialLoginResDTO: {
       /**
-       * @description 로그인 성공 여부
+       * @description Indicates whether the login was successful
        * @example true
        */
       success: boolean;
       /**
-       * @description 리디렉션 URL
+       * @description Redirection URL
        * @example https://example.com/dashboard
        */
       redirectUrl: string;
@@ -399,70 +399,6 @@ export interface components {
     ErrorDTO: Record<string, never>;
     PromoteToAdminReqDTO: {
       secret: string;
-    };
-    GetQuestionResDTO: {
-      title: string;
-      /**
-       * @description Category of the technical question
-       * @enum {string}
-       */
-      category:
-        | "DATABASE"
-        | "BACKEND"
-        | "FRONTEND"
-        | "DEVOPS"
-        | "SECURITY"
-        | "OTHER";
-      /** @description Optional tags for the question */
-      tags?: string[];
-      solution: string;
-      id: string;
-    };
-    CreateQuestionReqDTO: {
-      title: string;
-      /**
-       * @description Category of the technical question
-       * @enum {string}
-       */
-      category:
-        | "DATABASE"
-        | "BACKEND"
-        | "FRONTEND"
-        | "DEVOPS"
-        | "SECURITY"
-        | "OTHER";
-      /** @description Optional tags for the question */
-      tags?: string[];
-      solution: string;
-    };
-    UpdateQuestionReqDTO: {
-      title?: string;
-      /**
-       * @description Category of the technical question
-       * @enum {string}
-       */
-      category?:
-        | "DATABASE"
-        | "BACKEND"
-        | "FRONTEND"
-        | "DEVOPS"
-        | "SECURITY"
-        | "OTHER";
-      /** @description Optional tags for the question */
-      tags?: string[];
-      solution?: string;
-    };
-    InternalServerErrorException: Record<string, never>;
-    GetUserSolvedQuestionResDTO: {
-      id: string;
-      /** Format: date-time */
-      solvedAt: string;
-      answer: string;
-    };
-    CreateUserSolvedQuestionReqDTO: {
-      answer: string;
-      /** @enum {string} */
-      reviewFrequency: "NEVER" | "RARELY" | "OCCASIONALLY" | "FREQUENTLY";
     };
     GetFeedbackUserDTO: {
       /**
@@ -840,6 +776,76 @@ export interface components {
       /** @description Response message */
       message: string;
     };
+    TechQuestionDTO: {
+      /**
+       * @description Unique identifier for the tech question
+       * @example 12345
+       */
+      id: string;
+      /**
+       * @description The question text
+       * @example What is the difference between var, let, and const in JavaScript?
+       */
+      question: string;
+      /**
+       * @description The solution or answer to the tech question
+       * @example In JavaScript, var is function-scoped, let is block-scoped, and const is also block-scoped but cannot be reassigned.
+       */
+      solution: string;
+      /**
+       * Format: date-time
+       * @description The date when the tech question was created
+       * @example 2023-03-15T12:00:00Z
+       */
+      createdAt: string;
+      /**
+       * @description Optional code snippet related to the tech question
+       * @example console.log("Hello, World!");
+       */
+      code?: string;
+      /**
+       * @description Tags associated with the tech question
+       * @example [
+       *       "JavaScript",
+       *       "Programming",
+       *       "Web Development"
+       *     ]
+       */
+      tags: string[];
+      /**
+       * @description Indicates whether the question is bookmarked by the user
+       * @example true
+       */
+      isBookmarked: boolean;
+    };
+    CreateTechQuestionDTO: {
+      /**
+       * @description The question to be created
+       * @example What is the difference between let and var in JavaScript?
+       */
+      question: string;
+      /**
+       * @description The code snippet for the question
+       * @example ```javascript
+       *     let x = 10;
+       *     ```
+       */
+      code: string;
+    };
+    BookmarkedDto: {
+      /**
+       * @description Indicates whether the question is bookmarked
+       * @example true
+       */
+      bookmarked: boolean;
+    };
+    CreateTechQuestionAnswerDTO: {
+      /**
+       * @description The answer to the tech question
+       * @example This is the answer to the tech question.
+       */
+      userAnswer: string;
+    };
   };
   responses: never;
   parameters: never;
@@ -1041,178 +1047,6 @@ export interface operations {
       };
     };
   };
-  TechQuestionController_getQuestion: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 기술 질문을 성공적으로 가져왔습니다. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["GetQuestionResDTO"];
-        };
-      };
-    };
-  };
-  TechQuestionController_createQuestion: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** @description 기술 질문 생성 요청 DTO */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["CreateQuestionReqDTO"];
-      };
-    };
-    responses: {
-      /** @description 기술 질문이 성공적으로 생성되었습니다. */
-      201: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["MessageDTO"];
-        };
-      };
-    };
-  };
-  TechQuestionController_deleteQuestion: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        questionId: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 기술 질문이 성공적으로 삭제되었습니다. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["MessageDTO"];
-        };
-      };
-      /** @description 기술 질문 삭제에 실패했습니다. */
-      500: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["InternalServerErrorException"];
-        };
-      };
-    };
-  };
-  TechQuestionController_updateQuestion: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        questionId: string;
-      };
-      cookie?: never;
-    };
-    /** @description 기술 질문 업데이트 요청 DTO */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["UpdateQuestionReqDTO"];
-      };
-    };
-    responses: {
-      /** @description 기술 질문이 성공적으로 업데이트되었습니다. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["MessageDTO"];
-        };
-      };
-    };
-  };
-  UserSolvedController_getUserSolvedQuestion: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The ID of the question */
-        questionId: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 유저 답안을 성공적으로 가져왔습니다. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["GetUserSolvedQuestionResDTO"][];
-        };
-      };
-      /** @description 유저 답안을 가져오는 데 실패했습니다. 다시 시도해주세요. */
-      500: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["InternalServerErrorException"];
-        };
-      };
-    };
-  };
-  UserSolvedController_createUserSolvedQuestion: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The ID of the question */
-        questionId: string;
-      };
-      cookie?: never;
-    };
-    /** @description 유저 답안 제출 요청 DTO */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["CreateUserSolvedQuestionReqDTO"];
-      };
-    };
-    responses: {
-      /** @description 유저 답안 제출에 성공하였습니다. */
-      201: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["MessageDTO"];
-        };
-      };
-      /** @description 유저 답안 제출에 실패하였습니다. 다시 시도해주세요. */
-      500: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["InternalServerErrorException"];
-        };
-      };
-    };
-  };
   FeedbackController_getFeedbackList: {
     parameters: {
       query?: never;
@@ -1286,8 +1120,8 @@ export interface operations {
   InterviewController_getInterviews: {
     parameters: {
       query: {
-        skip: string;
-        take: string;
+        skip: number;
+        take: number;
       };
       header?: never;
       path?: never;
@@ -1453,6 +1287,221 @@ export interface operations {
         };
       };
       /** @description Interview deletion failed */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  TechQuestionController_getTechQuestions: {
+    parameters: {
+      query: {
+        /** @description Number of items to skip */
+        skip: number;
+        /** @description Number of items to take */
+        take: number;
+        /** @description Filter by tag names */
+        tags?: string[];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description List of tech questions */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["TechQuestionDTO"][];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Internal server error */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  TechQuestionController_createQuestion: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CreateTechQuestionDTO"];
+      };
+    };
+    responses: {
+      /** @description Tech question created successfully */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["TechQuestionDTO"];
+        };
+      };
+      /** @description Invalid input data */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Internal server error */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  TechQuestionController_bookmarkQuestion: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        questionId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Question bookmarked successfully. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["BookmarkedDto"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Question not found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Internal server error */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  TechQuestionController_answerQuestion: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        questionId: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CreateTechQuestionAnswerDTO"];
+      };
+    };
+    responses: {
+      /** @description Answer submitted successfully */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Invalid input data */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Unauthorized */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Question not found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Internal server error */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  TechQuestionController_deleteTechQuestionAnswer: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        questionId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Answer deleted successfully */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Unauthorized */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Answer not found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Internal server error */
       500: {
         headers: {
           [name: string]: unknown;
