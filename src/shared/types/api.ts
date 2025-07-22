@@ -613,7 +613,7 @@ export interface components {
              */
             finalNotes: string;
         };
-        EvaluationDto: {
+        DefaultEvaluationDto: {
             /**
              * @description 기술적 전문성 평가
              * @example {
@@ -717,7 +717,7 @@ export interface components {
              */
             evaluationType: "default";
             /** @description Interview evaluation data */
-            evaluation: components["schemas"]["EvaluationDto"];
+            evaluation: components["schemas"]["DefaultEvaluationDto"];
         };
         GetInterviewDTO: {
             /**

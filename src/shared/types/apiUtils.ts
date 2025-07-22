@@ -63,7 +63,7 @@ export type ApiRequestParams<
 
 export type BackendResponse = {
   evaluation: {
-    default: components["schemas"]["EvaluationDto"];
+    default: components["schemas"]["DefaultEvaluationDto"];
   };
   interview:
     | components["schemas"]["UnEvaluationInterviewResponse"]
