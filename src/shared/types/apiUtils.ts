@@ -65,7 +65,9 @@ export type BackendResponse = {
   evaluation: {
     default: components["schemas"]["EvaluationDto"];
   };
-  interview: components["schemas"]["InterviewSession"];
+  interview:
+    | components["schemas"]["UnEvaluationInterviewResponse"]
+    | components["schemas"]["DefaultEvaluationInterviewResponse"];
   interviewMessages: components["schemas"]["InterviewMessage"][];
   interviewMessage: components["schemas"]["InterviewMessage"];
   user: components["schemas"]["UserResDTO"];

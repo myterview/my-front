@@ -23,7 +23,7 @@
     "@svgr/webpack": "^8.1.0",
     "@tanstack/react-query": "^5.81.5",
     "ky": "^1.8.1",
-    "neato": "^0.0.10",
+    "neato": "^0.0.11",
     "next": "15.3.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

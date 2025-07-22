@@ -5,6 +5,7 @@ import {
 } from "./InterviewEvaluation/InterviewEvaluationFactory";
 import {
   BackendResponse,
+  components,
   InterviewExperienceKr,
   InterviewPositionKr,
   ProgressStatus,
@@ -48,15 +49,11 @@ export class Interview implements InterviewDomain {
     this.createdAt = new DateTime(session.createdAt);
     this.messages = session.messages;
 
-    // API 데이터를 TInterviewEvaluation 타입에 맞게 변환
-    if (session.evaluation && session.evaluationType === "default") {
-      // 평가 데이터가 있고 타입이 "default"인 경우
-      this.evaluation = new InterviewEvaluationFactory({
-        evaluationType: "default",
-        evaluation: session.evaluation,
-      });
+    if (session.evaluationType === "default") {
+      this.evaluation = new InterviewEvaluationFactory(
+        session as components["schemas"]["DefaultEvaluationInterviewResponse"]
+      );
     } else {
-      // 평가 데이터가 없거나 타입이 undefined인 경우
       this.evaluation = undefined;
     }
   }

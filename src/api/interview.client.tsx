@@ -46,7 +46,7 @@ export class InterviewClient extends Fetcher {
         if (
           query.state.data?.pages
             .flatMap((page) => page.items)
-            .find((item) => !item.evaluation && !item.isActive)
+            .find((item) => !item.evaluationType && !item.isActive)
         ) {
           return 10000;
         }
