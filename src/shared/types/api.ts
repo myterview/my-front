@@ -275,7 +275,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get paginated tech questions with optional tag filter */
+        /** 기술 질문 목록(태그 필터 포함) 조회 */
         get: operations["TechQuestionController_getTechQuestions"];
         put?: never;
         post?: never;
@@ -294,7 +294,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Create a new tech question */
+        /** 기술 질문 생성 */
         post: operations["TechQuestionController_createQuestion"];
         delete?: never;
         options?: never;
@@ -312,8 +312,8 @@ export interface paths {
         get?: never;
         put?: never;
         /**
-         * Bookmark a tech question
-         * @description Bookmark a tech question by its ID for the authenticated user.
+         * 기술 질문 북마크
+         * @description 인증된 사용자가 해당 ID의 기술 질문을 북마크합니다.
          */
         post: operations["TechQuestionController_bookmarkQuestion"];
         delete?: never;
@@ -330,15 +330,14 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Get answers for a tech question
-         * @description Retrieve answers for a specific tech question by its ID.
+         * 기술 질문 답변 조회
+         * @description 특정 기술 질문(ID) 답변 조회
          */
         get: operations["TechQuestionController_getTechQuestionAnswers"];
         put?: never;
-        /** Submit an answer for a tech question */
+        /** 기술 질문 답변 제출 */
         post: operations["TechQuestionController_answerQuestion"];
-        /** Delete an existing answer for a tech question */
-        delete: operations["TechQuestionController_deleteTechQuestionAnswer"];
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -509,12 +508,12 @@ export interface components {
             createdAt: string;
             /**
              * @description Interview evaluation type
-             * @enum {number|null}
+             * @enum {number}
              */
             evaluationType?: null;
             /**
              * @description Interview evaluation
-             * @enum {number|null}
+             * @enum {number}
              */
             evaluation?: null;
         };
@@ -825,12 +824,39 @@ export interface components {
              * @description Indicates whether the question is bookmarked by the user
              * @example true
              */
-            isBookmarked: boolean;
+            isUserBookmarked: boolean;
             /**
              * @description Indicates whether the question has been answered
              * @example false
              */
-            isAnswered: boolean;
+            isUserAnswered: boolean;
+        };
+        GetTechQuestionDTO: {
+            /**
+             * @description Total number of tech questions
+             * @example 100
+             */
+            count: number;
+            /**
+             * @description List of tech questions
+             * @example [
+             *       {
+             *         "id": "12345",
+             *         "question": "What is the difference between var, let, and const in JavaScript?",
+             *         "solution": "In JavaScript, var is function-scoped, let is block-scoped, and const is also block-scoped but cannot be reassigned.",
+             *         "createdAt": "2023-03-15T12:00:00Z",
+             *         "code": "console.log(\"Hello, World!\");",
+             *         "tags": [
+             *           "JavaScript",
+             *           "Programming",
+             *           "Web Development"
+             *         ],
+             *         "isUserBookmarked": true,
+             *         "isUserAnswered": false
+             *       }
+             *     ]
+             */
+            questions: components["schemas"]["TechQuestionDTO"][];
         };
         CreateTechQuestionDTO: {
             /**
@@ -855,22 +881,36 @@ export interface components {
         };
         TechQuestionAnswerDTO: {
             /**
-             * @description Indicates whether the question is answered
-             * @example true
+             * @description ID of the answer
+             * @example 12345
              */
-            isAnswered: boolean;
+            id: string;
             /**
-             * @description The answer to the tech question
-             * @example The answer to the question goes here.
+             * @description User ID of the answerer
+             * @example user123
              */
-            answer: string;
-        };
-        NotAnsweredTechQuestionDTO: {
+            userId: string;
             /**
-             * @description Indicates whether the question is answered
-             * @example false
+             * @description Question ID
+             * @example question123
              */
-            isAnswered: boolean;
+            questionId: string;
+            /**
+             * @description User answer to the question
+             * @example This is my answer to the tech question.
+             */
+            userAnswer: string;
+            /**
+             * @description LLM generated answer
+             * @example This is the LLM generated answer to the tech question.
+             */
+            llmAnswer: string;
+            /**
+             * Format: date-time
+             * @description Creation time of the answer
+             * @example 2023-10-01T12:00:00Z
+             */
+            createdAt: string;
         };
         CreateTechQuestionAnswerDTO: {
             /**
@@ -1331,11 +1371,14 @@ export interface operations {
     TechQuestionController_getTechQuestions: {
         parameters: {
             query: {
-                /** @description Number of items to skip */
+                /** @description Number of items to skip for pagination */
                 skip: number;
-                /** @description Number of items to take */
                 take: number;
-                /** @description Filter by tag names */
+                /** @description Filter by bookmarked status */
+                isBookmarked?: boolean;
+                /** @description Filter by answered status */
+                isAnswered?: boolean;
+                /** @description List of tags to filter tech questions */
                 tags?: string[];
             };
             header?: never;
@@ -1344,23 +1387,23 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description List of tech questions */
+            /** @description 기술 질문 목록 */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["TechQuestionDTO"][];
+                    "application/json": components["schemas"]["GetTechQuestionDTO"];
                 };
             };
-            /** @description Unauthorized */
+            /** @description 인증되지 않음 */
             401: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content?: never;
             };
-            /** @description Internal server error */
+            /** @description 내부 서버 오류 */
             500: {
                 headers: {
                     [name: string]: unknown;
@@ -1382,7 +1425,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description Tech question created successfully */
+            /** @description 기술 질문이 성공적으로 생성됨 */
             201: {
                 headers: {
                     [name: string]: unknown;
@@ -1391,14 +1434,14 @@ export interface operations {
                     "application/json": components["schemas"]["TechQuestionDTO"];
                 };
             };
-            /** @description Invalid input data */
+            /** @description 잘못된 입력 데이터 */
             400: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content?: never;
             };
-            /** @description Internal server error */
+            /** @description 내부 서버 오류 */
             500: {
                 headers: {
                     [name: string]: unknown;
@@ -1418,7 +1461,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description Question bookmarked successfully. */
+            /** @description 질문이 성공적으로 북마크됨. */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -1427,21 +1470,21 @@ export interface operations {
                     "application/json": components["schemas"]["BookmarkedDto"];
                 };
             };
-            /** @description Unauthorized */
+            /** @description 인증되지 않음 */
             401: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content?: never;
             };
-            /** @description Question not found */
+            /** @description 질문을 찾을 수 없음 */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content?: never;
             };
-            /** @description Internal server error */
+            /** @description 내부 서버 오류 */
             500: {
                 headers: {
                     [name: string]: unknown;
@@ -1459,30 +1502,30 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description Answers retrieved successfully. */
+            /** @description 답변 조회 성공 */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["TechQuestionAnswerDTO"] | components["schemas"]["NotAnsweredTechQuestionDTO"];
+                    "application/json": components["schemas"]["TechQuestionAnswerDTO"][];
                 };
             };
-            /** @description Unauthorized */
+            /** @description 인증되지 않음 */
             401: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content?: never;
             };
-            /** @description Question not found */
+            /** @description 질문을 찾을 수 없음 */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content?: never;
             };
-            /** @description Internal server error */
+            /** @description 내부 서버 오류 */
             500: {
                 headers: {
                     [name: string]: unknown;
@@ -1506,76 +1549,35 @@ export interface operations {
             };
         };
         responses: {
-            /** @description Answer submitted successfully */
+            /** @description 답변이 성공적으로 제출됨 */
             201: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content?: never;
             };
-            /** @description Invalid input data */
+            /** @description 잘못된 입력 데이터 */
             400: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content?: never;
             };
-            /** @description Unauthorized */
+            /** @description 인증되지 않음 */
             401: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content?: never;
             };
-            /** @description Question not found */
+            /** @description 질문을 찾을 수 없음 */
             404: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content?: never;
             };
-            /** @description Internal server error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    TechQuestionController_deleteTechQuestionAnswer: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                questionId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Answer deleted successfully */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Answer not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Internal server error */
+            /** @description 내부 서버 오류 */
             500: {
                 headers: {
                     [name: string]: unknown;
