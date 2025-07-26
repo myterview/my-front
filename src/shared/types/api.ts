@@ -1452,7 +1452,9 @@ export interface operations {
     };
     TechQuestionController_bookmarkQuestion: {
         parameters: {
-            query?: never;
+            query: {
+                isBookmarked: boolean;
+            };
             header?: never;
             path: {
                 questionId: string;
@@ -1497,7 +1499,9 @@ export interface operations {
         parameters: {
             query?: never;
             header?: never;
-            path?: never;
+            path: {
+                questionId: string;
+            };
             cookie?: never;
         };
         requestBody?: never;
