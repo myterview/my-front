@@ -1,4 +1,5 @@
 import { SizeWrapper } from "@/ui/components/SizeWrapper/SizeWrapper";
+import { TechQuestionTagSearchBar } from "@/ui/sections/TechQuestionTagSearchBar";
 
 export default function TechQuestionPage() {
   return (
@@ -6,7 +7,7 @@ export default function TechQuestionPage() {
       asChild="main"
       className="@container/main h-dvh flex-1 overflow-y-scroll py-100"
     >
-      준비중입니다
+      <TechQuestionTagSearchBar />
     </SizeWrapper>
   );
 }

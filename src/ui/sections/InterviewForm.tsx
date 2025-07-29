@@ -5,11 +5,11 @@ import {
   getErrors,
   getValues,
   handleServerAction,
-  register
+  register,
 } from "@/shared/sicilian/interviewForm";
 import { InterviewExperienceKr, InterviewPositionKr } from "@/shared/types";
 import { Clickable } from "@/ui/components/Clickable/Clickable";
-import { DefaultInputWrapper } from "@/ui/components/Form/DefaultInputWrapper";
+import { FieldUnderlineWrapper } from "@/ui/components/Form/DefaultInputWrapper";
 import { Form } from "@/ui/components/Form/Form";
 import { Input } from "@/ui/components/Form/Input";
 import { DropdownInput } from "@/ui/components/Popover/Dropdown/DropdownInput";
@@ -52,9 +52,9 @@ export function InterviewForm() {
     >
       <div className="flex flex-col max-w-480 gap-28">
         <SicilianProvider value={{ register, getErrors, name: "title" }}>
-          <DefaultInputWrapper title="인터뷰 제목">
+          <FieldUnderlineWrapper title="인터뷰 제목">
             <Input />
-          </DefaultInputWrapper>
+          </FieldUnderlineWrapper>
         </SicilianProvider>
 
         <div className="flex w-full gap-16">
@@ -62,9 +62,19 @@ export function InterviewForm() {
             {(item) => (
               <Popover
                 key={item.title}
-                position={{ mainAxis: 0, crossAxis: 30, placement: "bottom-start" }}
+                position={{
+                  mainAxis: 0,
+                  crossAxis: 30,
+                  placement: "bottom-start",
+                }}
                 anchorElement={(anchorElementProps) => (
-                  <SicilianProvider value={{ register, getErrors, name: item.title === "직군" ? "position" : "experience" }}>
+                  <SicilianProvider
+                    value={{
+                      register,
+                      getErrors,
+                      name: item.title === "직군" ? "position" : "experience",
+                    }}
+                  >
                     <DropdownInput
                       {...anchorElementProps}
                       title={item.title}

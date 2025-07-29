@@ -7,7 +7,7 @@ import {
   handleSubmit,
   register,
 } from "@/shared/sicilian/sessionForm";
-import { DefaultTextAreaWrapper } from "@/ui/components/Form/DefaultTextAreaWrapper";
+import { FieldOutlineWrapper } from "@/ui/components/Form/DefaultTextAreaWrapper";
 import { TextArea } from "@/ui/components/Form/TextArea";
 import { SizeWrapper } from "@/ui/components/SizeWrapper/SizeWrapper";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
@@ -41,7 +41,7 @@ export function SessionForm({ interviewId }: { interviewId: string }) {
       onSubmit={handleSubmit((data) => mutate(data))}
     >
       <SicilianProvider value={{ register, name: "message", getValues }}>
-        <DefaultTextAreaWrapper>
+        <FieldOutlineWrapper>
           <TextArea
             disabled={isLoading || !isActive}
             placeholder="메시지를 입력하세요..."
@@ -55,7 +55,7 @@ export function SessionForm({ interviewId }: { interviewId: string }) {
               height={24}
             />
           </button>
-        </DefaultTextAreaWrapper>
+        </FieldOutlineWrapper>
       </SicilianProvider>
     </SizeWrapper>
   );

@@ -1,7 +1,9 @@
+"use client";
+
 import { useSicilianContext } from "@ilokesto/sicilian/provider";
 import { Show } from "@ilokesto/utilinent";
 
-export function DefaultTextAreaWrapper({
+export function FieldOutlineWrapper({
   children,
   title,
 }: {

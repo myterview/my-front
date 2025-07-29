@@ -12,6 +12,12 @@ export class TechQuestionClient extends Fetcher {
     })
   })
 
+
+  public getTags = () => this.queryOptions({
+    queryKey: ["tech-question", "tags"],
+    queryFn: () => this.fetcher.get("tech-question/tags")
+  })
+
   public getTechQuestionList = ({isBookmarked, isAnswered, tags}: {isBookmarked: boolean, isAnswered: boolean, tags: Array<string>}) => this.infiniteQueryOptions({
     queryKey: ["tech-question", "list"],
     queryFn: ({

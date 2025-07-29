@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
+import { PopoverProps } from "../Popover";
 import { For } from "@ilokesto/utilinent";
 import { neato } from "neato";
 import { useEffect, useState } from "react";
-import { PopoverProps } from "../Popover";
 
 export function DropdownOption({
   floater,
@@ -19,9 +19,7 @@ export function DropdownOption({
   setSelectedOption: (option: string) => void;
 }) {
   const [isOpened, setIsOpened] = useState(helper.isOpen);
-  useEffect(() => {
-    setIsOpened(helper.isOpen);
-  }, [helper.isOpen]);
+  useEffect(() => setIsOpened(helper.isOpen), [helper.isOpen]);
 
   return (
     <div
