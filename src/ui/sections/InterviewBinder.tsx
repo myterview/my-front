@@ -1,5 +1,6 @@
 "use client";
 
+import { Card } from "../components/CardComponent/Card";
 import { InterviewClient } from "@/api/interview.client";
 import { Interview, InterviewDomain } from "@/shared/domains/Interview";
 import { getEnumValueByKey } from "@/shared/utils/enumUtils";
@@ -7,7 +8,6 @@ import { For, Observer, Show } from "@ilokesto/utilinent";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { neato } from "neato";
 import Link from "next/link";
-import { Card } from "../components/CardComponent/Card";
 
 export function InterviewBinder() {
   const { data, fetchNextPage } = useInfiniteQuery(
@@ -33,7 +33,7 @@ export function InterviewBinder() {
                     className={neato("border-l-8 pl-24", {
                       "border-secondary bg-white": interview.isInProgress(),
                       "border-gray-200 bg-gray-100": interview.isAnalyzing(),
-                      "border-blue-100 bg-white": interview.isCompleted(),
+                      "border-primary-100 bg-white": interview.isCompleted(),
                     })}
                   >
                     <Card.Title>{interview.title}</Card.Title>

@@ -26,7 +26,7 @@ export default function Error({
           router.refresh();
           reset();
         }}
-        className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+        className="rounded bg-primary-500 px-4 py-2 text-white hover:bg-primary-600"
       >
         다시 시도
       </button>

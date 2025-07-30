@@ -39,8 +39,8 @@ export function DropdownOption({
               }}
               className={neato(
                 "cursor-pointer px-4 py-2 font-semibold text-gray-600",
-                helper.activeIndex === index && "bg-blue-100",
-                selectedOption === option && "text-blue-600",
+                helper.activeIndex === index && "bg-primary-100",
+                selectedOption === option && "text-primary-600",
                 className
               )}
               {...helper.getItemProps({

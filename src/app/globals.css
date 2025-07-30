@@ -124,6 +124,10 @@ html {
   @apply text-xl/30 font-medium;
 }
 
+.dropdown-input {
+  @apply text-xl/28 font-semibold;
+}
+
 .label {
   @apply text-base/16 font-normal;
 }
