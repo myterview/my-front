@@ -23,7 +23,7 @@ const { register, setValues, getValues, handleSubmit } = new CreateForm({
 export function TechQuestionTagSearchBar() {
   return (
     <Popover
-      position={{ mainAxis: 25, crossAxis: 25, placement: "bottom-start" }}
+      position={{ mainAxis: 25, crossAxis: 79, placement: "bottom-start" }}
       anchorElement={(anchorProps) => <TagSearchBar {...anchorProps} />}
       floaterElement={(floaterProps) => <TagSelectOption {...floaterProps} />}
     />
@@ -55,6 +55,15 @@ function TagSearchBar({ anchor, helper }: PopoverProps["anchorElement"]) {
               className="dropdown"
             />
           </div>
+          <Image
+            src="/icons/close.svg"
+            alt="Close Icon"
+            onClick={() => {
+              setValues({ keyword: "" });
+            }}
+            width={24}
+            height={24}
+          />
         </FieldOutlineWrapper>
       </SicilianProvider>
     </Form>
@@ -95,7 +104,7 @@ function TagSelectOption({ floater, helper }: PopoverProps["floaterElement"]) {
   return (
     <div
       {...floater}
-      style={{ width: (helper.anchorWidth as number) + 104, ...floater.style }}
+      style={{ ...floater.style, width: (helper.anchorWidth as number) + 158 }}
       className={
         "bg-white rounded-[4px] flex border border-gray-200 overflow-y-scroll p-16 gap-16 flex-row flex-wrap"
       }
