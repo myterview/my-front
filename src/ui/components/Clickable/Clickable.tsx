@@ -1,4 +1,4 @@
-import { neato } from "neato";
+import { neato, neatoVariants } from "neato";
 import {
   cloneElement,
   ComponentPropsWithoutRef,
@@ -11,7 +11,10 @@ type ClickableProps = ClickableTypes & {
   children: React.ReactNode;
 };
 
-type ClickableTypes = ShadowClickableTypes | DefaultClickableTypes;
+type ClickableTypes =
+  | ShadowClickableTypes
+  | DefaultClickableTypes
+  | SelectableClickableTypes;
 
 type ShadowClickableTypes = {
   types: "shadow";
@@ -20,6 +23,11 @@ type ShadowClickableTypes = {
 
 type DefaultClickableTypes = {
   types: "default";
+};
+
+type SelectableClickableTypes = {
+  types: "selectable";
+  "data-selected": boolean;
 };
 
 abstract class ClickableStrategy {
@@ -49,11 +57,30 @@ class DefaultClickableStrategy implements ClickableStrategy {
   }
 }
 
+class SelectableClickableStrategy implements ClickableStrategy {
+  constructor(private props: SelectableClickableTypes) {}
+
+  styleRender(): string {
+    const a = neatoVariants({
+      base: "flex px-12 py-8 justify-center items-center text-gray-600 bg-gray-100 rounded-xl font-bold",
+      variants: {
+        isSelected: {
+          true: "text-blue-500 bg-blue-100",
+        },
+      },
+    });
+
+    return a({ isSelected: this.props["data-selected"] });
+  }
+}
+
 class ClickableFactory {
   static create(props: ClickableTypes): ClickableStrategy {
     switch (props.types) {
       case "shadow":
         return new ShadowClickableStrategy(props);
+      case "selectable":
+        return new SelectableClickableStrategy(props);
       default:
         return new DefaultClickableStrategy();
     }

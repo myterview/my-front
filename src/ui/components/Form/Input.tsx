@@ -1,9 +1,21 @@
 "use client";
 
 import { useSicilianContext } from "@ilokesto/sicilian/provider";
+import { neato } from "neato";
 
-export function Input() {
+export function Input(
+  props: Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    "name" | "id" | "onChange" | "value" | "onBlur" | "onFocus" | "type"
+  >
+) {
   const { register, name } = useSicilianContext();
 
-  return <input className="input w-full" {...register({ name })} />;
+  return (
+    <input
+      {...register({ name })}
+      {...props}
+      className={neato("input w-full", props.className)}
+    />
+  );
 }
