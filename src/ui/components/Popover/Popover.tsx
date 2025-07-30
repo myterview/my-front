@@ -1,5 +1,6 @@
 "use client";
 
+import { useComponentSize } from "@/shared/utils/useComponentSize";
 import {
   autoUpdate,
   flip,
@@ -14,7 +15,7 @@ import {
   useListNavigation,
   useRole,
 } from "@floating-ui/react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 export type PopoverProps = {
   anchorElement: {
@@ -60,9 +61,8 @@ function usePopoverPosition({
 }: Pick<PopoverProps, "position">) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [anchorWidth, setAnchorWidth] = useState<number>();
+  const [anchorRef, size] = useComponentSize<HTMLElement>();
   const listRef = useRef<Array<HTMLElement | null>>([]);
-  const anchorRef = useRef<HTMLElement | null>(null);
 
   const { refs, floatingStyles, context } = useFloating({
     open: isOpen,
@@ -78,23 +78,6 @@ function usePopoverPosition({
     placement: position.placement,
     whileElementsMounted: autoUpdate,
   });
-
-  useEffect(() => {
-    if (!anchorRef.current) return;
-    function updateWidth() {
-      setAnchorWidth(
-        anchorRef.current ? anchorRef.current.offsetWidth : undefined
-      );
-    }
-    updateWidth();
-    const ro = new window.ResizeObserver(updateWidth);
-    ro.observe(anchorRef.current);
-    window.addEventListener("resize", updateWidth);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", updateWidth);
-    };
-  }, []);
 
   const click = useClick(context, {
     event: "mousedown", // input의 경우 mousedown 이벤트 사용
@@ -145,7 +128,7 @@ function usePopoverPosition({
       listRef,
       FloatingFocusManager,
       context,
-      anchorWidth,
+      anchorWidth: size.width,
     },
   };
 }
