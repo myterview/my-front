@@ -1,9 +1,8 @@
-
+import { Card } from "../CardComponent/Card";
 import { grunfeld } from "@ilokesto/grunfeld";
 import { Show } from "@ilokesto/utilinent";
-import { neato } from "neato";
+import { ClassValue, neato } from "neato";
 import Image from "next/image";
-import { Card } from "../CardComponent/Card";
 
 export function ModalWrapper({
   children,
@@ -11,7 +10,7 @@ export function ModalWrapper({
 }: {
   children: React.ReactNode;
   title?: string;
-  className?: string;
+  className?: ClassValue;
 }) {
   return (
     <div

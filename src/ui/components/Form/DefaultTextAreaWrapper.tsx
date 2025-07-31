@@ -1,7 +1,7 @@
 "use client";
 
 import { Show } from "@ilokesto/utilinent";
-import { neato } from "neato";
+import { ClassValue, neato } from "neato";
 
 export function FieldOutlineWrapper({
   children,
@@ -10,7 +10,7 @@ export function FieldOutlineWrapper({
 }: {
   children: React.ReactNode;
   title?: string;
-  className?: string;
+  className?: ClassValue;
 }) {
   return (
     <div className="flex w-full flex-col gap-8">

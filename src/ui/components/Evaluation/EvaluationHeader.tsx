@@ -1,5 +1,6 @@
 import { Card } from "../CardComponent/Card";
 import { Tags } from "../Chips/Tags";
+import { ClassValue, neato } from "neato";
 import Image from "next/image";
 
 export function EvaluationHeader({
@@ -13,10 +14,10 @@ export function EvaluationHeader({
   title: string;
   createdAt: string;
   tags: string[];
-  className?: string;
+  className?: ClassValue;
 }) {
   return (
-    <div className={className}>
+    <div className={neato(className)}>
       <div className="flex items-start justify-between gap-24">
         <Card.Title>{title}</Card.Title>
 

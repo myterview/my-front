@@ -1,4 +1,4 @@
-import { neato, neatoVariants } from "neato";
+import { ClassValue, neato, neatoVariants } from "neato";
 import {
   cloneElement,
   ComponentPropsWithoutRef,
@@ -7,7 +7,7 @@ import {
 } from "react";
 
 type ClickableProps = ClickableTypes & {
-  className?: string;
+  className?: ClassValue;
   children: React.ReactNode;
 };
 

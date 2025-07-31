@@ -2,7 +2,7 @@
 
 import { PopoverProps } from "../Popover";
 import { For } from "@ilokesto/utilinent";
-import { neato } from "neato";
+import { ClassValue, neato } from "neato";
 import { useEffect, useState } from "react";
 
 export function DropdownOption({
@@ -13,7 +13,7 @@ export function DropdownOption({
   className,
   setSelectedOption,
 }: PopoverProps["floaterElement"] & {
-  className?: string;
+  className?: ClassValue;
   options: string[];
   selectedOption: string;
   setSelectedOption: (option: string) => void;

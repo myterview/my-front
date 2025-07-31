@@ -22,7 +22,7 @@ Card.Title = function Title({
   className,
 }: {
   children: React.ReactNode;
-  className?: string;
+  className?: ClassValue;
 }) {
   return (
     <h4
