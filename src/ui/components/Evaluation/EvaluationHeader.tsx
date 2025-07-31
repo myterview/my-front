@@ -33,7 +33,7 @@ export function EvaluationHeader({
 
       <div className="flex items-center justify-between">
         <Card.subTitle>{createdAt}</Card.subTitle>
-        <Tags each={tags} />
+        <Tags each={tags} className="justify-end" />
       </div>
     </div>
   );

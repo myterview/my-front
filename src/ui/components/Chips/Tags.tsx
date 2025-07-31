@@ -1,7 +1,14 @@
 import { useComponentSize } from "@/shared/utils/useComponentSize";
+import { ClassValue, neato } from "neato";
 import { useLayoutEffect, useRef, useState } from "react";
 
-export function Tags({ each }: { each: Array<string> }) {
+export function Tags({
+  each,
+  className,
+}: {
+  each: Array<string>;
+  className?: ClassValue;
+}) {
   const tagRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const plusRef = useRef<HTMLSpanElement | null>(null);
   const [visibleCount, setVisibleCount] = useState(each.length);
@@ -43,7 +50,7 @@ export function Tags({ each }: { each: Array<string> }) {
   const hiddenCount = each.length - visibleCount;
 
   return (
-    <div ref={containerRef} className="flex gap-8 relative">
+    <div ref={containerRef} className={neato("flex gap-8  flex-1", className)}>
       {each.map((tag, i) => (
         <span
           key={tag}
