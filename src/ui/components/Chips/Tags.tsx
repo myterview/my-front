@@ -38,7 +38,7 @@ export function Tags({ each }: { each: Array<string> }) {
     }
 
     setVisibleCount(count);
-  }, [each, size.width]);
+  }, [each, size.width, containerRef]);
 
   const hiddenCount = each.length - visibleCount;
 
