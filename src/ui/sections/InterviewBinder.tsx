@@ -1,6 +1,7 @@
 "use client";
 
 import { Card } from "../components/CardComponent/Card";
+import { Tags } from "../components/Chips/Tags";
 import { InterviewClient } from "@/api/interview.client";
 import { Interview, InterviewDomain } from "@/shared/domains/Interview";
 import { getEnumValueByKey } from "@/shared/utils/enumUtils";
@@ -48,7 +49,7 @@ export function InterviewBinder() {
                       </Card.ProgressChip>
                     </div>
 
-                    <Card.Tags
+                    <Tags
                       each={[
                         getEnumValueByKey(interview.position),
                         getEnumValueByKey(interview.experience),

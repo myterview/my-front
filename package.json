@@ -12,7 +12,7 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@floating-ui/react": "^0.27.14",
+    "@floating-ui/react": "^0.27.15",
     "@floating-ui/react-dom-interactions": "^0.13.3",
     "@fxts/core": "^1.15.0",
     "@ilokesto/caro-kann": "^4.0.1",
@@ -24,10 +24,10 @@
     "@tanstack/react-query": "^5.83.0",
     "es-hangul": "^2.3.5",
     "ky": "^1.8.2",
-    "neato": "^0.0.11",
-    "next": "15.4.4",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "neato": "^0.0.13",
+    "next": "15.4.5",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "react-hot-toast": "^2.5.2",
     "recharts": "^3.1.0"
   },
@@ -39,7 +39,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.4.4",
+    "eslint-config-next": "15.4.5",
     "openapi-typescript": "^7.8.0",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",

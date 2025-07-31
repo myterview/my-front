@@ -1,4 +1,5 @@
 import { SizeWrapper } from "@/ui/components/SizeWrapper/SizeWrapper";
+import { TechQuestionBinder } from "@/ui/sections/TechQuestionBinder";
 import { TechQuestionTagSearchBar } from "@/ui/sections/TechQuestionTagSearchBar";
 
 export default function TechQuestionPage() {
@@ -10,6 +11,8 @@ export default function TechQuestionPage() {
       <h2 className="heading-01">기술 질문</h2>
 
       <TechQuestionTagSearchBar />
+
+      <TechQuestionBinder />
     </SizeWrapper>
   );
 }

@@ -18,8 +18,8 @@ export class TechQuestionClient extends Fetcher {
     queryFn: () => this.fetcher.get("tech-question/tags")
   })
 
-  public getTechQuestionList = ({isBookmarked, isAnswered, tags}: {isBookmarked: boolean, isAnswered: boolean, tags: Array<string>}) => this.infiniteQueryOptions({
-    queryKey: ["tech-question", "list"],
+  public getTechQuestionList = ({isBookmarked = false, isAnswered = false, tags}: {isBookmarked: boolean, isAnswered: boolean, tags: Array<string>}) => this.infiniteQueryOptions({
+    queryKey: ["tech-question", "list", { isBookmarked, isAnswered, tags }],
     queryFn: ({
         pageParam,
       }: {
@@ -31,6 +31,8 @@ export class TechQuestionClient extends Fetcher {
           isAnswered,
           tags
         },
+      }, {
+        credentials: "include",
       }),
     initialPageParam: { take: 12, skip: 0 },
     getNextPageParam: (lastPage, pages, lastPageParam) => {

@@ -1,5 +1,6 @@
-import Image from "next/image";
 import { Card } from "../CardComponent/Card";
+import { Tags } from "../Chips/Tags";
+import Image from "next/image";
 
 export function EvaluationHeader({
   onClose,
@@ -32,7 +33,7 @@ export function EvaluationHeader({
 
       <div className="flex items-center justify-between">
         <Card.subTitle>{createdAt}</Card.subTitle>
-        <Card.Tags each={tags} />
+        <Tags each={tags} />
       </div>
     </div>
   );
