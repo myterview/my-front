@@ -9,21 +9,26 @@ export function Tags({ each }: { each: Array<string> }) {
 
   useLayoutEffect(() => {
     if (!containerRef.current) return;
+
     const containerWidth = containerRef.current.offsetWidth;
     let total = 0;
     let count = 0;
+
     for (let i = 0; i < each.length; i++) {
       const tagEl = tagRefs.current[i];
       if (!tagEl) continue;
-      // +N 버튼이 필요한 상황이면, 마지막 태그 대신 +N의 width를 고려
+
+      // +N 버튼이 필요한 상황이면 마지막 태그 대신 +N의 width 고려
       if (i === count && count < each.length - 1 && plusRef.current) {
         if (total + plusRef.current.offsetWidth > containerWidth) break;
       }
+
       total += tagEl.offsetWidth + 8; // gap-8
       if (total > containerWidth) break;
       count++;
     }
-    // +N이 보이는 경우, +N이 컨테이너를 조금이라도 넘기면 무조건 한 개 덜 보여줌
+
+    // +N이 보이는 경우, +N이 컨테이너를 넘기면 한 개 덜 보여줌
     if (count < each.length && plusRef.current) {
       const plusRight = plusRef.current.getBoundingClientRect().right;
       const containerRight = containerRef.current.getBoundingClientRect().right;
@@ -31,24 +36,28 @@ export function Tags({ each }: { each: Array<string> }) {
         count--;
       }
     }
+
     setVisibleCount(count);
-  }, [each, size.width, containerRef]);
+  }, [each, size.width]);
 
   const hiddenCount = each.length - visibleCount;
 
   return (
-    <div ref={containerRef} className="flex gap-8 overflow-hidden">
-      {each.slice(0, visibleCount).map((tag, i) => (
+    <div ref={containerRef} className="flex gap-8 relative">
+      {each.map((tag, i) => (
         <span
           key={tag}
           ref={(el) => {
             tagRefs.current[i] = el;
           }}
-          className="shadow-custom flex items-center justify-center whitespace-nowrap rounded-[4px] px-4 text-xs/18 font-medium text-primary-600"
+          className={`shadow-custom flex items-center justify-center whitespace-nowrap rounded-[4px] px-4 text-xs/18 font-medium text-primary-600 transition-all duration-100 ${
+            i < visibleCount ? "" : "invisible absolute"
+          }`}
         >
           #{tag}
         </span>
       ))}
+
       {hiddenCount > 0 && (
         <span
           ref={plusRef}
