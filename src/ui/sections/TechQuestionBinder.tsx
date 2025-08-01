@@ -3,10 +3,12 @@
 import Bookmark from "../components/Bookmark/Bookmark";
 import { Card } from "../components/CardComponent/Card";
 import { Tags } from "../components/Chips/Tags";
+import { TechQuestionModal } from "./TechQuestionModal";
 import { TechQuestionClient } from "@/api/tech-question.client";
 import { TechQuestion } from "@/shared/domains/TechQuestion";
 import { useIntersectionQuery } from "@/shared/utils/useIntersectionQuery";
 import { useQueryParams } from "@/shared/utils/useQueryParams";
+import { grunfeld } from "@ilokesto/grunfeld";
 import { For } from "@ilokesto/utilinent";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { neato } from "neato";
@@ -34,10 +36,19 @@ export function TechQuestionBinder() {
           ?.flatMap((page) => page.questions)
           .map((item) => new TechQuestion(item))}
       >
-        {(techQuestion) => {
-          return (
+        {(techQuestion) => (
+          <button
+            key={techQuestion.id}
+            type="button"
+            onClick={() =>
+              grunfeld.add(() => (
+                <TechQuestionModal
+                  isUserAnswered={techQuestion.isUserAnswered}
+                />
+              ))
+            }
+          >
             <Card
-              key={techQuestion.id}
               className={neato(
                 "border-l-8 pl-24 space-y-32 relative",
                 techQuestion.isUserAnswered
@@ -57,8 +68,8 @@ export function TechQuestionBinder() {
 
               <Tags each={techQuestion.tags} />
             </Card>
-          );
-        }}
+          </button>
+        )}
       </For>
 
       <div ref={ref} />

@@ -22,15 +22,16 @@ export default function Bookmark({
   const [hovered, setHovered] = useState(false);
   const [animating, setAnimating] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     mutate();
     setAnimating(true);
     setTimeout(() => setAnimating(false), 500);
   };
 
   return (
-    <button
-      type="button"
+    <div
       className={neato("bookmark-icon", className)}
       onClick={handleClick}
       onMouseEnter={() => setHovered(true)}
@@ -52,6 +53,6 @@ export default function Bookmark({
           strokeWidth={strokeWidth}
         />
       </svg>
-    </button>
+    </div>
   );
 }

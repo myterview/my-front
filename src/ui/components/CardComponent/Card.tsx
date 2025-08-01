@@ -27,7 +27,7 @@ Card.Title = function Title({
   return (
     <h4
       className={neato(
-        "line-clamp-1 text-2xl font-extrabold text-left",
+        "line-clamp-1 text-2xl font-extrabold text-left break-keep",
         className
       )}
     >
