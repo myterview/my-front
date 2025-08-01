@@ -1,49 +1,57 @@
-"use client"
+"use client";
 
-import React, { MouseEvent, useState } from "react";
-import './Bookmark.css';
+import "./Bookmark.css";
+import { ClassValue, neato } from "neato";
+import { useState } from "react";
 
-interface BookmarkIconProps {
+export default function Bookmark({
+  active,
+  mutate,
+  width = 24,
+  height = 32,
+  strokeWidth = 1,
+  className,
+}: {
+  active: boolean;
+  mutate: () => void;
   width?: number;
   height?: number;
   strokeWidth?: number;
-}
-
-const Bookmark: React.FC<BookmarkIconProps> = ({ width = 24, height = 32, strokeWidth = 1 }) => {
-  const [active, setActive] = useState(false);
+  className?: ClassValue;
+}) {
+  const [hovered, setHovered] = useState(false);
   const [animating, setAnimating] = useState(false);
 
-  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault(); // Prevent default action if needed
-    setActive((prev) => {
-      setAnimating(true);
-      setTimeout(() => setAnimating(false), 500);
-      return !prev;
-    });
+  const handleClick = () => {
+    mutate();
+    setAnimating(true);
+    setTimeout(() => setAnimating(false), 500);
   };
-
-  const [hovered, setHovered] = useState(false);
 
   return (
     <button
-      className="bookmark-icon"
+      type="button"
+      className={neato("bookmark-icon", className)}
       onClick={handleClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <svg viewBox="0 0 48 64" width={width} height={height} style={{ overflow: "visible"}}>
+      <svg
+        viewBox="0 0 48 64"
+        width={width}
+        height={height}
+        style={{ overflow: "visible" }}
+      >
         <polygon
-          className={`bookmark-fill${active ? ' active' : ''}${animating ? ' animating' : ''}${!active && hovered ? ' hovered' : ''}`}
+          className={`bookmark-fill${active ? " active" : ""}${animating ? " animating" : ""}${!active && hovered ? " hovered" : ""}`}
           points="8,8 40,8 40,56 24,44 8,56"
         />
         <polyline
-          className={`bookmark-shape${active ? ' active' : ''}${animating ? ' animating' : ''}${!active && hovered ? ' hovered' : ''}`}
+          className={`bookmark-shape${active ? " active" : ""}${animating ? " animating" : ""}${!active && hovered ? " hovered" : ""}`}
           points="8,8 40,8 40,56 24,44 8,56 8,8"
           strokeWidth={strokeWidth}
         />
       </svg>
     </button>
   );
-};
-
-export default Bookmark;
+}

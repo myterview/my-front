@@ -25,7 +25,7 @@ export function DropdownOption({
     <div
       {...floater}
       className={neato(
-        "dropdown-transition",
+        "dropdown-transition z-50",
         isOpened ? "max-h-300 opacity-100" : "max-h-0 opacity-0"
       )}
     >

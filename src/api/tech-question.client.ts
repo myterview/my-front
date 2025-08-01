@@ -1,4 +1,3 @@
-import { components } from "@/shared/types";
 import { QueryClient } from "@tanstack/react-query";
 import { thisBind } from "./decorators/thisBind";
 import { Fetcher } from "./Fetcher";
@@ -12,13 +11,12 @@ export class TechQuestionClient extends Fetcher {
     })
   })
 
-
   public getTags = () => this.queryOptions({
     queryKey: ["tech-question", "tags"],
     queryFn: () => this.fetcher.get("tech-question/tags")
   })
 
-  public getTechQuestionList = ({isBookmarked = false, isAnswered = false, tags}: {isBookmarked: boolean, isAnswered: boolean, tags: Array<string>}) => this.infiniteQueryOptions({
+  public getTechQuestionList = ({isBookmarked = false, isAnswered = false, tags }: {isBookmarked: boolean, isAnswered: boolean, tags: Array<string>}) => this.infiniteQueryOptions({
     queryKey: ["tech-question", "list", { isBookmarked, isAnswered, tags }],
     queryFn: ({
         pageParam,
@@ -45,27 +43,22 @@ export class TechQuestionClient extends Fetcher {
     }
   })
 
-  public postTechQuestionBookmark = ({ questionId, queryClient }: { questionId: string, queryClient: QueryClient; }) => this.mutationOptions({
-    mutationFn: ({ isBookmarked }: { isBookmarked: boolean }) => this.fetcher.post("tech-question/{questionId}/bookmark", {
+  public postTechQuestionBookmark = ({ queryClient }: {  queryClient: QueryClient, }) => this.mutationOptions({
+    mutationFn: ({ isBookmarked, questionId }: { questionId: string, isBookmarked: boolean }) => this.fetcher.post("tech-question/{questionId}/bookmark", {
       path: { questionId },
       query: { isBookmarked }
+    }, {
+      credentials: "include",
     }),
-    onMutate: async ({ isBookmarked }) => {
-      await queryClient.cancelQueries({ queryKey: ["tech-question", "list"] });
-      const previousData = queryClient.getQueryData(["tech-question", "list"]);
-      queryClient.setQueryData(["tech-question", "list"], (old: {
-        count: number;
-        questions: components["schemas"]["TechQuestionDTO"][];
-      }[]) => {
-        return old.map(({count, questions}) => ({count, questions: questions.map((question) => ({...question, isUserBookmarked: question.id === questionId ? isBookmarked : question.isUserBookmarked}))}))
-      });
-      return { previousData };
-    },
     onError(error) {
       console.error(error);
     },
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["tech-question", "list"], refetchType: "all" });
+      queryClient.invalidateQueries({
+        queryKey: ["tech-question", "list"],
+        exact: false, 
+        refetchType: "all"
+      });
     }
   })
 

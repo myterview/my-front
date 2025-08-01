@@ -5,13 +5,13 @@ import { Tags } from "../components/Chips/Tags";
 import { InterviewClient } from "@/api/interview.client";
 import { Interview, InterviewDomain } from "@/shared/domains/Interview";
 import { getEnumValueByKey } from "@/shared/utils/enumUtils";
-import { For, Observer, Show } from "@ilokesto/utilinent";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useIntersectionQuery } from "@/shared/utils/useIntersectionQuery";
+import { For, Show } from "@ilokesto/utilinent";
 import { neato } from "neato";
 import Link from "next/link";
 
 export function InterviewBinder() {
-  const { data, fetchNextPage } = useInfiniteQuery(
+  const { data, ref } = useIntersectionQuery(
     new InterviewClient().InfiniteInterviewList()
   );
 
@@ -62,11 +62,8 @@ export function InterviewBinder() {
           </For>
         )}
       </Show>
-      <Observer
-        onIntersect={(isIntersecting) => {
-          if (isIntersecting) fetchNextPage();
-        }}
-      />
+
+      <div ref={ref} />
     </div>
   );
 }

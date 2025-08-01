@@ -134,7 +134,7 @@ function TagSelectOption({
       {...floater}
       style={{ ...floater.style, width }}
       className={
-        "bg-white rounded-[4px] border border-gray-200 overflow-y-scroll p-16"
+        "bg-white rounded-[4px] border border-gray-200 overflow-y-scroll p-16 z-50"
       }
     >
       <TagArray
