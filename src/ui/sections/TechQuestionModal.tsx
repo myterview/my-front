@@ -127,13 +127,18 @@ TechQuestionModal.Result = function TechQuestionModalResult({
     const date = await grunfeld.add<DateTimeDomain>((removeWith) => ({
       element: (
         <TechQuestionModal.DateSelector
+          selectedAnswer={answer!}
           answerList={answerList}
           removeWith={removeWith}
         />
       ),
     }));
-    setAnswer(answerList.find((item) => item.createdAt.isEqual(date)));
+    setAnswer((prev) =>
+      answerList.find((item) => item.createdAt.isEqual(date ?? prev?.createdAt))
+    );
   };
+
+  if (!answer) return;
 
   return (
     <div className="flex flex-col h-full gap-28">
@@ -155,24 +160,24 @@ TechQuestionModal.Result = function TechQuestionModalResult({
         <div className={neato("flex items-center justify-between", "")}>
           <button
             type="button"
-            className="flex hover:text-primary-500 hover:primary-500-filter"
+            className="flex hover:text-primary-500 hover:primary-500-filter gap-8"
             onClick={handleClick}
           >
             <Image
-              src="/icons/submitArrow.svg"
+              src="/icons/calendar.svg"
               alt="refresh"
               draggable="false"
               width={24}
               height={24}
             />
-            {answer?.createdAt.format("YYYY.MM.DD")}
+            {answer.createdAt.format("YYYY.MM.DD")}
           </button>
 
           <Tags each={tags} className="justify-end" />
         </div>
       </div>
 
-      <div>{answer?.llmAnswer}</div>
+      <div>{answer.llmAnswer}</div>
     </div>
   );
 };
@@ -180,7 +185,9 @@ TechQuestionModal.Result = function TechQuestionModalResult({
 TechQuestionModal.DateSelector = function TechQuestionModalDateSelector({
   answerList,
   removeWith,
+  selectedAnswer,
 }: {
+  selectedAnswer: TechAnswerDomain;
   answerList: TechAnswerDomain[];
   removeWith: (data: DateTimeDomain) => void;
 }) {
@@ -197,6 +204,11 @@ TechQuestionModal.DateSelector = function TechQuestionModalDateSelector({
               }}
               type="button"
               key={item.id}
+              className={neato(
+                "cursor-pointer px-4 py-2 w-full font-semibold text-gray-600 text-left hover:bg-primary-100",
+                selectedAnswer.createdAt.isEqual(item.createdAt) &&
+                  "text-primary-600"
+              )}
             >
               {item.createdAt.format("YYYY년 MM월 DD일 HH시 mm분")}
             </button>
