@@ -9,7 +9,7 @@ import {
 } from "@/shared/sicilian/interviewForm";
 import { InterviewExperienceKr, InterviewPositionKr } from "@/shared/types";
 import { Clickable } from "@/ui/components/Clickable/Clickable";
-import { FieldUnderlineWrapper } from "@/ui/components/Form/DefaultInputWrapper";
+import { FieldUnderlineWrapper } from "@/ui/components/Form/FieldUnderlineWrapper";
 import { Form } from "@/ui/components/Form/Form";
 import { Input } from "@/ui/components/Form/Input";
 import { DropdownInput } from "@/ui/components/Popover/Dropdown/DropdownInput";

@@ -1,7 +1,7 @@
 "use client";
 
 import { Clickable } from "../components/Clickable/Clickable";
-import { FieldOutlineWrapper } from "../components/Form/DefaultTextAreaWrapper";
+import { FieldOutlineWrapper } from "../components/Form/FieldOutlineWrapper";
 import { Form } from "../components/Form/Form";
 import { Input } from "../components/Form/Input";
 import { DropdownOption } from "../components/Popover/Dropdown/DropdownOption";

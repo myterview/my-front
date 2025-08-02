@@ -46,18 +46,18 @@ export class TechQuestion implements TechQuestionDomain {
     this.isUserAnswered = tq.isUserAnswered;
   }
 
-  public toggleBookmark(
+  public toggleBookmark = (
     mutate: UseMutateFunction<
       unknown,
       unknown,
       { questionId: string; isBookmarked: boolean },
       unknown
     >
-  ) {
+  ) => {
     return () =>
       mutate({
         questionId: this.id,
         isBookmarked: this.isUserBookmarked,
       });
-  }
+  };
 }

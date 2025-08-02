@@ -41,11 +41,7 @@ export function TechQuestionBinder() {
             key={techQuestion.id}
             type="button"
             onClick={() =>
-              grunfeld.add(() => (
-                <TechQuestionModal
-                  isUserAnswered={techQuestion.isUserAnswered}
-                />
-              ))
+              grunfeld.add(() => <TechQuestionModal {...techQuestion} />)
             }
           >
             <Card

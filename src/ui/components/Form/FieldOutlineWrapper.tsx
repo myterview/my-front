@@ -13,14 +13,14 @@ export function FieldOutlineWrapper({
   className?: ClassValue;
 }) {
   return (
-    <div className="flex w-full flex-col gap-8">
+    <div className="flex w-full flex-col gap-8 flex-1">
       <Show when={title}>
         {(title) => <div className="label">{title}</div>}
       </Show>
 
       <div
         className={neato(
-          "focus-within:border-primary-600 flex items-end justify-between gap-12 rounded-[4] border-1 border-gray-200 px-24 py-18",
+          "focus-within:border-primary-600 h-full flex items-end justify-between gap-12 rounded-[4] border-1 border-gray-200 px-24 py-18",
           className
         )}
       >
