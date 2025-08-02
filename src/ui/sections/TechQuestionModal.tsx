@@ -5,6 +5,7 @@ import { Tags } from "../components/Chips/Tags";
 import FieldOutlineWithButtonWrapper from "../components/Form/FieldOutlineWithButtonWrapper";
 import { Form } from "../components/Form/Form";
 import { TextArea } from "../components/Form/TextArea";
+import { MDViewer } from "../components/Markdown/MDViewer";
 import { ModalWrapper } from "../components/Modal/ModalWrapper";
 import { TechQuestionClient } from "@/api/tech-question.client";
 import { DateTimeDomain } from "@/shared/domains/DateTime";
@@ -13,7 +14,7 @@ import { TechQuestionDomain } from "@/shared/domains/TechQuestion";
 import { grunfeld } from "@ilokesto/grunfeld";
 import { CreateForm } from "@ilokesto/sicilian";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
-import { For } from "@ilokesto/utilinent";
+import { For, Show } from "@ilokesto/utilinent";
 import {
   UseMutateFunction,
   useMutation,
@@ -57,8 +58,9 @@ const { register, getValues, handleSubmit } = new CreateForm({
 TechQuestionModal.Form = function TechQuestionModalForm({
   tags,
   question,
+  code,
   mutate,
-}: Pick<TechQuestionDomain, "tags" | "question"> & {
+}: Pick<TechQuestionDomain, "tags" | "question" | "code"> & {
   mutate: UseMutateFunction<
     never,
     Error,
@@ -90,7 +92,9 @@ TechQuestionModal.Form = function TechQuestionModalForm({
         </div>
       </div>
 
-      <div></div>
+      <div>
+        <Show when={code}>{(code) => <MDViewer>{code}</MDViewer>}</Show>
+      </div>
 
       <Form
         onSubmit={handleSubmit((data) => mutate(data))}
@@ -113,8 +117,11 @@ TechQuestionModal.Submitting = function TechQuestionModalSubmitting() {
 TechQuestionModal.Result = function TechQuestionModalResult({
   id: questionId,
   question,
+
+  solution,
+  code,
   tags,
-}: Pick<TechQuestionDomain, "id" | "question" | "tags">) {
+}: Pick<TechQuestionDomain, "id" | "question" | "tags" | "code" | "solution">) {
   const { data } = useSuspenseQuery(
     new TechQuestionClient().getTechAnswerList({
       questionId,
@@ -141,7 +148,7 @@ TechQuestionModal.Result = function TechQuestionModalResult({
   if (!answer) return;
 
   return (
-    <div className="flex flex-col h-full gap-28">
+    <div className="flex flex-col h-full gap-28 overflow-y-auto">
       <div className="flex flex-col gap-8">
         <div className="flex items-start justify-between gap-24">
           <Card.Title>{question}</Card.Title>
@@ -177,7 +184,16 @@ TechQuestionModal.Result = function TechQuestionModalResult({
         </div>
       </div>
 
-      <div>{answer.llmAnswer}</div>
+      <div>
+        <Show when={code}>{(code) => <MDViewer>{code}</MDViewer>}</Show>
+      </div>
+
+      {/* <div>{answer.userAnswer}</div> */}
+      <MDViewer>{answer.userAnswer}</MDViewer>
+
+      <MDViewer>{solution}</MDViewer>
+
+      <MDViewer>{answer.llmAnswer}</MDViewer>
     </div>
   );
 };
