@@ -25,11 +25,17 @@ export function ModalWrapper({
   );
 }
 
-ModalWrapper.Title = function ModalWrapperTitle({ title }: { title?: string }) {
+ModalWrapper.Title = function ModalWrapperTitle({
+  title,
+  className,
+}: {
+  title?: string;
+  className?: ClassValue;
+}) {
   return (
     <div className="flex items-start justify-between gap-24">
       <Show when={title} fallback={<div className="flex-1"></div>}>
-        {(title) => <Card.Title>{title}</Card.Title>}
+        {(title) => <Card.Title className={className}>{title}</Card.Title>}
       </Show>
 
       <button type="button" onClick={grunfeld.remove}>

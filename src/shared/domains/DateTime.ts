@@ -6,6 +6,7 @@ export interface DateTimeDomain {
   readonly date: Date;
   toTimezone(timezone?: string): Date;
   format(pattern?: string, timezone?: string): string;
+  isEqual(other: DateTimeDomain): boolean;
 }
 
 export class DateTime implements DateTimeDomain {
@@ -65,5 +66,12 @@ export class DateTime implements DateTimeDomain {
       .replace(/HH/g, hours)
       .replace(/mm/g, minutes)
       .replace(/ss/g, seconds);
+  }
+
+  public isEqual(other: DateTimeDomain): boolean {
+    if (!(other instanceof DateTime)) {
+      throw new Error("Comparison must be with another DateTime instance.");
+    }
+    return this.date.getTime() === other.date.getTime();
   }
 }

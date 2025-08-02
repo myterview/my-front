@@ -121,8 +121,19 @@ TechQuestionModal.Result = function TechQuestionModalResult({
     })
   );
   const answerList = data.map((item) => new TechAnswer(item));
-
   const [answer, setAnswer] = useState(answerList.at(-1));
+
+  const handleClick = async () => {
+    const date = await grunfeld.add<DateTimeDomain>((removeWith) => ({
+      element: (
+        <TechQuestionModal.DateSelector
+          answerList={answerList}
+          removeWith={removeWith}
+        />
+      ),
+    }));
+    setAnswer(answerList.find((item) => item.createdAt.isEqual(date)));
+  };
 
   return (
     <div className="flex flex-col h-full gap-28">
@@ -145,18 +156,7 @@ TechQuestionModal.Result = function TechQuestionModalResult({
           <button
             type="button"
             className="flex hover:text-primary-500 hover:primary-500-filter"
-            onClick={async () => {
-              const a = await grunfeld.add<DateTimeDomain>((removeWith) => ({
-                element: (
-                  <TechQuestionModal.DateSelector
-                    answerList={answerList}
-                    removeWith={removeWith}
-                  />
-                ),
-              }));
-
-              console.log("a", a);
-            }}
+            onClick={handleClick}
           >
             <Image
               src="/icons/submitArrow.svg"
@@ -167,9 +167,12 @@ TechQuestionModal.Result = function TechQuestionModalResult({
             />
             {answer?.createdAt.format("YYYY.MM.DD")}
           </button>
+
           <Tags each={tags} className="justify-end" />
         </div>
       </div>
+
+      <div>{answer?.llmAnswer}</div>
     </div>
   );
 };
@@ -182,22 +185,24 @@ TechQuestionModal.DateSelector = function TechQuestionModalDateSelector({
   removeWith: (data: DateTimeDomain) => void;
 }) {
   return (
-    <ModalWrapper>
+    <ModalWrapper className="flex flex-col gap-24 w-360">
       <ModalWrapper.Title title="이전 답변" />
 
-      <For each={answerList}>
-        {(item) => (
-          <button
-            onClick={() => {
-              removeWith(item.createdAt);
-            }}
-            type="button"
-            key={item.id}
-          >
-            {item.createdAt.format("YYYY년 MM월 DD일")}
-          </button>
-        )}
-      </For>
+      <div className="flex flex-col gap-8 items-start">
+        <For each={answerList}>
+          {(item) => (
+            <button
+              onClick={() => {
+                removeWith(item.createdAt);
+              }}
+              type="button"
+              key={item.id}
+            >
+              {item.createdAt.format("YYYY년 MM월 DD일 HH시 mm분")}
+            </button>
+          )}
+        </For>
+      </div>
     </ModalWrapper>
   );
 };
