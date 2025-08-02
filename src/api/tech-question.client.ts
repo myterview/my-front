@@ -1,4 +1,6 @@
+import { TechQuestionModalStep } from "@/ui/sections/TechQuestionModal";
 import { QueryClient } from "@tanstack/react-query";
+import { Dispatch, SetStateAction } from "react";
 import { thisBind } from "./decorators/thisBind";
 import { Fetcher } from "./Fetcher";
 
@@ -8,6 +10,8 @@ export class TechQuestionClient extends Fetcher {
     queryKey: ["tech-question", "answer", questionId],
     queryFn: () => this.fetcher.get("tech-question/{questionId}/answer", {
       path: { questionId } // 현재 사용자의 질문 ID를 사용
+    }, {
+      credentials: "include",
     })
   })
 
@@ -62,16 +66,24 @@ export class TechQuestionClient extends Fetcher {
     }
   })
 
-  public postTechAnswer = (({ questionId, queryClient }: { questionId: string, queryClient: QueryClient; }) => this.mutationOptions({
+  public postTechAnswer = (({ questionId, queryClient, setStep }: { questionId: string, queryClient: QueryClient; setStep: Dispatch<SetStateAction<TechQuestionModalStep>> }) => this.mutationOptions({
     mutationFn: ({ userAnswer }: { userAnswer: string }) => this.fetcher.post("tech-question/{questionId}/answer", {
       path: { questionId },
       body: { userAnswer }
+    }, {
+      credentials: "include",
+      timeout: 100000,
     }),
+    onMutate() {
+      setStep("submitting");
+    },
     onError(error) {
       console.error(error);
+      setStep("form");
     },
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["tech-question"], refetchType: "all" });
+      setStep("result");
     }
   }))
 }

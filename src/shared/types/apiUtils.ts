@@ -73,4 +73,5 @@ export type BackendResponse = {
   user: components["schemas"]["UserResDTO"];
 
   techQuestion: components["schemas"]["TechQuestionDTO"];
+  techAnswer: components["schemas"]["TechQuestionAnswerDTO"];
 };
