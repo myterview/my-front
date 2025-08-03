@@ -126,8 +126,8 @@ TechQuestionModal.Submitting = function TechQuestionModalSubmitting() {
       <Image
         src="/images/mrCatLoading.svg"
         alt="loading"
-        width={24}
-        height={24}
+        width={210}
+        height={210}
       />
       채점중{dot}
     </div>
@@ -198,7 +198,7 @@ TechQuestionModal.Result = function TechQuestionModalResult({
           </button>
         </div>
 
-        <div className={neato("flex items-center justify-between", "")}>
+        <div className={neato("flex items-center justify-between")}>
           <button
             type="button"
             className="flex hover:text-primary-500 hover:primary-500-filter gap-8"
