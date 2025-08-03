@@ -15,7 +15,7 @@ export function SidebarFooter({ user }: { user: BackendResponse["user"] }) {
         </div>
       </div>
 
-      <div className="flex flex-col gap-16 font-semibold text-blue-100">
+      <div className="flex flex-col gap-16 font-semibold text-primary-100">
         <Link href="/setting" className="flex gap-12">
           <Image
             src="/icons/setting.svg"

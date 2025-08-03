@@ -71,4 +71,7 @@ export type BackendResponse = {
   interviewMessages: components["schemas"]["InterviewMessage"][];
   interviewMessage: components["schemas"]["InterviewMessage"];
   user: components["schemas"]["UserResDTO"];
+
+  techQuestion: components["schemas"]["TechQuestionDTO"];
+  techAnswer: components["schemas"]["TechQuestionAnswerDTO"];
 };

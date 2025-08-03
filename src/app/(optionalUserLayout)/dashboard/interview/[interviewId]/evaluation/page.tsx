@@ -10,6 +10,23 @@ import { UserInterviewProsAndCons } from "@/ui/components/Evaluation/MyProsAndCo
 import { SizeWrapper } from "@/ui/components/SizeWrapper/SizeWrapper";
 import { SessionHeader } from "@/ui/sections/SessionHeader";
 import { neato } from "neato";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ interviewId: string }>;
+}): Promise<Metadata> {
+  const { interviewId } = await params;
+  const interviewQuery = new InterviewQuery();
+  const { session } = await interviewQuery.getInterviewById(interviewId, false);
+  const interview = new Interview(session);
+
+  return {
+    title: `${interview.title} 평가 | myterview`,
+    description: `${interview.createdAt.format("YYYY년 MM월 DD일")}에 진행된 "${interview.title}" 인터뷰의 평가 결과를 확인하세요.`,
+  };
+}
 
 export default async function NotInter({
   params,

@@ -1,4 +1,4 @@
-import { neato } from "neato";
+import { ClassValue, neato } from "neato";
 import Image from "next/image";
 
 export function Avatar({
@@ -6,7 +6,7 @@ export function Avatar({
   className,
 }: {
   src?: string;
-  className?: string;
+  className?: ClassValue;
 }) {
   return (
     <div

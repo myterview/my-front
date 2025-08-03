@@ -4,6 +4,11 @@ import { For } from "@ilokesto/utilinent";
 import Image from "next/image";
 import Link from "next/link";
 
+export const metadata = {
+  title: "로그인 | myterview",
+  description: "Google 또는 Github 계정으로 myterview에 로그인하세요.",
+};
+
 export default function Page() {
   const SIGN_ARRAY = [
     {

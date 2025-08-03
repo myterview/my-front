@@ -1,9 +1,8 @@
-
+import { Card } from "../CardComponent/Card";
 import { grunfeld } from "@ilokesto/grunfeld";
 import { Show } from "@ilokesto/utilinent";
-import { neato } from "neato";
+import { ClassValue, neato } from "neato";
 import Image from "next/image";
-import { Card } from "../CardComponent/Card";
 
 export function ModalWrapper({
   children,
@@ -11,7 +10,7 @@ export function ModalWrapper({
 }: {
   children: React.ReactNode;
   title?: string;
-  className?: string;
+  className?: ClassValue;
 }) {
   return (
     <div
@@ -26,11 +25,17 @@ export function ModalWrapper({
   );
 }
 
-ModalWrapper.Title = function ModalWrapperTitle({ title }: { title?: string }) {
+ModalWrapper.Title = function ModalWrapperTitle({
+  title,
+  className,
+}: {
+  title?: string;
+  className?: ClassValue;
+}) {
   return (
     <div className="flex items-start justify-between gap-24">
       <Show when={title} fallback={<div className="flex-1"></div>}>
-        {(title) => <Card.Title>{title}</Card.Title>}
+        {(title) => <Card.Title className={className}>{title}</Card.Title>}
       </Show>
 
       <button type="button" onClick={grunfeld.remove}>

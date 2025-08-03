@@ -16,7 +16,7 @@ html {
 
   --spacing: calc(1rem / 16);
 
-  --color-primary-100: #d5e8ff;
+  --color-primary-100: #eff6ff;
   --color-primary-200: #aad2ff;
   --color-primary-300: #80bbff;
   --color-primary-400: #55a5ff;
@@ -103,6 +103,16 @@ html {
   overflow: visible;
 }
 
+.filter-primary-500 {
+  filter: invert(40%) sepia(82%) saturate(1319%) hue-rotate(194deg)
+    brightness(100%) contrast(101%);
+}
+
+.hover\:filter-primary-500:hover {
+  filter: invert(40%) sepia(82%) saturate(1319%) hue-rotate(194deg)
+    brightness(100%) contrast(101%);
+}
+
 /* Typography Styles */
 .heading-01 {
   @apply text-[32px] leading-normal font-extrabold;
@@ -122,6 +132,10 @@ html {
 
 .dropdown {
   @apply text-xl/30 font-medium;
+}
+
+.dropdown-input {
+  @apply text-xl/28 font-semibold;
 }
 
 .label {

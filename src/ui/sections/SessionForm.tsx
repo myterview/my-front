@@ -1,5 +1,6 @@
 "use client";
 
+import FieldOutlineWithButtonWrapper from "../components/Form/FieldOutlineWithButtonWrapper";
 import { InterviewClient } from "@/api/interview.client";
 import { useInterviewLoading } from "@/shared/caro-kann/useInterviewLoading";
 import {
@@ -7,7 +8,6 @@ import {
   handleSubmit,
   register,
 } from "@/shared/sicilian/sessionForm";
-import { DefaultTextAreaWrapper } from "@/ui/components/Form/DefaultTextAreaWrapper";
 import { TextArea } from "@/ui/components/Form/TextArea";
 import { SizeWrapper } from "@/ui/components/SizeWrapper/SizeWrapper";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
@@ -16,7 +16,6 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import Image from "next/image";
 
 export function SessionForm({ interviewId }: { interviewId: string }) {
   const [isLoading, setIsLoading] = useInterviewLoading();
@@ -41,21 +40,13 @@ export function SessionForm({ interviewId }: { interviewId: string }) {
       onSubmit={handleSubmit((data) => mutate(data))}
     >
       <SicilianProvider value={{ register, name: "message", getValues }}>
-        <DefaultTextAreaWrapper>
+        <FieldOutlineWithButtonWrapper>
           <TextArea
             disabled={isLoading || !isActive}
             placeholder="메시지를 입력하세요..."
+            className="max-h-240"
           />
-          <button disabled={isLoading || !isActive}>
-            <Image
-              src="/icons/submitArrow.svg"
-              alt="Submit"
-              draggable={false}
-              width={24}
-              height={24}
-            />
-          </button>
-        </DefaultTextAreaWrapper>
+        </FieldOutlineWithButtonWrapper>
       </SicilianProvider>
     </SizeWrapper>
   );

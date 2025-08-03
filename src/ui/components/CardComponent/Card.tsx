@@ -1,13 +1,12 @@
 import { ProgressStatus } from "@/shared/types";
-import { For } from "@ilokesto/utilinent";
-import { neato } from "neato";
+import { ClassValue, neato } from "neato";
 
 export function Card({
   children,
   className,
 }: {
   children: React.ReactNode;
-  className?: string;
+  className?: ClassValue;
 }) {
   return (
     <div
@@ -18,9 +17,20 @@ export function Card({
   );
 }
 
-Card.Title = function Title({ children }: { children: React.ReactNode }) {
+Card.Title = function Title({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: ClassValue;
+}) {
   return (
-    <h4 className="line-clamp-1 text-2xl font-extrabold text-left">
+    <h4
+      className={neato(
+        "line-clamp-1 text-2xl font-extrabold text-left break-keep",
+        className
+      )}
+    >
       {children}
     </h4>
   );
@@ -46,7 +56,7 @@ Card.ProgressChip = function Progress({
         {
           "bg-secondary": children === ProgressStatus.IN_PROGRESS,
           "bg-gray-200": children === ProgressStatus.ANALYZING,
-          "bg-blue-100": children === ProgressStatus.COMPLETED,
+          "bg-primary-100": children === ProgressStatus.COMPLETED,
         }
       )}
     >
@@ -61,21 +71,4 @@ Card.Description = function Description({
   children: React.ReactNode;
 }) {
   return <p className="text-xs/18 font-medium text-gray-600">{children}</p>;
-};
-
-Card.Tags = function Tags({ each }: { each: Array<string> }) {
-  return (
-    <div className="flex gap-8">
-      <For each={each}>
-        {(tag) => (
-          <span
-            key={tag}
-            className="shadow-custom flex items-center justify-center rounded-[4px] px-4 text-xs/18 font-medium text-blue-600"
-          >
-            #{tag}
-          </span>
-        )}
-      </For>
-    </div>
-  );
 };

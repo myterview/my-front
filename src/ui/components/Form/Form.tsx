@@ -1,6 +1,6 @@
-import { ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithRef } from "react";
 
-export function Form({ children, ...props }: ComponentPropsWithoutRef<"form">) {
+export function Form({ children, ...props }: ComponentPropsWithRef<"form">) {
   return (
     <form noValidate {...props}>
       {children}

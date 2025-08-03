@@ -3,6 +3,11 @@ import { SizeWrapper } from "@/ui/components/SizeWrapper/SizeWrapper";
 import { InterviewBinder } from "@/ui/sections/InterviewBinder";
 import { Suspense } from "react";
 
+export const metadata = {
+  title: "기술 인터뷰 | myterview",
+  description: "맞춤형 기술 인터뷰를 생성하고 진행 상황을 확인하세요.",
+};
+
 export default async function Home() {
   return (
     <SizeWrapper

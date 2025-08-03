@@ -20,7 +20,7 @@ export class InterviewClient extends Fetcher {
     infiniteQueryOptions({
       queryKey: ["interview", "list"],
       queryFn: ({
-        pageParam: { take, skip},
+        pageParam: { take, skip },
       }: {
         pageParam: { take: number; skip: number };
       }) => {

@@ -1,5 +1,6 @@
 "use client";
 
+import { useComponentSize } from "@/shared/utils/useComponentSize";
 import {
   autoUpdate,
   flip,
@@ -12,39 +13,43 @@ import {
   useFloating,
   useInteractions,
   useListNavigation,
-  useRole
+  useRole,
 } from "@floating-ui/react";
 import { useRef, useState } from "react";
 
 export type PopoverProps = {
-  "anchorElement": {
+  anchorElement: {
     anchor: ReturnType<typeof usePopoverPosition>["anchor"];
     helper: ReturnType<typeof usePopoverPosition>["helper"];
-  },
-  "floaterElement": {
+  };
+  floaterElement: {
     floater: ReturnType<typeof usePopoverPosition>["floater"];
     helper: ReturnType<typeof usePopoverPosition>["helper"];
   };
-  "position"?: { mainAxis: number; crossAxis: number; placement: Placement }
-}
+  position?: { mainAxis: number; crossAxis: number; placement: Placement };
+};
 
 export function Popover({
   anchorElement,
   floaterElement,
   position,
 }: {
-  anchorElement: (anchorElementProps: PopoverProps["anchorElement"]) => React.ReactElement;
-  floaterElement: (floaterElementProps: PopoverProps["floaterElement"]) => React.ReactElement;
+  anchorElement: (
+    anchorElementProps: PopoverProps["anchorElement"]
+  ) => React.ReactElement;
+  floaterElement: (
+    floaterElementProps: PopoverProps["floaterElement"]
+  ) => React.ReactElement;
 } & Pick<PopoverProps, "position">) {
   const { anchor, floater, helper } = usePopoverPosition({ position });
 
   return (
     <>
-      {anchorElement({anchor, helper})}
+      {anchorElement({ anchor, helper })}
 
       {helper.isOpen && (
         <helper.FloatingFocusManager context={helper.context} modal={false}>
-          {floaterElement({floater, helper})}
+          {floaterElement({ floater, helper })}
         </helper.FloatingFocusManager>
       )}
     </>
@@ -56,6 +61,7 @@ function usePopoverPosition({
 }: Pick<PopoverProps, "position">) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [anchorRef, size] = useComponentSize<HTMLElement>();
   const listRef = useRef<Array<HTMLElement | null>>([]);
 
   const { refs, floatingStyles, context } = useFloating({
@@ -64,7 +70,11 @@ function usePopoverPosition({
       setIsOpen(open);
       if (!open) setActiveIndex(null);
     },
-    middleware: [offset({ mainAxis: position.mainAxis, crossAxis: position.crossAxis }), flip(), shift()],
+    middleware: [
+      offset({ mainAxis: position.mainAxis, crossAxis: position.crossAxis }),
+      flip(),
+      shift(),
+    ],
     placement: position.placement,
     whileElementsMounted: autoUpdate,
   });
@@ -72,7 +82,7 @@ function usePopoverPosition({
   const click = useClick(context, {
     event: "mousedown", // input의 경우 mousedown 이벤트 사용
   });
-  // const hover = useHover(context); 
+  // const hover = useHover(context);
   const dismiss = useDismiss(context, {
     outsidePressEvent: "mousedown",
     referencePress: false, // input 클릭 시 닫히지 않도록
@@ -98,7 +108,10 @@ function usePopoverPosition({
 
   return {
     anchor: {
-      ref: refs.setReference,
+      ref: (node: HTMLElement | null) => {
+        refs.setReference(node);
+        anchorRef.current = node;
+      },
       ...getReferenceProps(),
     },
     floater: {
@@ -115,6 +128,7 @@ function usePopoverPosition({
       listRef,
       FloatingFocusManager,
       context,
+      anchorWidth: size.width,
     },
   };
 }

@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { For } from "@ilokesto/utilinent";
-import { neato } from "neato";
-import { useEffect, useState } from "react";
 import { PopoverProps } from "../Popover";
+import { For } from "@ilokesto/utilinent";
+import { ClassValue, neato } from "neato";
+import { useEffect, useState } from "react";
 
 export function DropdownOption({
   floater,
@@ -13,21 +13,19 @@ export function DropdownOption({
   className,
   setSelectedOption,
 }: PopoverProps["floaterElement"] & {
-  className?: string;
+  className?: ClassValue;
   options: string[];
   selectedOption: string;
   setSelectedOption: (option: string) => void;
 }) {
   const [isOpened, setIsOpened] = useState(helper.isOpen);
-  useEffect(() => {
-    setIsOpened(helper.isOpen);
-  }, [helper.isOpen]);
+  useEffect(() => setIsOpened(helper.isOpen), [helper.isOpen]);
 
   return (
     <div
       {...floater}
       className={neato(
-        "dropdown-transition",
+        "dropdown-transition z-50",
         isOpened ? "max-h-300 opacity-100" : "max-h-0 opacity-0"
       )}
     >
@@ -41,8 +39,8 @@ export function DropdownOption({
               }}
               className={neato(
                 "cursor-pointer px-4 py-2 font-semibold text-gray-600",
-                helper.activeIndex === index && "bg-blue-100",
-                selectedOption === option && "text-blue-600",
+                helper.activeIndex === index && "bg-primary-100",
+                selectedOption === option && "text-primary-600",
                 className
               )}
               {...helper.getItemProps({

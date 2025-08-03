@@ -1,7 +1,9 @@
+"use client";
+
 import { useSicilianContext } from "@ilokesto/sicilian/provider";
 import { neato } from "neato";
 
-export function DefaultInputWrapper({
+export function FieldUnderlineWrapper({
   children,
   title,
 }: {
@@ -15,7 +17,10 @@ export function DefaultInputWrapper({
       <div className="label">{title}</div>
       <label
         htmlFor={name}
-        className={neato("focus-within:border-b-primary-600 border-b-1 border-b-black py-8", getErrors(name) && "border-b-red-600")}
+        className={neato(
+          "focus-within:border-b-primary-600 border-b-1 border-b-black py-8",
+          getErrors(name) && "border-b-red-600"
+        )}
       >
         {children}
       </label>
