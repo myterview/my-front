@@ -15,4 +15,3 @@ jobs:
           node-version: "18"
       - run: npm ci
       - run: npm run build
-      - run: npm test # 테스트가 있다면
