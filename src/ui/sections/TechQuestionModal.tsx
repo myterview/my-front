@@ -23,7 +23,7 @@ import {
 } from "@tanstack/react-query";
 import { neato } from "neato";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export type TechQuestionModalStep = "form" | "submitting" | "result";
 
@@ -41,7 +41,7 @@ export function TechQuestionModal(props: TechQuestionDomain) {
   );
 
   return (
-    <ModalWrapper className="md:w-770 h-dvh md:max-h-[80dvh]">
+    <ModalWrapper className="md:w-770 h-dvh md:max-h-[80dvh] ">
       {step === "form" && <TechQuestionModal.Form {...props} mutate={mutate} />}
       {step === "submitting" && <TechQuestionModal.Submitting />}
       {step === "result" && <TechQuestionModal.Result {...props} />}
@@ -111,7 +111,21 @@ TechQuestionModal.Form = function TechQuestionModalForm({
 };
 
 TechQuestionModal.Submitting = function TechQuestionModalSubmitting() {
-  return <>로딩중</>;
+  const [dot, setDot] = useState("");
+  useEffect(() => {
+    const id = setInterval(() => {
+      setDot((prev) => (prev.length < 3 ? prev + "." : ""));
+    }, 500);
+
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div className="flex flex-col items-center justify-center h-full">
+      <Image src="/icons/loading.svg" alt="loading" width={24} height={24} />
+      채점중{dot}
+    </div>
+  );
 };
 
 TechQuestionModal.Result = function TechQuestionModalResult({
@@ -147,8 +161,22 @@ TechQuestionModal.Result = function TechQuestionModalResult({
 
   if (!answer) return;
 
+  const contentList = [
+    {
+      src: "/icons/calendar.svg",
+      text: "내 답변",
+      content: answer.userAnswer,
+    },
+    { src: "/icons/calendar.svg", text: "모범 답안", content: solution },
+    {
+      src: "/icons/calendar.svg",
+      text: "AI 평가",
+      content: answer.llmAnswer,
+    },
+  ];
+
   return (
-    <div className="flex flex-col h-full gap-28 overflow-y-auto">
+    <div className="flex flex-col h-full gap-28 overflow-y-auto px-1 pb-1">
       <div className="flex flex-col gap-8">
         <div className="flex items-start justify-between gap-24">
           <Card.Title>{question}</Card.Title>
@@ -188,12 +216,19 @@ TechQuestionModal.Result = function TechQuestionModalResult({
         <Show when={code}>{(code) => <MDViewer>{code}</MDViewer>}</Show>
       </div>
 
-      {/* <div>{answer.userAnswer}</div> */}
-      <MDViewer>{answer.userAnswer}</MDViewer>
-
-      <MDViewer>{solution}</MDViewer>
-
-      <MDViewer>{answer.llmAnswer}</MDViewer>
+      <For each={contentList}>
+        {(item) => (
+          <div key={item.text} className="space-y-12">
+            <div className="flex items-center gap-16">
+              <Image src={item.src} alt={item.text} width={24} height={24} />
+              <span className="text-xl/30 font-bold">{item.text}</span>
+            </div>
+            <MDViewer className="px-16 py-18 rounded-[4px] shadow-custom text-base/28">
+              {item.content}
+            </MDViewer>
+          </div>
+        )}
+      </For>
     </div>
   );
 };
@@ -215,11 +250,11 @@ TechQuestionModal.DateSelector = function TechQuestionModalDateSelector({
         <For each={answerList}>
           {(item) => (
             <button
+              key={item.id}
+              type="button"
               onClick={() => {
                 removeWith(item.createdAt);
               }}
-              type="button"
-              key={item.id}
               className={neato(
                 "cursor-pointer px-4 py-2 w-full font-semibold text-gray-600 text-left hover:bg-primary-100",
                 selectedAnswer.createdAt.isEqual(item.createdAt) &&
