@@ -103,12 +103,12 @@ html {
   overflow: visible;
 }
 
-.primary-500-filter {
+.filter-primary-500 {
   filter: invert(40%) sepia(82%) saturate(1319%) hue-rotate(194deg)
     brightness(100%) contrast(101%);
 }
 
-.hover\:primary-500-filter:hover {
+.hover\:filter-primary-500:hover {
   filter: invert(40%) sepia(82%) saturate(1319%) hue-rotate(194deg)
     brightness(100%) contrast(101%);
 }

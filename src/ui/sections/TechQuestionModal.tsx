@@ -201,7 +201,7 @@ TechQuestionModal.Result = function TechQuestionModalResult({
         <div className={neato("flex items-center justify-between")}>
           <button
             type="button"
-            className="flex hover:text-primary-500 hover:primary-500-filter gap-8"
+            className="flex hover:text-primary-500 hover:filter-primary-500 gap-8"
             onClick={handleClick}
           >
             <Image
