@@ -5,7 +5,7 @@ import { neato } from "neato";
 
 export function Input(
   props: Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
+    React.ComponentPropsWithRef<"input">,
     "name" | "id" | "onChange" | "value" | "onBlur" | "onFocus" | "type"
   >
 ) {

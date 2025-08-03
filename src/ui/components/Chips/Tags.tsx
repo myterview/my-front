@@ -50,7 +50,7 @@ export function Tags({
   const hiddenCount = each.length - visibleCount;
 
   return (
-    <div ref={containerRef} className={neato("flex gap-8  flex-1", className)}>
+    <div ref={containerRef} className={neato("flex gap-8 flex-1", className)}>
       {each.map((tag, i) => (
         <span
           key={tag}

@@ -1,8 +1,9 @@
+import { PopoverProps } from "../Popover";
 import { useSicilianContext } from "@ilokesto/sicilian/provider";
 import { Show } from "@ilokesto/utilinent";
 import { neato } from "neato";
 import Image from "next/image";
-import { PopoverProps } from "../Popover";
+import { useRef } from "react";
 
 export function DropdownInput({
   anchor,
@@ -13,11 +14,8 @@ export function DropdownInput({
   title?: string;
   iconSrc?: string;
 } & PopoverProps["anchorElement"]) {
-  const { register, name, getErrors } = useSicilianContext()
-
-  const handleClick = () => {
-    document.querySelector<HTMLInputElement>(`input[name="${name}"]`)?.focus();
-  }
+  const { register, name, getErrors } = useSicilianContext();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <div className="w-full space-y-8">
@@ -46,7 +44,13 @@ export function DropdownInput({
           )}
         </Show>
 
-        <input {...register({ name })} onClick={handleClick} readOnly className="dropdown block min-h-30 flex-1 w-0 text-left cursor-pointer" />
+        <input
+          ref={inputRef}
+          {...register({ name })}
+          onClick={() => inputRef.current?.focus()}
+          readOnly
+          className="dropdown block min-h-30 flex-1 w-0 text-left cursor-pointer"
+        />
 
         <Image
           src="/icons/dropdownArrow.svg"

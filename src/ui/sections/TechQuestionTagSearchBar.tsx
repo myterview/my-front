@@ -15,6 +15,7 @@ import { For, Show } from "@ilokesto/utilinent";
 import { useQuery } from "@tanstack/react-query";
 import { disassemble } from "es-hangul";
 import Image from "next/image";
+import { useRef } from "react";
 
 const { register, getValues } = new CreateForm({
   initValue: {
@@ -99,6 +100,8 @@ function TagArray({
 }
 
 function TagSearchBar({ anchor, helper }: PopoverProps["anchorElement"]) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   return (
     <div
       {...anchor}
@@ -106,13 +109,16 @@ function TagSearchBar({ anchor, helper }: PopoverProps["anchorElement"]) {
       onClick={() => {
         helper.setIsOpen(true);
         setTimeout(() => {
-          const input = document.getElementById("keyword") as HTMLInputElement;
-          input?.focus();
+          inputRef.current?.focus();
         }, 0);
       }}
       className="flex-1"
     >
-      <Input placeholder="찾고 싶은 문제가 있나요?" className="dropdown" />
+      <Input
+        ref={inputRef}
+        placeholder="찾고 싶은 문제가 있나요?"
+        className="dropdown"
+      />
     </div>
   );
 }

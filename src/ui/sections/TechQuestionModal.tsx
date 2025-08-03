@@ -165,7 +165,7 @@ TechQuestionModal.Result = function TechQuestionModalResult({
     );
   };
 
-  if (!answer) return;
+  if (!answer) return null;
 
   const contentList = [
     {
