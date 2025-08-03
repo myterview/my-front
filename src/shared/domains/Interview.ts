@@ -29,15 +29,15 @@ export interface InterviewDomain {
 }
 
 export class Interview implements InterviewDomain {
-  public readonly id;
-  public readonly userId;
-  public readonly title;
-  public readonly position;
-  public readonly experience;
-  public readonly isActive;
-  public readonly createdAt;
-  public readonly messages;
-  public readonly evaluation;
+  public readonly id: string;
+  public readonly userId: string;
+  public readonly title: string;
+  public readonly position: InterviewPositionKr;
+  public readonly experience: InterviewExperienceKr;
+  public readonly isActive: boolean;
+  public readonly createdAt: DateTimeDomain;
+  public readonly messages?: BackendResponse["interviewMessages"];
+  public readonly evaluation: IInterviewEvaluationFactory | undefined;
 
   constructor(session: BackendResponse["interview"]) {
     this.id = session.id;

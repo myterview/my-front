@@ -53,6 +53,7 @@ const { register, getValues, handleSubmit } = new CreateForm({
   initValue: {
     userAnswer: "",
   },
+  clearFormOn: ["submit", "routeChange"],
 });
 
 TechQuestionModal.Form = function TechQuestionModalForm({
@@ -121,8 +122,13 @@ TechQuestionModal.Submitting = function TechQuestionModalSubmitting() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-full">
-      <Image src="/icons/loading.svg" alt="loading" width={24} height={24} />
+    <div className="flex flex-col items-center justify-center h-full heading-02 gap-28">
+      <Image
+        src="/images/mrCatLoading.svg"
+        alt="loading"
+        width={24}
+        height={24}
+      />
       채점중{dot}
     </div>
   );
@@ -163,14 +169,14 @@ TechQuestionModal.Result = function TechQuestionModalResult({
 
   const contentList = [
     {
-      src: "/icons/calendar.svg",
+      src: "/icons/userAnswer.svg",
       text: "내 답변",
       content: answer.userAnswer,
     },
-    { src: "/icons/calendar.svg", text: "모범 답안", content: solution },
+    { src: "/icons/solution.svg", text: "모범 답안", content: solution },
     {
-      src: "/icons/calendar.svg",
-      text: "AI 평가",
+      src: "/icons/mrCatLLMAnswer.svg",
+      text: "냥부장의 평가",
       content: answer.llmAnswer,
     },
   ];
