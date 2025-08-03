@@ -61,41 +61,36 @@ export function InterviewBinder() {
   );
 
   return (
-    <div>
-      <Show when={data}>
-        {(interviewList) => (
-          <For
-            each={interviewList.pages.flatMap((page) =>
-              page.items.map((item) => new Interview(item))
-            )}
-          >
-            {(interview) => {
-              return (
-                <InterviewBinder.CardWrapper
-                  key={interview.id}
-                  interview={interview}
+    <Show when={data}>
+      {(interviewList) => (
+        <For
+          each={interviewList.pages.flatMap((page) =>
+            page.items.map((item) => new Interview(item))
+          )}
+        >
+          {(interview) => {
+            return (
+              <InterviewBinder.CardWrapper
+                key={interview.id}
+                interview={interview}
+              >
+                <Card
+                  className={neato("border-l-8 pl-24", {
+                    "border-secondary bg-white": interview.isInProgress(),
+                    "border-gray-200 bg-gray-100": interview.isAnalyzing(),
+                    "border-primary-100 bg-white": interview.isCompleted(),
+                  })}
                 >
-                  <Card
-                    className={neato("border-l-8 pl-24", {
-                      "border-secondary bg-white": interview.isInProgress(),
-                      "border-gray-200 bg-gray-100": interview.isAnalyzing(),
-                      "border-primary-100 bg-white": interview.isCompleted(),
-                    })}
-                  >
-                    <Card.Title>{interview.title}</Card.Title>
+                  <Card.Title>{interview.title}</Card.Title>
 
-                    <Card.subTitle>
-                      {interview.createdAt.format()}
-                    </Card.subTitle>
-                  </Card>
-                </InterviewBinder.CardWrapper>
-              );
-            }}
-          </For>
-        )}
-      </Show>
-      <div ref={ref} />
-    </div>
+                  <Card.subTitle>{interview.createdAt.format()}</Card.subTitle>
+                </Card>
+              </InterviewBinder.CardWrapper>
+            );
+          }}
+        </For>
+      )}
+    </Show>
   );
 }
 ```
