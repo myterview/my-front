@@ -130,18 +130,16 @@ function TagSelectOption({
   const { selectedQueryParams, handleClick } = useQueryParams("tag");
   const { getTags } = new TechQuestionClient();
   const { data } = useQuery(getTags());
-  const keyword = disassemble(getValues("keyword"));
+  const keyword = disassemble(getValues("keyword").toLowerCase());
   const filteredTags = data?.filter((tag) =>
-    keyword ? disassemble(tag).includes(keyword) : true
+    keyword ? disassemble(tag.toLowerCase()).includes(keyword) : true
   );
 
   return (
     <div
       {...floater}
       style={{ ...floater.style, width }}
-      className={
-        "bg-white rounded-[4px] border border-gray-200 overflow-y-scroll p-16 z-50"
-      }
+      className="bg-white rounded-[4px] border border-gray-200 overflow-y-scroll h-320 p-16 z-50"
     >
       <TagArray
         array={filteredTags}
