@@ -75,7 +75,7 @@ TechQuestionModal.Form = function TechQuestionModalForm({
     <div className="flex flex-col h-full gap-28">
       <div className="flex flex-col gap-8">
         <div className="flex items-start justify-between gap-24">
-          <Card.Title>{question}</Card.Title>
+          <Card.Title className="line-clamp-none">{question}</Card.Title>
 
           <button type="button" onClick={grunfeld.clear}>
             <Image
@@ -137,7 +137,6 @@ TechQuestionModal.Submitting = function TechQuestionModalSubmitting() {
 TechQuestionModal.Result = function TechQuestionModalResult({
   id: questionId,
   question,
-
   solution,
   code,
   tags,
@@ -185,7 +184,7 @@ TechQuestionModal.Result = function TechQuestionModalResult({
     <div className="flex flex-col h-full gap-28 overflow-y-auto px-1 pb-1">
       <div className="flex flex-col gap-8">
         <div className="flex items-start justify-between gap-24">
-          <Card.Title>{question}</Card.Title>
+          <Card.Title className="line-clamp-none">{question}</Card.Title>
 
           <button type="button" onClick={grunfeld.clear}>
             <Image
