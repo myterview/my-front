@@ -61,7 +61,7 @@ class SelectableClickableStrategy implements ClickableStrategy {
   constructor(private props: SelectableClickableTypes) {}
 
   styleRender(): string {
-    const a = neatoVariants({
+    const variants = neatoVariants({
       base: "flex px-12 py-8 justify-center items-center text-gray-600 bg-gray-100 rounded-xl font-bold",
       variants: {
         isSelected: {
@@ -70,7 +70,7 @@ class SelectableClickableStrategy implements ClickableStrategy {
       },
     });
 
-    return a({ isSelected: this.props["data-selected"] });
+    return variants({ isSelected: this.props["data-selected"] });
   }
 }
 
