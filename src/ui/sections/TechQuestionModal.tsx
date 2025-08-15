@@ -25,7 +25,7 @@ import {
 } from "@tanstack/react-query";
 import { neato } from "neato";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 export type TechQuestionModalStep = "form" | "submitting" | "result";
 
@@ -46,7 +46,9 @@ export function TechQuestionModal(props: TechQuestionDomain) {
     <ModalWrapper className="md:w-770 h-dvh md:max-h-[80dvh] ">
       {step === "form" && <TechQuestionModal.Form {...props} mutate={mutate} />}
       {step === "submitting" && <TechQuestionModal.Submitting />}
-      {step === "result" && <TechQuestionModal.Result {...props} />}
+      {step === "result" && (
+        <TechQuestionModal.Result {...props} setStep={setStep} />
+      )}
     </ModalWrapper>
   );
 }
@@ -75,11 +77,9 @@ TechQuestionModal.Form = function TechQuestionModalForm({
 }) {
   const {
     text,
-    setText,
     textAreaRef,
     listening,
     toggleListening,
-    handleTextChange,
     browserSupportsSpeechRecognition,
   } = useSpeechToText();
 
@@ -179,7 +179,12 @@ TechQuestionModal.Result = function TechQuestionModalResult({
   solution,
   code,
   tags,
-}: Pick<TechQuestionDomain, "id" | "question" | "tags" | "code" | "solution">) {
+
+  setStep,
+}: Pick<
+  TechQuestionDomain,
+  "id" | "question" | "tags" | "code" | "solution"
+> & { setStep: Dispatch<SetStateAction<TechQuestionModalStep>> }) {
   const { data } = useSuspenseQuery(
     new TechQuestionClient().getTechAnswerList({
       questionId,
@@ -225,21 +230,38 @@ TechQuestionModal.Result = function TechQuestionModalResult({
         <div className="flex items-start justify-between gap-24">
           <Card.Title className="line-clamp-none">{question}</Card.Title>
 
-          <button type="button" onClick={grunfeld.clear}>
-            <Image
-              src="/icons/close.svg"
-              alt="close"
-              draggable="false"
-              width={24}
-              height={24}
-            />
-          </button>
+          <div>
+            <button type="button" onClick={() => setStep("form")}>
+              <Image
+                className="hover:filter-primary-500"
+                src="/icons/arrow.svg"
+                alt="close"
+                draggable="false"
+                width={24}
+                height={24}
+              />
+            </button>
+
+            <button
+              type="button"
+              onClick={grunfeld.clear}
+              className="shrink-0 w-24"
+            >
+              <Image
+                src="/icons/close.svg"
+                alt="close"
+                draggable="false"
+                width={24}
+                height={24}
+              />
+            </button>
+          </div>
         </div>
 
         <div className={neato("flex items-center justify-between gap-8")}>
           <button
             type="button"
-            className="flex hover:text-primary-500 hover:filter-primary-500 gap-8"
+            className="flex hover:text-primary-500 hover:filter-primary-500 gap-8 text-base/16"
             onClick={handleClick}
           >
             <Image
@@ -247,8 +269,8 @@ TechQuestionModal.Result = function TechQuestionModalResult({
               alt="refresh"
               draggable="false"
               className="hidden md:block"
-              width={24}
-              height={24}
+              width={18}
+              height={18}
             />
             {answer.createdAt.format("YYYY.MM.DD")}
           </button>
