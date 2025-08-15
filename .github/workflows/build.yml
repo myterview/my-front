@@ -2,7 +2,7 @@ name: build
 
 on:
   pull_request:
-    branches: [main, develop] # PR 대상 브랜치
+    branches: [main, develop]
 
 jobs:
   build:
@@ -10,8 +10,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      # pnpm 설치
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      # Node 설정 + pnpm 캐시
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - run: npm ci
-      - run: npm run build
+          cache: "pnpm"
+
+      # 의존성 설치(락파일 기준)
+      - run: pnpm install --frozen-lockfile
+
+      # 빌드
+      - run: pnpm build
