@@ -8,7 +8,7 @@ import Link from "next/link";
 export function SidebarDefaultMenu() {
   return (
     <menu className="flex flex-col items-start gap-40 menu text-primary-600">
-      <Link href="/dashboard/interview">모의 인터뷰</Link>
+      <Link href="/dashboard/interview">기술 인터뷰</Link>
 
       <Link href="/dashboard/tech-question">기술 면접 질문</Link>
 
