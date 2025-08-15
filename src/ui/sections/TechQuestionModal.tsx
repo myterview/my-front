@@ -236,7 +236,7 @@ TechQuestionModal.Result = function TechQuestionModalResult({
           </button>
         </div>
 
-        <div className={neato("flex items-center justify-between")}>
+        <div className={neato("flex items-center justify-between gap-8")}>
           <button
             type="button"
             className="flex hover:text-primary-500 hover:filter-primary-500 gap-8"
@@ -246,6 +246,7 @@ TechQuestionModal.Result = function TechQuestionModalResult({
               src="/icons/calendar.svg"
               alt="refresh"
               draggable="false"
+              className="hidden md:block"
               width={24}
               height={24}
             />
