@@ -2,7 +2,7 @@
 
 import { Card } from "../components/CardComponent/Card";
 import { Tags } from "../components/Chips/Tags";
-import FieldOutlineWithButtonWrapper from "../components/Form/FieldOutlineWithButtonWrapper";
+import { FieldOutlineWrapper } from "../components/Form/FieldOutlineWrapper";
 import { Form } from "../components/Form/Form";
 import { TextArea } from "../components/Form/TextArea";
 import { MDViewer } from "../components/Markdown/MDViewer";
@@ -102,9 +102,18 @@ TechQuestionModal.Form = function TechQuestionModalForm({
         className="flex flex-1"
       >
         <SicilianProvider value={{ register, name: "userAnswer", getValues }}>
-          <FieldOutlineWithButtonWrapper>
+          <FieldOutlineWrapper>
             <TextArea autoResize={false} placeholder="메시지를 입력하세요..." />
-          </FieldOutlineWithButtonWrapper>
+            <button>
+              <Image
+                src="/icons/submitArrow.svg"
+                alt="Submit"
+                draggable={false}
+                width={24}
+                height={24}
+              />
+            </button>
+          </FieldOutlineWrapper>
         </SicilianProvider>
       </Form>
     </div>
