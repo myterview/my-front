@@ -2,6 +2,7 @@
 
 import { Card } from "../components/CardComponent/Card";
 import { Tags } from "../components/Chips/Tags";
+import { Dictaphone } from "../components/Dictaphone/Dictaphone";
 import { FieldOutlineWrapper } from "../components/Form/FieldOutlineWrapper";
 import { Form } from "../components/Form/Form";
 import { TextArea } from "../components/Form/TextArea";
@@ -11,6 +12,7 @@ import { TechQuestionClient } from "@/api/tech-question.client";
 import { DateTimeDomain } from "@/shared/domains/DateTime";
 import { TechAnswer, TechAnswerDomain } from "@/shared/domains/TechAnswer";
 import { TechQuestionDomain } from "@/shared/domains/TechQuestion";
+import { useSpeechToText } from "@/shared/utils/useSpeechToText";
 import { grunfeld } from "@ilokesto/grunfeld";
 import { CreateForm } from "@ilokesto/sicilian";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
@@ -49,7 +51,7 @@ export function TechQuestionModal(props: TechQuestionDomain) {
   );
 }
 
-const { register, getValues, handleSubmit } = new CreateForm({
+const { register, getValues, handleSubmit, setValues } = new CreateForm({
   initValue: {
     userAnswer: "",
   },
@@ -71,6 +73,22 @@ TechQuestionModal.Form = function TechQuestionModalForm({
     void
   >;
 }) {
+  const {
+    text,
+    setText,
+    textAreaRef,
+    listening,
+    toggleListening,
+    handleTextChange,
+    browserSupportsSpeechRecognition,
+  } = useSpeechToText();
+
+  useEffect(() => {
+    if (text) {
+      setValues({ userAnswer: text });
+    }
+  }, [text, setValues]);
+
   return (
     <div className="flex flex-col h-full gap-28">
       <div className="flex flex-col gap-8">
@@ -103,16 +121,28 @@ TechQuestionModal.Form = function TechQuestionModalForm({
       >
         <SicilianProvider value={{ register, name: "userAnswer", getValues }}>
           <FieldOutlineWrapper>
-            <TextArea autoResize={false} placeholder="메시지를 입력하세요..." />
-            <button>
-              <Image
-                src="/icons/submitArrow.svg"
-                alt="Submit"
-                draggable={false}
-                width={24}
-                height={24}
+            <TextArea
+              ref={textAreaRef}
+              autoResize={false}
+              placeholder="메시지를 입력하세요..."
+            />
+
+            <div className="flex items-center justify-between">
+              <Dictaphone
+                listening={listening}
+                onClick={toggleListening}
+                isBrowserSupported={browserSupportsSpeechRecognition}
               />
-            </button>
+              <button>
+                <Image
+                  src="/icons/submitArrow.svg"
+                  alt="Submit"
+                  draggable={false}
+                  width={24}
+                  height={24}
+                />
+              </button>{" "}
+            </div>
           </FieldOutlineWrapper>
         </SicilianProvider>
       </Form>

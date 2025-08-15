@@ -1,23 +1,23 @@
+import { useIsMounted } from "@/shared/utils/useIsMounted";
 import { Show } from "@ilokesto/utilinent";
 import Image from "next/image";
 
 export function Dictaphone({
   listening,
   onClick,
-  browserSupportsSpeechRecognition,
+  isBrowserSupported,
 }: {
   listening: boolean;
   onClick: () => void;
-  browserSupportsSpeechRecognition: boolean;
+  isBrowserSupported: boolean;
 }) {
+  const isMounted = useIsMounted();
+  if (!isMounted) return null;
+
   return (
-    <button
-      onClick={onClick}
-      disabled={!browserSupportsSpeechRecognition}
-      type="button"
-    >
+    <button onClick={onClick} type="button" disabled={!isBrowserSupported}>
       <Show
-        when={browserSupportsSpeechRecognition}
+        when={isBrowserSupported}
         fallback={
           <Image
             src="/icons/no-mic.svg"
