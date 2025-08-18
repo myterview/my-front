@@ -11,6 +11,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
+  "packageManager": "pnpm@10.14.0",
   "dependencies": {
     "@floating-ui/react": "^0.27.15",
     "@floating-ui/react-dom-interactions": "^0.13.3",
@@ -40,6 +41,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@next/eslint-plugin-next": "^15.4.6",
     "@tailwindcss/postcss": "^4",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/node": "^24",
@@ -48,6 +50,8 @@
     "@types/react-speech-recognition": "^3.9.6",
     "eslint": "^9",
     "eslint-config-next": "15.4.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "openapi-typescript": "^7.8.0",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",
