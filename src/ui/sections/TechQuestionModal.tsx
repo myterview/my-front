@@ -2,7 +2,8 @@
 
 import { Card } from "../components/CardComponent/Card";
 import { Tags } from "../components/Chips/Tags";
-import FieldOutlineWithButtonWrapper from "../components/Form/FieldOutlineWithButtonWrapper";
+import { Dictaphone } from "../components/Dictaphone/Dictaphone";
+import { FieldOutlineWrapper } from "../components/Form/FieldOutlineWrapper";
 import { Form } from "../components/Form/Form";
 import { TextArea } from "../components/Form/TextArea";
 import { MDViewer } from "../components/Markdown/MDViewer";
@@ -11,6 +12,7 @@ import { TechQuestionClient } from "@/api/tech-question.client";
 import { DateTimeDomain } from "@/shared/domains/DateTime";
 import { TechAnswer, TechAnswerDomain } from "@/shared/domains/TechAnswer";
 import { TechQuestionDomain } from "@/shared/domains/TechQuestion";
+import { useSpeechToText } from "@/shared/utils/useSpeechToText";
 import { grunfeld } from "@ilokesto/grunfeld";
 import { CreateForm } from "@ilokesto/sicilian";
 import { SicilianProvider } from "@ilokesto/sicilian/provider";
@@ -23,7 +25,7 @@ import {
 } from "@tanstack/react-query";
 import { neato } from "neato";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 export type TechQuestionModalStep = "form" | "submitting" | "result";
 
@@ -44,12 +46,14 @@ export function TechQuestionModal(props: TechQuestionDomain) {
     <ModalWrapper className="md:w-770 h-dvh md:max-h-[80dvh] ">
       {step === "form" && <TechQuestionModal.Form {...props} mutate={mutate} />}
       {step === "submitting" && <TechQuestionModal.Submitting />}
-      {step === "result" && <TechQuestionModal.Result {...props} />}
+      {step === "result" && (
+        <TechQuestionModal.Result {...props} setStep={setStep} />
+      )}
     </ModalWrapper>
   );
 }
 
-const { register, getValues, handleSubmit } = new CreateForm({
+const { register, getValues, handleSubmit, setValues } = new CreateForm({
   initValue: {
     userAnswer: "",
   },
@@ -71,6 +75,20 @@ TechQuestionModal.Form = function TechQuestionModalForm({
     void
   >;
 }) {
+  const {
+    text,
+    textAreaRef,
+    listening,
+    toggleListening,
+    browserSupportsSpeechRecognition,
+  } = useSpeechToText();
+
+  useEffect(() => {
+    if (text) {
+      setValues({ userAnswer: text });
+    }
+  }, [text, setValues]);
+
   return (
     <div className="flex flex-col h-full gap-28">
       <div className="flex flex-col gap-8">
@@ -102,9 +120,30 @@ TechQuestionModal.Form = function TechQuestionModalForm({
         className="flex flex-1"
       >
         <SicilianProvider value={{ register, name: "userAnswer", getValues }}>
-          <FieldOutlineWithButtonWrapper>
-            <TextArea autoResize={false} placeholder="메시지를 입력하세요..." />
-          </FieldOutlineWithButtonWrapper>
+          <FieldOutlineWrapper>
+            <TextArea
+              ref={textAreaRef}
+              autoResize={false}
+              placeholder="메시지를 입력하세요..."
+            />
+
+            <div className="flex items-center justify-between">
+              <Dictaphone
+                listening={listening}
+                onClick={toggleListening}
+                isBrowserSupported={browserSupportsSpeechRecognition}
+              />
+              <button>
+                <Image
+                  src="/icons/submitArrow.svg"
+                  alt="Submit"
+                  draggable={false}
+                  width={24}
+                  height={24}
+                />
+              </button>
+            </div>
+          </FieldOutlineWrapper>
         </SicilianProvider>
       </Form>
     </div>
@@ -140,7 +179,12 @@ TechQuestionModal.Result = function TechQuestionModalResult({
   solution,
   code,
   tags,
-}: Pick<TechQuestionDomain, "id" | "question" | "tags" | "code" | "solution">) {
+
+  setStep,
+}: Pick<
+  TechQuestionDomain,
+  "id" | "question" | "tags" | "code" | "solution"
+> & { setStep: Dispatch<SetStateAction<TechQuestionModalStep>> }) {
   const { data } = useSuspenseQuery(
     new TechQuestionClient().getTechAnswerList({
       questionId,
@@ -186,29 +230,47 @@ TechQuestionModal.Result = function TechQuestionModalResult({
         <div className="flex items-start justify-between gap-24">
           <Card.Title className="line-clamp-none">{question}</Card.Title>
 
-          <button type="button" onClick={grunfeld.clear}>
-            <Image
-              src="/icons/close.svg"
-              alt="close"
-              draggable="false"
-              width={24}
-              height={24}
-            />
-          </button>
+          <div>
+            <button type="button" onClick={() => setStep("form")}>
+              <Image
+                className="hover:filter-primary-500"
+                src="/icons/arrow.svg"
+                alt="close"
+                draggable="false"
+                width={24}
+                height={24}
+              />
+            </button>
+
+            <button
+              type="button"
+              onClick={grunfeld.clear}
+              className="shrink-0 w-24"
+            >
+              <Image
+                src="/icons/close.svg"
+                alt="close"
+                draggable="false"
+                width={24}
+                height={24}
+              />
+            </button>
+          </div>
         </div>
 
-        <div className={neato("flex items-center justify-between")}>
+        <div className={neato("flex items-center justify-between gap-8")}>
           <button
             type="button"
-            className="flex hover:text-primary-500 hover:filter-primary-500 gap-8"
+            className="flex hover:text-primary-500 hover:filter-primary-500 gap-8 text-base/16"
             onClick={handleClick}
           >
             <Image
               src="/icons/calendar.svg"
               alt="refresh"
               draggable="false"
-              width={24}
-              height={24}
+              className="hidden md:block"
+              width={18}
+              height={18}
             />
             {answer.createdAt.format("YYYY.MM.DD")}
           </button>
