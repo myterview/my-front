@@ -26,6 +26,9 @@ importers:
       '@ilokesto/grunfeld':
         specifier: ^1.0.0
         version: 1.0.0(react@19.1.1)
+      '@ilokesto/path-codegen':
+        specifier: ^0.0.2
+        version: 0.0.2
       '@ilokesto/sicilian':
         specifier: ^3.1.0
         version: 3.1.0(react@19.1.1)
@@ -835,6 +838,10 @@ packages:
     resolution: {integrity: sha512-Vce8taOlzjN6DH4vIyQ5HUz5fLDzEhmiQSpPQ1NucOheWeTrknl4BjvE/+Bm0oD3rw39mhLf2xUEsUFZ3293Kg==}
     peerDependencies:
       react: '>=18.2.0'
+
+  '@ilokesto/path-codegen@0.0.2':
+    resolution: {integrity: sha512-X98LIEz3h4PT3HSq16m8aqdGuazCNj1EgageLYH9/1hjDs2xiq5886BYw65DH+E/eYIlBaxKumkmkyNstoHjdw==}
+    hasBin: true
 
   '@ilokesto/sicilian@3.1.0':
     resolution: {integrity: sha512-6oovTCeAG4JSHm8eJj2Bn8iOKx2Li7ia18GMpuBKSkNqbQOdkdAM0nyF5/GyaeX3U4KGh4pJHHUEUOoG/R3cFA==}
@@ -1748,6 +1755,10 @@ packages:
 
   comma-separated-tokens@2.0.3:
     resolution: {integrity: sha512-Fu4hJdvzeylCfQPp9SGWidpzrMs7tTrlu6Vb8XGaRGck8QSNZJJp538Wrb60Lax4fPwR64ViY468OIUTbRlGZg==}
+
+  commander@14.0.0:
+    resolution: {integrity: sha512-2uM9rYjPvyq39NwLRqaiLtWHyDC1FvryJDa2ATTVims5YAS4PupsEQsDvP14FqhFr0P49CYDugi59xaxJlTXRA==}
+    engines: {node: '>=20'}
 
   commander@7.2.0:
     resolution: {integrity: sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==}
@@ -4349,6 +4360,10 @@ snapshots:
     dependencies:
       react: 19.1.1
 
+  '@ilokesto/path-codegen@0.0.2':
+    dependencies:
+      commander: 14.0.0
+
   '@ilokesto/sicilian@3.1.0(react@19.1.1)':
     dependencies:
       '@ilokesto/common-resolver': 1.0.1
@@ -5214,6 +5229,8 @@ snapshots:
   colorette@1.4.0: {}
 
   comma-separated-tokens@2.0.3: {}
+
+  commander@14.0.0: {}
 
   commander@7.2.0: {}
 

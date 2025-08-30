@@ -7,6 +7,7 @@ import { Input } from "../components/Form/Input";
 import { DropdownOption } from "../components/Popover/Dropdown/DropdownOption";
 import { Popover, PopoverProps } from "../components/Popover/Popover";
 import { TechQuestionClient } from "@/api/tech-question.client";
+import { PUBLIC_FOLDER } from "@/shared/types/public";
 import { useComponentSize } from "@/shared/utils/useComponentSize";
 import { useQueryParams } from "@/shared/utils/useQueryParams";
 import { CreateForm } from "@ilokesto/sicilian";
@@ -33,7 +34,7 @@ export function TechQuestionTagSearchBar() {
         <SicilianProvider value={{ register, name: "keyword" }}>
           <FieldOutlineWrapper className="px-24 py-12 gap-30 items-center">
             <Image
-              src="/icons/search.svg"
+              src={PUBLIC_FOLDER.icons.search}
               alt="Search Icon"
               width={24}
               height={24}
@@ -179,7 +180,7 @@ function TagSortOptionButton() {
         <DropdownButton {...anchorProps}>
           {selectedOption}
           <Image
-            src="/icons/dropdownArrow.svg"
+            src={PUBLIC_FOLDER.icons.dropdownArrow}
             alt="Dropdown Icon"
             width={24}
             height={24}

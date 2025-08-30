@@ -12,6 +12,7 @@ import { TechQuestionClient } from "@/api/tech-question.client";
 import { DateTimeDomain } from "@/shared/domains/DateTime";
 import { TechAnswer, TechAnswerDomain } from "@/shared/domains/TechAnswer";
 import { TechQuestionDomain } from "@/shared/domains/TechQuestion";
+import { PUBLIC_FOLDER } from "@/shared/types/public";
 import { useSpeechToText } from "@/shared/utils/useSpeechToText";
 import { grunfeld } from "@ilokesto/grunfeld";
 import { CreateForm } from "@ilokesto/sicilian";
@@ -87,7 +88,7 @@ TechQuestionModal.Form = function TechQuestionModalForm({
     if (text) {
       setValues({ userAnswer: text });
     }
-  }, [text, setValues]);
+  }, [text]);
 
   return (
     <div className="flex flex-col h-full gap-28">
@@ -97,7 +98,7 @@ TechQuestionModal.Form = function TechQuestionModalForm({
 
           <button type="button" onClick={grunfeld.clear}>
             <Image
-              src="/icons/close.svg"
+              src={PUBLIC_FOLDER.icons.close}
               alt="close"
               draggable="false"
               width={24}
@@ -135,7 +136,7 @@ TechQuestionModal.Form = function TechQuestionModalForm({
               />
               <button>
                 <Image
-                  src="/icons/submitArrow.svg"
+                  src={PUBLIC_FOLDER.icons.submitArrow}
                   alt="Submit"
                   draggable={false}
                   width={24}
@@ -163,7 +164,7 @@ TechQuestionModal.Submitting = function TechQuestionModalSubmitting() {
   return (
     <div className="flex flex-col items-center justify-center h-full heading-02 gap-28">
       <Image
-        src="/images/mrCatLoading.svg"
+        src={PUBLIC_FOLDER.images.mrCatLoading}
         alt="loading"
         width={210}
         height={210}
@@ -234,7 +235,7 @@ TechQuestionModal.Result = function TechQuestionModalResult({
             <button type="button" onClick={() => setStep("form")}>
               <Image
                 className="hover:filter-primary-500"
-                src="/icons/arrow.svg"
+                src={PUBLIC_FOLDER.icons.arrow}
                 alt="close"
                 draggable="false"
                 width={24}
@@ -248,7 +249,7 @@ TechQuestionModal.Result = function TechQuestionModalResult({
               className="shrink-0 w-24"
             >
               <Image
-                src="/icons/close.svg"
+                src={PUBLIC_FOLDER.icons.close}
                 alt="close"
                 draggable="false"
                 width={24}
@@ -265,7 +266,7 @@ TechQuestionModal.Result = function TechQuestionModalResult({
             onClick={handleClick}
           >
             <Image
-              src="/icons/calendar.svg"
+              src={PUBLIC_FOLDER.icons.calendar}
               alt="refresh"
               draggable="false"
               className="hidden md:block"

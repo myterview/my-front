@@ -10,6 +10,7 @@ import {
   register,
   setValues,
 } from "@/shared/sicilian/sessionForm";
+import { PUBLIC_FOLDER } from "@/shared/types/public";
 import { useSpeechToText } from "@/shared/utils/useSpeechToText";
 import { TextArea } from "@/ui/components/Form/TextArea";
 import { SizeWrapper } from "@/ui/components/SizeWrapper/SizeWrapper";
@@ -40,11 +41,9 @@ export function SessionForm({ interviewId }: { interviewId: string }) {
 
   const {
     text,
-    setText,
     textAreaRef,
     listening,
     toggleListening,
-    handleTextChange,
     browserSupportsSpeechRecognition,
   } = useSpeechToText();
 
@@ -52,7 +51,7 @@ export function SessionForm({ interviewId }: { interviewId: string }) {
     if (text) {
       setValues({ message: text });
     }
-  }, [text, setValues]);
+  }, [text]);
 
   return (
     <SizeWrapper
@@ -76,7 +75,7 @@ export function SessionForm({ interviewId }: { interviewId: string }) {
             />
             <button>
               <Image
-                src="/icons/submitArrow.svg"
+                src={PUBLIC_FOLDER.icons.submitArrow}
                 alt="Submit"
                 draggable={false}
                 width={24}

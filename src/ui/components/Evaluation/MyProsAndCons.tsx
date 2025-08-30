@@ -2,6 +2,7 @@ import { ScoreChip } from "../Chips/ScoreChip";
 import { InterviewEvaluationFactory } from "@/shared/domains/InterviewEvaluation/InterviewEvaluationFactory";
 import { Score } from "@/shared/domains/Score";
 import { BackendResponse } from "@/shared/types";
+import { PUBLIC_FOLDER } from "@/shared/types/public";
 import { getEnumKeyByValue, getEnumValueByKey } from "@/shared/utils/enumUtils";
 import { neato } from "neato";
 import Image from "next/image";
@@ -54,7 +55,7 @@ UserInterviewProsAndCons.Title = function MyProsAndConsTitle() {
         <Image
           fill
           className="object-cover"
-          src="/images/mrCatToSayHi.svg"
+          src={PUBLIC_FOLDER.images.mrCatToSayHi}
           alt="Pros and Cons"
           draggable={false}
         />
@@ -89,7 +90,13 @@ UserInterviewProsAndCons.Card = function MyProsAndConsCard({
       )}
     >
       <Image
-        src={`/icons/evaluation/face/${scoreInstance ? getEnumKeyByValue(scoreInstance.grade) : `no_${type}`}.svg`}
+        src={
+          PUBLIC_FOLDER.icons.evaluation.face[
+            (scoreInstance
+              ? getEnumKeyByValue(scoreInstance.grade)
+              : `no_${type}`) as keyof typeof PUBLIC_FOLDER.icons.evaluation.face
+          ]
+        }
         alt=""
         width={90}
         height={90}
