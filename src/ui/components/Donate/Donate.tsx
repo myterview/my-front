@@ -2,6 +2,7 @@
 
 import { Clickable } from "../Clickable/Clickable";
 import { ModalWrapper } from "../Modal/ModalWrapper";
+import { PUBLIC_FOLDER } from "@/shared/types/public";
 import { grunfeld } from "@ilokesto/grunfeld";
 import { Show } from "@ilokesto/utilinent";
 import Image from "next/image";
@@ -35,7 +36,7 @@ function DonateMobile() {
         className="cover"
         width={220}
         height={90}
-        src="/images/donateToMrCat.png"
+        src={PUBLIC_FOLDER.images.donateToMrCat}
         alt="Donate"
         draggable={false}
       />
@@ -64,7 +65,7 @@ function DonateDesktop() {
                   <p className="dropdown">스캔하면 토스로 이동합니다</p>
                 </div>
                 <Image
-                  src="/images/donateQR.png"
+                  src={PUBLIC_FOLDER.images.donateQR}
                   alt="QR Code"
                   width={218}
                   height={218}
@@ -75,7 +76,7 @@ function DonateDesktop() {
           }
         >
           <Image
-            src="/icons/toss.png"
+            src={PUBLIC_FOLDER.icons.toss}
             alt="toss"
             width={20}
             height={20}

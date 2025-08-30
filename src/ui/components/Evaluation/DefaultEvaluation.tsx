@@ -5,6 +5,7 @@ import {
   TInterviewEvaluation,
 } from "@/shared/domains/InterviewEvaluation/InterviewEvaluationFactory";
 import { EvaluationKeysKr } from "@/shared/types";
+import { PUBLIC_FOLDER } from "@/shared/types/public";
 import { For } from "@ilokesto/utilinent";
 import { neato } from "neato";
 import Image from "next/image";
@@ -24,7 +25,11 @@ export function DefaultEvaluationOverall({
       <div className="heading-02">종합 평가</div>
 
       <Image
-        src={`/icons/evaluation/paw/${evaluation.overallAssessment.recommendation}.svg`}
+        src={
+          PUBLIC_FOLDER.icons.evaluation.paw[
+            evaluation.overallAssessment.recommendation
+          ]
+        }
         alt={evaluation.overallAssessment.recommendation}
         width={160}
         height={160}

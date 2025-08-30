@@ -1,3 +1,4 @@
+import { PUBLIC_FOLDER } from "@/shared/types/public";
 import { ClassValue, neato } from "neato";
 import Image from "next/image";
 
@@ -17,7 +18,7 @@ export function Avatar({
     >
       <Image
         className="object-cover"
-        src={src ?? "/images/AVATAR.svg"}
+        src={src ?? PUBLIC_FOLDER.images.AVATAR}
         alt="Avatar"
         draggable={false}
         fill

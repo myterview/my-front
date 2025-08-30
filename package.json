@@ -19,6 +19,7 @@
     "@ilokesto/caro-kann": "^4.0.1",
     "@ilokesto/common-resolver": "^1.0.1",
     "@ilokesto/grunfeld": "^1.0.0",
+    "@ilokesto/path-codegen": "^0.0.2",
     "@ilokesto/sicilian": "^3.1.0",
     "@ilokesto/utilinent": "^0.0.12",
     "@svgr/webpack": "^8.1.0",

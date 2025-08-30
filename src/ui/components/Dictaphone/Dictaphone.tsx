@@ -1,3 +1,4 @@
+import { PUBLIC_FOLDER } from "@/shared/types/public";
 import { useIsMounted } from "@/shared/utils/useIsMounted";
 import { Show } from "@ilokesto/utilinent";
 import Image from "next/image";
@@ -20,7 +21,7 @@ export function Dictaphone({
         when={isBrowserSupported}
         fallback={
           <Image
-            src="/icons/no-mic.svg"
+            src={PUBLIC_FOLDER.icons["no-mic"]}
             alt="음성인식 없음"
             width={24}
             height={24}
@@ -29,14 +30,14 @@ export function Dictaphone({
       >
         {listening ? (
           <Image
-            src="/icons/mic-on.svg"
+            src={PUBLIC_FOLDER.icons["mic-on"]}
             alt="음성인식 중"
             width={24}
             height={24}
           />
         ) : (
           <Image
-            src="/icons/mic-off.svg"
+            src={PUBLIC_FOLDER.icons["mic-off"]}
             alt="음성인식 시작"
             width={24}
             height={24}

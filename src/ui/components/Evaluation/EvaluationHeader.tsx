@@ -1,5 +1,6 @@
 import { Card } from "../CardComponent/Card";
 import { Tags } from "../Chips/Tags";
+import { PUBLIC_FOLDER } from "@/shared/types/public";
 import { ClassValue, neato } from "neato";
 import Image from "next/image";
 
@@ -23,7 +24,7 @@ export function EvaluationHeader({
 
         <button type="button" onClick={onClose}>
           <Image
-            src="/icons/close.svg"
+            src={PUBLIC_FOLDER.icons.close}
             alt="close"
             draggable="false"
             width={24}

@@ -1,4 +1,5 @@
 import { Card } from "../CardComponent/Card";
+import { PUBLIC_FOLDER } from "@/shared/types/public";
 import { grunfeld } from "@ilokesto/grunfeld";
 import { Show } from "@ilokesto/utilinent";
 import { ClassValue, neato } from "neato";
@@ -40,7 +41,7 @@ ModalWrapper.Title = function ModalWrapperTitle({
 
       <button type="button" onClick={grunfeld.remove}>
         <Image
-          src="/icons/close.svg"
+          src={PUBLIC_FOLDER.icons.close}
           alt="modal close"
           width={24}
           height={24}

@@ -1,4 +1,5 @@
 import { PopoverProps } from "../Popover";
+import { PUBLIC_FOLDER } from "@/shared/types/public";
 import { useSicilianContext } from "@ilokesto/sicilian/provider";
 import { Show } from "@ilokesto/utilinent";
 import { neato } from "neato";
@@ -53,7 +54,7 @@ export function DropdownInput({
         />
 
         <Image
-          src="/icons/dropdownArrow.svg"
+          src={PUBLIC_FOLDER.icons.dropdownArrow}
           alt="Dropdown Arrow"
           width={24}
           draggable={false}

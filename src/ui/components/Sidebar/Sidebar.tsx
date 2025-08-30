@@ -2,6 +2,7 @@
 
 import { Clickable } from "../Clickable/Clickable";
 import { Logo } from "../Logo/Logo";
+import { PUBLIC_FOLDER } from "@/shared/types/public";
 import { create } from "@ilokesto/caro-kann";
 import { neato } from "neato";
 import Image from "next/image";
@@ -48,7 +49,7 @@ export function Sidebar({
           >
             <button onClick={() => setIsOpen((prev) => !prev)}>
               <Image
-                src="/icons/paw.svg"
+                src={PUBLIC_FOLDER.icons.paw}
                 alt="sidebar toggle image"
                 style={{
                   transform: isOpen ? "scaleX(-1)" : "scaleX(1)",

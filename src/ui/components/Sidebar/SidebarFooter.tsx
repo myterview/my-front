@@ -1,6 +1,7 @@
 import { Avatar } from "../Avatar/Avatar";
 import { logoutAction } from "@/api/user.serverAction";
 import { BackendResponse } from "@/shared/types";
+import { PUBLIC_FOLDER } from "@/shared/types/public";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,7 +19,7 @@ export function SidebarFooter({ user }: { user: BackendResponse["user"] }) {
       <div className="flex flex-col gap-16 font-semibold text-primary-100">
         <Link href="/setting" className="flex gap-12">
           <Image
-            src="/icons/setting.svg"
+            src={PUBLIC_FOLDER.icons.setting}
             alt="설정"
             draggable={false}
             width={24}
@@ -30,7 +31,7 @@ export function SidebarFooter({ user }: { user: BackendResponse["user"] }) {
 
         <Link href="/term" className="flex gap-12">
           <Image
-            src="/icons/term.svg"
+            src={PUBLIC_FOLDER.icons.term}
             alt="이용약관"
             draggable={false}
             width={24}
